@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Tests, Security and Psalm
 
 on:
   push:
@@ -13,8 +13,12 @@ jobs:
     services:
       redis:
         image: redis
+        ports:
+          - 6379:6379
       memcached:
         image: memcached
+        ports:
+          - 11211:11211
 
     steps:
     - uses: actions/checkout@v2
@@ -26,10 +30,13 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Run test suite
-      run: php vendor/bin/phpunit --configuration phpunit.docker.xml
+      run: php vendor/bin/phpunit
+      env:
+        REDIS_HOST: redis
+        MEMCACHED_HOST: memcached
 
-    - name: PHP Security Checker
+    - name: Security Checker
       uses: StephaneBour/actions-php-security-checker@1.0
 
-    - name: Psalm - Code quality tool for PHP
+    - name: Psalm
       uses: mickaelandrieu/psalm-ga@v1.1
