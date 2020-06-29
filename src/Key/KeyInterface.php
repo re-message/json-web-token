@@ -51,6 +51,13 @@ interface KeyInterface extends JsonSerializable
     public function has(string $parameter): bool;
 
     /**
+     * Returns the type of the key.
+     *
+     * @return string
+     */
+    public function getType(): string;
+
+    /**
      * Returns all parameters for this key or array key format
      *
      * @return array

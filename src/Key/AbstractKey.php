@@ -51,6 +51,14 @@ abstract class AbstractKey implements KeyInterface
     /**
      * @inheritDoc
      */
+    public function getType(): string
+    {
+        return $this->get(self::PARAM_KEY_TYPE);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function has(string $parameter): bool
     {
         return array_key_exists($parameter, $this->parameters);
