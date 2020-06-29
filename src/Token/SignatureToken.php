@@ -37,7 +37,7 @@ class SignatureToken implements TokenInterface
 
     /**
      * Token signature.
-     * Empty signature is a valid signature with {@see NoneAlgorithm}.
+     * Empty signature is a valid signature with {@see None}.
      *
      * @var string|null
      * @see SignatureServiceInterface::sign()

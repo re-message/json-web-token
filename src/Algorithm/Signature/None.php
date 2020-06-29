@@ -19,11 +19,11 @@ namespace RM\Standard\Jwt\Algorithm\Signature;
 use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
- * Class NoneAlgorithm
+ * Class None
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class NoneAlgorithm implements SignatureAlgorithmInterface
+class None implements SignatureAlgorithmInterface
 {
     /**
      * @inheritDoc
