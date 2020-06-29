@@ -60,10 +60,11 @@ class SignatureServiceTest extends TestCase
 
     public function createTokenHandlerList(): TokenHandlerList
     {
-        $redisHost = defined('REDIS_HOST') ? REDIS_HOST : '127.0.0.1';
+        $host = $_ENV['REDIS_HOST'];
+        $port = $_ENV['REDIS_PORT'];
 
         $generator = new RandomUuidGenerator();
-        $tokenStorage = RedisTokenStorage::createFromParameters($redisHost);
+        $tokenStorage = RedisTokenStorage::createFromParameters($host, $port);
 
         $identifierClaimHandler = new IdentifierClaimHandler($generator, $tokenStorage);
 
