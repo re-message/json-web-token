@@ -3,12 +3,10 @@ name: Testing and Security check
 on:
     push:
         branches:
-            - v*.*
-            - release
+            - '*.x'
     pull_request:
         branches:
-            - v*.*
-            - release
+            - '*.x'
 
 jobs:
     testing:
