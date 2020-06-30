@@ -55,5 +55,10 @@
         "psr-4": {
             "RM\\Standard\\Jwt\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x"
+        }
     }
 }
