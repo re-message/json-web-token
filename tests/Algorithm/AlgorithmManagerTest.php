@@ -17,12 +17,8 @@
 namespace RM\Standard\Jwt\Tests\Algorithm;
 
 use PHPUnit\Framework\TestCase;
-use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
-use RM\Standard\Jwt\Algorithm\Signature\HS256;
-use RM\Standard\Jwt\Algorithm\Signature\HS512;
-use RM\Standard\Jwt\Algorithm\Signature\Keccak256;
-use RM\Standard\Jwt\Algorithm\Signature\Keccak512;
+use RM\Standard\Jwt\Algorithm\Signature\None;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use stdClass;
 use TypeError;
@@ -30,31 +26,18 @@ use TypeError;
 class AlgorithmManagerTest extends TestCase
 {
     private AlgorithmManager $manager;
-    private AlgorithmInterface $hs256;
-    private AlgorithmInterface $hs512;
-    private AlgorithmInterface $keccak256;
-    private AlgorithmInterface $keccak512;
 
     protected function setUp(): void
     {
-        $this->hs256 = new HS256();
-        $this->hs512 = new HS512();
-        $this->keccak256 = new Keccak256();
-        $this->keccak512 = new Keccak512();
+        $none = new None();
 
         $this->manager = new AlgorithmManager();
-        $this->manager->put($this->keccak256);
-        $this->manager->put($this->keccak512);
+        $this->manager->put($none);
     }
 
     public function testValidConstructor(): void
     {
-        $manager = new AlgorithmManager(
-            [
-                new HS256()
-            ]
-        );
-
+        $manager = new AlgorithmManager([new None()]);
         $this->assertInstanceOf(AlgorithmManager::class, $manager);
     }
 
@@ -62,41 +45,42 @@ class AlgorithmManagerTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        new AlgorithmManager(
-            [
-                new stdClass()
-            ]
-        );
+        /** @noinspection PhpParamsInspection */
+        new AlgorithmManager([new stdClass()]);
     }
 
+    /**
+     * @throws AlgorithmNotFoundException
+     */
     public function testValidGet(): void
     {
-        $this->assertEquals($this->keccak256, $this->manager->get($this->keccak256->name()));
+        $this->assertInstanceOf(None::class, $this->manager->get('none'));
     }
 
     public function testInvalidGet(): void
     {
         $this->expectException(AlgorithmNotFoundException::class);
-        $this->manager->get($this->hs256->name());
+        $this->manager->get('HS256');
     }
 
     public function testHas(): void
     {
-        $this->assertTrue($this->manager->has($this->keccak256->name()));
-        $this->assertFalse($this->manager->has($this->hs256->name()));
+        $this->assertTrue($this->manager->has('none'));
+        $this->assertFalse($this->manager->has('HS256'));
     }
 
     public function testRemove(): void
     {
-        $this->assertTrue($this->manager->has($this->keccak256->name()));
-        $this->manager->remove($this->keccak256->name());
-        $this->assertFalse($this->manager->has($this->keccak256->name()));
+        $this->assertTrue($this->manager->has('none'));
+        $this->manager->remove('none');
+        $this->assertFalse($this->manager->has('none'));
     }
 
     public function testPut(): void
     {
-        $this->assertFalse($this->manager->has($this->hs512->name()));
-        $this->manager->put($this->hs512);
-        $this->assertTrue($this->manager->has($this->hs512->name()));
+        $some = new Some();
+        $this->assertFalse($this->manager->has($some->name()));
+        $this->manager->put($some);
+        $this->assertTrue($this->manager->has($some->name()));
     }
 }
