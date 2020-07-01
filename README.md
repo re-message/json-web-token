@@ -12,15 +12,17 @@ You will need Composer to install. Run this command:
 
 ### Algorithms
 
-All tokens and services uses algorithms to sign, verify, encrypt and decrypt the token data. Each algorithm MUST implement `\RM\Standard\Jwt\Algorithm\AlgorithmInterface`.
+All tokens and services uses algorithms to sign, verify, encrypt and decrypt the token data. Each algorithm MUST implement `RM\Standard\Jwt\Algorithm\AlgorithmInterface`.
+
+To install these packages, you will need Composer.
 
 ### Keys
 
-For now we provides only octet key support. This is a just string which used as key in HMAC hash algorithms.
+At the moment, we provide only octet support. This is a just string which used as key in HMAC algorithms.
 
 ### Tokens
 
-To create new token you can use class `\RM\Standard\Jwt\Token\SignatureToken` class. Class constructor have 3 arguments: header claims, payload claims and signature. You should pass algorithm name with header claims. Other arguments and claims is optional.
+To create new token you can use class `RM\Standard\Jwt\Token\SignatureToken` class. Class constructor have 3 arguments: header claims, payload claims and signature. You should pass algorithm name with header claims. Other arguments and claims is optional.
 
 Example:
 ```php
@@ -28,30 +30,34 @@ Example:
 
 use RM\Standard\Jwt\Token\Header;
 use RM\Standard\Jwt\Token\SignatureToken;
-use RM\Standard\Jwt\Algorithm\Signature\Keccak256;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 
-// some algorithm
-$algorithm = new Keccak256();
-
-// first way to create token
+$algorithm = new HS3256();
 $token = new SignatureToken([Header::CLAIM_ALGORITHM => $algorithm->name()]);
+```
 
-// second way
-$token = SignatureToken::createWithAlgorithm($algorithm);
+Inlined way:
+```php
+<?php
+
+use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
+
+$token = SignatureToken::createWithAlgorithm(new HS3256());
 ```
 
 ### Claims
 
 The token has parameters called claim, these are important sensitive data that are needed for authorization and verification. They are divided respectively in the header and in the payload of the token. Header claims are general token data: the signing or encryption algorithm and the type of token. Payload claims contain the data necessary for verification: this is the time of signing the token, the time of its action, who signed it and for whom.
 
-Header claims defined in `\RM\Standard\Jwt\Token\Header` class as constants. Payload claim defined in `\RM\Standard\Jwt\Token\Payload` class.
+Header claims defined in `RM\Standard\Jwt\Token\Header` class as constants. Payload claim defined in `RM\Standard\Jwt\Token\Payload` class.
 
 You can use your custom claims. According to the standard, claim names must be concise enough. We use 3-character names, but there are no restrictions.
 
 
 ### Serialization
 
-Serialization of tokens provided by some services implemented the `\RM\Standard\Jwt\Serializer\SerializerInterface` interface.
+Serialization of tokens provided by some services implemented the `RM\Standard\Jwt\Serializer\SerializerInterface` interface.
 
 Example:
 
@@ -81,11 +87,11 @@ var_dump($rawToken === $token->toString($serializer));
 
 To sign the token you should use SignatureService. SignatureService depends on algorithm manager, token handlers, serializer, event dispatcher and logger.
 
-Algorithm manager are a map of supported by service algorithms. If service can not find the algorithm which used in the token, he will throw a exception.
+Algorithm manager are a map of supported by service algorithms. If service cannot find the algorithm which used in the token, he will throw an exception.
 
 Token handlers are a list of handlers that can generate new claims and validate existing ones.
 
-Serializer is necessary for the service to sign the token, since the signature is the header and the payload signed by the key.
+Serializer is necessary for the service to sign the token, since the signature is the header, and the payload signed by the key.
 
 Example:
 
@@ -95,14 +101,14 @@ Example:
 use Laminas\Math\Rand;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
-use RM\Standard\Jwt\Algorithm\Signature\Keccak512;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Service\SignatureService;
 use RM\Standard\Jwt\Token\Header;
 use RM\Standard\Jwt\Token\SignatureToken;
 
 // some algorithm
-$algorithm = new Keccak512();
+$algorithm = new HS3256();
 $token = new SignatureToken([Header::CLAIM_ALGORITHM => $algorithm->name()]);
 
 // generate random key for example
@@ -123,13 +129,6 @@ echo $signedToken;
 
 ## Implementation
 This library implements only **the necessary minimum** for the correct operation of the service platform.
-
-### Implemented
-- [x] JSON Web Token ([RFC 7519](https://tools.ietf.org/html/rfc7519))
-- [x] JSON Web Signature ([RFC 7515](https://tools.ietf.org/html/rfc7515))
-- [ ] JSON Web Encryption ([RFC 7516](https://tools.ietf.org/html/rfc7516))
-- [x] JSON Web Key ([RFC 7517](https://tools.ietf.org/html/rfc7517))
-- [x] JSON Web Algorithm ([RFC 7518](https://tools.ietf.org/html/rfc7518))
 
 ### Will not implemented
 * Nested JSON Web Token
