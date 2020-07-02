@@ -27,6 +27,8 @@ use JsonSerializable;
 interface KeyInterface extends JsonSerializable
 {
     public const PARAM_KEY_TYPE  = 'kty';
+    public const PARAM_KEY_IDENTIFIER = 'kid';
+    public const PARAM_USE = 'use';
     public const PARAM_KEY_VALUE = 'k';
 
     public const KEY_TYPE_OCTET = 'oct';
