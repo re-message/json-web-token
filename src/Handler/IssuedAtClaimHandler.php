@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Handler;
 use RM\Standard\Jwt\Claim\IssuedAt;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\IssuedAtViolationException;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use UnexpectedValueException;
 
 /**
  * Class IssuedAtClaimHandler
@@ -30,6 +28,14 @@ use UnexpectedValueException;
 class IssuedAtClaimHandler extends AbstractPropertyHandler
 {
     use LeewayHandlerTrait;
+
+    /**
+     * @inheritDoc
+     */
+    public function getPropertyClass(): string
+    {
+        return IssuedAt::class;
+    }
 
     /**
      * @inheritDoc
@@ -50,14 +56,8 @@ class IssuedAtClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
-    protected function validateProperty(PropertyInterface $property): bool
+    protected function validateValue(mixed $value): bool
     {
-        if (!$property instanceof IssuedAt) {
-            $message = sprintf('%s can handle only %s.', self::class, IssuedAt::class);
-            throw new UnexpectedValueException($message);
-        }
-
-        $value = $property->getValue();
         if (!is_int($value)) {
             throw new IncorrectPropertyTypeException('integer', gettype($value), $this->getPropertyName());
         }

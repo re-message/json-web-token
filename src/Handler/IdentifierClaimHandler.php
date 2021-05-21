@@ -23,8 +23,6 @@ use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
 use RM\Standard\Jwt\Identifier\UniqIdGenerator;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use UnexpectedValueException;
 
 /**
  * Class IdentifierClaimHandler provides processing for { @see Identifier } claim.
@@ -50,6 +48,14 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
         $this->identifierGenerator = $generator ?? new UniqIdGenerator();
         $this->tokenStorage = $storage ?? new RuntimeTokenStorage();
         $this->duration = $duration;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPropertyClass(): string
+    {
+        return Identifier::class;
     }
 
     /**
@@ -88,18 +94,12 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
-    protected function validateProperty(PropertyInterface $property): bool
+    protected function validateValue(mixed $value): bool
     {
-        if (!$property instanceof Identifier) {
-            $message = sprintf('%s can handle only %s.', self::class, Identifier::class);
-            throw new UnexpectedValueException($message);
-        }
-
         if ($this->tokenStorage === null) {
             throw new InvalidArgumentException(sprintf('To use %s required set up the token storage.', static::class));
         }
 
-        $value = $property->getValue();
         if (!is_string($value)) {
             throw new IncorrectPropertyTypeException('string', gettype($value), $this->getPropertyName());
         }

@@ -24,6 +24,7 @@ use RM\Standard\Jwt\Exception\PropertyViolationException;
 use RM\Standard\Jwt\Token\PropertyBag;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
+use UnexpectedValueException;
 
 /**
  * Class AbstractPropertyHandler
@@ -34,6 +35,13 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
 {
     public const HEADER_PARAMETER  = 'header';
     public const PAYLOAD_CLAIM = 'payload';
+
+    /**
+     * Returns a property class.
+     *
+     * @return class-string<PropertyInterface>
+     */
+    abstract public function getPropertyClass(): string;
 
     /**
      * Returns name of claim to handle.
@@ -98,14 +106,31 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
     }
 
     /**
-     * Validate value of this claim.
+     * Validate property.
+     *
+     * @throws PropertyViolationException
+     * @throws InvalidPropertyException
+     */
+    protected function validateProperty(PropertyInterface $property): bool
+    {
+        $class = $this->getPropertyClass();
+        if (!is_a($property, $class)) {
+            $message = sprintf('%s can handle only %s.', self::class, $class);
+            throw new UnexpectedValueException($message);
+        }
+
+        return $this->validateValue($property->getValue());
+    }
+
+    /**
+     * Validate value of this property.
      * Please throw instance of {@see PropertyViolationException} if this validation failed.
      * If you just return `false` or throw other exception then {@see validate()} will throw {@see PropertyViolationException} self.
      *
      * @throws PropertyViolationException
      * @throws InvalidPropertyException
      */
-    abstract protected function validateProperty(PropertyInterface $property): bool;
+    abstract protected function validateValue(mixed $value): bool;
 
     protected function resolveTarget(TokenInterface $token): PropertyBag
     {

@@ -18,8 +18,6 @@ namespace RM\Standard\Jwt\Handler;
 
 use RM\Standard\Jwt\Claim\Issuer;
 use RM\Standard\Jwt\Exception\IssuerViolationException;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use UnexpectedValueException;
 
 /**
  * Class IssuedAtClaimHandler
@@ -41,6 +39,14 @@ class IssuerClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
+    public function getPropertyClass(): string
+    {
+        return Issuer::class;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getPropertyName(): string
     {
         return Issuer::NAME;
@@ -57,14 +63,9 @@ class IssuerClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
-    protected function validateProperty(PropertyInterface $property): bool
+    protected function validateValue(mixed $value): bool
     {
-        if (!$property instanceof Issuer) {
-            $message = sprintf('%s can handle only %s.', self::class, Issuer::class);
-            throw new UnexpectedValueException($message);
-        }
-
-        if ($this->issuer !== $property->getValue()) {
+        if ($this->issuer !== $value) {
             throw new IssuerViolationException($this);
         }
 
