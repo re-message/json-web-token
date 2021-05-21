@@ -23,9 +23,9 @@ use ParagonIE\ConstantTime\Base64UrlSafe;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
-use RM\Standard\Jwt\Algorithm\Signature\HS256;
-use RM\Standard\Jwt\Algorithm\Signature\HS512;
-use RM\Standard\Jwt\Algorithm\Signature\Keccak256;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Handler\ExpirationClaimHandler;
@@ -139,7 +139,7 @@ class SignatureServiceTest extends TestCase
     {
         return [
             new HS256(),
-            new Keccak256()
+            new HS3256()
         ];
     }
 

@@ -18,7 +18,7 @@ namespace RM\Standard\Jwt\Tests\Serializer;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use RM\Standard\Jwt\Algorithm\Signature\Keccak512;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Token\SignatureToken;
@@ -34,7 +34,7 @@ class SignatureCompactSerializerTest extends TestCase
         $this->assertTrue($serializer->supports(SignatureToken::class));
         $this->assertFalse($serializer->supports(stdClass::class));
 
-        $token = SignatureToken::createWithAlgorithm(new Keccak512());
+        $token = SignatureToken::createWithAlgorithm(new HS3512());
         $this->assertTrue($serializer->supports($token));
         $this->assertFalse($serializer->supports(new stdClass()));
 
