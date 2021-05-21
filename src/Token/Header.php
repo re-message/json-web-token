@@ -19,7 +19,9 @@ namespace RM\Standard\Jwt\Token;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
+use RM\Standard\Jwt\HeaderParameter\Algorithm;
 use RM\Standard\Jwt\HeaderParameter\HeaderParameterInterface;
+use RM\Standard\Jwt\HeaderParameter\Type;
 use UnexpectedValueException;
 
 /**
@@ -32,13 +34,13 @@ class Header extends PropertyBag
     /**
      * Algorithm must be set from method { @see AlgorithmInterface::name() } and be in { @see AlgorithmManager }
      */
-    public const CLAIM_ALGORITHM = 'alg';
+    public const CLAIM_ALGORITHM = Algorithm::NAME;
 
     /**
      * Type of token, by default is `JWT`.
      * If you use some token types please override this claim.
      */
-    public const CLAIM_TYPE = 'typ';
+    public const CLAIM_TYPE = Type::NAME;
 
     public function __construct(array $parameters = [])
     {
