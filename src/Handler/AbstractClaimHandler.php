@@ -36,15 +36,11 @@ abstract class AbstractClaimHandler implements TokenHandlerInterface
 
     /**
      * Returns name of claim to handle.
-     *
-     * @return string
      */
     abstract public function getClaim(): string;
 
     /**
      * Returns the part of the token in which the claim for validation is located
-     *
-     * @return string
      */
     public function getClaimTarget(): string
     {
@@ -65,17 +61,12 @@ abstract class AbstractClaimHandler implements TokenHandlerInterface
 
     /**
      * Generate value for current claim.
-     *
-     * @return mixed
      */
     abstract protected function generateValue();
 
     /**
      * Checks if the passed value is valid.
      *
-     * @param TokenInterface $token
-     *
-     * @return bool
      * @throws ClaimViolationException
      * @throws InvalidTokenException
      */
@@ -111,17 +102,11 @@ abstract class AbstractClaimHandler implements TokenHandlerInterface
      *
      * @param string|int|float|bool $value
      *
-     * @return bool
      * @throws ClaimViolationException
      * @throws InvalidClaimException
      */
     abstract protected function validateValue($value): bool;
 
-    /**
-     * @param TokenInterface $token
-     *
-     * @return ParameterBag
-     */
     protected function resolveTarget(TokenInterface $token): PropertyBag
     {
         if ($this->getClaimTarget() === self::HEADER_CLAIM) {

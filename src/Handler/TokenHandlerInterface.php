@@ -28,17 +28,12 @@ interface TokenHandlerInterface
 {
     /**
      * Generate new value for current claim
-     *
-     * @param TokenInterface $token
      */
     public function generate(TokenInterface $token): void;
 
     /**
      * Checks if the passed value is valid.
      *
-     * @param TokenInterface $token
-     *
-     * @return bool
      * @throws InvalidTokenException
      */
     public function validate(TokenInterface $token): bool;

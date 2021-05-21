@@ -27,8 +27,6 @@ use RM\Standard\Jwt\Token\TokenInterface;
 class TokenHandlerList extends ArrayCollection implements TokenHandlerInterface
 {
     /**
-     * TokenHandlerList constructor.
-     *
      * @param TokenHandlerInterface[] $handlers
      */
     public function __construct(array $handlers = [])

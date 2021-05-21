@@ -28,8 +28,6 @@ class IssuerClaimHandler extends AbstractClaimHandler
 {
     /**
      * The identifier of server which issued the token
-     *
-     * @var string
      */
     protected string $issuer;
 
