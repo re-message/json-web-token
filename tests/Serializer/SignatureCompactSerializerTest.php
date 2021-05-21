@@ -44,19 +44,9 @@ class SignatureCompactSerializerTest extends TestCase
     /**
      * @depends      testSupports
      * @dataProvider getTokens
-     *
-     * @param bool                       $isValid
-     * @param string                     $rawToken
-     * @param SignatureCompactSerializer $serializer
-     *
-     * @return TokenInterface
-     * @throws InvalidTokenException
      */
-    public function testSerialize(
-        bool $isValid,
-        string $rawToken,
-        SignatureCompactSerializer $serializer
-    ): TokenInterface {
+    public function testSerialize(bool $isValid, string $rawToken, SignatureCompactSerializer $serializer): TokenInterface
+    {
         if (!$isValid) {
             $this->expectException(InvalidTokenException::class);
         }
