@@ -31,12 +31,12 @@ class SignatureCompactSerializerTest extends TestCase
     {
         $serializer = new SignatureCompactSerializer(SignatureToken::class);
 
-        $this->assertTrue($serializer->supports(SignatureToken::class));
-        $this->assertFalse($serializer->supports(stdClass::class));
+        self::assertTrue($serializer->supports(SignatureToken::class));
+        self::assertFalse($serializer->supports(stdClass::class));
 
         $token = SignatureToken::createWithAlgorithm(new HS3512());
-        $this->assertTrue($serializer->supports($token));
-        $this->assertFalse($serializer->supports(new stdClass()));
+        self::assertTrue($serializer->supports($token));
+        self::assertFalse($serializer->supports(new stdClass()));
 
         return $serializer;
     }
@@ -62,11 +62,11 @@ class SignatureCompactSerializerTest extends TestCase
         }
 
         $token = $serializer->deserialize($rawToken);
-        $this->assertInstanceOf(SignatureToken::class, $token);
+        self::assertInstanceOf(SignatureToken::class, $token);
 
         $serializedToken = $token->toString($serializer);
-        $this->assertNotNull($serializedToken);
-        $this->assertEquals($rawToken, $serializedToken);
+        self::assertNotNull($serializedToken);
+        self::assertEquals($rawToken, $serializedToken);
 
         return $token;
     }

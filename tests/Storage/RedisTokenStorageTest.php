@@ -38,13 +38,13 @@ class RedisTokenStorageTest extends TestCase
     public function testPut(): void
     {
         self::$storage->put(self::$someTokenId, 60);
-        $this->assertTrue(self::$storage->has(self::$someTokenId));
-        $this->assertFalse(self::$storage->has(Rand::getString(256)));
+        self::assertTrue(self::$storage->has(self::$someTokenId));
+        self::assertFalse(self::$storage->has(Rand::getString(256)));
     }
 
     public function testRevoke(): void
     {
         self::$storage->revoke(self::$someTokenId);
-        $this->assertFalse(self::$storage->has(self::$someTokenId));
+        self::assertFalse(self::$storage->has(self::$someTokenId));
     }
 }

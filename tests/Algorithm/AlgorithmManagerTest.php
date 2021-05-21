@@ -38,7 +38,7 @@ class AlgorithmManagerTest extends TestCase
     public function testValidConstructor(): void
     {
         $manager = new AlgorithmManager([new None()]);
-        $this->assertInstanceOf(AlgorithmManager::class, $manager);
+        self::assertInstanceOf(AlgorithmManager::class, $manager);
     }
 
     public function testInvalidConstructor(): void
@@ -54,7 +54,7 @@ class AlgorithmManagerTest extends TestCase
      */
     public function testValidGet(): void
     {
-        $this->assertInstanceOf(None::class, $this->manager->get('none'));
+        self::assertInstanceOf(None::class, $this->manager->get('none'));
     }
 
     public function testInvalidGet(): void
@@ -65,22 +65,22 @@ class AlgorithmManagerTest extends TestCase
 
     public function testHas(): void
     {
-        $this->assertTrue($this->manager->has('none'));
-        $this->assertFalse($this->manager->has('HS256'));
+        self::assertTrue($this->manager->has('none'));
+        self::assertFalse($this->manager->has('HS256'));
     }
 
     public function testRemove(): void
     {
-        $this->assertTrue($this->manager->has('none'));
+        self::assertTrue($this->manager->has('none'));
         $this->manager->remove('none');
-        $this->assertFalse($this->manager->has('none'));
+        self::assertFalse($this->manager->has('none'));
     }
 
     public function testPut(): void
     {
         $some = new Some();
-        $this->assertFalse($this->manager->has($some->name()));
+        self::assertFalse($this->manager->has($some->name()));
         $this->manager->put($some);
-        $this->assertTrue($this->manager->has($some->name()));
+        self::assertTrue($this->manager->has($some->name()));
     }
 }

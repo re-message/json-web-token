@@ -51,9 +51,9 @@ class SignatureServiceTest extends TestCase
         $handlerList = $this->createTokenHandlerList();
         $signatureService = new SignatureService($algorithmManager, $handlerList);
 
-        $this->assertInstanceOf(SignatureService::class, $signatureService);
-        $this->assertInstanceOf(AlgorithmManager::class, $signatureService->getAlgorithmManager());
-        $this->assertEquals($algorithmManager, $signatureService->getAlgorithmManager());
+        self::assertInstanceOf(SignatureService::class, $signatureService);
+        self::assertInstanceOf(AlgorithmManager::class, $signatureService->getAlgorithmManager());
+        self::assertEquals($algorithmManager, $signatureService->getAlgorithmManager());
 
         return $signatureService;
     }
@@ -98,31 +98,31 @@ class SignatureServiceTest extends TestCase
         $token = SignatureToken::createWithAlgorithm($algorithm);
 
         $signedToken = $service->sign($token, $key);
-        $this->assertInstanceOf(TokenInterface::class, $signedToken);
-        $this->assertTrue($signedToken->isSigned());
-        $this->assertFalse($token->isSigned());
+        self::assertInstanceOf(TokenInterface::class, $signedToken);
+        self::assertTrue($signedToken->isSigned());
+        self::assertFalse($token->isSigned());
 
-        $this->assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_ISSUER));
-        $this->assertEquals('test', $signedToken->getPayload()->get(Payload::CLAIM_ISSUER));
-        $this->assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_EXPIRATION));
-        $this->assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_ISSUED_AT));
-        $this->assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_NOT_BEFORE));
-        $this->assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_IDENTIFIER));
+        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_ISSUER));
+        self::assertEquals('test', $signedToken->getPayload()->get(Payload::CLAIM_ISSUER));
+        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_EXPIRATION));
+        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_ISSUED_AT));
+        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_NOT_BEFORE));
+        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_IDENTIFIER));
 
-        $this->assertFalse($token->getPayload()->containsKey(Payload::CLAIM_ISSUER));
-        $this->assertFalse($token->getPayload()->containsKey(Payload::CLAIM_EXPIRATION));
-        $this->assertFalse($token->getPayload()->containsKey(Payload::CLAIM_ISSUED_AT));
-        $this->assertFalse($token->getPayload()->containsKey(Payload::CLAIM_NOT_BEFORE));
-        $this->assertFalse($token->getPayload()->containsKey(Payload::CLAIM_IDENTIFIER));
+        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_ISSUER));
+        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_EXPIRATION));
+        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_ISSUED_AT));
+        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_NOT_BEFORE));
+        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_IDENTIFIER));
 
-        $this->assertTrue($service->verify($signedToken, $key));
-        $this->assertFalse($service->verify($signedToken->setSignature(null), $key));
+        self::assertTrue($service->verify($signedToken, $key));
+        self::assertFalse($service->verify($signedToken->setSignature(null), $key));
 
         $this->expectException(AlgorithmNotFoundException::class);
-        $this->assertFalse($service->verify($signedToken->setAlgorithm(new HS512())->setSignature($signedToken->getSignature()), $key));
+        self::assertFalse($service->verify($signedToken->setAlgorithm(new HS512())->setSignature($signedToken->getSignature()), $key));
 
         $this->expectException(InvalidTokenException::class);
-        $this->assertFalse($service->verify($token, $key));
+        self::assertFalse($service->verify($token, $key));
 
         return $signedToken;
     }
