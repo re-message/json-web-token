@@ -107,7 +107,7 @@ class SignatureServiceTest extends TestCase
         self::assertFalse($token->isSigned());
 
         self::assertTrue($signedToken->getPayload()->has(Issuer::NAME));
-        self::assertEquals('test', $signedToken->getPayload()->get(Issuer::NAME));
+        self::assertEquals('test', $signedToken->getPayload()->get(Issuer::NAME)->getValue());
         self::assertTrue($signedToken->getPayload()->has(Expiration::NAME));
         self::assertTrue($signedToken->getPayload()->has(IssuedAt::NAME));
         self::assertTrue($signedToken->getPayload()->has(NotBefore::NAME));
