@@ -64,4 +64,4 @@ jobs:
                     MEMCACHED_PORT: 11211
 
             -   name: PHP Security Checker
-                uses: StephaneBour/actions-php-security-checker@1.0
+                uses: StephaneBour/actions-php-security-checker@1.1
