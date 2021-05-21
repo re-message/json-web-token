@@ -22,13 +22,39 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Class PropertyBag
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
- * @template-implements ArrayCollection<int, PropertyInterface>
  */
-abstract class PropertyBag extends ArrayCollection
+abstract class PropertyBag
 {
+    private ArrayCollection $collection;
+
     public function __construct(array $parameters = [], array $defaults = [])
     {
-        parent::__construct(array_merge($defaults, $parameters));
+        $this->collection = new ArrayCollection(array_merge($defaults, $parameters));
+    }
+
+    protected function getProperty(string $name): ?PropertyInterface
+    {
+        if($this->collection->containsKey($name)) {
+            return $this->collection->get($name);
+        }
+
+        /** @var PropertyInterface $property */
+        foreach ($this->collection as $property) {
+            if ($property->getName() === $name) {
+                return $property;
+            }
+        }
+
+        return null;
+    }
+
+    protected function setProperty(PropertyInterface $property): void
+    {
+        $this->collection->set($property->getName(), $property);
+    }
+
+    public function toArray(): array
+    {
+        return $this->collection->toArray();
     }
 }

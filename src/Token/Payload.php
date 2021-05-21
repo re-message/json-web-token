@@ -16,12 +16,14 @@
 
 namespace RM\Standard\Jwt\Token;
 
+use RM\Standard\Jwt\Claim\ClaimInterface;
 use RM\Standard\Jwt\Handler\ExpirationClaimHandler;
 use RM\Standard\Jwt\Handler\IdentifierClaimHandler;
 use RM\Standard\Jwt\Handler\IssuedAtClaimHandler;
 use RM\Standard\Jwt\Handler\IssuerClaimHandler;
 use RM\Standard\Jwt\Handler\NotBeforeClaimHandler;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
+use UnexpectedValueException;
 
 /**
  * Class Payload
@@ -78,4 +80,19 @@ class Payload extends PropertyBag
      * @see IdentifierClaimHandler The manager for this claim.
      */
     public const CLAIM_IDENTIFIER = 'jti';
+
+    public function get(string $name): ?ClaimInterface
+    {
+        $property = $this->getProperty($name);
+        if (!$property instanceof ClaimInterface) {
+            throw new UnexpectedValueException('Expects a header parameter.');
+        }
+
+        return $property;
+    }
+
+    public function set(ClaimInterface $property): void
+    {
+        $this->setProperty($property);
+    }
 }

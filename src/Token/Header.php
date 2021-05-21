@@ -19,6 +19,8 @@ namespace RM\Standard\Jwt\Token;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
+use RM\Standard\Jwt\HeaderParameter\HeaderParameterInterface;
+use UnexpectedValueException;
 
 /**
  * Class Header
@@ -51,5 +53,20 @@ class Header extends PropertyBag
                 self::CLAIM_TYPE => 'JWT'
             ]
         );
+    }
+
+    public function get(string $name): ?HeaderParameterInterface
+    {
+        $property = $this->getProperty($name);
+        if (!$property instanceof HeaderParameterInterface) {
+            throw new UnexpectedValueException('Expects a header parameter.');
+        }
+
+        return $property;
+    }
+
+    public function set(HeaderParameterInterface $property): void
+    {
+        $this->setProperty($property);
     }
 }
