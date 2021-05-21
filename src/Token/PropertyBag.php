@@ -22,6 +22,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Class PropertyBag
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template-implements ArrayCollection<int, PropertyInterface>
  */
 abstract class PropertyBag extends ArrayCollection
 {
