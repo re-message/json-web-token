@@ -61,14 +61,6 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
-    public function getPropertyName(): string
-    {
-        return Identifier::NAME;
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function generateProperty(): Identifier
     {
         if ($this->identifierGenerator === null) {

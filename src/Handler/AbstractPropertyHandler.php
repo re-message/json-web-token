@@ -18,9 +18,11 @@ namespace RM\Standard\Jwt\Handler;
 
 use Exception;
 use InvalidArgumentException;
+use RM\Standard\Jwt\Claim\ClaimInterface;
 use RM\Standard\Jwt\Exception\InvalidPropertyException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Exception\PropertyViolationException;
+use RM\Standard\Jwt\HeaderParameter\HeaderParameterInterface;
 use RM\Standard\Jwt\Token\PropertyBag;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
@@ -33,9 +35,6 @@ use UnexpectedValueException;
  */
 abstract class AbstractPropertyHandler implements TokenHandlerInterface
 {
-    public const HEADER_PARAMETER  = 'header';
-    public const PAYLOAD_CLAIM = 'payload';
-
     /**
      * Returns a property class.
      *
@@ -46,14 +45,9 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
     /**
      * Returns name of claim to handle.
      */
-    abstract public function getPropertyName(): string;
-
-    /**
-     * Returns the part of the token in which the claim for validation is located
-     */
-    public function getPropertyTarget(): string
+    public function getPropertyName(): string
     {
-        return self::PAYLOAD_CLAIM;
+        return $this->getPropertyClass()::NAME;
     }
 
     /**
@@ -134,20 +128,16 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
 
     protected function resolveTarget(TokenInterface $token): PropertyBag
     {
-        if ($this->getPropertyTarget() === self::HEADER_PARAMETER) {
+        $class = $this->getPropertyClass();
+        if (is_a($class, HeaderParameterInterface::class, true)) {
             return $token->getHeader();
         }
 
-        if ($this->getPropertyTarget() === self::PAYLOAD_CLAIM) {
+        if (is_a($class, ClaimInterface::class, true)) {
             return $token->getPayload();
         }
 
-        throw new InvalidArgumentException(
-            sprintf(
-                'The claim target can be only `header` or `payload`. Got %2$s in %1$s.',
-                get_class($this),
-                $this->getPropertyTarget()
-            )
-        );
+        $message = sprintf('Undefined property target: %s', $this->getPropertyClass());
+        throw new InvalidArgumentException($message);
     }
 }

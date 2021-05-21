@@ -40,14 +40,6 @@ class NotBeforeClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
-    public function getPropertyName(): string
-    {
-        return NotBefore::NAME;
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function generateProperty(): NotBefore
     {
         return new NotBefore(time());

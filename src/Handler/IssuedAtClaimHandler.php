@@ -40,14 +40,6 @@ class IssuedAtClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
-    public function getPropertyName(): string
-    {
-        return IssuedAt::NAME;
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function generateProperty(): IssuedAt
     {
         return new IssuedAt(time());
