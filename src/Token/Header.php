@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Token;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
+use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 use RM\Standard\Jwt\HeaderParameter\Algorithm;
 use RM\Standard\Jwt\HeaderParameter\HeaderParameterInterface;
 use RM\Standard\Jwt\HeaderParameter\Type;
@@ -59,10 +60,23 @@ class Header extends PropertyBag
         }
     }
 
-    public function get(string $name): ?HeaderParameterInterface
+    /**
+     * @throws PropertyNotFoundException
+     */
+    public function get(string $name): HeaderParameterInterface
     {
         $property = $this->getProperty($name);
         if (!$property instanceof HeaderParameterInterface) {
+            throw new UnexpectedValueException('Expects a header parameter.');
+        }
+
+        return $property;
+    }
+
+    public function find(string $name): ?HeaderParameterInterface
+    {
+        $property = $this->findProperty($name);
+        if ($property !== null && !$property instanceof HeaderParameterInterface) {
             throw new UnexpectedValueException('Expects a header parameter.');
         }
 

@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Token;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 
 /**
  * Class PropertyBag
@@ -32,7 +33,15 @@ abstract class PropertyBag
         $this->collection = new ArrayCollection($parameters);
     }
 
-    protected function getProperty(string $name): ?PropertyInterface
+    /**
+     * @throws PropertyNotFoundException
+     */
+    protected function getProperty(string $name): PropertyInterface
+    {
+        return $this->findProperty($name) ?: throw new PropertyNotFoundException($name);
+    }
+
+    protected function findProperty(string $name): ?PropertyInterface
     {
         if ($this->collection->containsKey($name)) {
             return $this->collection->get($name);
@@ -50,7 +59,7 @@ abstract class PropertyBag
 
     protected function hasProperty(string $name): bool
     {
-        return $this->getProperty($name) !== null;
+        return $this->findProperty($name) !== null;
     }
 
     protected function setProperty(PropertyInterface $property): void

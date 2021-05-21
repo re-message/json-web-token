@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Token;
 
 use RM\Standard\Jwt\Claim\ClaimInterface;
+use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 use RM\Standard\Jwt\Handler\ExpirationClaimHandler;
 use RM\Standard\Jwt\Handler\IdentifierClaimHandler;
 use RM\Standard\Jwt\Handler\IssuedAtClaimHandler;
@@ -81,7 +82,10 @@ class Payload extends PropertyBag
      */
     public const CLAIM_IDENTIFIER = 'jti';
 
-    public function get(string $name): ?ClaimInterface
+    /**
+     * @throws PropertyNotFoundException
+     */
+    public function get(string $name): ClaimInterface
     {
         $property = $this->getProperty($name);
         if (!$property instanceof ClaimInterface) {
@@ -89,6 +93,21 @@ class Payload extends PropertyBag
         }
 
         return $property;
+    }
+
+    public function find(string $name): ?ClaimInterface
+    {
+        $property = $this->findProperty($name);
+        if ($property !== null && !$property instanceof ClaimInterface) {
+            throw new UnexpectedValueException('Expects a claim.');
+        }
+
+        return $property;
+    }
+
+    public function has(string $name): bool
+    {
+        return $this->hasProperty($name);
     }
 
     public function set(ClaimInterface $property): void
