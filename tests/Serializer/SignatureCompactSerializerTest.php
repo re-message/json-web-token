@@ -36,7 +36,7 @@ class SignatureCompactSerializerTest extends TestCase
 
         $token = SignatureToken::createWithAlgorithm(new HS3512());
         self::assertTrue($serializer->supports($token));
-        self::assertFalse($serializer->supports(new stdClass()));
+        self::assertFalse($serializer->supports(stdClass::class));
 
         return $serializer;
     }
