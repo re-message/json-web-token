@@ -19,6 +19,9 @@ namespace RM\Standard\Jwt\Serializer;
 use InvalidArgumentException;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Factory\ClaimFactory;
+use RM\Standard\Jwt\Factory\FactoryInterface;
+use RM\Standard\Jwt\Factory\HeaderParameterFactory;
 use RM\Standard\Jwt\Token\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -41,10 +44,16 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
     public const TOKEN_DELIMITER = '.';
 
     private JsonEncoder $encoder;
+    private FactoryInterface $claimFactory;
+    private FactoryInterface $headerParameterFactory;
 
-    public function __construct()
-    {
+    public function __construct(
+        ?ClaimFactory $claimFactory = null,
+        ?HeaderParameterFactory $headerParameterFactory = null,
+    ) {
         $this->encoder = new JsonEncoder();
+        $this->claimFactory = $claimFactory ?? new ClaimFactory();
+        $this->headerParameterFactory = $headerParameterFactory ?? new HeaderParameterFactory();
     }
 
     /**
@@ -103,11 +112,13 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         try {
             $b64Header = $parts[0];
             $jsonHeader = Base64UrlSafe::decode($b64Header);
-            $header = $this->decode($jsonHeader);
+            $headerArray = $this->decode($jsonHeader);
+            $header = $this->createPropertyBag($headerArray, $this->headerParameterFactory);
 
             $b64Payload = $parts[1];
             $jsonPayload = Base64UrlSafe::decode($b64Payload);
-            $payload = $this->decode($jsonPayload);
+            $payloadArray = $this->decode($jsonPayload);
+            $payload = $this->createPropertyBag($payloadArray, $this->claimFactory);
 
             if ($count === 3) {
                 $b64Signature = $parts[2];
@@ -118,6 +129,16 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         } catch (UnexpectedValueException $e) {
             throw new InvalidTokenException('The token is invalid and cannot be parsed from JSON.', $e);
         }
+    }
+
+    private function createPropertyBag(array $properties, FactoryInterface $factory): array
+    {
+        $bag = [];
+        foreach ($properties as $name => $value) {
+            $bag[$name] = $factory->create($name, $value);
+        }
+
+        return $bag;
     }
 
     protected function decode(string $data): array
