@@ -23,6 +23,8 @@ use RM\Standard\Jwt\Token\TokenInterface;
  * Class TokenHandlerList
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template-implements ArrayCollection<int, TokenHandlerInterface>
  */
 class TokenHandlerList extends ArrayCollection implements TokenHandlerInterface
 {
