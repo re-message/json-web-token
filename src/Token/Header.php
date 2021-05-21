@@ -42,19 +42,21 @@ class Header extends PropertyBag
      */
     public const CLAIM_TYPE = Type::NAME;
 
+    /**
+     * @param HeaderParameterInterface[] $parameters
+     */
     public function __construct(array $parameters = [])
     {
-        if (!array_key_exists(self::CLAIM_ALGORITHM, $parameters)) {
-            throw new InvalidArgumentException(sprintf('Any JSON Web Token must have the algorithm parameter (`%s`).', self::CLAIM_ALGORITHM));
+        parent::__construct([new Type('JWT')]);
+
+        foreach ($parameters as $parameter) {
+            $this->set($parameter);
         }
 
-        parent::__construct(
-            $parameters,
-            [
-                self::CLAIM_ALGORITHM => null,
-                self::CLAIM_TYPE => 'JWT'
-            ]
-        );
+        if (!$this->has(Algorithm::NAME)) {
+            $message = sprintf('Any JSON Web Token must have the algorithm parameter (`%s`).', Algorithm::NAME);
+            throw new InvalidArgumentException($message);
+        }
     }
 
     public function get(string $name): ?HeaderParameterInterface
@@ -65,6 +67,11 @@ class Header extends PropertyBag
         }
 
         return $property;
+    }
+
+    public function has(string $name): bool
+    {
+        return $this->hasProperty($name);
     }
 
     public function set(HeaderParameterInterface $property): void

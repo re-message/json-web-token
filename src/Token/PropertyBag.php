@@ -27,14 +27,14 @@ abstract class PropertyBag
 {
     private ArrayCollection $collection;
 
-    public function __construct(array $parameters = [], array $defaults = [])
+    public function __construct(array $parameters = [])
     {
-        $this->collection = new ArrayCollection(array_merge($defaults, $parameters));
+        $this->collection = new ArrayCollection($parameters);
     }
 
     protected function getProperty(string $name): ?PropertyInterface
     {
-        if($this->collection->containsKey($name)) {
+        if ($this->collection->containsKey($name)) {
             return $this->collection->get($name);
         }
 
@@ -46,6 +46,11 @@ abstract class PropertyBag
         }
 
         return null;
+    }
+
+    protected function hasProperty(string $name): bool
+    {
+        return $this->getProperty($name) !== null;
     }
 
     protected function setProperty(PropertyInterface $property): void
