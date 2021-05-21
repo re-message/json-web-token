@@ -21,11 +21,8 @@ use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Token\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
-use Webmozart\Json\DecodingFailedException;
-use Webmozart\Json\EncodingFailedException;
-use Webmozart\Json\JsonDecoder;
-use Webmozart\Json\JsonEncoder;
-use Webmozart\Json\ValidationFailedException;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 
 /**
  * Class CompactSerializer provides JWS Compact Serialization.
@@ -50,7 +47,6 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
      */
     private string $class;
     private JsonEncoder $encoder;
-    private JsonDecoder $decoder;
 
     /**
      * @inheritDoc
@@ -59,8 +55,6 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
     {
         $this->class = $class;
         $this->encoder = new JsonEncoder();
-        $this->decoder = new JsonDecoder();
-        $this->decoder->setObjectDecoding(JsonDecoder::ASSOC_ARRAY);
     }
 
     /**
@@ -81,8 +75,8 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         }
 
         try {
-            $jsonHeader = $this->encoder->encode($token->getHeader()->toArray());
-            $jsonPayload = $this->encoder->encode($token->getPayload()->toArray());
+            $jsonHeader = $this->encode($token->getHeader()->toArray());
+            $jsonPayload = $this->encode($token->getPayload()->toArray());
 
             $b64Header = Base64UrlSafe::encodeUnpadded($jsonHeader);
             $b64Payload = Base64UrlSafe::encodeUnpadded($jsonPayload);
@@ -95,9 +89,14 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
             }
 
             return implode(self::TOKEN_DELIMITER, $parts);
-        } catch (ValidationFailedException|EncodingFailedException $e) {
+        } catch (UnexpectedValueException $e) {
             throw new InvalidTokenException('The token data is invalid and cannot be serialized in JSON.', $e);
         }
+    }
+
+    protected function encode(array $data): string
+    {
+        return $this->encoder->encode($data, 'json');
     }
 
     /**
@@ -114,11 +113,11 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         try {
             $b64Header = $parts[0];
             $jsonHeader = Base64UrlSafe::decode($b64Header);
-            $header = $this->decoder->decode($jsonHeader);
+            $header = $this->decode($jsonHeader);
 
             $b64Payload = $parts[1];
             $jsonPayload = Base64UrlSafe::decode($b64Payload);
-            $payload = $this->decoder->decode($jsonPayload);
+            $payload = $this->decode($jsonPayload);
 
             if ($count === 3) {
                 $b64Signature = $parts[2];
@@ -126,9 +125,14 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
             }
 
             return new $this->class($header, $payload, $signature ?? null);
-        } catch (ValidationFailedException|DecodingFailedException $e) {
+        } catch (UnexpectedValueException $e) {
             throw new InvalidTokenException('The token is invalid and cannot be parsed from JSON.', $e);
         }
+    }
+
+    protected function decode(string $data): array
+    {
+        return $this->encoder->decode($data, 'json');
     }
 
     /**
