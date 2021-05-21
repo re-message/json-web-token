@@ -5,7 +5,7 @@
  *
  * @link      https://github.com/relmsg/json-web-token
  * @link      https://dev.relmsg.ru/packages/json-web-token
- * @copyright Copyright (c) 2018-2020 Relations Messenger
+ * @copyright Copyright (c) 2018-2021 Relations Messenger
  * @author    Oleg Kozlov <h1karo@relmsg.ru>
  * @license   Apache License 2.0
  * @license   https://legal.relmsg.ru/licenses/json-web-token
@@ -14,21 +14,21 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Algorithm\Signature;
+namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
 /**
- * Class HS256
+ * Class HS3512
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class HS256 extends HMAC
+class HS3512 extends HMAC
 {
     /**
      * @inheritDoc
      */
     public function name(): string
     {
-        return 'HS256';
+        return 'HS3512';
     }
 
     /**
@@ -36,6 +36,6 @@ class HS256 extends HMAC
      */
     protected function getHashAlgorithm(): string
     {
-        return 'sha256';
+        return 'sha3-512';
     }
 }
