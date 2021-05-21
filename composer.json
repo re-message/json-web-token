@@ -21,9 +21,10 @@
         "ext-json": "*",
         "ext-sodium": "*",
         "ext-mbstring": "*",
-        
+
         "psr/event-dispatcher": "^1.0.0",
         "symfony/event-dispatcher": "^4.4|^5.0",
+        "symfony/serializer": "^4.4|^5.0",
         "symfony/deprecation-contracts": "^2.1.2",
         "webmozart/json": "^1.2.2",
         "monolog/monolog": "^2.0.2",
@@ -35,9 +36,9 @@
         "ext-memcache": "*",
         "predis/predis": "^1.1",
         "symfony/stopwatch": "^4.4|^5.0",
-        
+
         "phpunit/phpunit": "^9.2.5",
-        
+
         "ramsey/uuid": "^3.9.2 || ^4.0.0",
         "bentools/cartesian-product": "^1.3"
     },
