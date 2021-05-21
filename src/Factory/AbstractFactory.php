@@ -45,7 +45,10 @@ abstract class AbstractFactory implements FactoryInterface
 
     public function create(string $name, mixed $value): PropertyInterface
     {
-        $class = $this->classMap[$name] ?? $this->defaultPropertyClass;
+        $class = $this->classMap[$name] ?? null;
+        if (null === $class) {
+            return new $this->defaultPropertyClass($name, $value);
+        }
 
         return new $class($value);
     }
