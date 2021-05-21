@@ -86,19 +86,9 @@ class SignatureServiceTest extends TestCase
     /**
      * @depends      testCreation
      * @dataProvider provideKeyAndAlgorithm
-     *
-     * @param AlgorithmInterface $algorithm
-     * @param KeyInterface       $key
-     * @param SignatureService   $service
-     *
-     * @return TokenInterface
-     * @throws InvalidTokenException
      */
-    public function testSign(
-        AlgorithmInterface $algorithm,
-        KeyInterface $key,
-        SignatureService $service
-    ): TokenInterface {
+    public function testSign(AlgorithmInterface $algorithm, KeyInterface $key, SignatureService $service): TokenInterface
+    {
         $token = SignatureToken::createWithAlgorithm($algorithm);
 
         $signedToken = $service->sign($token, $key);
