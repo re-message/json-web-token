@@ -16,7 +16,14 @@
 
 namespace RM\Standard\Jwt\Token;
 
+use RM\Standard\Jwt\Claim\Audience;
 use RM\Standard\Jwt\Claim\ClaimInterface;
+use RM\Standard\Jwt\Claim\Expiration;
+use RM\Standard\Jwt\Claim\Identifier;
+use RM\Standard\Jwt\Claim\IssuedAt;
+use RM\Standard\Jwt\Claim\Issuer;
+use RM\Standard\Jwt\Claim\NotBefore;
+use RM\Standard\Jwt\Claim\Subject;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 use RM\Standard\Jwt\Handler\ExpirationClaimHandler;
 use RM\Standard\Jwt\Handler\IdentifierClaimHandler;
@@ -41,46 +48,46 @@ class Payload extends PropertyBag
      *
      * @see IssuerClaimHandler The manager for this claim.
      */
-    public const CLAIM_ISSUER = 'iss';
+    public const CLAIM_ISSUER = Issuer::NAME;
     /**
      * Subject is a unique identity of application who wants to get access to the audience {@see Payload::CLAIM_AUDIENCE}.
      * It is required claim.
      * No handler for this claim because the token service processes it directly.
      */
-    public const CLAIM_SUBJECT = 'sub';
+    public const CLAIM_SUBJECT = Subject::NAME;
     /**
      * Audience is a unique identity of object token provides access to.
      * It is required claim. May have same value as {@see Payload::CLAIM_SUBJECT} claim.
      * No handler for this claim because the token service processes it directly. But you can create your own.
      */
-    public const CLAIM_AUDIENCE = 'aud';
+    public const CLAIM_AUDIENCE = Audience::NAME;
     /**
      * Expiration is a time in UNIX format when token expires.
      * It is required claim.
      *
      * @see ExpirationClaimHandler The manager for this claim.
      */
-    public const CLAIM_EXPIRATION = 'exp';
+    public const CLAIM_EXPIRATION = Expiration::NAME;
     /**
      * Not before time is a time in UNIX format before which the token is not valid.
      *
      * @see NotBeforeClaimHandler The manager for this claim.
      */
-    public const CLAIM_NOT_BEFORE = 'nbf';
+    public const CLAIM_NOT_BEFORE = NotBefore::NAME;
     /**
      * Issued at time is a time in UNIX format of token creation.
      * Often a value of this claim equals a value of {@see CLAIM_NOT_BEFORE} claim.
      *
      * @see IssuedAtClaimHandler The manager for this claim.
      */
-    public const CLAIM_ISSUED_AT = 'iat';
+    public const CLAIM_ISSUED_AT = IssuedAt::NAME;
     /**
      * Token identifier is unique sequence to provide revoke functional.
      * We recommend to set this claim.
      *
      * @see IdentifierClaimHandler The manager for this claim.
      */
-    public const CLAIM_IDENTIFIER = 'jti';
+    public const CLAIM_IDENTIFIER = Identifier::NAME;
 
     /**
      * @throws PropertyNotFoundException
