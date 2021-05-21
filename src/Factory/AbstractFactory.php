@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Factory;
 
-use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
@@ -31,9 +30,12 @@ abstract class AbstractFactory implements FactoryInterface
      */
     private array $classMap;
 
-    public function __construct(array $classMap = [])
+    private string $defaultPropertyClass;
+
+    public function __construct(array $classMap, string $defaultPropertyClass)
     {
         $this->classMap = $classMap;
+        $this->defaultPropertyClass = $defaultPropertyClass;
     }
 
     public function add(string $name, string $class): void
@@ -43,7 +45,7 @@ abstract class AbstractFactory implements FactoryInterface
 
     public function create(string $name, mixed $value): PropertyInterface
     {
-        $class = $this->classMap[$name] ?? throw new PropertyNotFoundException($name);
+        $class = $this->classMap[$name] ?? $this->defaultPropertyClass;
 
         return new $class($value);
     }

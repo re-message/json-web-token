@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Factory;
 
 use RM\Standard\Jwt\HeaderParameter\Algorithm;
+use RM\Standard\Jwt\HeaderParameter\Custom;
 use RM\Standard\Jwt\HeaderParameter\Type;
 
 /**
@@ -32,7 +33,8 @@ class HeaderParameterFactory extends AbstractFactory
             [
                 Algorithm::NAME => Algorithm::class,
                 Type::NAME => Type::class,
-            ]
+            ],
+            Custom::class,
         );
     }
 }

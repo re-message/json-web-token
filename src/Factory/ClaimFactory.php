@@ -22,6 +22,7 @@ use RM\Standard\Jwt\Claim\Identifier;
 use RM\Standard\Jwt\Claim\IssuedAt;
 use RM\Standard\Jwt\Claim\Issuer;
 use RM\Standard\Jwt\Claim\NotBefore;
+use RM\Standard\Jwt\Claim\PrivateClaim;
 use RM\Standard\Jwt\Claim\Subject;
 
 /**
@@ -42,7 +43,8 @@ class ClaimFactory extends AbstractFactory
                 Issuer::NAME => Issuer::class,
                 NotBefore::NAME => NotBefore::class,
                 Subject::NAME => Subject::class,
-            ]
+            ],
+            PrivateClaim::class
         );
     }
 }
