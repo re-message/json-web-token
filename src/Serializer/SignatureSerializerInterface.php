@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Serializer;
 
-use RM\Standard\Jwt\Token\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -26,11 +25,6 @@ use RM\Standard\Jwt\Token\TokenInterface;
  */
 interface SignatureSerializerInterface extends SerializerInterface
 {
-    /**
-     * @inheritDoc
-     */
-    public function __construct(string $class = SignatureToken::class);
-
     /**
      * @inheritDoc
      * @param bool $withoutSignature

@@ -40,20 +40,10 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
      */
     public const TOKEN_DELIMITER = '.';
 
-    /**
-     * The token class whose serialization is supported by this serializer.
-     *
-     * @var string
-     */
-    private string $class;
     private JsonEncoder $encoder;
 
-    /**
-     * @inheritDoc
-     */
-    public function __construct(string $class = SignatureToken::class)
+    public function __construct()
     {
-        $this->class = $class;
         $this->encoder = new JsonEncoder();
     }
 
@@ -124,7 +114,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
                 $signature = Base64UrlSafe::decode($b64Signature);
             }
 
-            return new $this->class($header, $payload, $signature ?? null);
+            return new SignatureToken($header, $payload, $signature ?? null);
         } catch (UnexpectedValueException $e) {
             throw new InvalidTokenException('The token is invalid and cannot be parsed from JSON.', $e);
         }
@@ -138,8 +128,8 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
     /**
      * @inheritDoc
      */
-    public function supports($token): bool
+    public function supports(TokenInterface|string $token): bool
     {
-        return is_a($token, $this->class, !is_object($token));
+        return is_a($token, SignatureToken::class, !is_object($token));
     }
 }

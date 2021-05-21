@@ -29,7 +29,7 @@ class SignatureCompactSerializerTest extends TestCase
 {
     public function testSupports(): SignatureCompactSerializer
     {
-        $serializer = new SignatureCompactSerializer(SignatureToken::class);
+        $serializer = new SignatureCompactSerializer();
 
         self::assertTrue($serializer->supports(SignatureToken::class));
         self::assertFalse($serializer->supports(stdClass::class));

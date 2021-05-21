@@ -27,13 +27,6 @@ use RM\Standard\Jwt\Token\TokenInterface;
 interface SerializerInterface
 {
     /**
-     * SerializerInterface constructor.
-     *
-     * @param string $class The token class whose serialization is supported by this serializer.
-     */
-    public function __construct(string $class);
-
-    /**
      * Serializes the token in a transfer-safe and short format.
      *
      * @param TokenInterface $token
@@ -55,9 +48,9 @@ interface SerializerInterface
     /**
      * Checks that serializer supports this token class for serialization and deserialization.
      *
-     * @param TokenInterface|string $token The token object or a token FQCN.
+     * @param string|TokenInterface $token The token object or a token FQCN.
      *
      * @return bool
      */
-    public function supports($token): bool;
+    public function supports(TokenInterface|string $token): bool;
 }

@@ -72,9 +72,7 @@ use RM\Standard\Jwt\Token\SignatureToken;
 // {"alg": "HS256","typ": "JWT"} . {"sub": "1234567890","name": "John Doe","iat": 1516239022} . signature
 $rawToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
-// in constructor should be passed FQCN of class
-// which object should be created on deserialization
-$serializer = new SignatureCompactSerializer(SignatureToken::class);
+$serializer = new SignatureCompactSerializer();
 
 // result is a SignatureToken object
 // serializer DO NOT validate token
