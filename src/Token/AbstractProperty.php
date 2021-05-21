@@ -14,40 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\HeaderParameter;
+namespace RM\Standard\Jwt\Token;
 
 /**
- * Class AbstractParameter
+ * Class AbstractProperty
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-abstract class AbstractParameter implements HeaderParameterInterface
+abstract class AbstractProperty implements PropertyInterface
 {
-    /**
-     * @var mixed
-     */
-    private $value;
+    private mixed $value;
 
     /**
-     * @param mixed $value
+     * @param mixed|null $value
      */
-    public function __construct($value = null)
+    public function __construct(mixed $value = null)
     {
         $this->setValue($value);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
 
-    /**
-     * @param mixed
-     */
-    public function setValue($value): void
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }

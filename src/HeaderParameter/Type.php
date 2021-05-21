@@ -16,12 +16,14 @@
 
 namespace RM\Standard\Jwt\HeaderParameter;
 
+use RM\Standard\Jwt\Token\AbstractProperty;
+
 /**
  * Class Type
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Type extends AbstractParameter
+class Type extends AbstractProperty implements HeaderParameterInterface
 {
     public const NAME = 'typ';
 
