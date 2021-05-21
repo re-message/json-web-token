@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Token;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
+use RM\Standard\Jwt\HeaderParameter\Algorithm;
 use RM\Standard\Jwt\Serializer\SerializerInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
@@ -65,7 +66,7 @@ class SignatureToken implements TokenInterface
      */
     public function getAlgorithm(): string
     {
-        return $this->header->get(Header::CLAIM_ALGORITHM);
+        return $this->header->get(Algorithm::NAME)->getValue();
     }
 
     /**
@@ -78,7 +79,7 @@ class SignatureToken implements TokenInterface
     public function setAlgorithm(SignatureAlgorithmInterface $algorithm): TokenInterface
     {
         $token = clone $this;
-        $token->header->set(Header::CLAIM_ALGORITHM, $algorithm->name());
+        $token->header->set(Algorithm::fromAlgorithm($algorithm));
         return $token;
     }
 
