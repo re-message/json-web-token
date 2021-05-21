@@ -26,6 +26,11 @@ use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
+use RM\Standard\Jwt\Claim\Expiration;
+use RM\Standard\Jwt\Claim\Identifier;
+use RM\Standard\Jwt\Claim\IssuedAt;
+use RM\Standard\Jwt\Claim\Issuer;
+use RM\Standard\Jwt\Claim\NotBefore;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Handler\ExpirationClaimHandler;
@@ -39,7 +44,6 @@ use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Service\SignatureService;
 use RM\Standard\Jwt\Storage\RedisTokenStorage;
-use RM\Standard\Jwt\Token\Payload;
 use RM\Standard\Jwt\Token\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 
@@ -102,18 +106,18 @@ class SignatureServiceTest extends TestCase
         self::assertTrue($signedToken->isSigned());
         self::assertFalse($token->isSigned());
 
-        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_ISSUER));
-        self::assertEquals('test', $signedToken->getPayload()->get(Payload::CLAIM_ISSUER));
-        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_EXPIRATION));
-        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_ISSUED_AT));
-        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_NOT_BEFORE));
-        self::assertTrue($signedToken->getPayload()->containsKey(Payload::CLAIM_IDENTIFIER));
+        self::assertTrue($signedToken->getPayload()->has(Issuer::NAME));
+        self::assertEquals('test', $signedToken->getPayload()->get(Issuer::NAME));
+        self::assertTrue($signedToken->getPayload()->has(Expiration::NAME));
+        self::assertTrue($signedToken->getPayload()->has(IssuedAt::NAME));
+        self::assertTrue($signedToken->getPayload()->has(NotBefore::NAME));
+        self::assertTrue($signedToken->getPayload()->has(Identifier::NAME));
 
-        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_ISSUER));
-        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_EXPIRATION));
-        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_ISSUED_AT));
-        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_NOT_BEFORE));
-        self::assertFalse($token->getPayload()->containsKey(Payload::CLAIM_IDENTIFIER));
+        self::assertFalse($token->getPayload()->has(Issuer::NAME));
+        self::assertFalse($token->getPayload()->has(Expiration::NAME));
+        self::assertFalse($token->getPayload()->has(IssuedAt::NAME));
+        self::assertFalse($token->getPayload()->has(NotBefore::NAME));
+        self::assertFalse($token->getPayload()->has(Identifier::NAME));
 
         self::assertTrue($service->verify($signedToken, $key));
         self::assertFalse($service->verify($signedToken->setSignature(null), $key));
