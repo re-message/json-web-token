@@ -72,6 +72,13 @@ abstract class PropertyBag
 
     public function toArray(): array
     {
-        return $this->collection->toArray();
+        $collection = new ArrayCollection();
+
+        /** @var PropertyInterface $property */
+        foreach ($this->collection as $property) {
+            $collection->set($property->getName(), $property->getValue());
+        }
+
+        return $collection->toArray();
     }
 }
