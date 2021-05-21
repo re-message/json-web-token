@@ -31,9 +31,13 @@ abstract class PropertyBag
 {
     private ArrayCollection $collection;
 
-    public function __construct(array $parameters = [])
+    public function __construct(array $properties = [])
     {
-        $this->collection = new ArrayCollection($parameters);
+        $this->collection = new ArrayCollection();
+
+        foreach ($properties as $property) {
+            $this->set($property);
+        }
     }
 
     /**
