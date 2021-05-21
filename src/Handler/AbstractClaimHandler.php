@@ -21,7 +21,7 @@ use InvalidArgumentException;
 use RM\Standard\Jwt\Exception\ClaimViolationException;
 use RM\Standard\Jwt\Exception\InvalidClaimException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
-use RM\Standard\Jwt\Token\ClaimCollection;
+use RM\Standard\Jwt\Token\PropertyBag;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -120,9 +120,9 @@ abstract class AbstractClaimHandler implements TokenHandlerInterface
     /**
      * @param TokenInterface $token
      *
-     * @return ClaimCollection
+     * @return ParameterBag
      */
-    protected function resolveTarget(TokenInterface $token): ClaimCollection
+    protected function resolveTarget(TokenInterface $token): PropertyBag
     {
         if ($this->getClaimTarget() === self::HEADER_CLAIM) {
             return $token->getHeader();

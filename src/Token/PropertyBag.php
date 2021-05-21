@@ -19,18 +19,12 @@ namespace RM\Standard\Jwt\Token;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class ClaimCollection
+ * Class PropertyBag
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-abstract class ClaimCollection extends ArrayCollection
+abstract class PropertyBag extends ArrayCollection
 {
-    /**
-     * ClaimCollection constructor.
-     *
-     * @param array $parameters
-     * @param array $defaults
-     */
     public function __construct(array $parameters = [], array $defaults = [])
     {
         parent::__construct(array_merge($defaults, $parameters));

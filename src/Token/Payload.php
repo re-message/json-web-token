@@ -28,7 +28,7 @@ use RM\Standard\Jwt\Storage\TokenStorageInterface;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Payload extends ClaimCollection
+class Payload extends PropertyBag
 {
     /**
      * Issuer is a unique identity of token generator server, authentication server or security server.

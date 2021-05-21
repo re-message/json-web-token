@@ -25,7 +25,7 @@ use RM\Standard\Jwt\Algorithm\AlgorithmManager;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Header extends ClaimCollection
+class Header extends PropertyBag
 {
     /**
      * Algorithm must be set from method { @see AlgorithmInterface::name() } and be in { @see AlgorithmManager }
