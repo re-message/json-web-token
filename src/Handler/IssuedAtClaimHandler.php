@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Exception\IncorrectClaimTypeException;
+use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\IssuedAtViolationException;
 use RM\Standard\Jwt\Token\Payload;
 
@@ -25,14 +25,14 @@ use RM\Standard\Jwt\Token\Payload;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IssuedAtClaimHandler extends AbstractClaimHandler
+class IssuedAtClaimHandler extends AbstractPropertyHandler
 {
     use LeewayHandlerTrait;
 
     /**
      * @inheritDoc
      */
-    public function getClaim(): string
+    public function getPropertyName(): string
     {
         return Payload::CLAIM_ISSUED_AT;
     }
@@ -40,7 +40,7 @@ class IssuedAtClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    protected function generateValue(): int
+    protected function generateProperty(): int
     {
         return time();
     }
@@ -48,10 +48,10 @@ class IssuedAtClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    protected function validateValue($value): bool
+    protected function validateProperty($value): bool
     {
         if (!is_int($value)) {
-            throw new IncorrectClaimTypeException('integer', gettype($value), $this->getClaim());
+            throw new IncorrectPropertyTypeException('integer', gettype($value), $this->getPropertyName());
         }
 
         if (time() < $value - $this->getLeeway()) {

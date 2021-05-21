@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Handler;
 
 use RM\Standard\Jwt\Exception\ExpirationViolationException;
-use RM\Standard\Jwt\Exception\IncorrectClaimTypeException;
+use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Token\Payload;
 
 /**
@@ -25,7 +25,7 @@ use RM\Standard\Jwt\Token\Payload;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class ExpirationClaimHandler extends AbstractClaimHandler
+class ExpirationClaimHandler extends AbstractPropertyHandler
 {
     use LeewayHandlerTrait;
 
@@ -44,7 +44,7 @@ class ExpirationClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    public function getClaim(): string
+    public function getPropertyName(): string
     {
         return Payload::CLAIM_EXPIRATION;
     }
@@ -52,18 +52,19 @@ class ExpirationClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    protected function generateValue(): int
+    protected function generateProperty(): int
     {
-        return time() + $this->duration;
+        $value = time() + $this->duration;
+        return $value;
     }
 
     /**
      * @inheritDoc
      */
-    protected function validateValue($value): bool
+    protected function validateProperty($value): bool
     {
         if (!is_int($value)) {
-            throw new IncorrectClaimTypeException('integer', gettype($value), $this->getClaim());
+            throw new IncorrectPropertyTypeException('integer', gettype($value), $this->getPropertyName());
         }
 
         if (time() > $value + $this->getLeeway()) {

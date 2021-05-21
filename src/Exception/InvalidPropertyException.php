@@ -23,7 +23,7 @@ use Throwable;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class InvalidClaimException extends InvalidTokenException
+class InvalidPropertyException extends InvalidTokenException
 {
     private string $claim;
 

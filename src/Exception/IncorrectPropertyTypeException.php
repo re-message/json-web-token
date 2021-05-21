@@ -23,7 +23,7 @@ use Throwable;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IncorrectClaimTypeException extends InvalidClaimException
+class IncorrectPropertyTypeException extends InvalidPropertyException
 {
     public function __construct(string $expected, string $got, string $claim, Throwable $previous = null)
     {

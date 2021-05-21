@@ -19,8 +19,8 @@ namespace RM\Standard\Jwt\Service;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Event\TokenPreSignEvent;
 use RM\Standard\Jwt\Event\TokenSignEvent;
-use RM\Standard\Jwt\Exception\ClaimViolationException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Exception\PropertyViolationException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
 
@@ -52,7 +52,7 @@ interface SignatureServiceInterface
      * @param KeyInterface   $key
      *
      * @return bool
-     * @throws ClaimViolationException
+     * @throws PropertyViolationException
      * @throws InvalidTokenException
      */
     public function verify(SignatureToken $token, KeyInterface $key): bool;

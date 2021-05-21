@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Handler;
 
 use InvalidArgumentException;
-use RM\Standard\Jwt\Exception\IncorrectClaimTypeException;
+use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
 use RM\Standard\Jwt\Identifier\UniqIdGenerator;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
@@ -29,7 +29,7 @@ use RM\Standard\Jwt\Token\Payload;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IdentifierClaimHandler extends AbstractClaimHandler
+class IdentifierClaimHandler extends AbstractPropertyHandler
 {
     protected IdentifierGeneratorInterface $identifierGenerator;
     protected TokenStorageInterface $tokenStorage;
@@ -53,7 +53,7 @@ class IdentifierClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    public function getClaim(): string
+    public function getPropertyName(): string
     {
         return Payload::CLAIM_IDENTIFIER;
     }
@@ -61,7 +61,7 @@ class IdentifierClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    protected function generateValue(): string
+    protected function generateProperty(): string
     {
         if ($this->identifierGenerator === null) {
             throw new InvalidArgumentException(
@@ -85,14 +85,14 @@ class IdentifierClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    protected function validateValue($value): bool
+    protected function validateProperty($value): bool
     {
         if ($this->tokenStorage === null) {
             throw new InvalidArgumentException(sprintf('To use %s required set up the token storage.', static::class));
         }
 
         if (!is_string($value)) {
-            throw new IncorrectClaimTypeException('string', gettype($value), $this->getClaim());
+            throw new IncorrectPropertyTypeException('string', gettype($value), $this->getPropertyName());
         }
 
         return $this->tokenStorage->has($value);

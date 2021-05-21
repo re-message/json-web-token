@@ -24,7 +24,7 @@ use Throwable;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class ExpirationViolationException extends ClaimViolationException
+class ExpirationViolationException extends PropertyViolationException
 {
     public function __construct(ExpirationClaimHandler $claimHandler, Throwable $previous = null)
     {

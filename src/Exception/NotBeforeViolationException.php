@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Handler\AbstractClaimHandler;
+use RM\Standard\Jwt\Handler\AbstractPropertyHandler;
 use Throwable;
 
 /**
@@ -24,9 +24,9 @@ use Throwable;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class NotBeforeViolationException extends ClaimViolationException
+class NotBeforeViolationException extends PropertyViolationException
 {
-    public function __construct(AbstractClaimHandler $claimHandler, Throwable $previous = null)
+    public function __construct(AbstractPropertyHandler $claimHandler, Throwable $previous = null)
     {
         parent::__construct('The token cannot be used yet.', $claimHandler, $previous);
     }

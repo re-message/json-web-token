@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Handler\AbstractClaimHandler;
+use RM\Standard\Jwt\Handler\AbstractPropertyHandler;
 use Throwable;
 
 /**
@@ -25,17 +25,17 @@ use Throwable;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class ClaimViolationException extends InvalidClaimException
+class PropertyViolationException extends InvalidPropertyException
 {
-    private AbstractClaimHandler $claimHandler;
+    private AbstractPropertyHandler $claimHandler;
 
-    public function __construct(string $message, AbstractClaimHandler $claimHandler, Throwable $previous = null)
+    public function __construct(string $message, AbstractPropertyHandler $claimHandler, Throwable $previous = null)
     {
-        parent::__construct($message, $claimHandler->getClaim(), $previous);
+        parent::__construct($message, $claimHandler->getPropertyName(), $previous);
         $this->claimHandler = $claimHandler;
     }
 
-    public function getClaimHandler(): AbstractClaimHandler
+    public function getClaimHandler(): AbstractPropertyHandler
     {
         return $this->claimHandler;
     }

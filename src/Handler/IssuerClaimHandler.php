@@ -24,7 +24,7 @@ use RM\Standard\Jwt\Token\Payload;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IssuerClaimHandler extends AbstractClaimHandler
+class IssuerClaimHandler extends AbstractPropertyHandler
 {
     /**
      * The identifier of server which issued the token
@@ -39,7 +39,7 @@ class IssuerClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    public function getClaim(): string
+    public function getPropertyName(): string
     {
         return Payload::CLAIM_ISSUER;
     }
@@ -47,7 +47,7 @@ class IssuerClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    protected function generateValue(): string
+    protected function generateProperty(): string
     {
         return $this->issuer;
     }
@@ -55,7 +55,7 @@ class IssuerClaimHandler extends AbstractClaimHandler
     /**
      * @inheritDoc
      */
-    protected function validateValue($value): bool
+    protected function validateProperty($value): bool
     {
         if ($this->issuer !== $value) {
             throw new IssuerViolationException($this);

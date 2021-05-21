@@ -24,7 +24,7 @@ use Throwable;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IssuerViolationException extends ClaimViolationException
+class IssuerViolationException extends PropertyViolationException
 {
     public function __construct(IssuerClaimHandler $claimHandler, Throwable $previous = null)
     {

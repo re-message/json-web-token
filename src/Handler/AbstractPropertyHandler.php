@@ -18,31 +18,32 @@ namespace RM\Standard\Jwt\Handler;
 
 use Exception;
 use InvalidArgumentException;
-use RM\Standard\Jwt\Exception\ClaimViolationException;
-use RM\Standard\Jwt\Exception\InvalidClaimException;
+use RM\Standard\Jwt\Exception\InvalidPropertyException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Exception\PropertyViolationException;
 use RM\Standard\Jwt\Token\PropertyBag;
+use RM\Standard\Jwt\Token\PropertyInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * Class AbstractClaimHandler
+ * Class AbstractPropertyHandler
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-abstract class AbstractClaimHandler implements TokenHandlerInterface
+abstract class AbstractPropertyHandler implements TokenHandlerInterface
 {
-    public const HEADER_CLAIM  = 'header';
+    public const HEADER_PARAMETER  = 'header';
     public const PAYLOAD_CLAIM = 'payload';
 
     /**
      * Returns name of claim to handle.
      */
-    abstract public function getClaim(): string;
+    abstract public function getPropertyName(): string;
 
     /**
      * Returns the part of the token in which the claim for validation is located
      */
-    public function getClaimTarget(): string
+    public function getPropertyTarget(): string
     {
         return self::PAYLOAD_CLAIM;
     }
@@ -53,67 +54,66 @@ abstract class AbstractClaimHandler implements TokenHandlerInterface
     final public function generate(TokenInterface $token): void
     {
         $target = $this->resolveTarget($token);
-        if (!$target->containsKey($this->getClaim())) {
-            $value = $this->generateValue();
-            $target->set($this->getClaim(), $value);
+        if (!$target->has($this->getPropertyName())) {
+            $property = $this->generateProperty();
+            $target->set($property);
         }
     }
 
     /**
      * Generate value for current claim.
      */
-    abstract protected function generateValue();
+    abstract protected function generateProperty(): PropertyInterface;
 
     /**
      * Checks if the passed value is valid.
      *
-     * @throws ClaimViolationException
+     * @throws PropertyViolationException
      * @throws InvalidTokenException
      */
     final public function validate(TokenInterface $token): bool
     {
         $target = $this->resolveTarget($token);
-        if (!$target->containsKey($this->getClaim())) {
-            throw new InvalidTokenException(sprintf('This token does not have claim %s.', $this->getClaim()));
+        $propertyName = $this->getPropertyName();
+        if (!$target->has($propertyName)) {
+            throw new InvalidTokenException(sprintf('This token does not have claim %s.', $propertyName));
         }
 
-        $value = $target->get($this->getClaim());
+        $property = $target->get($propertyName);
 
         try {
-            if ($this->validateValue($value) === true) {
+            if ($this->validateProperty($property) === true) {
                 return true;
             }
-        } catch (ClaimViolationException $e) {
+        } catch (PropertyViolationException $e) {
             // correct exception, just throw her again
             throw $e;
         } catch (Exception $e) {
             // incorrect exception, throw ClaimViolationException with previous
-            throw new ClaimViolationException('The token did not pass validation.', $this, $e);
+            throw new PropertyViolationException('The token did not pass validation.', $this, $e);
         }
 
         // if no exception and result false, then just throw ClaimViolationException
-        throw new ClaimViolationException('The token did not pass validation.', $this);
+        throw new PropertyViolationException('The token did not pass validation.', $this);
     }
 
     /**
      * Validate value of this claim.
-     * Please throw instance of {@see ClaimViolationException} if this validation failed.
-     * If you just return `false` or throw other exception then {@see validate()} will throw {@see ClaimViolationException} self.
+     * Please throw instance of {@see PropertyViolationException} if this validation failed.
+     * If you just return `false` or throw other exception then {@see validate()} will throw {@see PropertyViolationException} self.
      *
-     * @param string|int|float|bool $value
-     *
-     * @throws ClaimViolationException
-     * @throws InvalidClaimException
+     * @throws PropertyViolationException
+     * @throws InvalidPropertyException
      */
-    abstract protected function validateValue($value): bool;
+    abstract protected function validateProperty(PropertyInterface $value): bool;
 
     protected function resolveTarget(TokenInterface $token): PropertyBag
     {
-        if ($this->getClaimTarget() === self::HEADER_CLAIM) {
+        if ($this->getPropertyTarget() === self::HEADER_PARAMETER) {
             return $token->getHeader();
         }
 
-        if ($this->getClaimTarget() === self::PAYLOAD_CLAIM) {
+        if ($this->getPropertyTarget() === self::PAYLOAD_CLAIM) {
             return $token->getPayload();
         }
 
@@ -121,7 +121,7 @@ abstract class AbstractClaimHandler implements TokenHandlerInterface
             sprintf(
                 'The claim target can be only `header` or `payload`. Got %2$s in %1$s.',
                 get_class($this),
-                $this->getClaimTarget()
+                $this->getPropertyTarget()
             )
         );
     }
