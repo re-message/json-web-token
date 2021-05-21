@@ -19,7 +19,9 @@ namespace RM\Standard\Jwt\Claim;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class Audience
+ * Audience is a unique identity of object token provides access to.
+ * It is required claim. May have same value as {@see Subject} claim.
+ * No handler for this claim because the token service processes it directly. But you can create your own.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

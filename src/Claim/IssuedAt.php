@@ -17,7 +17,10 @@
 namespace RM\Standard\Jwt\Claim;
 
 /**
- * Class Issuer
+ * Issued at time is a time in UNIX format of token creation.
+ * Often a value of this claim equals a value of {@see NotBefore} claim.
+ *
+ * @see IssuedAtClaimHandler The manager for this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

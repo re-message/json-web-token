@@ -17,9 +17,11 @@
 namespace RM\Standard\Jwt\Claim;
 
 /**
- * Class NotBefore
+ * Not before time is a time in UNIX format before which the token is not valid.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see NotBeforeClaimHandler The manager for this claim.
  */
 class NotBefore extends DateValueClaim
 {

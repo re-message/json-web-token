@@ -19,9 +19,12 @@ namespace RM\Standard\Jwt\Claim;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class Identifier
+ * Token identifier is unique sequence to provide revoke functional.
+ * We recommend to set this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see IdentifierClaimHandler The manager for this claim.
  */
 class Identifier extends AbstractProperty implements ClaimInterface
 {

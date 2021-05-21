@@ -17,9 +17,12 @@
 namespace RM\Standard\Jwt\Claim;
 
 /**
- * Class Expiration
+ * Expiration is a time in UNIX format when token expires.
+ * It is required claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see ExpirationClaimHandler The manager for this claim.
  */
 class Expiration extends DateValueClaim
 {

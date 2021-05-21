@@ -19,9 +19,15 @@ namespace RM\Standard\Jwt\Claim;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class Issuer
+ * Issuer is a unique identity of token generator server, authentication server or security server.
+ * You can set this claim to check where token generated.
+ * It is maybe helps you, if you use several servers
+ * with own token id {@see Identifier} cache server {@see TokenStorageInterface}.
+ * We recommend to set this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see IssuerClaimHandler The manager for this claim.
  */
 class Issuer extends AbstractProperty implements ClaimInterface
 {

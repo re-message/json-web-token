@@ -19,7 +19,9 @@ namespace RM\Standard\Jwt\Claim;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class Subject
+ * Subject is a unique identity of application who wants to get access to the audience {@see Audience}.
+ * It is required claim.
+ * No handler for this claim because the token service processes it directly.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
