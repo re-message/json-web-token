@@ -25,15 +25,16 @@ At the moment, we provide only octet support. This is a just string which used a
 To create new token you can use class `RM\Standard\Jwt\Token\SignatureToken` class. Class constructor have 3 arguments: header claims, payload claims and signature. You should pass algorithm name with header claims. Other arguments and claims is optional.
 
 Example:
+
 ```php
 <?php
 
-use RM\Standard\Jwt\Token\Header;
+use RM\Standard\Jwt\HeaderParameter\Algorithm;
 use RM\Standard\Jwt\Token\SignatureToken;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 
 $algorithm = new HS3256();
-$token = new SignatureToken([Header::CLAIM_ALGORITHM => $algorithm->name()]);
+$token = new SignatureToken([Algorithm::fromAlgorithm($algorithm)]);
 ```
 
 Inlined way:
@@ -102,14 +103,14 @@ use Laminas\Math\Rand;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
+use RM\Standard\Jwt\HeaderParameter\Algorithm;
 use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Service\SignatureService;
-use RM\Standard\Jwt\Token\Header;
 use RM\Standard\Jwt\Token\SignatureToken;
 
 // some algorithm
 $algorithm = new HS3256();
-$token = new SignatureToken([Header::CLAIM_ALGORITHM => $algorithm->name()]);
+$token = new SignatureToken([Algorithm::fromAlgorithm($algorithm)]);
 
 // generate random key for example
 $value = Base64UrlSafe::encode(Rand::getBytes(64));

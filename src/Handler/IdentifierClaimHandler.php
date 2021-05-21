@@ -17,15 +17,17 @@
 namespace RM\Standard\Jwt\Handler;
 
 use InvalidArgumentException;
+use RM\Standard\Jwt\Claim\Identifier;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
 use RM\Standard\Jwt\Identifier\UniqIdGenerator;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
-use RM\Standard\Jwt\Token\Payload;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use UnexpectedValueException;
 
 /**
- * Class IdentifierClaimHandler provides processing for { @see Payload::CLAIM_IDENTIFIER } claim.
+ * Class IdentifierClaimHandler provides processing for { @see Identifier } claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
@@ -55,13 +57,13 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
      */
     public function getPropertyName(): string
     {
-        return Payload::CLAIM_IDENTIFIER;
+        return Identifier::NAME;
     }
 
     /**
      * @inheritDoc
      */
-    protected function generateProperty(): string
+    protected function generateProperty(): Identifier
     {
         if ($this->identifierGenerator === null) {
             throw new InvalidArgumentException(
@@ -79,18 +81,25 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
         }
 
         $this->tokenStorage->put($identifier, $this->duration);
-        return $identifier;
+
+        return new Identifier($identifier);
     }
 
     /**
      * @inheritDoc
      */
-    protected function validateProperty($value): bool
+    protected function validateProperty(PropertyInterface $property): bool
     {
+        if (!$property instanceof Identifier) {
+            $message = sprintf('%s can handle only %s.', self::class, Identifier::class);
+            throw new UnexpectedValueException($message);
+        }
+
         if ($this->tokenStorage === null) {
             throw new InvalidArgumentException(sprintf('To use %s required set up the token storage.', static::class));
         }
 
+        $value = $property->getValue();
         if (!is_string($value)) {
             throw new IncorrectPropertyTypeException('string', gettype($value), $this->getPropertyName());
         }

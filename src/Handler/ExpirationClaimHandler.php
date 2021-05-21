@@ -16,9 +16,11 @@
 
 namespace RM\Standard\Jwt\Handler;
 
+use RM\Standard\Jwt\Claim\Expiration;
 use RM\Standard\Jwt\Exception\ExpirationViolationException;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
-use RM\Standard\Jwt\Token\Payload;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use UnexpectedValueException;
 
 /**
  * Class ExpirationClaimHandler
@@ -46,23 +48,30 @@ class ExpirationClaimHandler extends AbstractPropertyHandler
      */
     public function getPropertyName(): string
     {
-        return Payload::CLAIM_EXPIRATION;
+        return Expiration::NAME;
     }
 
     /**
      * @inheritDoc
      */
-    protected function generateProperty(): int
+    protected function generateProperty(): Expiration
     {
         $value = time() + $this->duration;
-        return $value;
+
+        return new Expiration($value);
     }
 
     /**
      * @inheritDoc
      */
-    protected function validateProperty($value): bool
+    protected function validateProperty(PropertyInterface $property): bool
     {
+        if (!$property instanceof Expiration) {
+            $message = sprintf('%s can handle only %s.', self::class, Expiration::class);
+            throw new UnexpectedValueException($message);
+        }
+
+        $value = $property->getValue();
         if (!is_int($value)) {
             throw new IncorrectPropertyTypeException('integer', gettype($value), $this->getPropertyName());
         }

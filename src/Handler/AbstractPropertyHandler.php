@@ -105,7 +105,7 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
      * @throws PropertyViolationException
      * @throws InvalidPropertyException
      */
-    abstract protected function validateProperty(PropertyInterface $value): bool;
+    abstract protected function validateProperty(PropertyInterface $property): bool;
 
     protected function resolveTarget(TokenInterface $token): PropertyBag
     {
