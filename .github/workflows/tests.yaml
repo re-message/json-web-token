@@ -12,6 +12,10 @@ jobs:
     testing:
         runs-on: ubuntu-latest
 
+        strategy:
+            matrix:
+                php-versions: ['7.4', '8.0']
+
         services:
             redis:
                 image: redis
@@ -33,7 +37,7 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 7.4
+                    php-version: ${{ matrix.php-versions }}
                     coverage: pcov
                     extensions: "sodium,mbstring,json,memcached,redis"
                     ini-values: "memory_limit=-1"
