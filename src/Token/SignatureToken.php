@@ -170,6 +170,8 @@ class SignatureToken implements TokenInterface
      */
     final public static function createWithAlgorithm(AlgorithmInterface $algorithm): self
     {
-        return new static([Header::CLAIM_ALGORITHM => $algorithm->name()]);
+        $algorithmClaim = Algorithm::fromAlgorithm($algorithm);
+
+        return new static([$algorithmClaim]);
     }
 }

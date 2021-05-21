@@ -19,7 +19,8 @@ namespace RM\Standard\Jwt\HeaderParameter;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class Type
+ * Type of token, by default is `JWT`.
+ * If you use some token types, you can override this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
