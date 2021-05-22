@@ -40,6 +40,11 @@ abstract class PropertyBag
         }
     }
 
+    public function __clone(): void
+    {
+        $this->collection = clone $this->collection;
+    }
+
     /**
      * @throws PropertyNotFoundException
      */
