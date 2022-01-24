@@ -29,8 +29,8 @@ use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Handler\TokenHandlerList;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
-use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
+use RM\Standard\Jwt\Service\Signer\Signer;
+use RM\Standard\Jwt\Service\Signer\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -41,20 +41,20 @@ class SignatureService implements SignatureServiceInterface
 {
     private AlgorithmManager $algorithmManager;
     private ?TokenHandlerList $handlerList;
-    private SignatureSerializerInterface $serializer;
+    private SignerInterface $signer;
     private EventDispatcherInterface $eventDispatcher;
     private LoggerInterface $logger;
 
     public function __construct(
         AlgorithmManager $algorithmManager,
         TokenHandlerList $handlerList = null,
-        SignatureSerializerInterface $serializer = null,
+        SignerInterface $signer = null,
         EventDispatcherInterface $eventDispatcher = null,
         LoggerInterface $logger = null
     ) {
         $this->algorithmManager = $algorithmManager;
         $this->handlerList = $handlerList ?? new TokenHandlerList();
-        $this->serializer = $serializer ?? new SignatureCompactSerializer();
+        $this->signer = $signer ?? new Signer();
         $this->eventDispatcher = $eventDispatcher ?? new EventDispatcher();
         $this->logger = $logger ?? new NullLogger();
     }
@@ -79,13 +79,12 @@ class SignatureService implements SignatureServiceInterface
         $this->handlerList->generate($token);
         $this->logger->debug('Handlers processed the token.');
 
-        $signature = $algorithm->hash($key, $this->serializer->serialize($token, true));
-        $signedToken = $token->setSignature($signature);
+        $signedToken = $this->signer->sign($token, $algorithm, $key);
 
         $this->logger->debug(
             'Signature generated with hash algorithm.',
             [
-                'signature' => Base64UrlSafe::encode($signature),
+                'signature' => Base64UrlSafe::encode($signedToken->getSignature()),
                 'algorithm' => $algorithm->name()
             ]
         );
