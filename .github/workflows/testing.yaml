@@ -1,0 +1,72 @@
+name: Testing and Security check
+
+on:
+  push:
+    branches:
+      - '*.x'
+  pull_request:
+    branches:
+      - '*.x'
+
+jobs:
+  test:
+    name: Testing on PHP ${{ matrix.php-versions }}
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-versions: [ '8.1' ]
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      memcached:
+        image: memcached
+        ports:
+          - 11211:11211
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: pcov
+          extensions: "sodium,mbstring,json,memcached,redis"
+          ini-values: opcache.jit_buffer_size=256M, opcache.jit=1235, pcre.jit=1
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-dir)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run test suite
+        run: php vendor/bin/phpunit
+        env:
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          MEMCACHED_HOST: localhost
+          MEMCACHED_PORT: 11211
+
+      - name: PHP Security Checker
+        uses: StephaneBour/actions-php-security-checker@1.1
