@@ -59,21 +59,17 @@ class SignatureService implements SignatureServiceInterface
         $this->logger = $logger ?? new NullLogger();
     }
 
-    /**
-     * @inheritDoc
-     */
     final public function sign(SignatureToken $originalToken, KeyInterface $key, bool $resign = false): SignatureToken
     {
         if (!$resign && $originalToken->isSigned()) {
-            throw new InvalidTokenException(
-                'This token already signed. If you wants to resign them, set `resign` argument on `true`.'
-            );
+            $message = 'This token already signed. If you want to resign him, set `resign` argument on `true`.';
+            throw new InvalidTokenException($message);
         }
 
-        $this->logger->info('Token sign started.', ['service' => get_class($this), 'token' => $originalToken]);
+        $this->logger->info('Token sign started.', ['service' => $this::class, 'token' => $originalToken]);
 
         $algorithm = $this->findAlgorithm($originalToken->getAlgorithm());
-        $this->logger->debug('Found a algorithm to sign.', ['algorithm' => $algorithm->name()]);
+        $this->logger->debug('Found an algorithm to sign.', ['algorithm' => $algorithm->name()]);
 
         $this->eventDispatcher->dispatch(new TokenPreSignEvent($originalToken));
 
@@ -100,9 +96,6 @@ class SignatureService implements SignatureServiceInterface
         return $signedToken;
     }
 
-    /**
-     * @inheritDoc
-     */
     final public function verify(SignatureToken $token, KeyInterface $key): bool
     {
         if (!$token->isSigned()) {
