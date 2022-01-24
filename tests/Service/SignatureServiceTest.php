@@ -113,7 +113,11 @@ class SignatureServiceTest extends TestCase
         self::assertFalse($service->verify($signedToken->setSignature(null), $key));
 
         $this->expectException(AlgorithmNotFoundException::class);
-        self::assertFalse($service->verify($signedToken->setAlgorithm(new HS512())->setSignature($signedToken->getSignature()), $key));
+        $brokenToken = $signedToken
+            ->setAlgorithm(new HS512())
+            ->setSignature($signedToken->getSignature())
+        ;
+        self::assertFalse($service->verify($brokenToken, $key));
 
         $this->expectException(InvalidTokenException::class);
         self::assertFalse($service->verify($token, $key));
