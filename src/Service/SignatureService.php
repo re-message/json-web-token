@@ -17,13 +17,10 @@
 namespace RM\Standard\Jwt\Service;
 
 use InvalidArgumentException;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
-use RM\Standard\Jwt\Event\TokenPreSignEvent;
-use RM\Standard\Jwt\Event\TokenSignEvent;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Handler\TokenHandlerList;
@@ -31,7 +28,6 @@ use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Service\Signer\Signer;
 use RM\Standard\Jwt\Service\Signer\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
@@ -41,20 +37,17 @@ class SignatureService implements SignatureServiceInterface
     private AlgorithmManager $algorithmManager;
     private ?TokenHandlerList $handlerList;
     private SignerInterface $signer;
-    private EventDispatcherInterface $eventDispatcher;
     private LoggerInterface $logger;
 
     public function __construct(
         AlgorithmManager $algorithmManager,
         TokenHandlerList $handlerList = null,
         SignerInterface $signer = null,
-        EventDispatcherInterface $eventDispatcher = null,
         LoggerInterface $logger = null
     ) {
         $this->algorithmManager = $algorithmManager;
         $this->handlerList = $handlerList ?? new TokenHandlerList();
         $this->signer = $signer ?? new Signer();
-        $this->eventDispatcher = $eventDispatcher ?? new EventDispatcher();
         $this->logger = $logger ?? new NullLogger();
     }
 
@@ -70,8 +63,6 @@ class SignatureService implements SignatureServiceInterface
         $algorithm = $this->findAlgorithm($originalToken->getAlgorithm());
         $this->logger->debug('Found an algorithm to sign.', ['algorithm' => $algorithm->name()]);
 
-        $this->eventDispatcher->dispatch(new TokenPreSignEvent($originalToken));
-
         // detach token to avoid the claims value changes in original token
         $token = clone $originalToken;
 
@@ -80,7 +71,6 @@ class SignatureService implements SignatureServiceInterface
 
         $signedToken = $this->signer->sign($token, $algorithm, $key);
 
-        $this->eventDispatcher->dispatch(new TokenSignEvent($signedToken));
         $this->logger->info('Token sign complete successful.', ['token' => $signedToken]);
 
         return $signedToken;
