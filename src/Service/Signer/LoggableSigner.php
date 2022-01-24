@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Service\Signer;
 
-use ParagonIE\ConstantTime\Base64UrlSafe;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
@@ -40,14 +39,10 @@ class LoggableSigner extends DecoratedSigner
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
         $signedToken = parent::sign($token, $algorithm, $key);
-        $signature = Base64UrlSafe::encode($signedToken->getSignature());
 
         $this->logger->debug(
-            'Signature generated with hash algorithm.',
-            [
-                'signature' => $signature,
-                'algorithm' => $algorithm->name()
-            ]
+            'Token signed by hash algorithm signature',
+            ['algorithm' => $algorithm->name()]
         );
 
         return $signedToken;

@@ -69,11 +69,7 @@ class SignatureService implements SignatureServiceInterface
         $this->handlerList->generate($token);
         $this->logger->debug('Handlers processed the token.');
 
-        $signedToken = $this->signer->sign($token, $algorithm, $key);
-
-        $this->logger->info('Token sign complete successful.', ['token' => $signedToken]);
-
-        return $signedToken;
+        return $this->signer->sign($token, $algorithm, $key);
     }
 
     final public function verify(SignatureToken $token, KeyInterface $key): bool
