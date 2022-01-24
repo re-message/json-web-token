@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Algorithm;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 
 /**
- * Class AlgorithmManager
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class AlgorithmManager
@@ -31,8 +29,6 @@ class AlgorithmManager
     private array $algorithms = [];
 
     /**
-     * AlgorithmManager constructor.
-     *
      * @param AlgorithmInterface[] $algorithms
      */
     public function __construct(array $algorithms = [])
@@ -45,9 +41,6 @@ class AlgorithmManager
     /**
      * Returns any algorithm by name
      *
-     * @param string $algorithm
-     *
-     * @return AlgorithmInterface
      * @throws AlgorithmNotFoundException
      */
     public function get(string $algorithm): AlgorithmInterface
@@ -67,19 +60,11 @@ class AlgorithmManager
         $this->algorithms[$algorithm->name()] = $algorithm;
     }
 
-    /**
-     * @param string $algorithm
-     *
-     * @return bool
-     */
     public function has(string $algorithm): bool
     {
         return array_key_exists($algorithm, $this->algorithms);
     }
 
-    /**
-     * @param string $algorithm
-     */
     public function remove(string $algorithm): void
     {
         unset($this->algorithms[$algorithm]);

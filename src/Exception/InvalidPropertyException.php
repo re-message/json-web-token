@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Exception;
 use Throwable;
 
 /**
- * Class InvalidClaimException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class InvalidPropertyException extends InvalidTokenException

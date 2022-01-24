@@ -21,33 +21,22 @@ use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\NotBeforeViolationException;
 
 /**
- * Class IssuedAtClaimHandler
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class NotBeforeClaimHandler extends AbstractPropertyHandler
 {
     use LeewayHandlerTrait;
 
-    /**
-     * @inheritDoc
-     */
     public function getPropertyClass(): string
     {
         return NotBefore::class;
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function generateProperty(): NotBefore
     {
         return new NotBefore(time());
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function validateValue(mixed $value): bool
     {
         if (!is_int($value)) {

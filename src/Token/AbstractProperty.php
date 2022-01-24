@@ -25,9 +25,6 @@ abstract class AbstractProperty implements PropertyInterface
 {
     private mixed $value;
 
-    /**
-     * @param mixed|null $value
-     */
     public function __construct(mixed $value = null)
     {
         $this->setValue($value);

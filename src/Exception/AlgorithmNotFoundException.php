@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Exception;
 use Throwable;
 
 /**
- * Class AlgorithmNotFoundException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class AlgorithmNotFoundException extends InvalidTokenException

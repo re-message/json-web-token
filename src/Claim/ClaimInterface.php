@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Claim;
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
- * Interface ClaimInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface ClaimInterface extends PropertyInterface

@@ -28,29 +28,18 @@ interface SerializerInterface
 {
     /**
      * Serializes the token in a transfer-safe and short format.
-     *
-     * @param TokenInterface $token
-     *
-     * @return string
      */
     public function serialize(TokenInterface $token): string;
 
     /**
      * Deserializes the token from short transfer format.
      *
-     * @param string $serialized
-     *
-     * @return TokenInterface
      * @throws InvalidTokenException
      */
     public function deserialize(string $serialized): TokenInterface;
 
     /**
-     * Checks that serializer supports this token class for serialization and deserialization.
-     *
-     * @param string|TokenInterface $token The token object or a token FQCN.
-     *
-     * @return bool
+     * Checks that serializer supports this token or class for serialization and deserialization.
      */
     public function supports(TokenInterface|string $token): bool;
 }

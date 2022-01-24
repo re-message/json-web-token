@@ -20,8 +20,6 @@ use RM\Standard\Jwt\Token\SignatureToken;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
- * Class AbstractSignatureEvent
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class AbstractSignEvent extends Event

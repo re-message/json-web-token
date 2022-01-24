@@ -20,8 +20,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * Class TokenHandlerList
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  *
  * @template-implements ArrayCollection<int, TokenHandlerInterface>
@@ -36,9 +34,6 @@ class TokenHandlerList extends ArrayCollection implements TokenHandlerInterface
         parent::__construct($handlers);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function generate(TokenInterface $token): void
     {
         /** @var TokenHandlerInterface $handler */
@@ -47,9 +42,6 @@ class TokenHandlerList extends ArrayCollection implements TokenHandlerInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     public function validate(TokenInterface $token): bool
     {
         /** @var TokenHandlerInterface $handler */

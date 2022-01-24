@@ -17,8 +17,6 @@
 namespace RM\Standard\Jwt\Event;
 
 /**
- * Class TokenSignedEvent
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class TokenSignEvent extends AbstractSignEvent

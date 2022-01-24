@@ -23,18 +23,9 @@ namespace RM\Standard\Jwt\Token;
  */
 interface PropertyInterface
 {
-    /**
-     * @return string
-     */
     public function getName(): string;
 
-    /**
-     * @return mixed
-     */
-    public function getValue();
+    public function getValue(): mixed;
 
-    /**
-     * @param mixed
-     */
-    public function setValue($value);
+    public function setValue(mixed $value);
 }

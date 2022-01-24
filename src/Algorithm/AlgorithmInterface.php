@@ -17,16 +17,12 @@
 namespace RM\Standard\Jwt\Algorithm;
 
 /**
- * Interface AlgorithmInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface AlgorithmInterface
 {
     /**
      * Returns the name of the algorithm.
-     *
-     * @return string
      */
     public function name(): string;
 

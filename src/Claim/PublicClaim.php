@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Claim;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class PublicClaim
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class PublicClaim extends AbstractProperty implements ClaimInterface

@@ -20,8 +20,6 @@ use RM\Standard\Jwt\Handler\IssuedAtClaimHandler;
 use Throwable;
 
 /**
- * Class ExpirationViolationException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class IssuedAtViolationException extends PropertyViolationException

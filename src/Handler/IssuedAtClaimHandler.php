@@ -21,33 +21,22 @@ use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\IssuedAtViolationException;
 
 /**
- * Class IssuedAtClaimHandler
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class IssuedAtClaimHandler extends AbstractPropertyHandler
 {
     use LeewayHandlerTrait;
 
-    /**
-     * @inheritDoc
-     */
     public function getPropertyClass(): string
     {
         return IssuedAt::class;
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function generateProperty(): IssuedAt
     {
         return new IssuedAt(time());
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function validateValue(mixed $value): bool
     {
         if (!is_int($value)) {

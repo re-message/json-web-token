@@ -21,8 +21,6 @@ use RM\Standard\Jwt\HeaderParameter\Custom;
 use RM\Standard\Jwt\HeaderParameter\Type;
 
 /**
- * Class HeaderParameterFactory
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class HeaderParameterFactory extends AbstractFactory

@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\HeaderParameter;
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
- * Interface HeaderParameterInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface HeaderParameterInterface extends PropertyInterface

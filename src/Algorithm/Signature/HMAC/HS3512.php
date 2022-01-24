@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
 /**
- * Class HS3512
+ * Class HS3512 is HMAC implementation with SHA3-512 algorithm.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

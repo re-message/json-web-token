@@ -17,8 +17,6 @@
 namespace RM\Standard\Jwt\Identifier;
 
 /**
- * Interface IdentifierGeneratorInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface IdentifierGeneratorInterface

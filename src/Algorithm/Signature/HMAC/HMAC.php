@@ -21,42 +21,26 @@ use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
- * Class HMAC
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class HMAC implements SignatureAlgorithmInterface
 {
-    /**
-     * @inheritDoc
-     */
     final public function allowedKeyTypes(): array
     {
         return ['oct'];
     }
 
-    /**
-     * @inheritDoc
-     */
     final public function hash(KeyInterface $key, string $input): string
     {
         $k = $this->getKey($key);
         return hash_hmac($this->getHashAlgorithm(), $input, $k, true);
     }
 
-    /**
-     * @inheritDoc
-     */
     final public function verify(KeyInterface $key, string $input, string $hash): bool
     {
         return hash_equals($this->hash($key, $input), $hash);
     }
 
-    /**
-     * @param KeyInterface $key
-     *
-     * @return string
-     */
     protected function getKey(KeyInterface $key): string
     {
         if (!in_array($key->getType(), $this->allowedKeyTypes(), true)) {
@@ -68,9 +52,6 @@ abstract class HMAC implements SignatureAlgorithmInterface
         }
 
         $k = $key->get(KeyInterface::PARAM_KEY_VALUE);
-        if (!is_string($k)) {
-            throw new InvalidArgumentException(sprintf("The key parameter '%s' is invalid.", KeyInterface::PARAM_KEY_VALUE));
-        }
 
         if (mb_strlen($k, '8bit') < 32) {
             throw new InvalidArgumentException('Invalid key length.');
@@ -80,9 +61,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
     }
 
     /**
-     * Returns name of HMAC hash algorithm like "sha256"
-     *
-     * @return string
+     * Returns name of HMAC hash algorithm, like "sha256"
      */
     abstract protected function getHashAlgorithm(): string;
 }

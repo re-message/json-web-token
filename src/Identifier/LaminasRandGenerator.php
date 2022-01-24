@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Identifier;
 use Laminas\Math\Rand;
 
 /**
- * Class LaminasRandGenerator
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 final class LaminasRandGenerator implements IdentifierGeneratorInterface
@@ -35,7 +33,6 @@ final class LaminasRandGenerator implements IdentifierGeneratorInterface
     }
 
     /**
-     * @return string
      * @see getLength()
      */
     public function generate(): string
@@ -45,20 +42,16 @@ final class LaminasRandGenerator implements IdentifierGeneratorInterface
 
     /**
      * Returns length for generation random string.
-     *
-     * @return int
      */
     private function getLength(): int
     {
         if ($this->length <= self::MIN_LENGTH) {
-            @trigger_error(
-                sprintf(
-                    'Length to generation random identifier can not be less then %s, got %s.',
-                    self::MIN_LENGTH,
-                    $this->length
-                ),
-                E_USER_NOTICE
+            $message = sprintf(
+                'Length to generation random identifier can not be less than %s, got %s.',
+                self::MIN_LENGTH,
+                $this->length
             );
+            @trigger_error($message, E_USER_NOTICE);
 
             return self::MIN_LENGTH;
         }

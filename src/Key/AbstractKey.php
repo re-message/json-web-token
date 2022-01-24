@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Key;
 use InvalidArgumentException;
 
 /**
- * Class AbstractKey
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class AbstractKey implements KeyInterface
@@ -36,9 +34,6 @@ abstract class AbstractKey implements KeyInterface
         $this->parameters = $parameters;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function get(string $parameter): string
     {
         if (!$this->has($parameter)) {
@@ -48,33 +43,21 @@ abstract class AbstractKey implements KeyInterface
         return $this->parameters[$parameter];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getType(): string
     {
         return $this->get(self::PARAM_KEY_TYPE);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function has(string $parameter): bool
     {
         return array_key_exists($parameter, $this->parameters);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function all(): array
     {
         return $this->parameters;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function jsonSerialize(): array
     {
         return $this->parameters;

@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Exception;
 use Throwable;
 
 /**
- * Class IncorrectClaimTypeException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class IncorrectPropertyTypeException extends InvalidPropertyException

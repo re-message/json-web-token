@@ -16,9 +16,6 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-/**
- * Trait LeewayHandlerTrait
- */
 trait LeewayHandlerTrait
 {
     public function __construct(int $leeway = 0)
@@ -27,7 +24,7 @@ trait LeewayHandlerTrait
     }
 
     /**
-     * Allowed leeway in seconds. By default is 0.
+     * Allowed leeway in seconds. By default, 0.
      * For security reason, cannot be more than 2 minutes.
      */
     protected int $leeway = 0;
@@ -40,6 +37,6 @@ trait LeewayHandlerTrait
 
     final protected function getLeeway(): int
     {
-        return $this->leeway <= $this->maxLeeway ? $this->leeway : $this->maxLeeway;
+        return min($this->leeway, $this->maxLeeway);
     }
 }

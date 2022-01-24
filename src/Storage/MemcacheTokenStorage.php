@@ -20,8 +20,6 @@ use InvalidArgumentException;
 use Memcache;
 
 /**
- * Class MemcacheTokenStorage
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class MemcacheTokenStorage implements TokenStorageInterface
@@ -31,43 +29,24 @@ class MemcacheTokenStorage implements TokenStorageInterface
     public function __construct(string $host, int $port = 11211)
     {
         if (!class_exists(Memcache::class, false)) {
-            throw new InvalidArgumentException(
-                'Memcache class is not found. Maybe you should install memcache php extension.'
-            );
+            $message = 'Memcache class does not exist. Maybe you should install memcache php extension.';
+            throw new InvalidArgumentException($message);
         }
 
         $this->memcache = new Memcache();
         $this->memcache->addServer($host, $port);
     }
 
-    /**
-     * Checks if token id exists in storage
-     *
-     * @param string $tokenId
-     *
-     * @return bool
-     */
     public function has(string $tokenId): bool
     {
         return $this->memcache->get($tokenId) === $tokenId;
     }
 
-    /**
-     * Adds token id in storage on some duration (ttl)
-     *
-     * @param string $tokenId
-     * @param int    $duration
-     */
     public function put(string $tokenId, int $duration): void
     {
         $this->memcache->set($tokenId, $tokenId, 0, $duration);
     }
 
-    /**
-     * Revokes token
-     *
-     * @param string $tokenId
-     */
     public function revoke(string $tokenId): void
     {
         $this->memcache->delete($tokenId);

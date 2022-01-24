@@ -36,33 +36,21 @@ interface KeyInterface extends JsonSerializable
 
     /**
      * Returns value of parameter if he exists.
-     *
-     * @param string $parameter
-     *
-     * @return string
      */
     public function get(string $parameter): string;
 
     /**
      * Checks if a parameter exists in a key.
-     *
-     * @param string $parameter
-     *
-     * @return bool
      */
     public function has(string $parameter): bool;
 
     /**
      * Returns the type of the key.
-     *
-     * @return string
      */
     public function getType(): string;
 
     /**
      * Returns all parameters for this key or array key format
-     *
-     * @return array
      */
     public function all(): array;
 }

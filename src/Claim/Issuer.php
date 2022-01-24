@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Token\AbstractProperty;
  * You can set this claim to check where token generated.
  * It is maybe helps you, if you use several servers
  * with own token id {@see Identifier} cache server {@see TokenStorageInterface}.
- * We recommend to set this claim.
+ * We recommend setting this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  *

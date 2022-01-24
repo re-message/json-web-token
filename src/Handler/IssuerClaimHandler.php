@@ -20,8 +20,6 @@ use RM\Standard\Jwt\Claim\Issuer;
 use RM\Standard\Jwt\Exception\IssuerViolationException;
 
 /**
- * Class IssuedAtClaimHandler
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class IssuerClaimHandler extends AbstractPropertyHandler
@@ -36,25 +34,16 @@ class IssuerClaimHandler extends AbstractPropertyHandler
         $this->issuer = $issuer;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getPropertyClass(): string
     {
         return Issuer::class;
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function generateProperty(): Issuer
     {
         return new Issuer($this->issuer);
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function validateValue(mixed $value): bool
     {
         if ($this->issuer !== $value) {

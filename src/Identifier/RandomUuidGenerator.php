@@ -16,9 +16,6 @@
 
 namespace RM\Standard\Jwt\Identifier;
 
-use Exception;
-use InvalidArgumentException;
-use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -28,12 +25,6 @@ use Ramsey\Uuid\Uuid;
  */
 final class RandomUuidGenerator implements IdentifierGeneratorInterface
 {
-    /**
-     * @return string
-     * @throws UnsatisfiedDependencyException
-     * @throws InvalidArgumentException
-     * @throws Exception
-     */
     public function generate(): string
     {
         return Uuid::uuid4()->toString();

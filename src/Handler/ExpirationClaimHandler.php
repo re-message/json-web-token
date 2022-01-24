@@ -21,8 +21,6 @@ use RM\Standard\Jwt\Exception\ExpirationViolationException;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 
 /**
- * Class ExpirationClaimHandler
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class ExpirationClaimHandler extends AbstractPropertyHandler
@@ -30,7 +28,7 @@ class ExpirationClaimHandler extends AbstractPropertyHandler
     use LeewayHandlerTrait;
 
     /**
-     * Duration of token in seconds. By default is 1 hour.
+     * Duration of token in seconds. By default, 1 hour.
      * For security reason, cannot be infinite.
      */
     protected int $duration = 60 * 60;
@@ -41,17 +39,11 @@ class ExpirationClaimHandler extends AbstractPropertyHandler
         $this->leeway = $leeway;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getPropertyClass(): string
     {
         return Expiration::class;
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function generateProperty(): Expiration
     {
         $value = time() + $this->duration;

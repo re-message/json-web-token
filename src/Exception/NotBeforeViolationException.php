@@ -20,8 +20,6 @@ use RM\Standard\Jwt\Handler\AbstractPropertyHandler;
 use Throwable;
 
 /**
- * Class NotBeforeViolationException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class NotBeforeViolationException extends PropertyViolationException

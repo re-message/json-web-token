@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Storage;
 
 /**
- * Interface TokenIdStorage
+ * Interface TokenStorageInterface
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
@@ -25,25 +25,16 @@ interface TokenStorageInterface
 {
     /**
      * Checks if token id exists in storage
-     *
-     * @param string $tokenId
-     *
-     * @return bool
      */
     public function has(string $tokenId): bool;
 
     /**
      * Adds token id in storage on some duration (ttl)
-     *
-     * @param string $tokenId
-     * @param int    $duration
      */
     public function put(string $tokenId, int $duration): void;
 
     /**
      * Revokes token
-     *
-     * @param string $tokenId
      */
     public function revoke(string $tokenId): void;
 }

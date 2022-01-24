@@ -20,8 +20,6 @@ use RuntimeException;
 use Throwable;
 
 /**
- * Class PropertyNotFoundException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class PropertyNotFoundException extends RuntimeException

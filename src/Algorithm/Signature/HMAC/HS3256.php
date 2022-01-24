@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
 /**
- * Class HS3256
+ * Class HS3256 is HMAC implementation with SHA3-256 algorithm.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

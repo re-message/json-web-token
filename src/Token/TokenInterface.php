@@ -28,40 +28,26 @@ interface TokenInterface
 {
     /**
      * Returns array collection of header parameters.
-     *
-     * @return Header
      */
     public function getHeader(): Header;
 
     /**
      * Returns algorithm name used in token.
-     *
-     * @return string
      */
     public function getAlgorithm(): string;
 
     /**
      * Returns array collection of payload parameters.
-     *
-     * @return Payload
      */
     public function getPayload(): Payload;
 
     /**
      * Returns serialized token string.
-     *
-     * @param SerializerInterface $serializer
-     *
-     * @return string
      */
     public function toString(SerializerInterface $serializer): string;
 
     /**
      * Creates token instance with algorithm.
-     *
-     * @param AlgorithmInterface $algorithm
-     *
-     * @return TokenInterface
      */
-    public static function createWithAlgorithm(AlgorithmInterface $algorithm): self;
+    public static function createWithAlgorithm(AlgorithmInterface $algorithm): static;
 }

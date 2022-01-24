@@ -29,22 +29,11 @@ interface SignatureAlgorithmInterface extends AlgorithmInterface
 {
     /**
      * Sign input with key
-     *
-     * @param KeyInterface $key
-     * @param string       $input
-     *
-     * @return string
      */
     public function hash(KeyInterface $key, string $input): string;
 
     /**
      * Verify signature for this input and key pair
-     *
-     * @param KeyInterface $key
-     * @param string       $input
-     * @param string       $hash
-     *
-     * @return bool
      */
     public function verify(KeyInterface $key, string $input, string $hash): bool;
 }

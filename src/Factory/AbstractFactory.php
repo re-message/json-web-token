@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Factory;
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
- * Class AbstractFactory
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class AbstractFactory implements FactoryInterface

@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Storage;
 use Predis\Client;
 
 /**
- * Class RedisTokenStorage
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class RedisTokenStorage implements TokenStorageInterface
@@ -32,35 +30,17 @@ class RedisTokenStorage implements TokenStorageInterface
         $this->redis = new Client($dsn);
     }
 
-    /**
-     * Checks if token identifier exists in storage.
-     *
-     * @param string $tokenId
-     *
-     * @return bool
-     */
     public function has(string $tokenId): bool
     {
         return $this->redis->get($tokenId) === $tokenId;
     }
 
-    /**
-     * Adds token identifier in storage on some duration (ttl).
-     *
-     * @param string $tokenId
-     * @param int    $duration
-     */
     public function put(string $tokenId, int $duration): void
     {
         $this->redis->set($tokenId, $tokenId);
         $this->redis->expire($tokenId, $duration);
     }
 
-    /**
-     * Revokes token by token identifier.
-     *
-     * @param string $tokenId
-     */
     public function revoke(string $tokenId): void
     {
         $this->redis->del([$tokenId]);
@@ -72,6 +52,7 @@ class RedisTokenStorage implements TokenStorageInterface
         int $database = 0,
         float $timeout = 0.0
     ): self {
-        return new static(sprintf('redis://%s:%d/%d?timeout=%f', $host, $port, $database, $timeout));
+        $dsn = sprintf('redis://%s:%d/%d?timeout=%f', $host, $port, $database, $timeout);
+        return new static($dsn);
     }
 }

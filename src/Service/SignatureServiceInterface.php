@@ -35,10 +35,6 @@ interface SignatureServiceInterface
      * Sign token with this key.
      * This method triggers some events that call handlers for some claims.
      *
-     * @param SignatureToken $token
-     * @param KeyInterface   $key
-     *
-     * @return SignatureToken
      * @throws InvalidTokenException
      * @see TokenPreSignEvent
      * @see TokenSignEvent
@@ -46,12 +42,8 @@ interface SignatureServiceInterface
     public function sign(SignatureToken $token, KeyInterface $key): SignatureToken;
 
     /**
-     * Verify that token is valid and signature is exist and correct.
+     * Verify that token is valid and signature exist and correct.
      *
-     * @param SignatureToken $token
-     * @param KeyInterface   $key
-     *
-     * @return bool
      * @throws PropertyViolationException
      * @throws InvalidTokenException
      */
@@ -59,10 +51,6 @@ interface SignatureServiceInterface
 
     /**
      * Returns algorithm by name from algorithm manager.
-     *
-     * @param string $name
-     *
-     * @return SignatureAlgorithmInterface
      */
     public function findAlgorithm(string $name): SignatureAlgorithmInterface;
 }

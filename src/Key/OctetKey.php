@@ -17,8 +17,6 @@
 namespace RM\Standard\Jwt\Key;
 
 /**
- * Class OctetKey
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 final class OctetKey extends AbstractKey

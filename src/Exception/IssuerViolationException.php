@@ -20,8 +20,6 @@ use RM\Standard\Jwt\Handler\IssuerClaimHandler;
 use Throwable;
 
 /**
- * Class IssuerViolationException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class IssuerViolationException extends PropertyViolationException

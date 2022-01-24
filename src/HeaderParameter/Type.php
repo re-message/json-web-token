@@ -28,9 +28,6 @@ class Type extends AbstractProperty implements HeaderParameterInterface
 {
     public const NAME = 'typ';
 
-    /**
-     * @inheritDoc
-     */
     public function getName(): string
     {
         return self::NAME;

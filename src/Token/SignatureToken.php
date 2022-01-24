@@ -41,7 +41,6 @@ class SignatureToken implements TokenInterface
      * Token signature.
      * Empty signature is a valid signature with {@see None}.
      *
-     * @var string|null
      * @see SignatureServiceInterface::sign()
      */
     private ?string $signature;
@@ -71,10 +70,6 @@ class SignatureToken implements TokenInterface
 
     /**
      * Returns new instance of the token with updated algorithm.
-     *
-     * @param SignatureAlgorithmInterface $algorithm
-     *
-     * @return TokenInterface
      */
     public function setAlgorithm(SignatureAlgorithmInterface $algorithm): TokenInterface
     {
@@ -93,8 +88,6 @@ class SignatureToken implements TokenInterface
 
     /**
      * Returns current token signature.
-     *
-     * @return string|null
      */
     public function getSignature(): ?string
     {
@@ -103,10 +96,6 @@ class SignatureToken implements TokenInterface
 
     /**
      * Returns new instance of the token with signature.
-     *
-     * @param string|null $signature
-     *
-     * @return SignatureToken
      */
     public function setSignature(?string $signature): SignatureToken
     {
@@ -117,8 +106,6 @@ class SignatureToken implements TokenInterface
 
     /**
      * Defines that signature successful signed or not.
-     *
-     * @return bool
      */
     public function isSigned(): bool
     {
@@ -156,7 +143,6 @@ class SignatureToken implements TokenInterface
     /**
      * Returns compact serialized token.
      *
-     * @return string
      * @see SignatureCompactSerializer::serialize()
      */
     public function __toString()
@@ -168,7 +154,7 @@ class SignatureToken implements TokenInterface
     /**
      * @inheritDoc
      */
-    final public static function createWithAlgorithm(AlgorithmInterface $algorithm): self
+    final public static function createWithAlgorithm(AlgorithmInterface $algorithm): static
     {
         $algorithmClaim = Algorithm::fromAlgorithm($algorithm);
 

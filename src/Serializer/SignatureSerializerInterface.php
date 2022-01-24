@@ -19,15 +19,12 @@ namespace RM\Standard\Jwt\Serializer;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * Interface SignatureSerializerInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface SignatureSerializerInterface extends SerializerInterface
 {
     /**
      * @inheritDoc
-     * @param bool $withoutSignature
      */
     public function serialize(TokenInterface $token, bool $withoutSignature = false): string;
 }

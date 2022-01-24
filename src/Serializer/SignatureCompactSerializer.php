@@ -98,9 +98,6 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         return $this->encoder->encode($data, 'json');
     }
 
-    /**
-     * @inheritDoc
-     */
     public function deserialize(string $serialized): TokenInterface
     {
         $parts = explode(self::TOKEN_DELIMITER, $serialized);
@@ -146,9 +143,6 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         return $this->encoder->decode($data, 'json');
     }
 
-    /**
-     * @inheritDoc
-     */
     public function supports(TokenInterface|string $token): bool
     {
         return is_a($token, SignatureToken::class, !is_object($token));

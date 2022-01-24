@@ -35,8 +35,6 @@ use RM\Standard\Jwt\Token\SignatureToken;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * Class SignatureService
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class SignatureService implements SignatureServiceInterface
@@ -122,9 +120,6 @@ class SignatureService implements SignatureServiceInterface
     /**
      * Returns signature algorithm by name from manager
      *
-     * @param string $name
-     *
-     * @return SignatureAlgorithmInterface
      * @throws AlgorithmNotFoundException
      */
     public function findAlgorithm(string $name): SignatureAlgorithmInterface

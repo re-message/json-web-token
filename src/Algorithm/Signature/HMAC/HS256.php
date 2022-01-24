@@ -17,23 +17,17 @@
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
 /**
- * Class HS256
+ * Class HS256 is HMAC implementation with SHA256 algorithm.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class HS256 extends HMAC
 {
-    /**
-     * @inheritDoc
-     */
     public function name(): string
     {
         return 'HS256';
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function getHashAlgorithm(): string
     {
         return 'sha256';

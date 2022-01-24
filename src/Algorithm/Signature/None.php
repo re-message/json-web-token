@@ -19,39 +19,25 @@ namespace RM\Standard\Jwt\Algorithm\Signature;
 use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
- * Class None
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class None implements SignatureAlgorithmInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function name(): string
     {
         return 'none';
     }
 
-    /**
-     * @inheritDoc
-     */
     public function allowedKeyTypes(): array
     {
         return ['none'];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function hash(KeyInterface $key, string $input): string
     {
         return '';
     }
 
-    /**
-     * @inheritDoc
-     */
     public function verify(KeyInterface $key, string $input, string $hash): bool
     {
         return $this->hash($key, $input) === $hash;

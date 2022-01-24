@@ -43,7 +43,7 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
     abstract public function getPropertyClass(): string;
 
     /**
-     * Returns name of claim to handle.
+     * Returns name of property to handle.
      */
     public function getPropertyName(): string
     {

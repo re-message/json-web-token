@@ -26,8 +26,6 @@ use RM\Standard\Jwt\Claim\PrivateClaim;
 use RM\Standard\Jwt\Claim\Subject;
 
 /**
- * Class ClaimFactory
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class ClaimFactory extends AbstractFactory

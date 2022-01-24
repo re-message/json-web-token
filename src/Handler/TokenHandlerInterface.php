@@ -20,8 +20,6 @@ use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * Interface ClaimHandlerInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface TokenHandlerInterface

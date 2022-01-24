@@ -22,8 +22,6 @@ use DateTimeZone;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class DateValueClaim
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class DateValueClaim extends AbstractProperty implements ClaimInterface

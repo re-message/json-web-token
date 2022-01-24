@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
 /**
- * Class HS256
+ * Class HS512 is HMAC implementation with SHA512 algorithm.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

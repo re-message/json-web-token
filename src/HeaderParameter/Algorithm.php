@@ -20,17 +20,12 @@ use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Class Algorithm
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Algorithm extends AbstractProperty implements HeaderParameterInterface
 {
     public const NAME = 'alg';
 
-    /**
-     * @inheritDoc
-     */
     public function getName(): string
     {
         return self::NAME;

@@ -20,8 +20,6 @@ use Exception;
 use Throwable;
 
 /**
- * Class InvalidTokenException
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class InvalidTokenException extends Exception

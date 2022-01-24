@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use InvalidArgumentException;
 use RM\Standard\Jwt\Claim\Identifier;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
@@ -35,7 +34,7 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
     protected TokenStorageInterface $tokenStorage;
 
     /**
-     * Duration of token in seconds. By default is 1 hour.
+     * Duration of token in seconds. By default, 1 hour.
      * For security reason, cannot be infinite.
      */
     protected int $duration = 60 * 60;
@@ -63,21 +62,7 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
      */
     protected function generateProperty(): Identifier
     {
-        if ($this->identifierGenerator === null) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'To use %s required set up the identifier generator.',
-                    static::class
-                )
-            );
-        }
-
         $identifier = $this->identifierGenerator->generate();
-
-        if ($this->tokenStorage === null) {
-            throw new InvalidArgumentException(sprintf('To use %s required set up the token storage.', static::class));
-        }
-
         $this->tokenStorage->put($identifier, $this->duration);
 
         return new Identifier($identifier);
@@ -88,10 +73,6 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
      */
     protected function validateValue(mixed $value): bool
     {
-        if ($this->tokenStorage === null) {
-            throw new InvalidArgumentException(sprintf('To use %s required set up the token storage.', static::class));
-        }
-
         if (!is_string($value)) {
             throw new IncorrectPropertyTypeException('string', gettype($value), $this->getPropertyName());
         }
