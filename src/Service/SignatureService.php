@@ -107,12 +107,11 @@ class SignatureService implements SignatureServiceInterface
         }
 
         $resignedToken = $this->sign($token, $key, true);
+
         return hash_equals($token->getSignature(), $resignedToken->getSignature());
     }
 
     /**
-     * Returns signature algorithm by name from manager
-     *
      * @throws AlgorithmNotFoundException
      */
     public function findAlgorithm(string $name): SignatureAlgorithmInterface
@@ -120,13 +119,12 @@ class SignatureService implements SignatureServiceInterface
         $algorithm = $this->algorithmManager->get($name);
 
         if (!$algorithm instanceof SignatureAlgorithmInterface) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Signature algorithm must implement %1$s, given %2$s.',
-                    SignatureAlgorithmInterface::class,
-                    get_class($algorithm)
-                )
+            $message = sprintf(
+                'Signature algorithm must implement %1$s, given %2$s.',
+                SignatureAlgorithmInterface::class,
+                $algorithm::class
             );
+            throw new InvalidArgumentException($message);
         }
 
         return $algorithm;
