@@ -51,7 +51,7 @@ class RedisTokenStorage implements TokenStorageInterface
         int $port = 6379,
         int $database = 0,
         float $timeout = 0.0
-    ): self {
+    ): static {
         $dsn = sprintf('redis://%s:%d/%d?timeout=%f', $host, $port, $database, $timeout);
         return new static($dsn);
     }

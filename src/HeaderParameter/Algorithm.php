@@ -31,7 +31,7 @@ class Algorithm extends AbstractProperty implements HeaderParameterInterface
         return self::NAME;
     }
 
-    public static function fromAlgorithm(AlgorithmInterface $algorithm): self
+    public static function fromAlgorithm(AlgorithmInterface $algorithm): static
     {
         return new Algorithm($algorithm->name());
     }
