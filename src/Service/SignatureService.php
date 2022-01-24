@@ -17,7 +17,6 @@
 namespace RM\Standard\Jwt\Service;
 
 use InvalidArgumentException;
-use ParagonIE\ConstantTime\Base64UrlSafe;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -80,14 +79,6 @@ class SignatureService implements SignatureServiceInterface
         $this->logger->debug('Handlers processed the token.');
 
         $signedToken = $this->signer->sign($token, $algorithm, $key);
-
-        $this->logger->debug(
-            'Signature generated with hash algorithm.',
-            [
-                'signature' => Base64UrlSafe::encode($signedToken->getSignature()),
-                'algorithm' => $algorithm->name()
-            ]
-        );
 
         $this->eventDispatcher->dispatch(new TokenSignEvent($signedToken));
         $this->logger->info('Token sign complete successful.', ['token' => $signedToken]);
