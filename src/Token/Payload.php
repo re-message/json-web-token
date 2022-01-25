@@ -34,7 +34,7 @@ class Payload extends PropertyBag
     {
         $property = $this->getProperty($name);
         if (!$property instanceof ClaimInterface) {
-            throw new UnexpectedValueException('Expects a header parameter.');
+            throw new UnexpectedValueException('Expects a claim.');
         }
 
         return $property;
