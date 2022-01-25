@@ -19,6 +19,8 @@ namespace RM\Standard\Jwt\Handler;
 use RM\Standard\Jwt\Claim\NotBefore;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\NotBeforeViolationException;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use UnexpectedValueException;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
@@ -37,8 +39,14 @@ class NotBeforeClaimHandler extends AbstractPropertyHandler
         return new NotBefore(time());
     }
 
-    protected function validateValue(mixed $value): bool
+    protected function validateProperty(PropertyInterface $property): bool
     {
+        if (!$property instanceof NotBefore) {
+            $message = sprintf('%s can handle only %s.', static::class, $property::class);
+            throw new UnexpectedValueException($message);
+        }
+
+        $value = $property->getValue();
         if (!is_int($value)) {
             throw new IncorrectPropertyTypeException('integer', gettype($value), $this->getPropertyName());
         }

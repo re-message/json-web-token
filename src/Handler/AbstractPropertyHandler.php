@@ -26,7 +26,6 @@ use RM\Standard\Jwt\HeaderParameter\HeaderParameterInterface;
 use RM\Standard\Jwt\Token\PropertyBag;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
-use UnexpectedValueException;
 
 /**
  * Class AbstractPropertyHandler
@@ -101,30 +100,13 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
 
     /**
      * Validate property.
-     *
-     * @throws PropertyViolationException
-     * @throws InvalidPropertyException
-     */
-    protected function validateProperty(PropertyInterface $property): bool
-    {
-        $class = $this->getPropertyClass();
-        if (!is_a($property, $class)) {
-            $message = sprintf('%s can handle only %s.', self::class, $class);
-            throw new UnexpectedValueException($message);
-        }
-
-        return $this->validateValue($property->getValue());
-    }
-
-    /**
-     * Validate value of this property.
      * Please throw instance of {@see PropertyViolationException} if this validation failed.
      * If you just return `false` or throw other exception then {@see validate()} will throw {@see PropertyViolationException} self.
      *
      * @throws PropertyViolationException
      * @throws InvalidPropertyException
      */
-    abstract protected function validateValue(mixed $value): bool;
+    abstract protected function validateProperty(PropertyInterface $property): bool;
 
     protected function resolveTarget(TokenInterface $token): PropertyBag
     {

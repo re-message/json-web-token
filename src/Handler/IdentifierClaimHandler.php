@@ -22,6 +22,8 @@ use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
 use RM\Standard\Jwt\Identifier\UniqIdGenerator;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use UnexpectedValueException;
 
 /**
  * Class IdentifierClaimHandler provides processing for { @see Identifier } claim.
@@ -71,8 +73,14 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
     /**
      * @inheritDoc
      */
-    protected function validateValue(mixed $value): bool
+    protected function validateProperty(PropertyInterface $property): bool
     {
+        if (!$property instanceof Identifier) {
+            $message = sprintf('%s can handle only %s.', static::class, $property::class);
+            throw new UnexpectedValueException($message);
+        }
+
+        $value = $property->getValue();
         if (!is_string($value)) {
             throw new IncorrectPropertyTypeException('string', gettype($value), $this->getPropertyName());
         }
