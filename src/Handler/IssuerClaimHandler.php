@@ -41,6 +41,11 @@ class IssuerClaimHandler extends AbstractPropertyHandler
         return Issuer::class;
     }
 
+    public function getPropertyName(): string
+    {
+        return Issuer::NAME;
+    }
+
     protected function generateProperty(): Issuer
     {
         return new Issuer($this->issuer);

@@ -44,10 +44,7 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
     /**
      * Returns name of property to handle.
      */
-    public function getPropertyName(): string
-    {
-        return $this->getPropertyClass()::NAME;
-    }
+    abstract public function getPropertyName(): string;
 
     /**
      * @inheritDoc

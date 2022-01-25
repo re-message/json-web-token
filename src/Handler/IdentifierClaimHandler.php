@@ -51,17 +51,16 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
         $this->duration = $duration;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getPropertyClass(): string
     {
         return Identifier::class;
     }
 
-    /**
-     * @inheritDoc
-     */
+    public function getPropertyName(): string
+    {
+        return Identifier::NAME;
+    }
+
     protected function generateProperty(): Identifier
     {
         $identifier = $this->identifierGenerator->generate();
@@ -70,9 +69,6 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
         return new Identifier($identifier);
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function validateProperty(PropertyInterface $property): bool
     {
         if (!$property instanceof Identifier) {

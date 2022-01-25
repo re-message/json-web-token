@@ -46,6 +46,11 @@ class ExpirationClaimHandler extends AbstractPropertyHandler
         return Expiration::class;
     }
 
+    public function getPropertyName(): string
+    {
+        return Expiration::NAME;
+    }
+
     protected function generateProperty(): Expiration
     {
         $value = time() + $this->duration;
@@ -53,9 +58,6 @@ class ExpirationClaimHandler extends AbstractPropertyHandler
         return new Expiration($value);
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function validateProperty(PropertyInterface $property): bool
     {
         if (!$property instanceof Expiration) {
