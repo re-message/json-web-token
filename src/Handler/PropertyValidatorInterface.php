@@ -30,6 +30,11 @@ interface PropertyValidatorInterface
     public function getPropertyName(): string;
 
     /**
+     * Returns name of property to generate.
+     */
+    public function getPropertyTarget(): PropertyTarget;
+
+    /**
      * Checks if the passed value is valid.
      *
      * @throws InvalidTokenException
