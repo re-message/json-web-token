@@ -82,7 +82,10 @@ class SignatureService implements SignatureServiceInterface
             return false;
         }
 
-        $resignedToken = $this->sign($token, $key, true);
+        $algorithm = $this->findAlgorithm($token->getAlgorithm());
+        $this->logger->debug('Found an algorithm to sign.', ['algorithm' => $algorithm->name()]);
+
+        $resignedToken = $this->signer->sign($token, $algorithm, $key);
 
         return hash_equals($token->getSignature(), $resignedToken->getSignature());
     }
