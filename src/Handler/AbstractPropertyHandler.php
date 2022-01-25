@@ -78,7 +78,7 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
         $target = $this->resolveTarget($token);
         $propertyName = $this->getPropertyName();
         if (!$target->has($propertyName)) {
-            throw new InvalidTokenException(sprintf('This token does not have claim %s.', $propertyName));
+            return true;
         }
 
         $property = $target->get($propertyName);
