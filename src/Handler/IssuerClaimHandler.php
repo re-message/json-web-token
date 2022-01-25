@@ -36,9 +36,9 @@ class IssuerClaimHandler extends AbstractPropertyHandler
         $this->issuer = $issuer;
     }
 
-    public function getPropertyClass(): string
+    public function getPropertyTarget(): PropertyTarget
     {
-        return Issuer::class;
+        return PropertyTarget::PAYLOAD;
     }
 
     public function getPropertyName(): string

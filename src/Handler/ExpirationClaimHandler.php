@@ -41,9 +41,9 @@ class ExpirationClaimHandler extends AbstractPropertyHandler
         $this->leeway = $leeway;
     }
 
-    public function getPropertyClass(): string
+    public function getPropertyTarget(): PropertyTarget
     {
-        return Expiration::class;
+        return PropertyTarget::PAYLOAD;
     }
 
     public function getPropertyName(): string

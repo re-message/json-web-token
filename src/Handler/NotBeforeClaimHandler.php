@@ -29,9 +29,9 @@ class NotBeforeClaimHandler extends AbstractPropertyHandler
 {
     use LeewayHandlerTrait;
 
-    public function getPropertyClass(): string
+    public function getPropertyTarget(): PropertyTarget
     {
-        return NotBefore::class;
+        return PropertyTarget::PAYLOAD;
     }
 
     public function getPropertyName(): string

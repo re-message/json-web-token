@@ -51,9 +51,9 @@ class IdentifierClaimHandler extends AbstractPropertyHandler
         $this->duration = $duration;
     }
 
-    public function getPropertyClass(): string
+    public function getPropertyTarget(): PropertyTarget
     {
-        return Identifier::class;
+        return PropertyTarget::PAYLOAD;
     }
 
     public function getPropertyName(): string

@@ -29,9 +29,9 @@ class IssuedAtClaimHandler extends AbstractPropertyHandler
 {
     use LeewayHandlerTrait;
 
-    public function getPropertyClass(): string
+    public function getPropertyTarget(): PropertyTarget
     {
-        return IssuedAt::class;
+        return PropertyTarget::PAYLOAD;
     }
 
     public function getPropertyName(): string

@@ -17,38 +17,28 @@
 namespace RM\Standard\Jwt\Handler;
 
 use Exception;
-use InvalidArgumentException;
-use RM\Standard\Jwt\Claim\ClaimInterface;
 use RM\Standard\Jwt\Exception\InvalidPropertyException;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Exception\PropertyViolationException;
-use RM\Standard\Jwt\HeaderParameter\HeaderParameterInterface;
 use RM\Standard\Jwt\Token\PropertyBag;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * Class AbstractPropertyHandler
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class AbstractPropertyHandler implements TokenHandlerInterface
 {
-    /**
-     * Returns a property class.
-     *
-     * @return class-string<PropertyInterface>
-     */
-    abstract public function getPropertyClass(): string;
-
     /**
      * Returns name of property to handle.
      */
     abstract public function getPropertyName(): string;
 
     /**
-     * @inheritDoc
+     * Returns a property target.
      */
+    abstract public function getPropertyTarget(): PropertyTarget;
+
     final public function generate(TokenInterface $token): void
     {
         $target = $this->resolveTarget($token);
@@ -107,16 +97,9 @@ abstract class AbstractPropertyHandler implements TokenHandlerInterface
 
     protected function resolveTarget(TokenInterface $token): PropertyBag
     {
-        $class = $this->getPropertyClass();
-        if (is_a($class, HeaderParameterInterface::class, true)) {
-            return $token->getHeader();
-        }
-
-        if (is_a($class, ClaimInterface::class, true)) {
-            return $token->getPayload();
-        }
-
-        $message = sprintf('Undefined property target: %s', $this->getPropertyClass());
-        throw new InvalidArgumentException($message);
+        return match ($this->getPropertyTarget()) {
+            PropertyTarget::HEADER => $token->getHeader(),
+            PropertyTarget::PAYLOAD => $token->getPayload(),
+        };
     }
 }
