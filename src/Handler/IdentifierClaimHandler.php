@@ -16,10 +16,10 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Claim\Identifier;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
 use RM\Standard\Jwt\Identifier\UniqIdGenerator;
+use RM\Standard\Jwt\Property\Payload\Identifier;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 use RM\Standard\Jwt\Token\PropertyInterface;

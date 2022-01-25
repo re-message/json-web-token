@@ -14,31 +14,22 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Header;
 
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
+ * Type of token, by default is `JWT`.
+ * If you use some token types, you can override this claim.
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class PrivateClaim extends AbstractProperty implements ClaimInterface
+class Type extends AbstractProperty implements HeaderParameterInterface
 {
-    private string $name;
-
-    public function __construct(string $name, $value = null)
-    {
-        parent::__construct($value);
-
-        $this->setName($name);
-    }
+    public const NAME = 'typ';
 
     public function getName(): string
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
+        return self::NAME;
     }
 }

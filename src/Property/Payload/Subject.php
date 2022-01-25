@@ -14,19 +14,20 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Payload;
+
+use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Issued at time is a time in UNIX format of token creation.
- * Often a value of this claim equals a value of {@see NotBefore} claim.
- *
- * @see IssuedAtClaimHandler The manager for this claim.
+ * Subject is a unique identity of application who wants to get access to the audience {@see Audience}.
+ * It is required claim.
+ * No handler for this claim because the token service processes it directly.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IssuedAt extends DateValueClaim
+class Subject extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'iat';
+    public const NAME = 'sub';
 
     public function getName(): string
     {

@@ -14,23 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Payload;
 
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Audience is a unique identity of object token provides access to.
- * It is required claim. May have same value as {@see Subject} claim.
- * No handler for this claim because the token service processes it directly. But you can create your own.
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Audience extends AbstractProperty implements ClaimInterface
+class PrivateClaim extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'aud';
+    private string $name;
+
+    public function __construct(string $name, $value = null)
+    {
+        parent::__construct($value);
+
+        $this->setName($name);
+    }
 
     public function getName(): string
     {
-        return self::NAME;
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

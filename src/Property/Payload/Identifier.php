@@ -14,31 +14,24 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Payload;
 
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
+ * Token identifier is unique sequence to provide revoke functional.
+ * We recommend to set this claim.
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see IdentifierClaimHandler The manager for this claim.
  */
-class PublicClaim extends AbstractProperty implements ClaimInterface
+class Identifier extends AbstractProperty implements ClaimInterface
 {
-    private string $name;
-
-    public function __construct(string $name, $value = null)
-    {
-        parent::__construct($value);
-
-        $this->setName($name);
-    }
+    public const NAME = 'jti';
 
     public function getName(): string
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
+        return self::NAME;
     }
 }

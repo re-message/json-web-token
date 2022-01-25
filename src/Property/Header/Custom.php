@@ -14,25 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Header;
 
-use DateTime;
-use DateTimeImmutable;
-use DateTimeZone;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
+class Custom extends AbstractProperty implements HeaderParameterInterface
 {
-    public function setValue(mixed $value): void
-    {
-        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
-            $value = $value->setTimezone(new DateTimeZone('UTC'));
-            $value = $value->getTimestamp();
-        }
+    private string $name;
 
-        parent::setValue($value);
+    public function __construct(string $name, $value = null)
+    {
+        parent::__construct($value);
+
+        $this->setName($name);
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

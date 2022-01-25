@@ -16,8 +16,8 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Claim\Issuer;
 use RM\Standard\Jwt\Exception\IssuerViolationException;
+use RM\Standard\Jwt\Property\Payload\Issuer;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use UnexpectedValueException;
 

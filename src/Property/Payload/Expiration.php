@@ -14,18 +14,19 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Payload;
 
 /**
- * Not before time is a time in UNIX format before which the token is not valid.
+ * Expiration is a time in UNIX format when token expires.
+ * It is required claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  *
- * @see NotBeforeClaimHandler The manager for this claim.
+ * @see ExpirationClaimHandler The manager for this claim.
  */
-class NotBefore extends DateValueClaim
+class Expiration extends DateValueClaim
 {
-    public const NAME = 'nbf';
+    public const NAME = 'exp';
 
     public function getName(): string
     {

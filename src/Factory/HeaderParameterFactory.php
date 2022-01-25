@@ -16,9 +16,9 @@
 
 namespace RM\Standard\Jwt\Factory;
 
-use RM\Standard\Jwt\HeaderParameter\Algorithm;
-use RM\Standard\Jwt\HeaderParameter\Custom;
-use RM\Standard\Jwt\HeaderParameter\Type;
+use RM\Standard\Jwt\Property\Header\Algorithm;
+use RM\Standard\Jwt\Property\Header\Custom;
+use RM\Standard\Jwt\Property\Header\Type;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>

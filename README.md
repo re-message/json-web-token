@@ -29,9 +29,8 @@ Example:
 ```php
 <?php
 
-use RM\Standard\Jwt\HeaderParameter\Algorithm;
+use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Token\SignatureToken;
-use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 
 $algorithm = new HS3256();
 $token = new SignatureToken([Algorithm::fromAlgorithm($algorithm)]);
@@ -101,8 +100,8 @@ use Laminas\Math\Rand;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
-use RM\Standard\Jwt\HeaderParameter\Algorithm;
 use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Service\SignatureService;
 use RM\Standard\Jwt\Token\SignatureToken;
 

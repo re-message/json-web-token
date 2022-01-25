@@ -16,8 +16,8 @@
 
 namespace RM\Standard\Jwt\Token;
 
-use RM\Standard\Jwt\Claim\ClaimInterface;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
+use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use UnexpectedValueException;
 
 /**

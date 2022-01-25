@@ -18,9 +18,9 @@ namespace RM\Standard\Jwt\Token;
 
 use InvalidArgumentException;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
-use RM\Standard\Jwt\HeaderParameter\Algorithm;
-use RM\Standard\Jwt\HeaderParameter\HeaderParameterInterface;
-use RM\Standard\Jwt\HeaderParameter\Type;
+use RM\Standard\Jwt\Property\Header\Algorithm;
+use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
+use RM\Standard\Jwt\Property\Header\Type;
 use UnexpectedValueException;
 
 /**

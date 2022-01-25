@@ -14,19 +14,19 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\HeaderParameter;
-
-use RM\Standard\Jwt\Token\AbstractProperty;
+namespace RM\Standard\Jwt\Property\Payload;
 
 /**
- * Type of token, by default is `JWT`.
- * If you use some token types, you can override this claim.
+ * Issued at time is a time in UNIX format of token creation.
+ * Often a value of this claim equals a value of {@see NotBefore} claim.
+ *
+ * @see IssuedAtClaimHandler The manager for this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Type extends AbstractProperty implements HeaderParameterInterface
+class IssuedAt extends DateValueClaim
 {
-    public const NAME = 'typ';
+    public const NAME = 'iat';
 
     public function getName(): string
     {

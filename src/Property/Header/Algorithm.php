@@ -14,31 +14,25 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\HeaderParameter;
+namespace RM\Standard\Jwt\Property\Header;
 
+use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Custom extends AbstractProperty implements HeaderParameterInterface
+class Algorithm extends AbstractProperty implements HeaderParameterInterface
 {
-    private string $name;
-
-    public function __construct(string $name, $value = null)
-    {
-        parent::__construct($value);
-
-        $this->setName($name);
-    }
+    public const NAME = 'alg';
 
     public function getName(): string
     {
-        return $this->name;
+        return self::NAME;
     }
 
-    public function setName(string $name): void
+    public static function fromAlgorithm(AlgorithmInterface $algorithm): static
     {
-        $this->name = $name;
+        return new Algorithm($algorithm->name());
     }
 }

@@ -14,23 +14,13 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Header;
 
-use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
- * Subject is a unique identity of application who wants to get access to the audience {@see Audience}.
- * It is required claim.
- * No handler for this claim because the token service processes it directly.
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Subject extends AbstractProperty implements ClaimInterface
+interface HeaderParameterInterface extends PropertyInterface
 {
-    public const NAME = 'sub';
-
-    public function getName(): string
-    {
-        return self::NAME;
-    }
 }

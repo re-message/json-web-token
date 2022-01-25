@@ -14,27 +14,25 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Payload;
 
+use DateTime;
+use DateTimeImmutable;
+use DateTimeZone;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Issuer is a unique identity of token generator server, authentication server or security server.
- * You can set this claim to check where token generated.
- * It is maybe helps you, if you use several servers
- * with own token id {@see Identifier} cache server {@see TokenStorageInterface}.
- * We recommend setting this claim.
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
- * @see IssuerClaimHandler The manager for this claim.
  */
-class Issuer extends AbstractProperty implements ClaimInterface
+abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'iss';
-
-    public function getName(): string
+    public function setValue(mixed $value): void
     {
-        return self::NAME;
+        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
+            $value = $value->setTimezone(new DateTimeZone('UTC'));
+            $value = $value->getTimestamp();
+        }
+
+        parent::setValue($value);
     }
 }

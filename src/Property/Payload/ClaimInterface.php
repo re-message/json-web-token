@@ -14,13 +14,13 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\HeaderParameter;
+namespace RM\Standard\Jwt\Property\Payload;
 
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-interface HeaderParameterInterface extends PropertyInterface
+interface ClaimInterface extends PropertyInterface
 {
 }

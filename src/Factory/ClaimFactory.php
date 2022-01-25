@@ -16,14 +16,14 @@
 
 namespace RM\Standard\Jwt\Factory;
 
-use RM\Standard\Jwt\Claim\Audience;
-use RM\Standard\Jwt\Claim\Expiration;
-use RM\Standard\Jwt\Claim\Identifier;
-use RM\Standard\Jwt\Claim\IssuedAt;
-use RM\Standard\Jwt\Claim\Issuer;
-use RM\Standard\Jwt\Claim\NotBefore;
-use RM\Standard\Jwt\Claim\PrivateClaim;
-use RM\Standard\Jwt\Claim\Subject;
+use RM\Standard\Jwt\Property\Payload\Audience;
+use RM\Standard\Jwt\Property\Payload\Expiration;
+use RM\Standard\Jwt\Property\Payload\Identifier;
+use RM\Standard\Jwt\Property\Payload\IssuedAt;
+use RM\Standard\Jwt\Property\Payload\Issuer;
+use RM\Standard\Jwt\Property\Payload\NotBefore;
+use RM\Standard\Jwt\Property\Payload\PrivateClaim;
+use RM\Standard\Jwt\Property\Payload\Subject;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>

@@ -16,9 +16,9 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Claim\Expiration;
 use RM\Standard\Jwt\Exception\ExpirationViolationException;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
+use RM\Standard\Jwt\Property\Payload\Expiration;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use UnexpectedValueException;
 

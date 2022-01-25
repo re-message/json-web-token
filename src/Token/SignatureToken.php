@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Token;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
-use RM\Standard\Jwt\HeaderParameter\Algorithm;
+use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Serializer\SerializerInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;

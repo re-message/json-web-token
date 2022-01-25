@@ -16,9 +16,9 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Claim\NotBefore;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\NotBeforeViolationException;
+use RM\Standard\Jwt\Property\Payload\NotBefore;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use UnexpectedValueException;
 

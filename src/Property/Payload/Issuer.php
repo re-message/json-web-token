@@ -14,21 +14,24 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Claim;
+namespace RM\Standard\Jwt\Property\Payload;
 
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * Token identifier is unique sequence to provide revoke functional.
- * We recommend to set this claim.
+ * Issuer is a unique identity of token generator server, authentication server or security server.
+ * You can set this claim to check where token generated.
+ * It is maybe helps you, if you use several servers
+ * with own token id {@see Identifier} cache server {@see TokenStorageInterface}.
+ * We recommend setting this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  *
- * @see IdentifierClaimHandler The manager for this claim.
+ * @see IssuerClaimHandler The manager for this claim.
  */
-class Identifier extends AbstractProperty implements ClaimInterface
+class Issuer extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'jti';
+    public const NAME = 'iss';
 
     public function getName(): string
     {
