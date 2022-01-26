@@ -38,4 +38,11 @@ class Signer implements SignerInterface
 
         return $token->setSignature($signature);
     }
+
+    public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool
+    {
+        $body = $this->serializer->serialize($token, true);
+
+        return $algorithm->verify($key, $body, $token->getSignature());
+    }
 }

@@ -32,4 +32,6 @@ interface SignerInterface
      * @throws InvalidTokenException
      */
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token;
+
+    public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool;
 }

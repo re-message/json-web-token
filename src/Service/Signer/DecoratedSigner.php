@@ -36,4 +36,9 @@ class DecoratedSigner implements SignerInterface
     {
         return $this->signer->sign($token, $algorithm, $key);
     }
+
+    public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool
+    {
+        return $this->signer->verify($token, $algorithm, $key);
+    }
 }
