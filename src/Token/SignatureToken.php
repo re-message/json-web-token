@@ -44,24 +44,18 @@ final class SignatureToken implements TokenInterface
      */
     private ?string $signature;
 
-    final public function __construct(array $header, array $payload = [], string $signature = null)
+    public function __construct(array $header, array $payload = [], string $signature = null)
     {
         $this->header = new Header($header);
         $this->payload = new Payload($payload);
         $this->signature = $signature;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getHeader(): Header
     {
         return $this->header;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getAlgorithm(): string
     {
         return $this->header->get(Algorithm::NAME)->getValue();
@@ -73,13 +67,13 @@ final class SignatureToken implements TokenInterface
     public function setAlgorithm(SignatureAlgorithmInterface $algorithm): TokenInterface
     {
         $token = clone $this;
-        $token->header->set(Algorithm::fromAlgorithm($algorithm));
+
+        $property = Algorithm::fromAlgorithm($algorithm);
+        $token->header->set($property);
+
         return $token;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getPayload(): Payload
     {
         return $this->payload;
@@ -100,6 +94,7 @@ final class SignatureToken implements TokenInterface
     {
         $token = clone $this;
         $token->signature = $signature;
+
         return $token;
     }
 
@@ -111,9 +106,6 @@ final class SignatureToken implements TokenInterface
         return $this->signature !== null;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function toString(SerializerInterface $serializer, bool $withoutSignature = false): string
     {
         if (!$serializer instanceof SignatureSerializerInterface) {
@@ -147,16 +139,14 @@ final class SignatureToken implements TokenInterface
     public function __toString()
     {
         $serializer = new SignatureCompactSerializer();
+
         return $this->toString($serializer);
     }
 
-    /**
-     * @inheritDoc
-     */
-    final public static function createWithAlgorithm(AlgorithmInterface $algorithm): static
+    public static function createWithAlgorithm(AlgorithmInterface $algorithm): static
     {
         $algorithmClaim = Algorithm::fromAlgorithm($algorithm);
 
-        return new static([$algorithmClaim]);
+        return new self([$algorithmClaim]);
     }
 }
