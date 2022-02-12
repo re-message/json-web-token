@@ -22,11 +22,12 @@ use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
-use RM\Standard\Jwt\Handler\TokenHandlerList;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Signer\Signer;
 use RM\Standard\Jwt\Signer\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Validator\ChainValidator;
+use RM\Standard\Jwt\Validator\ValidatorInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
@@ -34,18 +35,16 @@ use RM\Standard\Jwt\Token\SignatureToken;
 class SignatureService implements SignatureServiceInterface
 {
     private AlgorithmManager $algorithmManager;
-    private ?TokenHandlerList $handlerList;
     private SignerInterface $signer;
     private LoggerInterface $logger;
 
     public function __construct(
         AlgorithmManager $algorithmManager,
-        TokenHandlerList $handlerList = null,
         SignerInterface $signer = null,
+        private readonly ValidatorInterface $validator = new ChainValidator(),
         LoggerInterface $logger = null
     ) {
         $this->algorithmManager = $algorithmManager;
-        $this->handlerList = $handlerList ?? new TokenHandlerList();
         $this->signer = $signer ?? new Signer();
         $this->logger = $logger ?? new NullLogger();
     }
@@ -69,7 +68,7 @@ class SignatureService implements SignatureServiceInterface
             return false;
         }
 
-        if (!$this->handlerList->validate($token)) {
+        if (!$this->validator->validate($token)) {
             return false;
         }
 
