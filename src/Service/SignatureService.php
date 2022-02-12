@@ -60,9 +60,6 @@ class SignatureService implements SignatureServiceInterface
         // detach token to avoid the claims value changes in original token
         $token = clone $originalToken;
 
-        $this->handlerList->generate($token);
-        $this->logger->debug('Handlers processed the token.');
-
         return $this->signer->sign($token, $algorithm, $key);
     }
 
