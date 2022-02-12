@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
 use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use RM\Standard\Jwt\Token\PropertyInterface;
@@ -30,10 +32,20 @@ use UnexpectedValueException;
 class ChainPropertyValidator implements ValidatorInterface
 {
     /**
+     * @var Collection<PropertyValidatorInterface>
+     */
+    private readonly Collection $validators;
+
+    /**
      * @param PropertyValidatorInterface[] $validators
      */
-    public function __construct(private array $validators = [])
+    public function __construct(array $validators = [])
     {
+        $this->validators = new ArrayCollection();
+
+        foreach ($validators as $validator) {
+            $this->pushValidator($validator);
+        }
     }
 
     public function validate(TokenInterface $token): bool
@@ -56,6 +68,11 @@ class ChainPropertyValidator implements ValidatorInterface
         }
 
         return true;
+    }
+
+    public function pushValidator(PropertyValidatorInterface $validator): void
+    {
+        $this->validators->add($validator);
     }
 
     private function findValidator(PropertyInterface $property): ?PropertyValidatorInterface

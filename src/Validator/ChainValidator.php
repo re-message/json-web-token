@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Validator;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -24,10 +26,20 @@ use RM\Standard\Jwt\Token\TokenInterface;
 class ChainValidator implements ValidatorInterface
 {
     /**
+     * @var Collection<ValidatorInterface>
+     */
+    private readonly Collection $validators;
+
+    /**
      * @param ValidatorInterface[] $validators
      */
-    public function __construct(private array $validators = [])
+    public function __construct(array $validators = [])
     {
+        $this->validators = new ArrayCollection();
+
+        foreach ($validators as $validator) {
+            $this->pushValidator($validator);
+        }
     }
 
     /**
@@ -42,5 +54,10 @@ class ChainValidator implements ValidatorInterface
         }
 
         return true;
+    }
+
+    public function pushValidator(ValidatorInterface $validator): void
+    {
+        $this->validators->add($validator);
     }
 }
