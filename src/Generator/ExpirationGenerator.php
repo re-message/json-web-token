@@ -24,19 +24,8 @@ use RM\Standard\Jwt\Token\PropertyTarget;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class ExpirationGenerator implements PropertyGeneratorInterface
+class ExpirationGenerator extends AbstractDurationGenerator
 {
-    /**
-     * Duration of token in seconds. By default, 1 hour.
-     * For security reason, cannot be infinite.
-     */
-    protected int $duration;
-
-    public function __construct(int $duration = 60 * 60)
-    {
-        $this->duration = $duration;
-    }
-
     public function getPropertyName(): string
     {
         return Expiration::NAME;
@@ -49,7 +38,7 @@ class ExpirationGenerator implements PropertyGeneratorInterface
 
     public function generate(): Expiration
     {
-        $value = time() + $this->duration;
+        $value = time() + $this->getDuration();
 
         return new Expiration($value);
     }
