@@ -57,9 +57,7 @@ class SignatureService implements SignatureServiceInterface
 
         $algorithm = $this->findAlgorithm($token->getAlgorithm());
 
-        $resignedToken = $this->signer->sign($token, $algorithm, $key);
-
-        return hash_equals($token->getSignature(), $resignedToken->getSignature());
+        return $this->signer->verify($token, $algorithm, $key);
     }
 
     /**
