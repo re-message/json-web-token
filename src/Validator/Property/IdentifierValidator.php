@@ -26,6 +26,8 @@ use UnexpectedValueException;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see Identifier
  */
 class IdentifierValidator implements PropertyValidatorInterface
 {

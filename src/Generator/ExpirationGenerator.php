@@ -20,9 +20,9 @@ use RM\Standard\Jwt\Property\Payload\Expiration;
 use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
- * Class ExpirationGenerator
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see Expiration
  */
 class ExpirationGenerator extends AbstractDurationGenerator
 {

@@ -24,9 +24,9 @@ use RM\Standard\Jwt\Token\PropertyTarget;
 use UnexpectedValueException;
 
 /**
- * Class ExpirationValidator
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see Expiration
  */
 class ExpirationValidator extends AbstractLeewayValidator
 {

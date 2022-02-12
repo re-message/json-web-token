@@ -26,6 +26,8 @@ use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see Identifier
  */
 class IdentifierGenerator extends AbstractDurationGenerator
 {
