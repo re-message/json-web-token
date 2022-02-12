@@ -22,7 +22,6 @@ use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
-use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Handler\TokenHandlerList;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Service\Signer\Signer;
@@ -51,13 +50,8 @@ class SignatureService implements SignatureServiceInterface
         $this->logger = $logger ?? new NullLogger();
     }
 
-    final public function sign(SignatureToken $originalToken, KeyInterface $key, bool $resign = false): SignatureToken
+    final public function sign(SignatureToken $originalToken, KeyInterface $key): SignatureToken
     {
-        if (!$resign && $originalToken->isSigned()) {
-            $message = 'This token already signed. If you want to resign him, set `resign` argument on `true`.';
-            throw new InvalidTokenException($message);
-        }
-
         $this->logger->info('Token sign started.', ['service' => $this::class, 'token' => $originalToken]);
 
         $algorithm = $this->findAlgorithm($originalToken->getAlgorithm());

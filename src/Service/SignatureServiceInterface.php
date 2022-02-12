@@ -39,7 +39,7 @@ interface SignatureServiceInterface
      * @see TokenPreSignEvent
      * @see TokenSignEvent
      */
-    public function sign(SignatureToken $token, KeyInterface $key, bool $resign): SignatureToken;
+    public function sign(SignatureToken $token, KeyInterface $key): SignatureToken;
 
     /**
      * Verify that token is valid and signature exist and correct.

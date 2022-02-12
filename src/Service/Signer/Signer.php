@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Service\Signer;
 
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
+use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
@@ -33,6 +34,10 @@ class Signer implements SignerInterface
 
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
+        if ($token->isSigned()) {
+            throw new InvalidTokenException('This token already signed');
+        }
+
         $body = $this->serializer->serialize($token, true);
         $signature = $algorithm->hash($key, $body);
 
