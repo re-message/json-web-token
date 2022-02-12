@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Handler\IssuedAtClaimHandler;
 use RM\Standard\Jwt\Validator\Property\IssuedAtValidator;
 use Throwable;
 
@@ -25,7 +24,7 @@ use Throwable;
  */
 class IssuedAtViolationException extends PropertyViolationException
 {
-    public function __construct(IssuedAtClaimHandler|IssuedAtValidator $validator, Throwable $previous = null)
+    public function __construct(IssuedAtValidator $validator, Throwable $previous = null)
     {
         parent::__construct('This token is issued in the future.', $validator, $previous);
     }

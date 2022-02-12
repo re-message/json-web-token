@@ -16,51 +16,19 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
-use RM\Standard\Jwt\Exception\IssuedAtViolationException;
-use RM\Standard\Jwt\Property\Payload\IssuedAt;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use RM\Standard\Jwt\Token\PropertyTarget;
-use UnexpectedValueException;
+use RM\Standard\Jwt\Generator\IssuedAtGenerator;
+use RM\Standard\Jwt\Validator\Property\IssuedAtValidator;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IssuedAtClaimHandler extends AbstractPropertyHandler
+class IssuedAtClaimHandler extends DelegatingPropertyHandler
 {
-    use LeewayHandlerTrait;
-
-    public function getPropertyTarget(): PropertyTarget
+    public function __construct(int $leeway = 0)
     {
-        return PropertyTarget::PAYLOAD;
-    }
+        $generator = new IssuedAtGenerator();
+        $validator = new IssuedAtValidator($leeway);
 
-    public function getPropertyName(): string
-    {
-        return IssuedAt::NAME;
-    }
-
-    protected function generateProperty(): IssuedAt
-    {
-        return new IssuedAt(time());
-    }
-
-    protected function validateProperty(PropertyInterface $property): bool
-    {
-        if (!$property instanceof IssuedAt) {
-            $message = sprintf('%s can handle only %s.', static::class, $property::class);
-            throw new UnexpectedValueException($message);
-        }
-
-        $value = $property->getValue();
-        if (!is_int($value)) {
-            throw new IncorrectPropertyTypeException('integer', gettype($value), $this->getPropertyName());
-        }
-
-        if (time() < $value - $this->getLeeway()) {
-            throw new IssuedAtViolationException($this);
-        }
-
-        return true;
+        parent::__construct($generator, $validator);
     }
 }
