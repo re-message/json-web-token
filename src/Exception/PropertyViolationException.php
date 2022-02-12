@@ -21,22 +21,22 @@ use RM\Standard\Jwt\Validator\Property\PropertyValidatorInterface;
 use Throwable;
 
 /**
- * Class ViolationException
  * This class isn't related to symfony validation package.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class PropertyViolationException extends InvalidPropertyException
 {
-    private AbstractPropertyHandler|PropertyValidatorInterface $validator;
-
-    public function __construct(string $message, AbstractPropertyHandler|PropertyValidatorInterface $validator, Throwable $previous = null)
-    {
-        parent::__construct($message, $validator->getPropertyName(), $previous);
-        $this->validator = $validator;
+    public function __construct(
+        string $message,
+        private readonly PropertyValidatorInterface|AbstractPropertyHandler $validator,
+        Throwable $previous = null
+    ) {
+        $propertyName = $validator->getPropertyName();
+        parent::__construct($message, $propertyName, $previous);
     }
 
-    public function getValidator(): AbstractPropertyHandler|PropertyValidatorInterface
+    public function getValidator(): PropertyValidatorInterface|AbstractPropertyHandler
     {
         return $this->validator;
     }

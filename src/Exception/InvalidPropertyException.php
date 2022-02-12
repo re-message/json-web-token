@@ -23,16 +23,16 @@ use Throwable;
  */
 class InvalidPropertyException extends InvalidTokenException
 {
-    private string $claim;
-
-    public function __construct(string $message, string $claim, Throwable $previous = null)
-    {
+    public function __construct(
+        string $message,
+        private readonly string $propertyName,
+        Throwable $previous = null
+    ) {
         parent::__construct($message, $previous);
-        $this->claim = $claim;
     }
 
-    public function getClaim(): string
+    public function getPropertyName(): string
     {
-        return $this->claim;
+        return $this->propertyName;
     }
 }
