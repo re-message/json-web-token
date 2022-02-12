@@ -14,27 +14,13 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Handler;
-
-use RM\Standard\Jwt\Token\PropertyInterface;
+namespace RM\Standard\Jwt\Token;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-interface PropertyGeneratorInterface
+enum PropertyTarget
 {
-    /**
-     * Returns name of property to generate.
-     */
-    public function getPropertyName(): string;
-
-    /**
-     * Returns name of property to generate.
-     */
-    public function getPropertyTarget(): PropertyTarget;
-
-    /**
-     * Generate new value for current property
-     */
-    public function generate(): PropertyInterface;
+    case HEADER;
+    case PAYLOAD;
 }

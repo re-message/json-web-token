@@ -23,6 +23,7 @@ use RM\Standard\Jwt\Property\Payload\Identifier;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 use UnexpectedValueException;
 
 /**

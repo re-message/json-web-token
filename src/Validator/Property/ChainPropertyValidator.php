@@ -16,11 +16,10 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
-use RM\Standard\Jwt\Handler\PropertyTarget;
-use RM\Standard\Jwt\Handler\PropertyValidatorInterface;
 use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
 use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
 use RM\Standard\Jwt\Validator\ValidatorInterface;
 use UnexpectedValueException;

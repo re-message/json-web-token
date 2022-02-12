@@ -17,7 +17,10 @@
 namespace RM\Standard\Jwt\Handler;
 
 use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Generator\PropertyGeneratorInterface;
 use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
+use RM\Standard\Jwt\Validator\Property\PropertyValidatorInterface;
 use UnexpectedValueException;
 
 /**

@@ -14,18 +14,18 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Handler;
+namespace RM\Standard\Jwt\Generator;
 
-use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-interface PropertyValidatorInterface
+interface PropertyGeneratorInterface
 {
     /**
-     * Returns name of property to validate.
+     * Returns name of property to generate.
      */
     public function getPropertyName(): string;
 
@@ -35,9 +35,7 @@ interface PropertyValidatorInterface
     public function getPropertyTarget(): PropertyTarget;
 
     /**
-     * Checks if the passed value is valid.
-     *
-     * @throws InvalidTokenException
+     * Generate new value for current property
      */
-    public function validate(PropertyInterface $property): bool;
+    public function generate(): PropertyInterface;
 }

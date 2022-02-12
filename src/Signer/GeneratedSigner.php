@@ -19,10 +19,10 @@ namespace RM\Standard\Jwt\Signer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
-use RM\Standard\Jwt\Handler\PropertyGeneratorInterface;
-use RM\Standard\Jwt\Handler\PropertyTarget;
+use RM\Standard\Jwt\Generator\PropertyGeneratorInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Token\PropertyBag;
+use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\SignatureToken as Token;
 
 /**

@@ -22,6 +22,7 @@ use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Exception\PropertyViolationException;
 use RM\Standard\Jwt\Token\PropertyBag;
 use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**

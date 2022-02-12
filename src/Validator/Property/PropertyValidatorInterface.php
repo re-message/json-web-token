@@ -14,13 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Handler;
+namespace RM\Standard\Jwt\Validator\Property;
+
+use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-enum PropertyTarget
+interface PropertyValidatorInterface
 {
-    case HEADER;
-    case PAYLOAD;
+    /**
+     * Returns name of property to validate.
+     */
+    public function getPropertyName(): string;
+
+    /**
+     * Returns name of property to generate.
+     */
+    public function getPropertyTarget(): PropertyTarget;
+
+    /**
+     * Checks if the passed value is valid.
+     *
+     * @throws InvalidTokenException
+     */
+    public function validate(PropertyInterface $property): bool;
 }

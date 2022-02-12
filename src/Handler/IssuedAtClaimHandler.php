@@ -20,6 +20,7 @@ use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\IssuedAtViolationException;
 use RM\Standard\Jwt\Property\Payload\IssuedAt;
 use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 use UnexpectedValueException;
 
 /**
