@@ -20,10 +20,11 @@ abstract class AbstractLeewayValidator implements PropertyValidatorInterface
 {
     public const DEFAULT_LEEWAY = 0;
     public const DEFAULT_MAX_LEEWAY = 2 * 60;
+    public const MINIMAL_LEEWAY = 0;
 
     /**
      * Allowed leeway in seconds. By default, 0.
-     * For security reason, cannot be more than 2 minutes.
+     * For security reason, cannot be more than 2 minutes or negative.
      */
     protected int $leeway = self::DEFAULT_LEEWAY;
 
@@ -40,6 +41,14 @@ abstract class AbstractLeewayValidator implements PropertyValidatorInterface
 
     final protected function getLeeway(): int
     {
-        return min($this->leeway, $this->maxLeeway);
+        if (self::MINIMAL_LEEWAY >= $this->leeway) {
+            return self::MINIMAL_LEEWAY;
+        }
+
+        if ($this->leeway >= $this->maxLeeway) {
+            return $this->maxLeeway;
+        }
+
+        return $this->leeway;
     }
 }
