@@ -23,16 +23,16 @@ abstract class AbstractLeewayValidator implements PropertyValidatorInterface
     public const MINIMAL_LEEWAY = 0;
 
     /**
-     * Allowed leeway in seconds. By default, 0.
-     * For security reason, cannot be more than 2 minutes or negative.
-     */
-    protected int $leeway = self::DEFAULT_LEEWAY;
-
-    /**
      * Max leeway value.
      * By default is 2 minutes.
      */
     protected int $maxLeeway = self::DEFAULT_MAX_LEEWAY;
+
+    /**
+     * Allowed leeway in seconds. By default, 0.
+     * For security reason, cannot be more than 2 minutes or negative.
+     */
+    private readonly int $leeway;
 
     public function __construct(int $leeway = self::DEFAULT_LEEWAY)
     {
