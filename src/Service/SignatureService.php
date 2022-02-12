@@ -17,10 +17,9 @@
 namespace RM\Standard\Jwt\Service;
 
 use InvalidArgumentException;
-use RM\Standard\Jwt\Algorithm\AlgorithmManager;
+use RM\Standard\Jwt\Algorithm\AlgorithmResolverInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
-use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Signer\Signer;
 use RM\Standard\Jwt\Signer\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
@@ -33,14 +32,14 @@ use RM\Standard\Jwt\Validator\ValidatorInterface;
 class SignatureService implements SignatureServiceInterface
 {
     public function __construct(
-        private readonly AlgorithmManager $algorithmManager,
+        private readonly AlgorithmResolverInterface $algorithmResolver,
         private readonly SignerInterface $signer = new Signer(),
         private readonly ValidatorInterface $validator = new ChainValidator(),
     ) {}
 
     final public function sign(SignatureToken $token, KeyInterface $key): SignatureToken
     {
-        $algorithm = $this->findAlgorithm($token->getAlgorithm());
+        $algorithm = $this->resolveAlgorithm($token);
 
         return $this->signer->sign($token, $algorithm, $key);
     }
@@ -55,7 +54,7 @@ class SignatureService implements SignatureServiceInterface
             return false;
         }
 
-        $algorithm = $this->findAlgorithm($token->getAlgorithm());
+        $algorithm = $this->resolveAlgorithm($token);
 
         return $this->signer->verify($token, $algorithm, $key);
     }
@@ -63,24 +62,24 @@ class SignatureService implements SignatureServiceInterface
     /**
      * @throws AlgorithmNotFoundException
      */
-    public function findAlgorithm(string $name): SignatureAlgorithmInterface
+    protected function resolveAlgorithm(SignatureToken $token): SignatureAlgorithmInterface
     {
-        $algorithm = $this->algorithmManager->get($name);
-
+        $algorithm = $this->algorithmResolver->resolve($token);
         if (!$algorithm instanceof SignatureAlgorithmInterface) {
-            $message = sprintf(
-                'Signature algorithm must implement %1$s, given %2$s.',
-                SignatureAlgorithmInterface::class,
-                $algorithm::class
-            );
-            throw new InvalidArgumentException($message);
+            $this->throwInvalidAlgorithmException($algorithm::class);
         }
 
         return $algorithm;
     }
 
-    public function getAlgorithmManager(): AlgorithmManager
+    protected function throwInvalidAlgorithmException(string $algorithm): void
     {
-        return $this->algorithmManager;
+        $expect = SignatureAlgorithmInterface::class;
+        $message = sprintf(
+            'Signature algorithm must implement %1$s, given %2$s.',
+            $expect,
+            $algorithm
+        );
+        throw new InvalidArgumentException($message);
     }
 }
