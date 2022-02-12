@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Service\Signer;
+namespace RM\Standard\Jwt\Signer;
 
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Exception\InvalidTokenException;

@@ -24,8 +24,8 @@ use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use RM\Standard\Jwt\Handler\TokenHandlerList;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Service\Signer\Signer;
-use RM\Standard\Jwt\Service\Signer\SignerInterface;
+use RM\Standard\Jwt\Signer\Signer;
+use RM\Standard\Jwt\Signer\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
 
 /**

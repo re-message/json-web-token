@@ -14,31 +14,37 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Service\Signer;
+namespace RM\Standard\Jwt\Signer;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
+use RM\Standard\Jwt\Event\TokenPreSignEvent;
+use RM\Standard\Jwt\Event\TokenSignEvent;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Token\SignatureToken as Token;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-abstract class DecoratedSigner implements SignerInterface
+class EventfulSigner extends DecoratedSigner
 {
-    private SignerInterface $signer;
+    private EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(SignerInterface $signer)
+    public function __construct(SignerInterface $signer, EventDispatcherInterface $eventDispatcher = null)
     {
-        $this->signer = $signer;
+        parent::__construct($signer);
+
+        $this->eventDispatcher = $eventDispatcher ?? new EventDispatcher();
     }
 
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
-        return $this->signer->sign($token, $algorithm, $key);
-    }
+        $this->eventDispatcher->dispatch(new TokenPreSignEvent($token));
 
-    public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool
-    {
-        return $this->signer->verify($token, $algorithm, $key);
+        $signedToken = parent::sign($token, $algorithm, $key);
+        $this->eventDispatcher->dispatch(new TokenSignEvent($signedToken));
+
+        return $signedToken;
     }
 }

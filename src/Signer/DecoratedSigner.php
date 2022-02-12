@@ -14,24 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Service\Signer;
+namespace RM\Standard\Jwt\Signer;
 
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
-use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Token\SignatureToken as Token;
 
 /**
- * Signs the token by algorithm and key.
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-interface SignerInterface
+abstract class DecoratedSigner implements SignerInterface
 {
-    /**
-     * @throws InvalidTokenException
-     */
-    public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token;
+    private SignerInterface $signer;
 
-    public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool;
+    public function __construct(SignerInterface $signer)
+    {
+        $this->signer = $signer;
+    }
+
+    public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
+    {
+        return $this->signer->sign($token, $algorithm, $key);
+    }
+
+    public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool
+    {
+        return $this->signer->verify($token, $algorithm, $key);
+    }
 }
