@@ -16,65 +16,19 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Exception\ExpirationViolationException;
-use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
-use RM\Standard\Jwt\Property\Payload\Expiration;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use RM\Standard\Jwt\Token\PropertyTarget;
-use UnexpectedValueException;
+use RM\Standard\Jwt\Generator\ExpirationGenerator;
+use RM\Standard\Jwt\Validator\Property\ExpirationValidator;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class ExpirationClaimHandler extends AbstractPropertyHandler
+class ExpirationClaimHandler extends DelegatingPropertyHandler
 {
-    use LeewayHandlerTrait;
-
-    /**
-     * Duration of token in seconds. By default, 1 hour.
-     * For security reason, cannot be infinite.
-     */
-    protected int $duration = 60 * 60;
-
     public function __construct(int $duration = 60 * 60, int $leeway = 0)
     {
-        $this->duration = $duration;
-        $this->leeway = $leeway;
-    }
+        $generator = new ExpirationGenerator($duration);
+        $validator = new ExpirationValidator($leeway);
 
-    public function getPropertyTarget(): PropertyTarget
-    {
-        return PropertyTarget::PAYLOAD;
-    }
-
-    public function getPropertyName(): string
-    {
-        return Expiration::NAME;
-    }
-
-    protected function generateProperty(): Expiration
-    {
-        $value = time() + $this->duration;
-
-        return new Expiration($value);
-    }
-
-    protected function validateProperty(PropertyInterface $property): bool
-    {
-        if (!$property instanceof Expiration) {
-            $message = sprintf('%s can handle only %s.', static::class, $property::class);
-            throw new UnexpectedValueException($message);
-        }
-
-        $value = $property->getValue();
-        if (!is_int($value)) {
-            throw new IncorrectPropertyTypeException('integer', gettype($value), $this->getPropertyName());
-        }
-
-        if (time() > $value + $this->getLeeway()) {
-            throw new ExpirationViolationException($this);
-        }
-
-        return true;
+        parent::__construct($generator, $validator);
     }
 }

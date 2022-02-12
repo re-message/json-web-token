@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Handler\ExpirationClaimHandler;
 use RM\Standard\Jwt\Validator\Property\ExpirationValidator;
 use Throwable;
 
@@ -25,7 +24,7 @@ use Throwable;
  */
 class ExpirationViolationException extends PropertyViolationException
 {
-    public function __construct(ExpirationClaimHandler|ExpirationValidator $validator, Throwable $previous = null)
+    public function __construct(ExpirationValidator $validator, Throwable $previous = null)
     {
         parent::__construct('The token expired.', $validator, $previous);
     }
