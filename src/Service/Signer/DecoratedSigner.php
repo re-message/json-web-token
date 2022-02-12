@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Token\SignatureToken as Token;
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class DecoratedSigner implements SignerInterface
+abstract class DecoratedSigner implements SignerInterface
 {
     private SignerInterface $signer;
 
