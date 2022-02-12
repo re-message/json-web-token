@@ -20,6 +20,7 @@ use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\AlgorithmResolverInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
+use RM\Standard\Jwt\Key\Resolver\KeyResolverInterface;
 use RM\Standard\Jwt\Signer\Signer;
 use RM\Standard\Jwt\Signer\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
@@ -33,18 +34,20 @@ class SignatureService implements SignatureServiceInterface
 {
     public function __construct(
         private readonly AlgorithmResolverInterface $algorithmResolver,
+        private readonly KeyResolverInterface $keyResolver,
         private readonly SignerInterface $signer = new Signer(),
         private readonly ValidatorInterface $validator = new ChainValidator(),
     ) {}
 
-    final public function sign(SignatureToken $token, KeyInterface $key): SignatureToken
+    final public function sign(SignatureToken $token): SignatureToken
     {
         $algorithm = $this->resolveAlgorithm($token);
+        $key = $this->keyResolver->resolve($token);
 
         return $this->signer->sign($token, $algorithm, $key);
     }
 
-    final public function verify(SignatureToken $token, KeyInterface $key): bool
+    final public function verify(SignatureToken $token): bool
     {
         if (!$token->isSigned()) {
             return false;
@@ -55,6 +58,7 @@ class SignatureService implements SignatureServiceInterface
         }
 
         $algorithm = $this->resolveAlgorithm($token);
+        $key = $this->keyResolver->resolve($token);
 
         return $this->signer->verify($token, $algorithm, $key);
     }

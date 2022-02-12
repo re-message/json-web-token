@@ -16,12 +16,10 @@
 
 namespace RM\Standard\Jwt\Service;
 
-use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Event\TokenPreSignEvent;
 use RM\Standard\Jwt\Event\TokenSignEvent;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Exception\PropertyViolationException;
-use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
 
 /**
@@ -32,14 +30,13 @@ use RM\Standard\Jwt\Token\SignatureToken;
 interface SignatureServiceInterface
 {
     /**
-     * Sign token with this key.
-     * This method triggers some events that call handlers for some claims.
+     * Signs token.
      *
      * @throws InvalidTokenException
      * @see TokenPreSignEvent
      * @see TokenSignEvent
      */
-    public function sign(SignatureToken $token, KeyInterface $key): SignatureToken;
+    public function sign(SignatureToken $token): SignatureToken;
 
     /**
      * Verify that token is valid and signature exist and correct.
@@ -47,10 +44,5 @@ interface SignatureServiceInterface
      * @throws PropertyViolationException
      * @throws InvalidTokenException
      */
-    public function verify(SignatureToken $token, KeyInterface $key): bool;
-
-    /**
-     * Returns algorithm by name from algorithm manager.
-     */
-    public function findAlgorithm(string $name): SignatureAlgorithmInterface;
+    public function verify(SignatureToken $token): bool;
 }
