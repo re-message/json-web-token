@@ -32,17 +32,11 @@ use RM\Standard\Jwt\Validator\ValidatorInterface;
  */
 class SignatureService implements SignatureServiceInterface
 {
-    private AlgorithmManager $algorithmManager;
-    private SignerInterface $signer;
-
     public function __construct(
-        AlgorithmManager $algorithmManager,
-        SignerInterface $signer = null,
+        private readonly AlgorithmManager $algorithmManager,
+        private readonly SignerInterface $signer = new Signer(),
         private readonly ValidatorInterface $validator = new ChainValidator(),
-    ) {
-        $this->algorithmManager = $algorithmManager;
-        $this->signer = $signer ?? new Signer();
-    }
+    ) {}
 
     final public function sign(SignatureToken $token, KeyInterface $key): SignatureToken
     {
