@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Handler\IssuerClaimHandler;
 use RM\Standard\Jwt\Validator\Property\IssuerValidator;
 use Throwable;
 
@@ -25,7 +24,7 @@ use Throwable;
  */
 class IssuerViolationException extends PropertyViolationException
 {
-    public function __construct(IssuerClaimHandler|IssuerValidator $validator, Throwable $previous = null)
+    public function __construct(IssuerValidator $validator, Throwable $previous = null)
     {
         parent::__construct('Token issuer is different from current issuer.', $validator, $previous);
     }

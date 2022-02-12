@@ -16,54 +16,19 @@
 
 namespace RM\Standard\Jwt\Handler;
 
-use RM\Standard\Jwt\Exception\IssuerViolationException;
-use RM\Standard\Jwt\Property\Payload\Issuer;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use RM\Standard\Jwt\Token\PropertyTarget;
-use UnexpectedValueException;
+use RM\Standard\Jwt\Generator\IssuerGenerator;
+use RM\Standard\Jwt\Validator\Property\IssuerValidator;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class IssuerClaimHandler extends AbstractPropertyHandler
+class IssuerClaimHandler extends DelegatingPropertyHandler
 {
-    /**
-     * The identifier of server which issued the token
-     */
-    protected string $issuer;
-
     public function __construct(string $issuer)
     {
-        $this->issuer = $issuer;
-    }
+        $generator = new IssuerGenerator($issuer);
+        $validator = new IssuerValidator($issuer);
 
-    public function getPropertyTarget(): PropertyTarget
-    {
-        return PropertyTarget::PAYLOAD;
-    }
-
-    public function getPropertyName(): string
-    {
-        return Issuer::NAME;
-    }
-
-    protected function generateProperty(): Issuer
-    {
-        return new Issuer($this->issuer);
-    }
-
-    protected function validateProperty(PropertyInterface $property): bool
-    {
-        if (!$property instanceof Issuer) {
-            $message = sprintf('%s can handle only %s.', static::class, $property::class);
-            throw new UnexpectedValueException($message);
-        }
-
-        $value = $property->getValue();
-        if ($this->issuer !== $value) {
-            throw new IssuerViolationException($this);
-        }
-
-        return true;
+        parent::__construct($generator, $validator);
     }
 }
