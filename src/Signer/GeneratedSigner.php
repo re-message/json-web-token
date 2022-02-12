@@ -46,11 +46,14 @@ class GeneratedSigner extends DecoratedSigner
 
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
+        // detach token to avoid the value changes in original token
+        $target = clone $token;
+
         foreach ($this->generators as $generator) {
-            $this->generateWith($generator, $token);
+            $this->generateWith($generator, $target);
         }
 
-        return parent::sign($token, $algorithm, $key);
+        return parent::sign($target, $algorithm, $key);
     }
 
     public function pushGenerator(PropertyGeneratorInterface $generator): void

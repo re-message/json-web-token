@@ -49,15 +49,12 @@ class SignatureService implements SignatureServiceInterface
         $this->logger = $logger ?? new NullLogger();
     }
 
-    final public function sign(SignatureToken $originalToken, KeyInterface $key): SignatureToken
+    final public function sign(SignatureToken $token, KeyInterface $key): SignatureToken
     {
-        $this->logger->info('Token sign started.', ['service' => $this::class, 'token' => $originalToken]);
+        $this->logger->info('Token sign started.', ['service' => $this::class, 'token' => $token]);
 
-        $algorithm = $this->findAlgorithm($originalToken->getAlgorithm());
+        $algorithm = $this->findAlgorithm($token->getAlgorithm());
         $this->logger->debug('Found an algorithm to sign.', ['algorithm' => $algorithm->name()]);
-
-        // detach token to avoid the claims value changes in original token
-        $token = clone $originalToken;
 
         return $this->signer->sign($token, $algorithm, $key);
     }
