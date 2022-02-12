@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Handler\NotBeforeClaimHandler;
 use RM\Standard\Jwt\Validator\Property\NotBeforeValidator;
 use Throwable;
 
@@ -25,7 +24,7 @@ use Throwable;
  */
 class NotBeforeViolationException extends PropertyViolationException
 {
-    public function __construct(NotBeforeClaimHandler|NotBeforeValidator $validator, Throwable $previous = null)
+    public function __construct(NotBeforeValidator $validator, Throwable $previous = null)
     {
         parent::__construct('The token cannot be used yet.', $validator, $previous);
     }
