@@ -43,8 +43,10 @@ class EventfulSigner extends DecoratedSigner
         $this->eventDispatcher->dispatch(new TokenPreSignEvent($token));
 
         $signedToken = parent::sign($token, $algorithm, $key);
-        $this->eventDispatcher->dispatch(new TokenSignEvent($signedToken));
 
-        return $signedToken;
+        $signEvent = new TokenSignEvent($signedToken);
+        $this->eventDispatcher->dispatch($signEvent);
+
+        return $signEvent->getToken();
     }
 }

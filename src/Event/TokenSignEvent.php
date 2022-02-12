@@ -16,9 +16,15 @@
 
 namespace RM\Standard\Jwt\Event;
 
+use RM\Standard\Jwt\Token\SignatureToken;
+
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class TokenSignEvent extends AbstractSignEvent
 {
+    public function setToken(SignatureToken $token): void
+    {
+        $this->token = $token;
+    }
 }
