@@ -14,19 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Exception;
+namespace RM\Standard\Jwt\Generator;
 
-use RM\Standard\Jwt\Handler\IssuedAtClaimHandler;
-use RM\Standard\Jwt\Validator\Property\IssuedAtValidator;
-use Throwable;
+use RM\Standard\Jwt\Property\Payload\IssuedAt;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see IssuedAt
  */
-class IssuedAtViolationException extends PropertyViolationException
+class IssuedAtGenerator implements PropertyGeneratorInterface
 {
-    public function __construct(IssuedAtClaimHandler|IssuedAtValidator $validator, Throwable $previous = null)
+    public function getPropertyName(): string
     {
-        parent::__construct('This token is issued in the future.', $validator, $previous);
+        return IssuedAt::NAME;
+    }
+
+    public function getPropertyTarget(): PropertyTarget
+    {
+        return PropertyTarget::PAYLOAD;
+    }
+
+    public function generate(): PropertyInterface
+    {
+        return new IssuedAt(time());
     }
 }
