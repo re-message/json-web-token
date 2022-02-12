@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Handler\AbstractPropertyHandler;
 use RM\Standard\Jwt\Validator\Property\PropertyValidatorInterface;
 use Throwable;
 
@@ -29,14 +28,14 @@ class PropertyViolationException extends InvalidPropertyException
 {
     public function __construct(
         string $message,
-        private readonly PropertyValidatorInterface|AbstractPropertyHandler $validator,
+        private readonly PropertyValidatorInterface $validator,
         Throwable $previous = null
     ) {
         $propertyName = $validator->getPropertyName();
         parent::__construct($message, $propertyName, $previous);
     }
 
-    public function getValidator(): PropertyValidatorInterface|AbstractPropertyHandler
+    public function getValidator(): PropertyValidatorInterface
     {
         return $this->validator;
     }
