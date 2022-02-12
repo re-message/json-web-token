@@ -16,7 +16,8 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
-use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Exception\InvalidPropertyException;
+use RM\Standard\Jwt\Exception\PropertyViolationException;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use RM\Standard\Jwt\Token\PropertyTarget;
 
@@ -38,7 +39,8 @@ interface PropertyValidatorInterface
     /**
      * Checks if the passed value is valid.
      *
-     * @throws InvalidTokenException
+     * @throws PropertyViolationException
+     * @throws InvalidPropertyException
      */
     public function validate(PropertyInterface $property): bool;
 }
