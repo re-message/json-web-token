@@ -24,8 +24,6 @@ use RM\Standard\Jwt\Key\Resolver\KeyResolverInterface;
 use RM\Standard\Jwt\Signer\Signer;
 use RM\Standard\Jwt\Signer\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
-use RM\Standard\Jwt\Validator\ChainValidator;
-use RM\Standard\Jwt\Validator\ValidatorInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
@@ -36,7 +34,6 @@ class SignatureService implements SignatureServiceInterface
         private readonly AlgorithmResolverInterface $algorithmResolver,
         private readonly KeyResolverInterface $keyResolver,
         private readonly SignerInterface $signer = new Signer(),
-        private readonly ValidatorInterface $validator = new ChainValidator(),
     ) {}
 
     final public function sign(SignatureToken $token): SignatureToken
@@ -49,14 +46,6 @@ class SignatureService implements SignatureServiceInterface
 
     final public function verify(SignatureToken $token): bool
     {
-        if (!$token->isSigned()) {
-            return false;
-        }
-
-        if (!$this->validator->validate($token)) {
-            return false;
-        }
-
         $algorithm = $this->resolveAlgorithm($token);
         $key = $this->keyResolver->resolve($token);
 
