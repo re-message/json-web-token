@@ -14,19 +14,35 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Exception;
+namespace RM\Standard\Jwt\Generator;
 
-use RM\Standard\Jwt\Handler\IssuerClaimHandler;
-use RM\Standard\Jwt\Validator\Property\IssuerValidator;
-use Throwable;
+use RM\Standard\Jwt\Property\Payload\Issuer;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see Issuer
  */
-class IssuerViolationException extends PropertyViolationException
+class IssuerGenerator implements PropertyGeneratorInterface
 {
-    public function __construct(IssuerClaimHandler|IssuerValidator $validator, Throwable $previous = null)
+    public function __construct(
+        protected readonly string $issuer
+    ) {}
+
+    public function getPropertyName(): string
     {
-        parent::__construct('Token issuer is different from current issuer.', $validator, $previous);
+        return Issuer::NAME;
+    }
+
+    public function getPropertyTarget(): PropertyTarget
+    {
+        return PropertyTarget::PAYLOAD;
+    }
+
+    public function generate(): PropertyInterface
+    {
+        return new Issuer($this->issuer);
     }
 }
