@@ -26,8 +26,6 @@ use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\SignatureToken as Token;
 
 /**
- * Class GeneratedSigner
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class GeneratedSigner extends DecoratedSigner
@@ -37,11 +35,18 @@ class GeneratedSigner extends DecoratedSigner
      */
     private readonly Collection $generators;
 
+    /**
+     * @param PropertyGeneratorInterface[] $generators
+     */
     public function __construct(SignerInterface $signer, array $generators = [])
     {
         parent::__construct($signer);
 
-        $this->generators = new ArrayCollection($generators);
+        $this->generators = new ArrayCollection();
+
+        foreach ($generators as $generator) {
+            $this->pushGenerator($generator);
+        }
     }
 
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
