@@ -42,11 +42,6 @@ class AlgorithmManager
         }
     }
 
-    /**
-     * Returns any algorithm by name
-     *
-     * @throws AlgorithmNotFoundException
-     */
     public function get(string $algorithm): AlgorithmInterface
     {
         if (!$this->has($algorithm)) {
@@ -56,9 +51,6 @@ class AlgorithmManager
         return $this->algorithms->get($algorithm);
     }
 
-    /**
-     * @param AlgorithmInterface $algorithm
-     */
     public function put(AlgorithmInterface $algorithm): void
     {
         $this->algorithms->set($algorithm->name(), $algorithm);
