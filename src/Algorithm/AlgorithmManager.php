@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Algorithm;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 
 /**
@@ -24,15 +26,17 @@ use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 class AlgorithmManager
 {
     /**
-     * @var AlgorithmInterface[]
+     * @var Collection<AlgorithmInterface>
      */
-    private array $algorithms = [];
+    private readonly Collection $algorithms;
 
     /**
      * @param AlgorithmInterface[] $algorithms
      */
     public function __construct(array $algorithms = [])
     {
+        $this->algorithms = new ArrayCollection();
+
         foreach ($algorithms as $algorithm) {
             $this->put($algorithm);
         }
@@ -49,7 +53,7 @@ class AlgorithmManager
             throw new AlgorithmNotFoundException($algorithm);
         }
 
-        return $this->algorithms[$algorithm];
+        return $this->algorithms->get($algorithm);
     }
 
     /**
@@ -57,16 +61,16 @@ class AlgorithmManager
      */
     public function put(AlgorithmInterface $algorithm): void
     {
-        $this->algorithms[$algorithm->name()] = $algorithm;
+        $this->algorithms->set($algorithm->name(), $algorithm);
     }
 
     public function has(string $algorithm): bool
     {
-        return array_key_exists($algorithm, $this->algorithms);
+        return $this->algorithms->containsKey($algorithm);
     }
 
     public function remove(string $algorithm): void
     {
-        unset($this->algorithms[$algorithm]);
+        $this->algorithms->remove($algorithm);
     }
 }
