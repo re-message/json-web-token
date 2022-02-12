@@ -17,8 +17,6 @@
 namespace RM\Standard\Jwt\Service;
 
 use InvalidArgumentException;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
@@ -36,25 +34,19 @@ class SignatureService implements SignatureServiceInterface
 {
     private AlgorithmManager $algorithmManager;
     private SignerInterface $signer;
-    private LoggerInterface $logger;
 
     public function __construct(
         AlgorithmManager $algorithmManager,
         SignerInterface $signer = null,
         private readonly ValidatorInterface $validator = new ChainValidator(),
-        LoggerInterface $logger = null
     ) {
         $this->algorithmManager = $algorithmManager;
         $this->signer = $signer ?? new Signer();
-        $this->logger = $logger ?? new NullLogger();
     }
 
     final public function sign(SignatureToken $token, KeyInterface $key): SignatureToken
     {
-        $this->logger->info('Token sign started.', ['service' => $this::class, 'token' => $token]);
-
         $algorithm = $this->findAlgorithm($token->getAlgorithm());
-        $this->logger->debug('Found an algorithm to sign.', ['algorithm' => $algorithm->name()]);
 
         return $this->signer->sign($token, $algorithm, $key);
     }
@@ -70,7 +62,6 @@ class SignatureService implements SignatureServiceInterface
         }
 
         $algorithm = $this->findAlgorithm($token->getAlgorithm());
-        $this->logger->debug('Found an algorithm to sign.', ['algorithm' => $algorithm->name()]);
 
         $resignedToken = $this->signer->sign($token, $algorithm, $key);
 
