@@ -16,13 +16,17 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use RM\Standard\Jwt\Generator\ExpirationGenerator;
+use RM\Standard\Jwt\Validator\Property\ExpirationValidator;
+
 /**
  * Expiration is a time in UNIX format when token expires.
  * It is required claim.
  *
- * @author Oleg Kozlov <h1karo@relmsg.ru>
+ * @see ExpirationGenerator can generate value for this claim.
+ * @see ExpirationValidator can validate this claim.
  *
- * @see ExpirationClaimHandler The manager for this claim.
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Expiration extends DateValueClaim
 {

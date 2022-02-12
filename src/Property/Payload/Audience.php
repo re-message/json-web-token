@@ -21,7 +21,7 @@ use RM\Standard\Jwt\Token\AbstractProperty;
 /**
  * Audience is a unique identity of object token provides access to.
  * It is required claim. May have same value as {@see Subject} claim.
- * No handler for this claim because the token service processes it directly. But you can create your own.
+ * This property has no generator or validator.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

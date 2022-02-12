@@ -16,12 +16,16 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use RM\Standard\Jwt\Generator\NotBeforeGenerator;
+use RM\Standard\Jwt\Validator\Property\NotBeforeValidator;
+
 /**
  * Not before time is a time in UNIX format before which the token is not valid.
  *
- * @author Oleg Kozlov <h1karo@relmsg.ru>
+ * @see NotBeforeGenerator can generate value for this claim.
+ * @see NotBeforeValidator can validate this claim.
  *
- * @see NotBeforeClaimHandler The manager for this claim.
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class NotBefore extends DateValueClaim
 {

@@ -16,11 +16,15 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use RM\Standard\Jwt\Generator\IssuedAtGenerator;
+use RM\Standard\Jwt\Validator\Property\IssuedAtValidator;
+
 /**
  * Issued at time is a time in UNIX format of token creation.
  * Often a value of this claim equals a value of {@see NotBefore} claim.
  *
- * @see IssuedAtClaimHandler The manager for this claim.
+ * @see IssuedAtGenerator can generate value for this claim.
+ * @see IssuedAtValidator can validate this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

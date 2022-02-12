@@ -16,18 +16,21 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use RM\Standard\Jwt\Generator\IssuerGenerator;
 use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Validator\Property\IssuerValidator;
 
 /**
  * Issuer is a unique identity of token generator server, authentication server or security server.
  * You can set this claim to check where token generated.
  * It is maybe helps you, if you use several servers
  * with own token id {@see Identifier} cache server {@see TokenStorageInterface}.
- * We recommend setting this claim.
+ * We recommend set up this claim.
+ *
+ * @see IssuerGenerator can generate value for this claim.
+ * @see IssuerValidator can validate this claim.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
- * @see IssuerClaimHandler The manager for this claim.
  */
 class Issuer extends AbstractProperty implements ClaimInterface
 {

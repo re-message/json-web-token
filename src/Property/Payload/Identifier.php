@@ -16,15 +16,18 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use RM\Standard\Jwt\Generator\IdentifierGenerator;
 use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Validator\Property\IdentifierValidator;
 
 /**
  * Token identifier is unique sequence to provide revoke functional.
  * We recommend to set this claim.
  *
- * @author Oleg Kozlov <h1karo@relmsg.ru>
+ * @see IdentifierGenerator can generate value for this claim.
+ * @see IdentifierValidator can validate this claim.
  *
- * @see IdentifierClaimHandler The manager for this claim.
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Identifier extends AbstractProperty implements ClaimInterface
 {
