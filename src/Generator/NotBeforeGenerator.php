@@ -14,19 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Exception;
+namespace RM\Standard\Jwt\Generator;
 
-use RM\Standard\Jwt\Handler\NotBeforeClaimHandler;
-use RM\Standard\Jwt\Validator\Property\NotBeforeValidator;
-use Throwable;
+use RM\Standard\Jwt\Property\Payload\NotBefore;
+use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @see NotBefore
  */
-class NotBeforeViolationException extends PropertyViolationException
+class NotBeforeGenerator implements PropertyGeneratorInterface
 {
-    public function __construct(NotBeforeClaimHandler|NotBeforeValidator $validator, Throwable $previous = null)
+    public function getPropertyTarget(): PropertyTarget
     {
-        parent::__construct('The token cannot be used yet.', $validator, $previous);
+        return PropertyTarget::PAYLOAD;
+    }
+
+    public function getPropertyName(): string
+    {
+        return NotBefore::NAME;
+    }
+
+    public function generate(): PropertyInterface
+    {
+        return new NotBefore(time());
     }
 }
