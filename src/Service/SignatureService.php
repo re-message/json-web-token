@@ -16,10 +16,8 @@
 
 namespace RM\Standard\Jwt\Service;
 
-use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\AlgorithmResolverInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
-use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use RM\Standard\Jwt\Key\Resolver\KeyResolverInterface;
 use RM\Standard\Jwt\Signer\Signer;
 use RM\Standard\Jwt\Signer\SignerInterface;
@@ -38,7 +36,7 @@ class SignatureService implements SignatureServiceInterface
 
     final public function sign(SignatureToken $token): SignatureToken
     {
-        $algorithm = $this->resolveAlgorithm($token);
+        $algorithm = $this->algorithmResolver->resolve($token, SignatureAlgorithmInterface::class);
         $key = $this->keyResolver->resolve($token);
 
         return $this->signer->sign($token, $algorithm, $key);
@@ -46,33 +44,9 @@ class SignatureService implements SignatureServiceInterface
 
     final public function verify(SignatureToken $token): bool
     {
-        $algorithm = $this->resolveAlgorithm($token);
+        $algorithm = $this->algorithmResolver->resolve($token, SignatureAlgorithmInterface::class);
         $key = $this->keyResolver->resolve($token);
 
         return $this->signer->verify($token, $algorithm, $key);
-    }
-
-    /**
-     * @throws AlgorithmNotFoundException
-     */
-    protected function resolveAlgorithm(SignatureToken $token): SignatureAlgorithmInterface
-    {
-        $algorithm = $this->algorithmResolver->resolve($token);
-        if (!$algorithm instanceof SignatureAlgorithmInterface) {
-            $this->throwInvalidAlgorithmException($algorithm::class);
-        }
-
-        return $algorithm;
-    }
-
-    protected function throwInvalidAlgorithmException(string $algorithm): void
-    {
-        $expect = SignatureAlgorithmInterface::class;
-        $message = sprintf(
-            'Signature algorithm must implement %1$s, given %2$s.',
-            $expect,
-            $algorithm
-        );
-        throw new InvalidArgumentException($message);
     }
 }

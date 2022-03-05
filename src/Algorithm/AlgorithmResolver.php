@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Algorithm;
 
+use InvalidArgumentException;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -27,8 +28,18 @@ class AlgorithmResolver implements AlgorithmResolverInterface
         private readonly AlgorithmManager $algorithmManager
     ) {}
 
-    public function resolve(TokenInterface $token): AlgorithmInterface
+    public function resolve(TokenInterface $token, string $type): AlgorithmInterface
     {
-        return $this->algorithmManager->get($token->getAlgorithm());
+        $algorithm = $this->algorithmManager->get($token->getAlgorithm());
+        if (is_a($algorithm, $type, false)) {
+            return $algorithm;
+        }
+
+        $message = sprintf(
+            'Algorithm must implement %1$s, given %2$s.',
+            $algorithm::class,
+            $type
+        );
+        throw new InvalidArgumentException($message);
     }
 }

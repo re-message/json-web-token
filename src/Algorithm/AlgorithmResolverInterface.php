@@ -25,7 +25,12 @@ use RM\Standard\Jwt\Token\TokenInterface;
 interface AlgorithmResolverInterface
 {
     /**
+     * @template T of AlgorithmInterface
+     * @param class-string<T> $type
+     *
+     * @return T
+     *
      * @throws AlgorithmNotFoundException
      */
-    public function resolve(TokenInterface $token): AlgorithmInterface;
+    public function resolve(TokenInterface $token, string $type): AlgorithmInterface;
 }
