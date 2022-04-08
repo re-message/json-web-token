@@ -16,137 +16,18 @@
 
 namespace RM\Standard\Jwt\Token;
 
-use InvalidArgumentException;
-use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
-use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
-use RM\Standard\Jwt\Property\Header\Algorithm;
-use RM\Standard\Jwt\Serializer\SerializerInterface;
-use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
-use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
-use RM\Standard\Jwt\Signature\SignerInterface;
+use RM\Standard\Jwt\Signature\SignatureToken as NewSignatureToken;
 
 /**
  * Class SignatureToken implements JSON Web Signature standard (RFC 7515)
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  * @see    https://tools.ietf.org/pdf/rfc7515
+ *
+ * @deprecated This class will be removed in 0.2.0. Use {@see NewSignatureToken} instead.
+ *
+ * @final
  */
-final class SignatureToken implements TokenInterface
+class SignatureToken extends NewSignatureToken
 {
-    private Header $header;
-    private Payload $payload;
-
-    /**
-     * Token signature.
-     * Empty signature is a valid signature with {@see None}.
-     *
-     * @see SignerInterface::sign()
-     */
-    private ?string $signature;
-
-    public function __construct(array $header, array $payload = [], string $signature = null)
-    {
-        $this->header = new Header($header);
-        $this->payload = new Payload($payload);
-        $this->signature = $signature;
-    }
-
-    public function getHeader(): Header
-    {
-        return $this->header;
-    }
-
-    public function getAlgorithm(): string
-    {
-        return $this->header->get(Algorithm::NAME)->getValue();
-    }
-
-    /**
-     * Returns new instance of the token with updated algorithm.
-     */
-    public function setAlgorithm(SignatureAlgorithmInterface $algorithm): TokenInterface
-    {
-        $token = clone $this;
-
-        $property = Algorithm::fromAlgorithm($algorithm);
-        $token->header->set($property);
-
-        return $token;
-    }
-
-    public function getPayload(): Payload
-    {
-        return $this->payload;
-    }
-
-    /**
-     * Returns current token signature.
-     */
-    public function getSignature(): ?string
-    {
-        return $this->signature;
-    }
-
-    /**
-     * Returns new instance of the token with signature.
-     */
-    public function setSignature(?string $signature): SignatureToken
-    {
-        $token = clone $this;
-        $token->signature = $signature;
-
-        return $token;
-    }
-
-    /**
-     * Defines that signature successful signed or not.
-     */
-    public function isSigned(): bool
-    {
-        return $this->signature !== null;
-    }
-
-    public function toString(SerializerInterface $serializer, bool $withoutSignature = false): string
-    {
-        if (!$serializer instanceof SignatureSerializerInterface) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '%s can be serialized only with %s.',
-                    self::class,
-                    SignatureSerializerInterface::class
-                )
-            );
-        }
-
-        return $serializer->serialize($this, $withoutSignature);
-    }
-
-    /**
-     * On cloning the signature should be removed.
-     */
-    public function __clone()
-    {
-        $this->header = clone $this->header;
-        $this->payload = clone $this->payload;
-        $this->signature = null;
-    }
-
-    /**
-     * Returns compact serialized token.
-     *
-     * @see SignatureCompactSerializer::serialize()
-     */
-    public function __toString()
-    {
-        $serializer = new SignatureCompactSerializer();
-
-        return $this->toString($serializer);
-    }
-
-    public static function createWithAlgorithm(AlgorithmInterface $algorithm): static
-    {
-        $algorithmClaim = Algorithm::fromAlgorithm($algorithm);
-
-        return new self([$algorithmClaim]);
-    }
 }
