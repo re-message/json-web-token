@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Validator;
 
 use RM\Standard\Jwt\Service\SignatureService;
+use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -30,6 +31,10 @@ class SignatureValidator implements ValidatorInterface
 
     public function validate(TokenInterface $token): bool
     {
+        if (!$token instanceof SignatureToken) {
+            return true;
+        }
+
         if (!$token->isSigned()) {
             return false;
         }
