@@ -38,6 +38,10 @@ class Signer implements SignerInterface
             throw new InvalidTokenException('This token already signed');
         }
 
+        if ($algorithm->name() !== $token->getAlgorithm()) {
+            throw new InvalidTokenException('Mismatch between the algorithm in the token and the algorithm for signing.');
+        }
+
         $body = $this->serializer->serialize($token, true);
         $signature = $algorithm->hash($key, $body);
 
