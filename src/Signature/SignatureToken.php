@@ -32,10 +32,8 @@ use RM\Standard\Jwt\Token\TokenInterface;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  * @see    https://tools.ietf.org/pdf/rfc7515
- *
- * @final  since 0.2.0
  */
-class SignatureToken implements TokenInterface
+final class SignatureToken implements TokenInterface
 {
     private Header $header;
     private Payload $payload;
