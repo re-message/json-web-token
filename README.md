@@ -99,30 +99,25 @@ Example:
 
 use Laminas\Math\Rand;
 use ParagonIE\ConstantTime\Base64UrlSafe;
-use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Key\OctetKey;
-use RM\Standard\Jwt\Property\Header\Algorithm;
-use RM\Standard\Jwt\Service\SignatureService;
 use RM\Standard\Jwt\Signature\SignatureToken;
+use RM\Standard\Jwt\Signature\Signer;
 
 // some algorithm
 $algorithm = new HS3256();
-$token = new SignatureToken([Algorithm::fromAlgorithm($algorithm)]);
+$token = SignatureToken::createWithAlgorithm($algorithm);
 
 // generate random key for example
 $value = Base64UrlSafe::encode(Rand::getBytes(64));
 $key = new OctetKey($value);
 
-// create algorithm manager and put token algorithm
-$manager = new AlgorithmManager();
-$manager->put($algorithm);
-
-$service = new SignatureService($manager);
+$signer = new Signer();
 // method returns new token object with signature
-$signedToken = $service->sign($token, $key);
+$signedToken = $signer->sign($token, $algorithm, $key);
 
-// will return something like eyJhbGciOiJLZWNjYWs1MTIiLCJ0eXAiOiJKV1QifQ.W10.eVGwIbbqljuVK5jm4vuTQ00mq80s2JGmjhnir1dTtLYHDlWERPmpDGJoFi_sETgG7mNl3ThwV1ssC_6QPGe3qQ
+// will return something like this:
+// eyJhbGciOiJIUzMyNTYiLCJ0eXAiOiJKV1QifQ.W10.KDa2nZVCuX1LldcMJZz2wp_QifjN7sNHCFLtGDAWF9s
 echo $signedToken;
 ```
 
