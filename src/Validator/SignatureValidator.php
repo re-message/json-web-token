@@ -16,8 +16,12 @@
 
 namespace RM\Standard\Jwt\Validator;
 
-use RM\Standard\Jwt\Service\SignatureService;
+use RM\Standard\Jwt\Algorithm\AlgorithmResolverInterface;
+use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
+use RM\Standard\Jwt\Key\Resolver\KeyResolverInterface;
 use RM\Standard\Jwt\Signature\SignatureToken;
+use RM\Standard\Jwt\Signature\Signer;
+use RM\Standard\Jwt\Signature\SignerInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -26,7 +30,9 @@ use RM\Standard\Jwt\Token\TokenInterface;
 class SignatureValidator implements ValidatorInterface
 {
     public function __construct(
-        private readonly SignatureService $service
+        private readonly AlgorithmResolverInterface $algorithmResolver,
+        private readonly KeyResolverInterface $keyResolver,
+        private readonly SignerInterface $signer = new Signer(),
     ) {}
 
     public function validate(TokenInterface $token): bool
@@ -39,6 +45,9 @@ class SignatureValidator implements ValidatorInterface
             return false;
         }
 
-        return $this->service->verify($token);
+        $algorithm = $this->algorithmResolver->resolve($token, SignatureAlgorithmInterface::class);
+        $key = $this->keyResolver->resolve($token);
+
+        return $this->signer->verify($token, $algorithm, $key);
     }
 }
