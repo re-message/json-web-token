@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Serializer\SerializerInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
-use RM\Standard\Jwt\Service\SignatureServiceInterface;
+use RM\Standard\Jwt\Signer\SignerInterface;
 
 /**
  * Class SignatureToken implements JSON Web Signature standard (RFC 7515)
@@ -40,7 +40,7 @@ final class SignatureToken implements TokenInterface
      * Token signature.
      * Empty signature is a valid signature with {@see None}.
      *
-     * @see SignatureServiceInterface::sign()
+     * @see SignerInterface::sign()
      */
     private ?string $signature;
 
