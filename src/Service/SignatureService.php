@@ -19,8 +19,8 @@ namespace RM\Standard\Jwt\Service;
 use RM\Standard\Jwt\Algorithm\AlgorithmResolverInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\Resolver\KeyResolverInterface;
-use RM\Standard\Jwt\Signer\Signer;
-use RM\Standard\Jwt\Signer\SignerInterface;
+use RM\Standard\Jwt\Signature\Signer;
+use RM\Standard\Jwt\Signature\SignerInterface;
 use RM\Standard\Jwt\Token\SignatureToken;
 
 /**

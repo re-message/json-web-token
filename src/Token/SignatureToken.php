@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Serializer\SerializerInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
-use RM\Standard\Jwt\Signer\SignerInterface;
+use RM\Standard\Jwt\Signature\SignerInterface;
 
 /**
  * Class SignatureToken implements JSON Web Signature standard (RFC 7515)

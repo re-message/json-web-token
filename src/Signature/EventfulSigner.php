@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Signer;
+namespace RM\Standard\Jwt\Signature;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;

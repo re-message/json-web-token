@@ -14,40 +14,31 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Signer;
+namespace RM\Standard\Jwt\Signature;
 
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
-use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
-use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
 use RM\Standard\Jwt\Token\SignatureToken as Token;
 
-class Signer implements SignerInterface
+/**
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
+ */
+abstract class DecoratedSigner implements SignerInterface
 {
-    private SignatureSerializerInterface $serializer;
+    private SignerInterface $signer;
 
-    public function __construct(SignatureSerializerInterface $serializer = null)
+    public function __construct(SignerInterface $signer)
     {
-        $this->serializer = $serializer ?? new SignatureCompactSerializer();
+        $this->signer = $signer;
     }
 
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
-        if ($token->isSigned()) {
-            throw new InvalidTokenException('This token already signed');
-        }
-
-        $body = $this->serializer->serialize($token, true);
-        $signature = $algorithm->hash($key, $body);
-
-        return $token->setSignature($signature);
+        return $this->signer->sign($token, $algorithm, $key);
     }
 
     public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool
     {
-        $body = $this->serializer->serialize($token, true);
-
-        return $algorithm->verify($key, $body, $token->getSignature());
+        return $this->signer->verify($token, $algorithm, $key);
     }
 }

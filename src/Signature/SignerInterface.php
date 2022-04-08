@@ -14,37 +14,24 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Signer;
+namespace RM\Standard\Jwt\Signature;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
+use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Token\SignatureToken as Token;
 
 /**
+ * Signs the token by algorithm and key.
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class LoggableSigner extends DecoratedSigner
+interface SignerInterface
 {
-    private LoggerInterface $logger;
+    /**
+     * @throws InvalidTokenException
+     */
+    public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token;
 
-    public function __construct(SignerInterface $signer, LoggerInterface $logger = null)
-    {
-        parent::__construct($signer);
-
-        $this->logger = $logger ?? new NullLogger();
-    }
-
-    public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
-    {
-        $signedToken = parent::sign($token, $algorithm, $key);
-
-        $this->logger->debug(
-            'Token signed by hash algorithm signature',
-            ['algorithm' => $algorithm->name()]
-        );
-
-        return $signedToken;
-    }
+    public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool;
 }
