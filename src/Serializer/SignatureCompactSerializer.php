@@ -22,7 +22,7 @@ use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Factory\ClaimFactory;
 use RM\Standard\Jwt\Factory\FactoryInterface;
 use RM\Standard\Jwt\Factory\HeaderParameterFactory;
-use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;

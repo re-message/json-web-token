@@ -21,7 +21,7 @@ use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as Algorithm
 use RM\Standard\Jwt\Event\TokenPreSignEvent;
 use RM\Standard\Jwt\Event\TokenSignEvent;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Token\SignatureToken as Token;
+use RM\Standard\Jwt\Signature\SignatureToken as Token;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**

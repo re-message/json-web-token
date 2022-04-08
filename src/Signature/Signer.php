@@ -21,7 +21,7 @@ use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
-use RM\Standard\Jwt\Token\SignatureToken as Token;
+use RM\Standard\Jwt\Signature\SignatureToken as Token;
 
 class Signer implements SignerInterface
 {

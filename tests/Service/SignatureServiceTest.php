@@ -43,8 +43,8 @@ use RM\Standard\Jwt\Property\Payload\IssuedAt;
 use RM\Standard\Jwt\Property\Payload\Issuer;
 use RM\Standard\Jwt\Property\Payload\NotBefore;
 use RM\Standard\Jwt\Service\SignatureService;
+use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Storage\RedisTokenStorage;
-use RM\Standard\Jwt\Token\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 class SignatureServiceTest extends TestCase
@@ -87,8 +87,11 @@ class SignatureServiceTest extends TestCase
      * @depends      testCreation
      * @dataProvider provideKeyAndAlgorithm
      */
-    public function testSign(AlgorithmInterface $algorithm, KeyInterface $key, SignatureService $service): TokenInterface
-    {
+    public function testSign(
+        AlgorithmInterface $algorithm,
+        KeyInterface $key,
+        SignatureService $service
+    ): TokenInterface {
         $token = SignatureToken::createWithAlgorithm($algorithm);
 
         $signedToken = $service->sign($token, $key);
@@ -127,7 +130,9 @@ class SignatureServiceTest extends TestCase
 
     public function provideKeyAndAlgorithm(): Generator
     {
-        $cartesian = new CartesianProduct([$this->getAlgorithms(), iterator_to_array($this->getKey())]);
+        $cartesian = new CartesianProduct(
+            [$this->getAlgorithms(), iterator_to_array($this->getKey())]
+        );
         foreach ($cartesian->getIterator() as $arguments) {
             yield $arguments;
         }

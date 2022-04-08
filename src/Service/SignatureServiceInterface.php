@@ -20,7 +20,7 @@ use RM\Standard\Jwt\Event\TokenPreSignEvent;
 use RM\Standard\Jwt\Event\TokenSignEvent;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Exception\PropertyViolationException;
-use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Signature\SignatureToken;
 
 /**
  * Interface SignatureServiceInterface

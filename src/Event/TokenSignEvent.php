@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Event;
 
-use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Signature\SignatureToken;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>

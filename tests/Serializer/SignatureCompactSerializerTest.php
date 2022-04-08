@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
-use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 use stdClass;
 
@@ -42,11 +42,12 @@ class SignatureCompactSerializerTest extends TestCase
     }
 
     /**
-     * @depends      testSupports
      * @dataProvider getTokens
      */
-    public function testSerialize(bool $isValid, string $rawToken, SignatureCompactSerializer $serializer): TokenInterface
+    public function testSerialize(bool $isValid, string $rawToken): TokenInterface
     {
+        $serializer = new SignatureCompactSerializer();
+
         if (!$isValid) {
             $this->expectException(InvalidTokenException::class);
         }
@@ -67,7 +68,13 @@ class SignatureCompactSerializerTest extends TestCase
             true,
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
         ];
-        yield [false, 'eyJhbGciOiJIUzI1NiJ9.SGVsbG8sIHdvcmxkIQ.onO9Ihudz3WkiauDO2Uhyuz0Y18UASXlSc1eS0NkWyA'];
-        yield [false, 'this.is.invalid.token'];
+        yield [
+            false,
+            'eyJhbGciOiJIUzI1NiJ9.SGVsbG8sIHdvcmxkIQ.onO9Ihudz3WkiauDO2Uhyuz0Y18UASXlSc1eS0NkWyA'
+        ];
+        yield [
+            false,
+            'this.is.invalid.token'
+        ];
     }
 }

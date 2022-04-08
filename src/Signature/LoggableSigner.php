@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Token\SignatureToken as Token;
+use RM\Standard\Jwt\Signature\SignatureToken as Token;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
