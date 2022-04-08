@@ -26,7 +26,7 @@ use RM\Standard\Jwt\Exception\PropertyNotFoundException;
  *
  * @method PropertyInterface get(string $name)
  * @method void set(PropertyInterface $property)
- * @method bool has(PropertyInterface $property)
+ * @method bool has(string $name)
  */
 abstract class PropertyBag
 {
