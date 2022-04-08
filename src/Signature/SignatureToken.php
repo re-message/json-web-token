@@ -22,7 +22,6 @@ use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Serializer\SerializerInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
-use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
 use RM\Standard\Jwt\Token\Header;
 use RM\Standard\Jwt\Token\Payload;
 use RM\Standard\Jwt\Token\TokenInterface;
@@ -110,14 +109,9 @@ final class SignatureToken implements TokenInterface
 
     public function toString(SerializerInterface $serializer, bool $withoutSignature = false): string
     {
-        if (!$serializer instanceof SignatureSerializerInterface) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '%s can be serialized only with %s.',
-                    self::class,
-                    SignatureSerializerInterface::class
-                )
-            );
+        if (!$serializer->supports($this)) {
+            $message = sprintf('%s can not be serialized with %s.', self::class, $serializer::class);
+            throw new InvalidArgumentException($message);
         }
 
         return $serializer->serialize($this, $withoutSignature);
