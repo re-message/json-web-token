@@ -18,6 +18,8 @@ namespace RM\Standard\Jwt\Tests\Storage;
 
 use Laminas\Math\Rand;
 use PHPUnit\Framework\TestCase;
+use Predis\Client;
+use Predis\Connection\ConnectionException;
 use RM\Standard\Jwt\Storage\RedisTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
@@ -30,6 +32,10 @@ class RedisTokenStorageTest extends TestCase
     {
         $host = $_ENV['REDIS_HOST'];
         $port = $_ENV['REDIS_PORT'];
+
+        if (!self::isRedisAvailable($host, $port)) {
+            self::markTestIncomplete('Redis server is not available');
+        }
 
         self::$storage = RedisTokenStorage::createFromParameters($host, $port);
         self::$someTokenId = Rand::getString(256);
@@ -50,5 +56,21 @@ class RedisTokenStorageTest extends TestCase
         self::assertTrue(self::$storage->has(self::$someTokenId));
         self::$storage->revoke(self::$someTokenId);
         self::assertFalse(self::$storage->has(self::$someTokenId));
+    }
+
+    /**
+     * @noinspection PhpRedundantCatchClauseInspection
+     */
+    private static function isRedisAvailable(string $host, string $port): bool
+    {
+        try {
+            $dsn = sprintf('redis://%s:%d', $host, $port);
+            $client = new Client($dsn);
+            $client->connect();
+
+            return true;
+        } catch (ConnectionException) {
+            return false;
+        }
     }
 }

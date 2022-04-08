@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Tests\Storage;
 
 use Laminas\Math\Rand;
+use Memcache;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Storage\MemcacheTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
@@ -30,6 +31,10 @@ class MemcacheTokenStorageTest extends TestCase
     {
         $host = $_ENV['MEMCACHED_HOST'];
         $port = $_ENV['MEMCACHED_PORT'];
+
+        if (!self::isMemcacheAvailable($host, $port)) {
+            self::markTestIncomplete('Memcached server is not available');
+        }
 
         self::$storage = new MemcacheTokenStorage($host, $port);
         self::$someTokenId = Rand::getString(256);
@@ -50,5 +55,15 @@ class MemcacheTokenStorageTest extends TestCase
         self::assertTrue(self::$storage->has(self::$someTokenId));
         self::$storage->revoke(self::$someTokenId);
         self::assertFalse(self::$storage->has(self::$someTokenId));
+    }
+
+    private static function isMemcacheAvailable(string $host, string $port): bool
+    {
+        $memcache = new Memcache();
+        $isConnected = @$memcache->connect($host, $port);
+
+        $memcache->close();
+
+        return $isConnected;
     }
 }
