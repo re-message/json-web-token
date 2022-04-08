@@ -21,11 +21,15 @@ use RM\Standard\Jwt\Event\TokenSignEvent;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Exception\PropertyViolationException;
 use RM\Standard\Jwt\Signature\SignatureToken;
+use RM\Standard\Jwt\Signature\SignerInterface;
+use RM\Standard\Jwt\Validator\ValidatorInterface;
 
 /**
  * Interface SignatureServiceInterface
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @deprecated This interface will be removed in 0.2.0. Use {@see SignerInterface} and {@see ValidatorInterface} instead.
  */
 interface SignatureServiceInterface
 {

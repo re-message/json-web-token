@@ -22,9 +22,12 @@ use RM\Standard\Jwt\Key\Resolver\KeyResolverInterface;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\Signer;
 use RM\Standard\Jwt\Signature\SignerInterface;
+use RM\Standard\Jwt\Validator\ValidatorInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @deprecated This class will be removed in 0.2.0. Use {@see SignerInterface} and {@see ValidatorInterface} instead.
  */
 class SignatureService implements SignatureServiceInterface
 {
