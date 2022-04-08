@@ -22,7 +22,7 @@ At the moment, we provide only octet support. This is a just string which used a
 
 ### Tokens
 
-To create new token you can use class `RM\Standard\Jwt\Token\SignatureToken` class. Class constructor have 3 arguments: header claims, payload claims and signature. You should pass algorithm name with header claims. Other arguments and claims is optional.
+To create new token you can use class `RM\Standard\Jwt\Signature\SignatureToken` class. Class constructor have 3 arguments: header claims, payload claims and signature. You should pass algorithm name with header claims. Other arguments and claims is optional.
 
 Example:
 
@@ -30,7 +30,7 @@ Example:
 <?php
 
 use RM\Standard\Jwt\Property\Header\Algorithm;
-use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Signature\SignatureToken;
 
 $algorithm = new HS3256();
 $token = new SignatureToken([Algorithm::fromAlgorithm($algorithm)]);
@@ -40,8 +40,8 @@ Inlined way:
 ```php
 <?php
 
-use RM\Standard\Jwt\Token\SignatureToken;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
+use RM\Standard\Jwt\Signature\SignatureToken;
 
 $token = SignatureToken::createWithAlgorithm(new HS3256());
 ```
@@ -65,7 +65,7 @@ Example:
 <?php
 
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
-use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Signature\SignatureToken;
 
 // serialized token
 // {"alg": "HS256","typ": "JWT"} . {"sub": "1234567890","name": "John Doe","iat": 1516239022} . signature
@@ -83,13 +83,14 @@ var_dump($rawToken === $token->toString($serializer));
 
 ### Signing
 
-To sign the token you should use SignatureService. SignatureService depends on algorithm manager, token handlers, serializer, event dispatcher and logger.
-
-Algorithm manager are a map of supported by service algorithms. If service cannot find the algorithm which used in the token, he will throw an exception.
-
-Token handlers are a list of handlers that can generate new claims and validate existing ones.
+To sign the token you should use the Signer. Signer only depends on the serializer, but the default is SignatureCompactSerializer.
 
 Serializer is necessary for the service to sign the token, since the signature is the header, and the payload signed by the key.
+
+Also, you can use decorators for Signer to provide some token handling:
+- GeneratedSigner provides ability to generate token property before signing
+- EventfulSigner creates events
+- LoggableSigner allows collecting logs about the signing process
 
 Example:
 
@@ -103,7 +104,7 @@ use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Service\SignatureService;
-use RM\Standard\Jwt\Token\SignatureToken;
+use RM\Standard\Jwt\Signature\SignatureToken;
 
 // some algorithm
 $algorithm = new HS3256();
