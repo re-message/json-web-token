@@ -42,8 +42,12 @@ class MemcacheTokenStorageTest extends TestCase
         self::assertFalse(self::$storage->has(Rand::getString(256)));
     }
 
+    /**
+     * @depends testPut
+     */
     public function testRevoke(): void
     {
+        self::assertTrue(self::$storage->has(self::$someTokenId));
         self::$storage->revoke(self::$someTokenId);
         self::assertFalse(self::$storage->has(self::$someTokenId));
     }
