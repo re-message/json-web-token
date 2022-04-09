@@ -14,8 +14,6 @@ You will need Composer to install. Run this command:
 
 All tokens and services uses algorithms to sign, verify, encrypt and decrypt the token data. Each algorithm MUST implement `RM\Standard\Jwt\Algorithm\AlgorithmInterface`.
 
-To install these packages, you will need Composer.
-
 ### Keys
 
 At the moment, we provide only octet support. This is a just string which used as key in HMAC algorithms.
@@ -83,14 +81,14 @@ var_dump($rawToken === $token->toString($serializer));
 
 ### Signing
 
-To sign the token you should use the Signer. Signer only depends on the serializer, but the default is SignatureCompactSerializer.
+To sign the token you should use the `RM\Standard\Jwt\Signature\Signer`. Signer only depends on the serializer, but the default is `RM\Standard\Jwt\Serializer\SignatureCompactSerializer`.
 
 Serializer is necessary for the service to sign the token, since the signature is the header, and the payload signed by the key.
 
 Also, you can use decorators for Signer to provide some token handling:
-- GeneratedSigner provides ability to generate token property before signing
-- EventfulSigner creates events
-- LoggableSigner allows collecting logs about the signing process
+- `RM\Standard\Jwt\Signature\GeneratedSigner` provides ability to generate token property before signing
+- `RM\Standard\Jwt\Signature\EventfulSigner` creates events
+- `RM\Standard\Jwt\Signature\LoggableSigner` allows collecting logs about the signing process
 
 Example:
 
