@@ -27,6 +27,7 @@ Example:
 ```php
 <?php
 
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Signature\SignatureToken;
 
@@ -34,7 +35,7 @@ $algorithm = new HS3256();
 $token = new SignatureToken([Algorithm::fromAlgorithm($algorithm)]);
 ```
 
-Inlined way:
+Via secondary constructor:
 ```php
 <?php
 
