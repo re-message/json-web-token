@@ -32,6 +32,9 @@ use RM\Standard\Jwt\Token\PropertyBag;
 use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
 
+/**
+ * @internal
+ */
 class GeneratedSignerTest extends TestCase
 {
     public function testTokenCloningOnSign(): GeneratedSigner

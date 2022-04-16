@@ -24,6 +24,9 @@ use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\OctetKey;
 
+/**
+ * @internal
+ */
 class HMACTest extends TestCase
 {
     private OctetKey $key;

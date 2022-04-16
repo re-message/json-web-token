@@ -31,6 +31,9 @@ use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\Signer;
 
+/**
+ * @internal
+ */
 class SignerTest extends TestCase
 {
     /**

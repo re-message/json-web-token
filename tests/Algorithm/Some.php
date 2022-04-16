@@ -21,6 +21,8 @@ use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 /**
  * Class Some represents just stub for {@see AlgorithmManagerTest}.
  *
+ * @internal
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Some implements AlgorithmInterface

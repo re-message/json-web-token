@@ -25,6 +25,9 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 use stdClass;
 
+/**
+ * @internal
+ */
 class SignatureCompactSerializerTest extends TestCase
 {
     public function testSupports(): SignatureCompactSerializer

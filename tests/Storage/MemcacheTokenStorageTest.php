@@ -22,6 +22,9 @@ use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Storage\MemcacheTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
+/**
+ * @internal
+ */
 class MemcacheTokenStorageTest extends TestCase
 {
     private static TokenStorageInterface $storage;

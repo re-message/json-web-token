@@ -23,6 +23,9 @@ use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 use stdClass;
 use TypeError;
 
+/**
+ * @internal
+ */
 class AlgorithmManagerTest extends TestCase
 {
     private AlgorithmManager $manager;

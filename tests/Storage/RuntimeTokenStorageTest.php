@@ -21,6 +21,9 @@ use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
+/**
+ * @internal
+ */
 class RuntimeTokenStorageTest extends TestCase
 {
     private static TokenStorageInterface $storage;

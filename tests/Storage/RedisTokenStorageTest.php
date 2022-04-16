@@ -23,6 +23,9 @@ use Predis\Connection\ConnectionException;
 use RM\Standard\Jwt\Storage\RedisTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
+/**
+ * @internal
+ */
 class RedisTokenStorageTest extends TestCase
 {
     private static TokenStorageInterface $storage;
