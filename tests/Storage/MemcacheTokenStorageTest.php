@@ -23,6 +23,8 @@ use RM\Standard\Jwt\Storage\MemcacheTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
 /**
+ * @coversDefaultClass \RM\Standard\Jwt\Storage\MemcacheTokenStorage
+ *
  * @internal
  */
 class MemcacheTokenStorageTest extends TestCase
@@ -43,6 +45,9 @@ class MemcacheTokenStorageTest extends TestCase
         self::$someTokenId = Rand::getString(256);
     }
 
+    /**
+     * @covers ::put
+     */
     public function testPut(): void
     {
         self::$storage->put(self::$someTokenId, 60);
@@ -51,6 +56,7 @@ class MemcacheTokenStorageTest extends TestCase
     }
 
     /**
+     * @covers ::revoke
      * @depends testPut
      */
     public function testRevoke(): void

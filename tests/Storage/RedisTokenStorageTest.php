@@ -24,6 +24,8 @@ use RM\Standard\Jwt\Storage\RedisTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
 /**
+ * @coversDefaultClass \RM\Standard\Jwt\Storage\RedisTokenStorage
+ *
  * @internal
  */
 class RedisTokenStorageTest extends TestCase
@@ -44,6 +46,9 @@ class RedisTokenStorageTest extends TestCase
         self::$someTokenId = Rand::getString(256);
     }
 
+    /**
+     * @covers ::put
+     */
     public function testPut(): void
     {
         self::$storage->put(self::$someTokenId, 60);
@@ -52,6 +57,7 @@ class RedisTokenStorageTest extends TestCase
     }
 
     /**
+     * @covers ::revoke
      * @depends testPut
      */
     public function testRevoke(): void

@@ -24,6 +24,8 @@ use stdClass;
 use TypeError;
 
 /**
+ * @coversDefaultClass \RM\Standard\Jwt\Algorithm\AlgorithmManager
+ *
  * @internal
  */
 class AlgorithmManagerTest extends TestCase
@@ -38,12 +40,18 @@ class AlgorithmManagerTest extends TestCase
         $this->manager->put($none);
     }
 
+    /**
+     * @covers ::__constructor
+     */
     public function testValidConstructor(): void
     {
         $manager = new AlgorithmManager([new None()]);
         self::assertInstanceOf(AlgorithmManager::class, $manager);
     }
 
+    /**
+     * @covers ::__constructor
+     */
     public function testInvalidConstructor(): void
     {
         $this->expectException(TypeError::class);
@@ -52,25 +60,34 @@ class AlgorithmManagerTest extends TestCase
     }
 
     /**
-     * @throws AlgorithmNotFoundException
+     * @covers ::get
      */
     public function testValidGet(): void
     {
         self::assertInstanceOf(None::class, $this->manager->get('none'));
     }
 
+    /**
+     * @covers ::get
+     */
     public function testInvalidGet(): void
     {
         $this->expectException(AlgorithmNotFoundException::class);
         $this->manager->get('HS256');
     }
 
+    /**
+     * @covers ::has
+     */
     public function testHas(): void
     {
         self::assertTrue($this->manager->has('none'));
         self::assertFalse($this->manager->has('HS256'));
     }
 
+    /**
+     * @covers ::remove
+     */
     public function testRemove(): void
     {
         self::assertTrue($this->manager->has('none'));
@@ -78,6 +95,9 @@ class AlgorithmManagerTest extends TestCase
         self::assertFalse($this->manager->has('none'));
     }
 
+    /**
+     * @covers ::put
+     */
     public function testPut(): void
     {
         $some = new Some();

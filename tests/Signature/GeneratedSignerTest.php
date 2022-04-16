@@ -33,10 +33,15 @@ use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
+ * @coversDefaultClass \RM\Standard\Jwt\Signature\GeneratedSigner
+ *
  * @internal
  */
 class GeneratedSignerTest extends TestCase
 {
+    /**
+     * @covers ::sign
+     */
     public function testTokenCloningOnSign(): GeneratedSigner
     {
         $algorithm = $this->createMock(SignatureAlgorithmInterface::class);
@@ -56,6 +61,8 @@ class GeneratedSignerTest extends TestCase
     }
 
     /**
+     * @covers       ::pushGenerator
+     * @covers       ::sign
      * @depends      testTokenCloningOnSign
      * @dataProvider providePropertyGenerators
      *
