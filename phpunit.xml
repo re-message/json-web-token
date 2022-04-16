@@ -6,6 +6,7 @@
          testdox="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
+         forceCoversAnnotation="true"
          failOnRisky="true"
          failOnWarning="true"
          bootstrap="vendor/autoload.php"
