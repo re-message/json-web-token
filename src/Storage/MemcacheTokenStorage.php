@@ -30,6 +30,7 @@ class MemcacheTokenStorage implements TokenStorageInterface
     {
         if (!class_exists(Memcache::class, false)) {
             $message = 'Memcache class does not exist. Maybe you should install memcache php extension.';
+
             throw new InvalidArgumentException($message);
         }
 

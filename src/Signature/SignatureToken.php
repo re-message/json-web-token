@@ -27,10 +27,11 @@ use RM\Standard\Jwt\Token\Payload;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * Class SignatureToken implements JSON Web Signature standard (RFC 7515)
+ * Class SignatureToken implements JSON Web Signature standard (RFC 7515).
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
- * @see    https://tools.ietf.org/pdf/rfc7515
+ *
+ * @see https://tools.ietf.org/pdf/rfc7515
  */
 final class SignatureToken implements TokenInterface
 {
@@ -104,13 +105,14 @@ final class SignatureToken implements TokenInterface
      */
     public function isSigned(): bool
     {
-        return $this->signature !== null;
+        return null !== $this->signature;
     }
 
     public function toString(SerializerInterface $serializer, bool $withoutSignature = false): string
     {
         if (!$serializer->supports($this)) {
             $message = sprintf('%s can not be serialized with %s.', self::class, $serializer::class);
+
             throw new InvalidArgumentException($message);
         }
 

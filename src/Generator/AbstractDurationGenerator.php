@@ -37,7 +37,7 @@ abstract class AbstractDurationGenerator implements PropertyGeneratorInterface
 
     final protected function getDuration(): int
     {
-        if ($this->duration === INF) {
+        if (INF === $this->duration) {
             return self::DEFAULT_DURATION;
         }
 

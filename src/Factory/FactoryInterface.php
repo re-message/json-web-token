@@ -19,8 +19,6 @@ namespace RM\Standard\Jwt\Factory;
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
- * Interface FactoryInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface FactoryInterface

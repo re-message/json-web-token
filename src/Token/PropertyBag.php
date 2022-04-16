@@ -20,13 +20,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 
 /**
- * Class PropertyBag
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  *
  * @method PropertyInterface get(string $name)
- * @method void set(PropertyInterface $property)
- * @method bool has(string $name)
+ * @method void              set(PropertyInterface $property)
+ * @method bool              has(string $name)
  */
 abstract class PropertyBag
 {
@@ -72,7 +70,7 @@ abstract class PropertyBag
 
     protected function hasProperty(string $name): bool
     {
-        return $this->findProperty($name) !== null;
+        return null !== $this->findProperty($name);
     }
 
     protected function setProperty(PropertyInterface $property): void

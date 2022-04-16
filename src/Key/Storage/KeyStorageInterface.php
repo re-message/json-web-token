@@ -24,17 +24,17 @@ use RM\Standard\Jwt\Key\KeyInterface;
 interface KeyStorageInterface
 {
     /**
-     * Get key from storage by id
+     * Get key from storage by id.
      */
     public function get(string $id): KeyInterface;
 
     /**
-     * Set key in storage
+     * Set key in storage.
      */
     public function set(string $id, KeyInterface $key): void;
 
     /**
-     * Checks if key exists in storage
+     * Checks if key exists in storage.
      */
     public function has(string $id): bool;
 }

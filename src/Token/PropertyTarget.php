@@ -22,5 +22,6 @@ namespace RM\Standard\Jwt\Token;
 enum PropertyTarget
 {
     case HEADER;
+
     case PAYLOAD;
 }

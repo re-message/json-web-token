@@ -44,6 +44,7 @@ class ExpirationValidator extends AbstractLeewayValidator
     {
         if (!$property instanceof Expiration) {
             $message = sprintf('%s can handle only %s.', static::class, Expiration::class);
+
             throw new UnexpectedValueException($message);
         }
 

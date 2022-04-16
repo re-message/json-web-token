@@ -26,7 +26,8 @@ class DirectKeyResolver implements KeyResolverInterface
 {
     public function __construct(
         private readonly KeyInterface $key
-    ) {}
+    ) {
+    }
 
     public function resolve(TokenInterface $token): KeyInterface
     {

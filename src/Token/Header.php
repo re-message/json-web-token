@@ -24,8 +24,6 @@ use RM\Standard\Jwt\Property\Header\Type;
 use UnexpectedValueException;
 
 /**
- * Class Header
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Header extends PropertyBag
@@ -49,6 +47,7 @@ class Header extends PropertyBag
         $algorithm = $this->find(Algorithm::NAME);
         if (null === $algorithm || null === $algorithm->getValue()) {
             $message = sprintf('Any JSON Web Token must have the algorithm parameter (`%s`).', Algorithm::NAME);
+
             throw new InvalidArgumentException($message);
         }
     }
@@ -69,7 +68,7 @@ class Header extends PropertyBag
     public function find(string $name): ?HeaderParameterInterface
     {
         $property = $this->findProperty($name);
-        if ($property !== null && !$property instanceof HeaderParameterInterface) {
+        if (null !== $property && !$property instanceof HeaderParameterInterface) {
             throw new UnexpectedValueException('Expects a header parameter.');
         }
 

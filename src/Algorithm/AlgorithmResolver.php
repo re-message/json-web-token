@@ -26,7 +26,8 @@ class AlgorithmResolver implements AlgorithmResolverInterface
 {
     public function __construct(
         private readonly AlgorithmManager $algorithmManager
-    ) {}
+    ) {
+    }
 
     public function resolve(TokenInterface $token, string $type): AlgorithmInterface
     {
@@ -40,6 +41,7 @@ class AlgorithmResolver implements AlgorithmResolverInterface
             $algorithm::class,
             $type
         );
+
         throw new InvalidArgumentException($message);
     }
 }

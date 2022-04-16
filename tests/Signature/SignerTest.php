@@ -73,10 +73,11 @@ class SignerTest extends TestCase
 
         /**
          * @var AlgorithmInterface $algorithm
-         * @var KeyInterface $key
+         * @var KeyInterface       $key
          */
         foreach ($cartesian->getIterator() as [$algorithm, $key]) {
             $name = sprintf('alg %s and key %s', $algorithm->name(), $key->getType());
+
             yield $name => [$algorithm, $key];
         }
     }
@@ -84,6 +85,7 @@ class SignerTest extends TestCase
     public function getAlgorithms(): Generator
     {
         yield new HS256();
+
         yield new HS3256();
     }
 

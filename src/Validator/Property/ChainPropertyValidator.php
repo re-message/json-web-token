@@ -58,7 +58,7 @@ class ChainPropertyValidator implements ValidatorInterface
 
         foreach ($properties as $property) {
             $validator = $this->findValidator($property);
-            if ($validator === null) {
+            if (null === $validator) {
                 continue;
             }
 

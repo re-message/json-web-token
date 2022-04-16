@@ -44,6 +44,7 @@ class IssuedAtValidator extends AbstractLeewayValidator
     {
         if (!$property instanceof IssuedAt) {
             $message = sprintf('%s can handle only %s.', static::class, IssuedAt::class);
+
             throw new UnexpectedValueException($message);
         }
 
@@ -51,6 +52,7 @@ class IssuedAtValidator extends AbstractLeewayValidator
         if (!is_int($value)) {
             $name = $this->getPropertyName();
             $valueType = gettype($value);
+
             throw new IncorrectPropertyTypeException('integer', $valueType, $name);
         }
 

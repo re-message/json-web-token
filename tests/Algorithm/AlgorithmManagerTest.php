@@ -45,7 +45,6 @@ class AlgorithmManagerTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        /** @noinspection PhpParamsInspection */
         new AlgorithmManager([new stdClass()]);
     }
 

@@ -82,7 +82,7 @@ class GeneratedSignerTest extends TestCase
 
     private function getPropertyBag(TokenInterface $token, PropertyTarget $target): PropertyBag
     {
-        return match($target) {
+        return match ($target) {
             PropertyTarget::HEADER => $token->getHeader(),
             PropertyTarget::PAYLOAD => $token->getPayload(),
         };
@@ -91,8 +91,11 @@ class GeneratedSignerTest extends TestCase
     public function providePropertyGenerators(): Generator
     {
         yield 'issuer only' => [[new IssuerGenerator('issuer')]];
+
         yield 'expiration only' => [[new ExpirationGenerator()]];
+
         yield 'issued at only' => [[new IssuedAtGenerator()]];
+
         yield 'not before only' => [[new NotBeforeGenerator()]];
 
         yield 'all generators' => [
@@ -101,7 +104,7 @@ class GeneratedSignerTest extends TestCase
                 new ExpirationGenerator(),
                 new IssuedAtGenerator(),
                 new NotBeforeGenerator(),
-            ]
+            ],
         ];
     }
 }

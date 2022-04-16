@@ -35,7 +35,7 @@ interface PropertyGeneratorInterface
     public function getPropertyTarget(): PropertyTarget;
 
     /**
-     * Generate new value for current property
+     * Generate new value for current property.
      */
     public function generate(): PropertyInterface;
 }

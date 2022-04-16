@@ -20,20 +20,21 @@ use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
- * Interface SignatureAlgorithmInterface implements Json Web Token standard for signatures (RFC 7618, section 3)
+ * Interface SignatureAlgorithmInterface implements Json Web Token standard for signatures (RFC 7618, section 3).
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
- * @see    https://tools.ietf.org/html/rfc7518
+ *
+ * @see https://tools.ietf.org/html/rfc7518
  */
 interface SignatureAlgorithmInterface extends AlgorithmInterface
 {
     /**
-     * Sign input with key
+     * Sign input with key.
      */
     public function hash(KeyInterface $key, string $input): string;
 
     /**
-     * Verify signature for this input and key pair
+     * Verify signature for this input and key pair.
      */
     public function verify(KeyInterface $key, string $input, string $hash): bool;
 }

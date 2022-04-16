@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Storage;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class RuntimeTokenStorage implement runtime (in-memory) storage
+ * Class RuntimeTokenStorage implement runtime (in-memory) storage.
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

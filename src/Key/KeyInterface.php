@@ -19,20 +19,21 @@ namespace RM\Standard\Jwt\Key;
 use JsonSerializable;
 
 /**
- * Interface KeyInterface implements JSON Web Key standard (RFC 7517)
+ * Interface KeyInterface implements JSON Web Key standard (RFC 7517).
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
- * @see    https://tools.ietf.org/pdf/rfc7517
+ *
+ * @see https://tools.ietf.org/pdf/rfc7517
  */
 interface KeyInterface extends JsonSerializable
 {
-    public const PARAM_KEY_TYPE  = 'kty';
+    public const PARAM_KEY_TYPE = 'kty';
     public const PARAM_KEY_IDENTIFIER = 'kid';
     public const PARAM_USE = 'use';
     public const PARAM_KEY_VALUE = 'k';
 
     public const KEY_TYPE_OCTET = 'oct';
-    public const KEY_TYPE_RSA   = 'RSA';
+    public const KEY_TYPE_RSA = 'RSA';
 
     /**
      * Returns value of parameter if he exists.
@@ -50,7 +51,7 @@ interface KeyInterface extends JsonSerializable
     public function getType(): string;
 
     /**
-     * Returns all parameters for this key or array key format
+     * Returns all parameters for this key or array key format.
      */
     public function all(): array;
 }

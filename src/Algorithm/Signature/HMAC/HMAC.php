@@ -33,6 +33,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
     final public function hash(KeyInterface $key, string $input): string
     {
         $k = $this->getKey($key);
+
         return hash_hmac($this->getHashAlgorithm(), $input, $k, true);
     }
 
@@ -61,7 +62,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
     }
 
     /**
-     * Returns name of HMAC hash algorithm, like "sha256"
+     * Returns name of HMAC hash algorithm, like "sha256".
      */
     abstract protected function getHashAlgorithm(): string;
 }

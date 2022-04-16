@@ -26,11 +26,12 @@ interface AlgorithmResolverInterface
 {
     /**
      * @template T of AlgorithmInterface
+     *
      * @param class-string<T> $type
      *
-     * @return T
-     *
      * @throws AlgorithmNotFoundException
+     *
+     * @return T
      */
     public function resolve(TokenInterface $token, string $type): AlgorithmInterface;
 }

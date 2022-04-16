@@ -27,7 +27,7 @@ interface AlgorithmInterface
     public function name(): string;
 
     /**
-     * Returns the key types suitable for this algorithm
+     * Returns the key types suitable for this algorithm.
      *
      * @return string[]
      */

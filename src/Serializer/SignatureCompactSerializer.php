@@ -58,6 +58,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
 
     /**
      * @inheritDoc
+     *
      * @throws InvalidTokenException
      */
     public function serialize(TokenInterface $token, bool $withoutSignature = false): string
@@ -68,7 +69,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
                     '%s can serialize only %s, given %s',
                     self::class,
                     SignatureToken::class,
-                    get_class($token)
+                    $token::class
                 )
             );
         }
@@ -117,7 +118,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
             $payloadArray = $this->decode($jsonPayload);
             $payload = $this->createPropertyBag($payloadArray, $this->claimFactory);
 
-            if ($count === 3) {
+            if (3 === $count) {
                 $b64Signature = $parts[2];
                 $signature = Base64UrlSafe::decode($b64Signature);
             }

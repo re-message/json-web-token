@@ -33,7 +33,8 @@ class IdentifierValidator implements PropertyValidatorInterface
 {
     public function __construct(
         protected readonly TokenStorageInterface $storage = new RuntimeTokenStorage(),
-    ) {}
+    ) {
+    }
 
     public function getPropertyTarget(): PropertyTarget
     {
@@ -44,6 +45,7 @@ class IdentifierValidator implements PropertyValidatorInterface
     {
         if (!$property instanceof Identifier) {
             $message = sprintf('%s can handle only %s.', static::class, Identifier::class);
+
             throw new UnexpectedValueException($message);
         }
 
@@ -51,6 +53,7 @@ class IdentifierValidator implements PropertyValidatorInterface
         if (!is_string($value)) {
             $name = $this->getPropertyName();
             $valueType = gettype($value);
+
             throw new IncorrectPropertyTypeException('string', $valueType, $name);
         }
 

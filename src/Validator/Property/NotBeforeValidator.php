@@ -44,6 +44,7 @@ class NotBeforeValidator extends AbstractLeewayValidator
     {
         if (!$property instanceof NotBefore) {
             $message = sprintf('%s can handle only %s.', static::class, NotBefore::class);
+
             throw new UnexpectedValueException($message);
         }
 
@@ -51,6 +52,7 @@ class NotBeforeValidator extends AbstractLeewayValidator
         if (!is_int($value)) {
             $name = $this->getPropertyName();
             $valueType = gettype($value);
+
             throw new IncorrectPropertyTypeException('integer', $valueType, $name);
         }
 

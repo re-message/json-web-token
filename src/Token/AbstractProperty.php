@@ -17,8 +17,6 @@
 namespace RM\Standard\Jwt\Token;
 
 /**
- * Class AbstractProperty
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class AbstractProperty implements PropertyInterface

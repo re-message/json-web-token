@@ -29,7 +29,8 @@ class IssuerGenerator implements PropertyGeneratorInterface
 {
     public function __construct(
         protected readonly string $issuer
-    ) {}
+    ) {
+    }
 
     public function getPropertyName(): string
     {

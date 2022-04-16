@@ -31,7 +31,8 @@ class IssuerValidator implements PropertyValidatorInterface
 {
     public function __construct(
         protected readonly string $issuer
-    ) {}
+    ) {
+    }
 
     public function getPropertyName(): string
     {
@@ -47,6 +48,7 @@ class IssuerValidator implements PropertyValidatorInterface
     {
         if (!$property instanceof Issuer) {
             $message = sprintf('%s can handle only %s.', static::class, Issuer::class);
+
             throw new UnexpectedValueException($message);
         }
 

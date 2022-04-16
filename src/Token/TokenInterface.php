@@ -20,8 +20,6 @@ use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Serializer\SerializerInterface;
 
 /**
- * Interface TokenInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface TokenInterface

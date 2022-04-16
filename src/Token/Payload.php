@@ -21,8 +21,6 @@ use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use UnexpectedValueException;
 
 /**
- * Class Payload
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Payload extends PropertyBag
@@ -43,7 +41,7 @@ class Payload extends PropertyBag
     public function find(string $name): ?ClaimInterface
     {
         $property = $this->findProperty($name);
-        if ($property !== null && !$property instanceof ClaimInterface) {
+        if (null !== $property && !$property instanceof ClaimInterface) {
             throw new UnexpectedValueException('Expects a claim.');
         }
 

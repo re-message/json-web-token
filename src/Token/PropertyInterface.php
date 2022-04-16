@@ -17,8 +17,6 @@
 namespace RM\Standard\Jwt\Token;
 
 /**
- * Interface PropertyInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface PropertyInterface

@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Identifier;
  */
 final class UniqIdGenerator implements IdentifierGeneratorInterface
 {
-    protected string $prefix = '';
+    private string $prefix = '';
 
     public function __construct(string $prefix = '')
     {
