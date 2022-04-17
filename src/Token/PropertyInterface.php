@@ -25,5 +25,5 @@ interface PropertyInterface
 
     public function getValue(): mixed;
 
-    public function setValue(mixed $value);
+    public function setValue(mixed $value): void;
 }
