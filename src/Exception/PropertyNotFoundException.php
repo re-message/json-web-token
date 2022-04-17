@@ -26,6 +26,7 @@ class PropertyNotFoundException extends RuntimeException
 {
     public function __construct(string $property, Throwable $previous = null)
     {
-        parent::__construct(sprintf('The property with name `%s` is not exists.', $property), 0, $previous);
+        $message = sprintf('The property with name `%s` is not exists.', $property);
+        parent::__construct($message, 0, $previous);
     }
 }
