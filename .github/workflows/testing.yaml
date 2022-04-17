@@ -60,13 +60,22 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Run test suite
-        run: php vendor/bin/phpunit
+      - name: Run PHPUnit test
+        run: |
+          php vendor/bin/phpunit  \
+          --coverage-text \
+          --coverage-html=coverage/html \
+          --coverage-clover=coverage/clover.xml
         env:
           REDIS_HOST: localhost
           REDIS_PORT: 6379
           MEMCACHED_HOST: localhost
           MEMCACHED_PORT: 11211
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Coverage report
+          path: coverage
 
       - name: PHP Security Checker
         uses: StephaneBour/actions-php-security-checker@1.1
