@@ -45,13 +45,14 @@ class AlgorithmManager
     /**
      * @throws AlgorithmNotFoundException
      */
-    public function get(string $algorithm): AlgorithmInterface
+    public function get(string $name): AlgorithmInterface
     {
-        if (!$this->has($algorithm)) {
-            throw new AlgorithmNotFoundException($algorithm);
+        $algorithm = $this->algorithms->get($name);
+        if (null === $algorithm) {
+            throw new AlgorithmNotFoundException($name);
         }
 
-        return $this->algorithms->get($algorithm);
+        return $algorithm;
     }
 
     public function put(AlgorithmInterface $algorithm): void
@@ -59,13 +60,13 @@ class AlgorithmManager
         $this->algorithms->set($algorithm->name(), $algorithm);
     }
 
-    public function has(string $algorithm): bool
+    public function has(string $name): bool
     {
-        return $this->algorithms->containsKey($algorithm);
+        return $this->algorithms->containsKey($name);
     }
 
-    public function remove(string $algorithm): void
+    public function remove(string $name): void
     {
-        $this->algorithms->remove($algorithm);
+        $this->algorithms->remove($name);
     }
 }
