@@ -56,7 +56,12 @@ class AlgorithmManagerTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        new AlgorithmManager([new stdClass()]);
+        $unsupportedClass = new stdClass();
+        $algorithms = [$unsupportedClass];
+
+        /** @noinspection PhpParamsInspection */
+        /** @psalm-suppress InvalidArgument */
+        new AlgorithmManager($algorithms);
     }
 
     /**
