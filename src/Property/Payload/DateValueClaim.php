@@ -22,10 +22,10 @@ use DateTimeZone;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template-implements ClaimInterface<int>
  * @template-extends AbstractProperty<int>
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
 {

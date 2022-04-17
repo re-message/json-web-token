@@ -19,10 +19,10 @@ namespace RM\Standard\Jwt\Property\Header;
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template T of mixed
  * @template-extends PropertyInterface<T>
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface HeaderParameterInterface extends PropertyInterface
 {

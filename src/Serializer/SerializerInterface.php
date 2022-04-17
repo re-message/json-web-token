@@ -38,16 +38,16 @@ interface SerializerInterface
     /**
      * Deserializes the token from short transfer format.
      *
-     * @return T
-     *
      * @throws InvalidTokenException
+     *
+     * @return T
      */
     public function deserialize(string $serialized): TokenInterface;
 
     /**
      * Checks that serializer supports this token or class for serialization and deserialization.
      *
-     * @param T|string $token
+     * @param string|T $token
      */
     public function supports(TokenInterface|string $token): bool;
 }

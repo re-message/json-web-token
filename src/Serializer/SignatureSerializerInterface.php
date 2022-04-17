@@ -20,9 +20,9 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template-extends SerializerInterface<SignatureToken>
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface SignatureSerializerInterface extends SerializerInterface
 {

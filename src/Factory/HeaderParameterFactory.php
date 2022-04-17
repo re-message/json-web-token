@@ -22,9 +22,9 @@ use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
 use RM\Standard\Jwt\Property\Header\Type;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template-extends AbstractFactory<HeaderParameterInterface>
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class HeaderParameterFactory extends AbstractFactory
 {

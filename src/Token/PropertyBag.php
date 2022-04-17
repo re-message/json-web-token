@@ -21,9 +21,9 @@ use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template T of PropertyInterface
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class PropertyBag
 {
@@ -57,7 +57,7 @@ abstract class PropertyBag
     }
 
     /**
-     * @return T|null
+     * @return null|T
      */
     public function find(string $name): ?PropertyInterface
     {

@@ -27,9 +27,9 @@ use RM\Standard\Jwt\Property\Payload\PrivateClaim;
 use RM\Standard\Jwt\Property\Payload\Subject;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template-extends AbstractFactory<ClaimInterface>
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class ClaimFactory extends AbstractFactory
 {

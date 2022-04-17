@@ -17,10 +17,10 @@
 namespace RM\Standard\Jwt\Token;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template T of mixed
  * @template-implements PropertyInterface<T>
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class AbstractProperty implements PropertyInterface
 {

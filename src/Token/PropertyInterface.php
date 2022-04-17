@@ -17,9 +17,9 @@
 namespace RM\Standard\Jwt\Token;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template T of mixed
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface PropertyInterface
 {

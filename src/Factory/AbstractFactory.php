@@ -19,10 +19,10 @@ namespace RM\Standard\Jwt\Factory;
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
- * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
  * @template T of PropertyInterface
  * @template-implements FactoryInterface<T>
+ *
+ * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 abstract class AbstractFactory implements FactoryInterface
 {
@@ -38,7 +38,7 @@ abstract class AbstractFactory implements FactoryInterface
 
     /**
      * @param array<string, class-string<T>> $classMap
-     * @param class-string<T> $defaultPropertyClass
+     * @param class-string<T>                $defaultPropertyClass
      */
     public function __construct(array $classMap, string $defaultPropertyClass)
     {
