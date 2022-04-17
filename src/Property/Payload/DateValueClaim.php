@@ -23,9 +23,15 @@ use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template-implements ClaimInterface<int>
+ * @template-extends AbstractProperty<int>
  */
 abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
 {
+    /**
+     * @param int|DateTime|DateTimeImmutable $value
+     */
     public function setValue(mixed $value): void
     {
         if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {

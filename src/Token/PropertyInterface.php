@@ -18,12 +18,20 @@ namespace RM\Standard\Jwt\Token;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template T of mixed
  */
 interface PropertyInterface
 {
     public function getName(): string;
 
+    /**
+     * @return T
+     */
     public function getValue(): mixed;
 
+    /**
+     * @param T $value
+     */
     public function setValue(mixed $value): void;
 }

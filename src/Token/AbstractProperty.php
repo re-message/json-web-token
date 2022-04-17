@@ -18,21 +18,36 @@ namespace RM\Standard\Jwt\Token;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template T of mixed
+ * @template-implements PropertyInterface<T>
  */
 abstract class AbstractProperty implements PropertyInterface
 {
+    /**
+     * @var T
+     */
     private mixed $value;
 
+    /**
+     * @param T $value
+     */
     public function __construct(mixed $value = null)
     {
-        $this->setValue($value);
+        $this->value = $value;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getValue(): mixed
     {
         return $this->value;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setValue(mixed $value): void
     {
         $this->value = $value;

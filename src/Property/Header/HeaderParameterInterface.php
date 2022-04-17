@@ -20,6 +20,9 @@ use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template T of mixed
+ * @template-extends PropertyInterface<T>
  */
 interface HeaderParameterInterface extends PropertyInterface
 {
