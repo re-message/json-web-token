@@ -36,7 +36,7 @@ class RedisTokenStorageTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         $host = $_ENV['REDIS_HOST'];
-        $port = $_ENV['REDIS_PORT'];
+        $port = (int) $_ENV['REDIS_PORT'];
 
         if (!self::isRedisAvailable($host, $port)) {
             self::markTestIncomplete('Redis server is not available');
@@ -70,7 +70,7 @@ class RedisTokenStorageTest extends TestCase
     /**
      * @noinspection PhpRedundantCatchClauseInspection
      */
-    private static function isRedisAvailable(string $host, string $port): bool
+    private static function isRedisAvailable(string $host, int $port): bool
     {
         try {
             $dsn = sprintf('redis://%s:%d', $host, $port);

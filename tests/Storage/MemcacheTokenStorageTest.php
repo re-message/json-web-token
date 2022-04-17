@@ -35,7 +35,7 @@ class MemcacheTokenStorageTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         $host = $_ENV['MEMCACHED_HOST'];
-        $port = $_ENV['MEMCACHED_PORT'];
+        $port = (int) $_ENV['MEMCACHED_PORT'];
 
         if (!self::isMemcacheAvailable($host, $port)) {
             self::markTestIncomplete('Memcached server is not available');
@@ -66,7 +66,7 @@ class MemcacheTokenStorageTest extends TestCase
         self::assertFalse(self::$storage->has(self::$someTokenId));
     }
 
-    private static function isMemcacheAvailable(string $host, string $port): bool
+    private static function isMemcacheAvailable(string $host, int $port): bool
     {
         $memcache = new Memcache();
         $isConnected = @$memcache->connect($host, $port);
