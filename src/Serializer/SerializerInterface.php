@@ -22,17 +22,23 @@ use RM\Standard\Jwt\Token\TokenInterface;
 /**
  * Interface SerializerInterface provides serialization functional for tokens.
  *
+ * @template T of TokenInterface
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 interface SerializerInterface
 {
     /**
      * Serializes the token in a transfer-safe and short format.
+     *
+     * @param T $token
      */
     public function serialize(TokenInterface $token): string;
 
     /**
      * Deserializes the token from short transfer format.
+     *
+     * @return T
      *
      * @throws InvalidTokenException
      */
@@ -40,6 +46,8 @@ interface SerializerInterface
 
     /**
      * Checks that serializer supports this token or class for serialization and deserialization.
+     *
+     * @param T|string $token
      */
     public function supports(TokenInterface|string $token): bool;
 }

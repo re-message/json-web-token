@@ -16,10 +16,13 @@
 
 namespace RM\Standard\Jwt\Serializer;
 
+use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template-extends SerializerInterface<SignatureToken>
  */
 interface SignatureSerializerInterface extends SerializerInterface
 {
