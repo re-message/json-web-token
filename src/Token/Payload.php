@@ -21,6 +21,8 @@ use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use UnexpectedValueException;
 
 /**
+ * @template-extends PropertyBag<ClaimInterface>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Payload extends PropertyBag

@@ -24,6 +24,8 @@ use RM\Standard\Jwt\Property\Header\Type;
 use UnexpectedValueException;
 
 /**
+ * @template-extends PropertyBag<HeaderParameterInterface>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Header extends PropertyBag
