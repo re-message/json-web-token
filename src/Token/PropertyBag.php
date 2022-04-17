@@ -21,10 +21,6 @@ use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
- *
- * @method PropertyInterface get(string $name)
- * @method void              set(PropertyInterface $property)
- * @method bool              has(string $name)
  */
 abstract class PropertyBag
 {
@@ -47,12 +43,12 @@ abstract class PropertyBag
     /**
      * @throws PropertyNotFoundException
      */
-    protected function getProperty(string $name): PropertyInterface
+    public function get(string $name): PropertyInterface
     {
-        return $this->findProperty($name) ?: throw new PropertyNotFoundException($name);
+        return $this->find($name) ?: throw new PropertyNotFoundException($name);
     }
 
-    protected function findProperty(string $name): ?PropertyInterface
+    public function find(string $name): ?PropertyInterface
     {
         if ($this->collection->containsKey($name)) {
             return $this->collection->get($name);
@@ -68,12 +64,12 @@ abstract class PropertyBag
         return null;
     }
 
-    protected function hasProperty(string $name): bool
+    public function has(string $name): bool
     {
-        return null !== $this->findProperty($name);
+        return null !== $this->find($name);
     }
 
-    protected function setProperty(PropertyInterface $property): void
+    public function set(PropertyInterface $property): void
     {
         $this->collection->set($property->getName(), $property);
     }

@@ -57,7 +57,7 @@ class Header extends PropertyBag
      */
     public function get(string $name): HeaderParameterInterface
     {
-        $property = $this->getProperty($name);
+        $property = parent::get($name);
         if (!$property instanceof HeaderParameterInterface) {
             throw new UnexpectedValueException('Expects a header parameter.');
         }
@@ -67,7 +67,7 @@ class Header extends PropertyBag
 
     public function find(string $name): ?HeaderParameterInterface
     {
-        $property = $this->findProperty($name);
+        $property = parent::find($name);
         if (null !== $property && !$property instanceof HeaderParameterInterface) {
             throw new UnexpectedValueException('Expects a header parameter.');
         }
@@ -75,13 +75,12 @@ class Header extends PropertyBag
         return $property;
     }
 
-    public function has(string $name): bool
+    public function set(PropertyInterface $property): void
     {
-        return $this->hasProperty($name);
-    }
+        if (!$property instanceof HeaderParameterInterface) {
+            throw new UnexpectedValueException('Expects a header parameter.');
+        }
 
-    public function set(HeaderParameterInterface $property): void
-    {
-        $this->setProperty($property);
+        parent::set($property);
     }
 }

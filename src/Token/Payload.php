@@ -30,7 +30,7 @@ class Payload extends PropertyBag
      */
     public function get(string $name): ClaimInterface
     {
-        $property = $this->getProperty($name);
+        $property = parent::get($name);
         if (!$property instanceof ClaimInterface) {
             throw new UnexpectedValueException('Expects a claim.');
         }
@@ -40,7 +40,7 @@ class Payload extends PropertyBag
 
     public function find(string $name): ?ClaimInterface
     {
-        $property = $this->findProperty($name);
+        $property = parent::find($name);
         if (null !== $property && !$property instanceof ClaimInterface) {
             throw new UnexpectedValueException('Expects a claim.');
         }
@@ -48,13 +48,12 @@ class Payload extends PropertyBag
         return $property;
     }
 
-    public function has(string $name): bool
+    public function set(PropertyInterface $property): void
     {
-        return $this->hasProperty($name);
-    }
+        if (!$property instanceof ClaimInterface) {
+            throw new UnexpectedValueException('Expects a header parameter.');
+        }
 
-    public function set(ClaimInterface $property): void
-    {
-        $this->setProperty($property);
+        parent::set($property);
     }
 }
