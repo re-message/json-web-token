@@ -28,7 +28,7 @@ use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 abstract class PropertyBag
 {
     /**
-     * @var Collection<string, PropertyInterface>
+     * @var Collection<string, T>
      */
     private Collection $collection;
 
@@ -41,7 +41,7 @@ abstract class PropertyBag
         }
     }
 
-    public function __clone(): void
+    public function __clone()
     {
         $this->collection = clone $this->collection;
     }
@@ -65,7 +65,10 @@ abstract class PropertyBag
             return $this->collection->get($name);
         }
 
-        /** @var PropertyInterface $property */
+        /**
+         * @var PropertyInterface $property
+         * @psalm-var T $property
+         */
         foreach ($this->collection as $property) {
             if ($property->getName() === $name) {
                 return $property;
@@ -90,6 +93,7 @@ abstract class PropertyBag
 
     public function toArray(): array
     {
+        /** @var Collection<string, mixed> $collection */
         $collection = new ArrayCollection();
 
         /** @var PropertyInterface $property */
