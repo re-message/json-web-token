@@ -29,6 +29,9 @@ class AlgorithmResolver implements AlgorithmResolverInterface
     ) {
     }
 
+    /**
+     * @template T of AlgorithmInterface
+     */
     public function resolve(TokenInterface $token, string $type): AlgorithmInterface
     {
         $algorithm = $this->algorithmManager->get($token->getAlgorithm());
