@@ -42,6 +42,9 @@ class AlgorithmManager
         }
     }
 
+    /**
+     * @throws AlgorithmNotFoundException
+     */
     public function get(string $algorithm): AlgorithmInterface
     {
         if (!$this->has($algorithm)) {
