@@ -75,7 +75,10 @@ jobs:
           --diff \
           | cs2pr
 
-      - name: Run PHPUnit test
+      - name: PHP Security Checker
+        uses: StephaneBour/actions-php-security-checker@1.1
+
+      - name: Run PHPUnit tests
         run: |
           php vendor/bin/phpunit  \
           --coverage-text \
@@ -91,6 +94,3 @@ jobs:
         with:
           name: Coverage report
           path: coverage
-
-      - name: PHP Security Checker
-        uses: StephaneBour/actions-php-security-checker@1.1
