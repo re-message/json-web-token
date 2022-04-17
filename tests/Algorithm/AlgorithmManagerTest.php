@@ -41,7 +41,7 @@ class AlgorithmManagerTest extends TestCase
     }
 
     /**
-     * @covers ::__constructor
+     * @covers ::__construct
      */
     public function testValidConstructor(): void
     {
@@ -50,7 +50,7 @@ class AlgorithmManagerTest extends TestCase
     }
 
     /**
-     * @covers ::__constructor
+     * @covers ::__construct
      */
     public function testInvalidConstructor(): void
     {
