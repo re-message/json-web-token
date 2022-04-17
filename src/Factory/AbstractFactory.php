@@ -28,14 +28,24 @@ abstract class AbstractFactory implements FactoryInterface
      */
     private array $classMap;
 
+    /**
+     * @var class-string<PropertyInterface>
+     */
     private string $defaultPropertyClass;
 
+    /**
+     * @param array<string, class-string<PropertyInterface>> $classMap
+     * @param class-string<PropertyInterface> $defaultPropertyClass
+     */
     public function __construct(array $classMap, string $defaultPropertyClass)
     {
         $this->classMap = $classMap;
         $this->defaultPropertyClass = $defaultPropertyClass;
     }
 
+    /**
+     * @param class-string<PropertyInterface> $class
+     */
     public function add(string $name, string $class): void
     {
         $this->classMap[$name] = $class;
@@ -43,6 +53,7 @@ abstract class AbstractFactory implements FactoryInterface
 
     public function create(string $name, mixed $value): PropertyInterface
     {
+        /** @var class-string<PropertyInterface> $class */
         $class = $this->classMap[$name] ?? null;
         if (null === $class) {
             return new $this->defaultPropertyClass($name, $value);
