@@ -37,7 +37,7 @@ abstract class AbstractDurationGenerator implements PropertyGeneratorInterface
 
     final protected function getDuration(): int
     {
-        if (INF === $this->duration) {
+        if (PHP_INT_MAX === $this->duration) {
             return self::DEFAULT_DURATION;
         }
 
