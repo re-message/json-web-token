@@ -108,7 +108,7 @@ final class SignatureToken implements TokenInterface
         return null !== $this->signature;
     }
 
-    public function toString(SerializerInterface $serializer, bool $withoutSignature = false): string
+    public function toString(SerializerInterface $serializer): string
     {
         if (!$serializer->supports($this)) {
             $message = sprintf('%s can not be serialized with %s.', self::class, $serializer::class);
@@ -116,7 +116,7 @@ final class SignatureToken implements TokenInterface
             throw new InvalidArgumentException($message);
         }
 
-        return $serializer->serialize($this, $withoutSignature);
+        return $serializer->serialize($this);
     }
 
     /**
