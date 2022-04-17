@@ -42,6 +42,9 @@ return $config
             'phpdoc_tag_casing' => [
                 'tags' => ['inheritDoc'],
             ],
+            'phpdoc_to_comment' => [
+                'ignored_tags' => ['todo', 'noinspection', 'psalm-suppress'],
+            ],
         ]
     )
     ->setRiskyAllowed(true)
