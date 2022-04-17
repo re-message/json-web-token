@@ -65,7 +65,6 @@ class SignatureCompactSerializerTest extends TestCase
         self::assertInstanceOf(SignatureToken::class, $token);
 
         $serializedToken = $token->toString($serializer);
-        self::assertNotNull($serializedToken);
         self::assertEquals($rawToken, $serializedToken);
 
         return $token;
