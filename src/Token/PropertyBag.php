@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Token;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 
 /**
@@ -24,7 +25,10 @@ use RM\Standard\Jwt\Exception\PropertyNotFoundException;
  */
 abstract class PropertyBag
 {
-    private ArrayCollection $collection;
+    /**
+     * @var Collection<string, PropertyInterface>
+     */
+    private Collection $collection;
 
     public function __construct(array $properties = [])
     {
