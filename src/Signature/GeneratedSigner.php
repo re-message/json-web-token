@@ -31,7 +31,7 @@ use RM\Standard\Jwt\Token\PropertyTarget;
 class GeneratedSigner extends DecoratedSigner
 {
     /**
-     * @var Collection<PropertyGeneratorInterface>
+     * @var Collection<int, PropertyGeneratorInterface>
      */
     private readonly Collection $generators;
 

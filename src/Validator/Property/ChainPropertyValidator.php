@@ -32,7 +32,7 @@ use UnexpectedValueException;
 class ChainPropertyValidator implements ValidatorInterface
 {
     /**
-     * @var Collection<PropertyValidatorInterface>
+     * @var Collection<int, PropertyValidatorInterface>
      */
     private readonly Collection $validators;
 

@@ -26,7 +26,7 @@ use RM\Standard\Jwt\Token\TokenInterface;
 class ChainValidator implements ValidatorInterface
 {
     /**
-     * @var Collection<ValidatorInterface>
+     * @var Collection<int, ValidatorInterface>
      */
     private readonly Collection $validators;
 

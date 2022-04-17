@@ -26,7 +26,7 @@ use RM\Standard\Jwt\Exception\AlgorithmNotFoundException;
 class AlgorithmManager
 {
     /**
-     * @var Collection<AlgorithmInterface>
+     * @var Collection<string, AlgorithmInterface>
      */
     private readonly Collection $algorithms;
 
