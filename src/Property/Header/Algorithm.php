@@ -22,7 +22,7 @@ use RM\Standard\Jwt\Token\AbstractProperty;
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class Algorithm extends AbstractProperty implements HeaderParameterInterface
+final class Algorithm extends AbstractProperty implements HeaderParameterInterface
 {
     public const NAME = 'alg';
 
@@ -31,7 +31,7 @@ class Algorithm extends AbstractProperty implements HeaderParameterInterface
         return self::NAME;
     }
 
-    public static function fromAlgorithm(AlgorithmInterface $algorithm): static
+    public static function fromAlgorithm(AlgorithmInterface $algorithm): self
     {
         return new Algorithm($algorithm->name());
     }
