@@ -29,4 +29,9 @@ interface FactoryInterface
      * @return T
      */
     public function create(string $name, mixed $value): PropertyInterface;
+
+    /**
+     * @param class-string<T> $class
+     */
+    public function register(string $name, string $class): void;
 }

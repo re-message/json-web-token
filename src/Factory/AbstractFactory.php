@@ -49,7 +49,7 @@ abstract class AbstractFactory implements FactoryInterface
     /**
      * @param class-string<T> $class
      */
-    public function add(string $name, string $class): void
+    public function register(string $name, string $class): void
     {
         $this->classMap[$name] = $class;
     }
