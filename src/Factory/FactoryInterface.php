@@ -20,8 +20,13 @@ use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template T of PropertyInterface
  */
 interface FactoryInterface
 {
+    /**
+     * @return T
+     */
     public function create(string $name, mixed $value): PropertyInterface;
 }

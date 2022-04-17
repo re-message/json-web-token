@@ -20,22 +20,25 @@ use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template T of PropertyInterface
+ * @template-implements FactoryInterface<T>
  */
 abstract class AbstractFactory implements FactoryInterface
 {
     /**
-     * @var array<string, class-string<PropertyInterface>>
+     * @var array<string, class-string<T>>
      */
     private array $classMap;
 
     /**
-     * @var class-string<PropertyInterface>
+     * @var class-string<T>
      */
     private string $defaultPropertyClass;
 
     /**
-     * @param array<string, class-string<PropertyInterface>> $classMap
-     * @param class-string<PropertyInterface> $defaultPropertyClass
+     * @param array<string, class-string<T>> $classMap
+     * @param class-string<T> $defaultPropertyClass
      */
     public function __construct(array $classMap, string $defaultPropertyClass)
     {
@@ -44,7 +47,7 @@ abstract class AbstractFactory implements FactoryInterface
     }
 
     /**
-     * @param class-string<PropertyInterface> $class
+     * @param class-string<T> $class
      */
     public function add(string $name, string $class): void
     {
@@ -53,7 +56,6 @@ abstract class AbstractFactory implements FactoryInterface
 
     public function create(string $name, mixed $value): PropertyInterface
     {
-        /** @var class-string<PropertyInterface> $class */
         $class = $this->classMap[$name] ?? null;
         if (null === $class) {
             return new $this->defaultPropertyClass($name, $value);

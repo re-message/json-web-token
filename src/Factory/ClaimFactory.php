@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Factory;
 
 use RM\Standard\Jwt\Property\Payload\Audience;
+use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use RM\Standard\Jwt\Property\Payload\Expiration;
 use RM\Standard\Jwt\Property\Payload\Identifier;
 use RM\Standard\Jwt\Property\Payload\IssuedAt;
@@ -27,6 +28,8 @@ use RM\Standard\Jwt\Property\Payload\Subject;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template-extends AbstractFactory<ClaimInterface>
  */
 class ClaimFactory extends AbstractFactory
 {

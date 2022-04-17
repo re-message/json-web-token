@@ -18,10 +18,13 @@ namespace RM\Standard\Jwt\Factory;
 
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\Custom;
+use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
 use RM\Standard\Jwt\Property\Header\Type;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template-extends AbstractFactory<HeaderParameterInterface>
  */
 class HeaderParameterFactory extends AbstractFactory
 {
