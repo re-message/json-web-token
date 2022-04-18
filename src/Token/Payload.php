@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Token;
 
-use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use UnexpectedValueException;
 
@@ -28,7 +27,7 @@ use UnexpectedValueException;
 class Payload extends PropertyBag
 {
     /**
-     * @throws PropertyNotFoundException
+     * @inheritDoc
      */
     public function get(string $name): ClaimInterface
     {
@@ -40,6 +39,9 @@ class Payload extends PropertyBag
         return $property;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function find(string $name): ?ClaimInterface
     {
         $property = parent::find($name);
@@ -50,6 +52,9 @@ class Payload extends PropertyBag
         return $property;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function set(PropertyInterface $property): void
     {
         if (!$property instanceof ClaimInterface) {
