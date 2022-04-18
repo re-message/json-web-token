@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Validator;
 
-use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Exception\InvalidTokenExceptionInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -27,7 +27,7 @@ interface ValidatorInterface
     /**
      * Checks if the passed value is valid.
      *
-     * @throws InvalidTokenException
+     * @throws InvalidTokenExceptionInterface
      */
     public function validate(TokenInterface $token): bool;
 }
