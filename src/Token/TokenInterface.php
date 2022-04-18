@@ -42,9 +42,7 @@ interface TokenInterface
     /**
      * Returns serialized token string.
      *
-     * @template T of self
-     *
-     * @param SerializerInterface<T> $serializer
+     * @param SerializerInterface<static> $serializer
      */
     public function toString(SerializerInterface $serializer): string;
 

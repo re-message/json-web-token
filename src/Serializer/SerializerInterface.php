@@ -47,7 +47,7 @@ interface SerializerInterface
     /**
      * Checks that serializer supports this token or class for serialization and deserialization.
      *
-     * @param string|T $token
+     * @psalm-assert-if-true T|string $token
      */
     public function supports(TokenInterface|string $token): bool;
 }
