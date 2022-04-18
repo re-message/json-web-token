@@ -15,8 +15,9 @@
  */
 
 $finder = PhpCsFixer\Finder::create()
-    ->exclude('vendor')
     ->in(__DIR__)
+    ->exclude('vendor')
+    ->append([__FILE__])
 ;
 
 $namespace = 'Relations Messenger';
@@ -40,6 +41,7 @@ $header = <<<EOF
     EOF;
 
 $config = new PhpCsFixer\Config();
+
 return $config
     ->setRules(
         [
