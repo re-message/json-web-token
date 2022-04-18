@@ -16,16 +16,11 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use RuntimeException;
 use Throwable;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class AlgorithmNotFoundException extends RuntimeException
+interface InvalidTokenExceptionInterface extends Throwable
 {
-    public function __construct(string $algorithm, Throwable $previous = null)
-    {
-        parent::__construct(sprintf('The algorithm with name `%s` is not exists.', $algorithm), 0, $previous);
-    }
 }

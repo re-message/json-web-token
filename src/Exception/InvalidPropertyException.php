@@ -16,19 +16,20 @@
 
 namespace RM\Standard\Jwt\Exception;
 
+use Exception;
 use Throwable;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class InvalidPropertyException extends InvalidTokenException
+class InvalidPropertyException extends Exception implements InvalidTokenExceptionInterface
 {
     public function __construct(
         string $message,
         private readonly string $propertyName,
         Throwable $previous = null
     ) {
-        parent::__construct($message, $previous);
+        parent::__construct($message, 0, $previous);
     }
 
     public function getPropertyName(): string

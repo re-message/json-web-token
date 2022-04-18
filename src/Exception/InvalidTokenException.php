@@ -16,13 +16,13 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use Exception;
+use RuntimeException;
 use Throwable;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class InvalidTokenException extends Exception
+class InvalidTokenException extends RuntimeException implements InvalidTokenExceptionInterface
 {
     public function __construct(string $message = '', Throwable $previous = null)
     {
