@@ -29,9 +29,15 @@ use UnexpectedValueException;
  */
 class IssuerValidator implements PropertyValidatorInterface
 {
-    public function __construct(
-        protected readonly string $issuer
-    ) {
+    protected readonly array $issuers;
+
+    public function __construct(array|string $issuers)
+    {
+        if (is_string($issuers)) {
+            $issuers = [$issuers];
+        }
+
+        $this->issuers = $issuers;
     }
 
     public function getPropertyName(): string
@@ -53,7 +59,7 @@ class IssuerValidator implements PropertyValidatorInterface
         }
 
         $value = $property->getValue();
-        if ($this->issuer !== $value) {
+        if (!in_array($value, $this->issuers, true)) {
             throw new IssuerViolationException($this);
         }
 
