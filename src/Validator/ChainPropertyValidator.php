@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Validator\Property;
+namespace RM\Standard\Jwt\Validator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use RM\Standard\Jwt\Token\PropertyInterface;
 use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
-use RM\Standard\Jwt\Validator\ValidatorInterface;
+use RM\Standard\Jwt\Validator\Property\PropertyValidatorInterface;
 use UnexpectedValueException;
 
 /**
