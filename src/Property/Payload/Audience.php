@@ -23,6 +23,9 @@ use RM\Standard\Jwt\Token\AbstractProperty;
  * It is required claim. May have same value as {@see Subject} claim.
  * This property has no generator or validator.
  *
+ * @template-extends AbstractProperty<string>
+ * @template-implements ClaimInterface<string>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Audience extends AbstractProperty implements ClaimInterface

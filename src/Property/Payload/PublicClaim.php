@@ -20,6 +20,9 @@ use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
+ *
+ * @template-extends AbstractProperty<mixed>
+ * @template-implements ClaimInterface<mixed>
  */
 class PublicClaim extends AbstractProperty implements ClaimInterface
 {

@@ -27,6 +27,9 @@ use RM\Standard\Jwt\Validator\Property\IssuerValidator;
  * with own token id {@see Identifier} cache server {@see TokenStorageInterface}.
  * We recommend set up this claim.
  *
+ * @template-extends AbstractProperty<string>
+ * @template-implements ClaimInterface<string>
+ *
  * @see IssuerGenerator can generate value for this claim.
  * @see IssuerValidator can validate this claim.
  *

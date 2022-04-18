@@ -22,6 +22,9 @@ use RM\Standard\Jwt\Token\AbstractProperty;
  * Subject is a unique identity of application who wants to get access to the audience {@see Audience}.
  * It is required claim.
  *
+ * @template-extends AbstractProperty<string>
+ * @template-implements ClaimInterface<string>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Subject extends AbstractProperty implements ClaimInterface
