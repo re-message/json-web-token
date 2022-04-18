@@ -28,7 +28,7 @@ class PrivateClaim extends AbstractProperty implements ClaimInterface
 {
     private string $name;
 
-    public function __construct(string $name, $value = null)
+    public function __construct(string $name, mixed $value = null)
     {
         parent::__construct($value);
 
