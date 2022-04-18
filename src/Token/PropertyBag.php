@@ -91,6 +91,11 @@ abstract class PropertyBag
         $this->collection->set($property->getName(), $property);
     }
 
+    public function getProperties(): array
+    {
+        return $this->collection->getValues();
+    }
+
     public function toArray(): array
     {
         /** @var Collection<string, mixed> $collection */

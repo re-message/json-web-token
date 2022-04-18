@@ -50,8 +50,8 @@ class ChainPropertyValidator implements ValidatorInterface
 
     public function validate(TokenInterface $token): bool
     {
-        $headerProperties = array_values($token->getHeader()->toArray());
-        $payloadProperties = array_values($token->getPayload()->toArray());
+        $headerProperties = $token->getHeader()->getProperties();
+        $payloadProperties = $token->getPayload()->getProperties();
 
         /** @var PropertyInterface[] $properties */
         $properties = array_merge($headerProperties, $payloadProperties);
