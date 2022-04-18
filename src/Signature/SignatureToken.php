@@ -66,7 +66,7 @@ final class SignatureToken implements TokenInterface
     /**
      * Returns new instance of the token with updated algorithm.
      */
-    public function setAlgorithm(SignatureAlgorithmInterface $algorithm): TokenInterface
+    public function setAlgorithm(SignatureAlgorithmInterface $algorithm): static
     {
         $token = clone $this;
 
