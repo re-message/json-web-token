@@ -39,7 +39,7 @@ class Signer implements SignerInterface
         }
 
         if ($algorithm->name() !== $token->getAlgorithm()) {
-            throw new InvalidTokenException('Mismatch between the algorithm in the token and the algorithm for signing.');
+            $token = $token->setAlgorithm($algorithm);
         }
 
         $body = $this->serializer->serialize($token, true);
