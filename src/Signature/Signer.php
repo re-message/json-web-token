@@ -53,11 +53,11 @@ class Signer implements SignerInterface
      */
     public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool
     {
-        $signature = $token->getSignature();
-        if (null === $signature) {
+        if (!$token->isSigned()) {
             throw new InvalidTokenException('The token have no signature to validate.');
         }
 
+        $signature = $token->getSignature();
         $body = $this->serializer->serialize($token, true);
 
         return $algorithm->verify($key, $body, $signature);

@@ -102,6 +102,9 @@ final class SignatureToken implements TokenInterface
 
     /**
      * Defines that signature successful signed or not.
+     *
+     * @psalm-assert-if-true string $this->signature
+     * @psalm-assert-if-true string $this->getSignature()
      */
     public function isSigned(): bool
     {
