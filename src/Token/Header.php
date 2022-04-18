@@ -35,19 +35,13 @@ class Header extends PropertyBag
      */
     public function __construct(array $parameters = [])
     {
-        parent::__construct(
-            [
-                new Algorithm(null),
-                new Type('JWT'),
-            ]
-        );
+        parent::__construct([new Type('JWT')]);
 
         foreach ($parameters as $parameter) {
             $this->set($parameter);
         }
 
-        $algorithm = $this->find(Algorithm::NAME);
-        if (null === $algorithm || null === $algorithm->getValue()) {
+        if (!$this->has(Algorithm::NAME)) {
             $message = sprintf('Any JSON Web Token must have the algorithm parameter (`%s`).', Algorithm::NAME);
 
             throw new InvalidArgumentException($message);
