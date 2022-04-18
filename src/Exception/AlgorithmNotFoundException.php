@@ -26,6 +26,8 @@ class AlgorithmNotFoundException extends RuntimeException
 {
     public function __construct(string $algorithm, Throwable $previous = null)
     {
-        parent::__construct(sprintf('The algorithm with name `%s` is not exists.', $algorithm), 0, $previous);
+        $message = sprintf('The algorithm with name `%s` is not exists.', $algorithm);
+
+        parent::__construct($message, 0, $previous);
     }
 }

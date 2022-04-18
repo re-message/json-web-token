@@ -25,6 +25,8 @@ class IncorrectPropertyTypeException extends InvalidPropertyException
 {
     public function __construct(string $expected, string $got, string $claim, Throwable $previous = null)
     {
-        parent::__construct(sprintf('Claim `%s` must be a %s, got %s.', $claim, $expected, $got), $claim, $previous);
+        $message = sprintf('Claim `%s` must be a %s, got %s.', $claim, $expected, $got);
+
+        parent::__construct($message, $claim, $previous);
     }
 }
