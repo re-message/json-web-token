@@ -22,6 +22,9 @@ use RM\Standard\Jwt\Token\AbstractProperty;
  * Type of token, by default is `JWT`.
  * If you use some token types, you can override this claim.
  *
+ * @template-extends AbstractProperty<string>
+ * @template-implements HeaderParameterInterface<string>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Type extends AbstractProperty implements HeaderParameterInterface

@@ -20,6 +20,9 @@ use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
+ * @template-extends AbstractProperty<string>
+ * @template-implements HeaderParameterInterface<string>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 final class Algorithm extends AbstractProperty implements HeaderParameterInterface

@@ -19,6 +19,9 @@ namespace RM\Standard\Jwt\Property\Header;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
+ * @template-extends AbstractProperty<mixed>
+ * @template-implements HeaderParameterInterface<mixed>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class Custom extends AbstractProperty implements HeaderParameterInterface
