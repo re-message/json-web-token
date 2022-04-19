@@ -44,9 +44,9 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
      */
     public const TOKEN_DELIMITER = '.';
 
-    private FormatterInterface $formatter;
-    private FactoryInterface $claimFactory;
-    private FactoryInterface $headerParameterFactory;
+    private readonly FormatterInterface $formatter;
+    private readonly FactoryInterface $claimFactory;
+    private readonly FactoryInterface $headerParameterFactory;
 
     public function __construct(
         ?FormatterInterface $formatter = null,
