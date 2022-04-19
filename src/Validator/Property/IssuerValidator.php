@@ -31,19 +31,8 @@ class IssuerValidator implements PropertyValidatorInterface
 {
     protected readonly array $issuers;
 
-    public function __construct(array|string $issuers)
+    public function __construct(array $issuers)
     {
-        if (is_string($issuers)) {
-            trigger_deprecation(
-                'relmsg/json-web-token',
-                '0.2.4',
-                'Using a string as "%s" parameter is deprecated and will cause an error on 0.3.0. Use array instead.',
-                static::class
-            );
-
-            $issuers = [$issuers];
-        }
-
         $this->issuers = $issuers;
     }
 
