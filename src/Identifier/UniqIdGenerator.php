@@ -23,11 +23,9 @@ namespace RM\Standard\Jwt\Identifier;
  */
 final class UniqIdGenerator implements IdentifierGeneratorInterface
 {
-    private string $prefix = '';
-
-    public function __construct(string $prefix = '')
-    {
-        $this->prefix = $prefix;
+    public function __construct(
+        private readonly string $prefix = '',
+    ) {
     }
 
     public function generate(): string

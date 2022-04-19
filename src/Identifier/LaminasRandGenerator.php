@@ -25,11 +25,9 @@ final class LaminasRandGenerator implements IdentifierGeneratorInterface
 {
     private const MIN_LENGTH = 32;
 
-    private int $length = 64;
-
-    public function __construct(int $length = 64)
-    {
-        $this->length = $length;
+    public function __construct(
+        private readonly int $length = 64,
+    ) {
     }
 
     /**
