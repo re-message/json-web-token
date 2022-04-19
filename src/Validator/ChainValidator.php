@@ -60,4 +60,9 @@ class ChainValidator implements ValidatorInterface
     {
         $this->validators->add($validator);
     }
+
+    public function getValidators(): array
+    {
+        return $this->validators->toArray();
+    }
 }

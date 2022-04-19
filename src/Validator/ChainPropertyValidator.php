@@ -75,6 +75,11 @@ class ChainPropertyValidator implements ValidatorInterface
         $this->validators->add($validator);
     }
 
+    public function getValidators(): array
+    {
+        return $this->validators->toArray();
+    }
+
     private function findValidator(PropertyInterface $property): ?PropertyValidatorInterface
     {
         foreach ($this->validators as $validator) {
