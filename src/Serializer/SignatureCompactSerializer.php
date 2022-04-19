@@ -22,9 +22,10 @@ use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Factory\ClaimFactory;
 use RM\Standard\Jwt\Factory\FactoryInterface;
 use RM\Standard\Jwt\Factory\HeaderParameterFactory;
+use RM\Standard\Jwt\Serializer\Format\FormatterInterface;
+use RM\Standard\Jwt\Serializer\Format\JsonFormatter;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 
 /**
@@ -43,15 +44,16 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
      */
     public const TOKEN_DELIMITER = '.';
 
-    private JsonEncoder $encoder;
+    private FormatterInterface $formatter;
     private FactoryInterface $claimFactory;
     private FactoryInterface $headerParameterFactory;
 
     public function __construct(
+        ?FormatterInterface $formatter = null,
         ?ClaimFactory $claimFactory = null,
         ?HeaderParameterFactory $headerParameterFactory = null,
     ) {
-        $this->encoder = new JsonEncoder();
+        $this->formatter = $formatter ?? new JsonFormatter();
         $this->claimFactory = $claimFactory ?? new ClaimFactory();
         $this->headerParameterFactory = $headerParameterFactory ?? new HeaderParameterFactory();
     }
@@ -75,8 +77,8 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         }
 
         try {
-            $jsonHeader = $this->encode($token->getHeader()->toArray());
-            $jsonPayload = $this->encode($token->getPayload()->toArray());
+            $jsonHeader = $this->formatter->encode($token->getHeader()->toArray());
+            $jsonPayload = $this->formatter->encode($token->getPayload()->toArray());
 
             $b64Header = Base64UrlSafe::encodeUnpadded($jsonHeader);
             $b64Payload = Base64UrlSafe::encodeUnpadded($jsonPayload);
@@ -94,11 +96,6 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         }
     }
 
-    protected function encode(array $data): string
-    {
-        return $this->encoder->encode($data, 'json');
-    }
-
     public function deserialize(string $serialized): TokenInterface
     {
         $parts = explode(self::TOKEN_DELIMITER, $serialized);
@@ -110,12 +107,12 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         try {
             $b64Header = $parts[0];
             $jsonHeader = Base64UrlSafe::decode($b64Header);
-            $headerArray = $this->decode($jsonHeader);
+            $headerArray = $this->formatter->decode($jsonHeader);
             $header = $this->createPropertyBag($headerArray, $this->headerParameterFactory);
 
             $b64Payload = $parts[1];
             $jsonPayload = Base64UrlSafe::decode($b64Payload);
-            $payloadArray = $this->decode($jsonPayload);
+            $payloadArray = $this->formatter->decode($jsonPayload);
             $payload = $this->createPropertyBag($payloadArray, $this->claimFactory);
 
             if (3 === $count) {
@@ -137,11 +134,6 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         }
 
         return $bag;
-    }
-
-    protected function decode(string $data): array
-    {
-        return $this->encoder->decode($data, 'json');
     }
 
     public function supports(TokenInterface|string $token): bool
