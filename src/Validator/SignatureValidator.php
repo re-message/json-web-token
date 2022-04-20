@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Validator;
 
 use RM\Standard\Jwt\Algorithm\AlgorithmResolverInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
+use RM\Standard\Jwt\Key\KeyUse;
 use RM\Standard\Jwt\Key\Resolver\KeyResolverInterface;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\Signer;
@@ -47,7 +48,7 @@ class SignatureValidator implements ValidatorInterface
         }
 
         $algorithm = $this->algorithmResolver->resolve($token, SignatureAlgorithmInterface::class);
-        $key = $this->keyResolver->resolve($token);
+        $key = $this->keyResolver->resolve($token, KeyUse::SIGN);
 
         return $this->signer->verify($token, $algorithm, $key);
     }
