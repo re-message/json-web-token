@@ -27,8 +27,14 @@ abstract class AbstractKey implements KeyInterface
 
     public function __construct(array $parameters)
     {
-        if (!array_key_exists(self::PARAM_KEY_TYPE, $parameters)) {
-            throw new InvalidArgumentException(sprintf('Any JSON Web Key must have the key type parameter (`%s`).', self::PARAM_KEY_TYPE));
+        $typeParameter = self::PARAM_KEY_TYPE;
+        if (!array_key_exists($typeParameter, $parameters)) {
+            $message = sprintf(
+                'Any JSON Web Key must have the key type parameter (`%s`).',
+                $typeParameter
+            );
+
+            throw new InvalidArgumentException($message);
         }
 
         $this->parameters = $parameters;
@@ -37,7 +43,12 @@ abstract class AbstractKey implements KeyInterface
     public function get(string $parameter): string
     {
         if (!$this->has($parameter)) {
-            throw new InvalidArgumentException(sprintf('The parameter with name `%s` is not exists in this key.', $parameter));
+            $message = sprintf(
+                'The parameter with name `%s` is not exists in this key.',
+                $parameter
+            );
+
+            throw new InvalidArgumentException($message);
         }
 
         return $this->parameters[$parameter];
