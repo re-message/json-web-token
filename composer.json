@@ -22,14 +22,19 @@
         "ext-sodium": "*",
         "ext-mbstring": "*",
 
+        "psr/http-client": "^1.0.0",
+        "psr/http-factory": "^1.0.0",
         "psr/event-dispatcher": "^1.0.0",
-        "symfony/event-dispatcher": "^6.0",
-        "symfony/serializer": "^6.0",
-        "symfony/deprecation-contracts": "^3.0",
-        "monolog/monolog": "^2.0.2",
+
         "doctrine/collections": "^1.6.4",
+        "symfony/deprecation-contracts": "^3.0",
+
+        "symfony/serializer": "^6.0",
         "paragonie/constant_time_encoding": "^2.3",
-        "laminas/laminas-math": "^3.2"
+        "laminas/laminas-math": "^3.2",
+
+        "symfony/event-dispatcher": "^6.0",
+        "monolog/monolog": "^2.0.2"
     },
     "require-dev": {
         "ext-memcache": "*",
