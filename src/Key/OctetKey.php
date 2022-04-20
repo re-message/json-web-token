@@ -21,14 +21,18 @@ namespace RM\Standard\Jwt\Key;
  */
 final class OctetKey extends AbstractKey
 {
-    public function __construct(string $value)
+    public function __construct(string $value, string $id = null)
     {
-        parent::__construct(
-            [
-                self::PARAM_KEY_TYPE => self::KEY_TYPE_OCTET,
-                self::PARAM_KEY_VALUE => $value,
-            ]
-        );
+        $parameters = [
+            self::PARAM_KEY_TYPE => self::KEY_TYPE_OCTET,
+            self::PARAM_KEY_VALUE => $value,
+        ];
+
+        if (null !== $id) {
+            $parameters[self::PARAM_KEY_IDENTIFIER] = $id;
+        }
+
+        parent::__construct($parameters);
     }
 
     public function getValue(): string
