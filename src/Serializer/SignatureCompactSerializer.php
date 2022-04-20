@@ -19,11 +19,11 @@ namespace RM\Standard\Jwt\Serializer;
 use InvalidArgumentException;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
-use RM\Standard\Jwt\Factory\ClaimFactory;
-use RM\Standard\Jwt\Factory\FactoryInterface;
-use RM\Standard\Jwt\Factory\HeaderParameterFactory;
 use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Format\JsonFormatter;
+use RM\Standard\Jwt\Property\Factory\ClaimFactory;
+use RM\Standard\Jwt\Property\Factory\HeaderParameterFactory;
+use RM\Standard\Jwt\Property\Factory\PropertyFactoryInterface;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
@@ -46,8 +46,8 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
 
     public function __construct(
         private readonly FormatterInterface $formatter = new JsonFormatter(),
-        private readonly FactoryInterface $claimFactory = new ClaimFactory(),
-        private readonly FactoryInterface $headerParameterFactory = new HeaderParameterFactory(),
+        private readonly PropertyFactoryInterface $claimFactory = new ClaimFactory(),
+        private readonly PropertyFactoryInterface $headerParameterFactory = new HeaderParameterFactory(),
     ) {
     }
 
@@ -119,7 +119,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         }
     }
 
-    private function createPropertyBag(array $properties, FactoryInterface $factory): array
+    private function createPropertyBag(array $properties, PropertyFactoryInterface $factory): array
     {
         $bag = [];
         foreach ($properties as $name => $value) {

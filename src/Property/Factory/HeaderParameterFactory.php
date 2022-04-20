@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Factory;
+namespace RM\Standard\Jwt\Property\Factory;
 
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\Custom;
@@ -22,11 +22,11 @@ use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
 use RM\Standard\Jwt\Property\Header\Type;
 
 /**
- * @template-extends AbstractFactory<HeaderParameterInterface>
+ * @template-extends AbstractPropertyFactory<HeaderParameterInterface>
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class HeaderParameterFactory extends AbstractFactory
+class HeaderParameterFactory extends AbstractPropertyFactory
 {
     public function __construct()
     {

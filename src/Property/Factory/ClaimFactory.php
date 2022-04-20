@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Factory;
+namespace RM\Standard\Jwt\Property\Factory;
 
 use RM\Standard\Jwt\Property\Payload\Audience;
 use RM\Standard\Jwt\Property\Payload\ClaimInterface;
@@ -27,11 +27,11 @@ use RM\Standard\Jwt\Property\Payload\PrivateClaim;
 use RM\Standard\Jwt\Property\Payload\Subject;
 
 /**
- * @template-extends AbstractFactory<ClaimInterface>
+ * @template-extends AbstractPropertyFactory<ClaimInterface>
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class ClaimFactory extends AbstractFactory
+class ClaimFactory extends AbstractPropertyFactory
 {
     public function __construct()
     {

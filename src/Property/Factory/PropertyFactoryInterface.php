@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Factory;
+namespace RM\Standard\Jwt\Property\Factory;
 
 use RM\Standard\Jwt\Token\PropertyInterface;
 
@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Token\PropertyInterface;
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-interface FactoryInterface
+interface PropertyFactoryInterface
 {
     /**
      * @return T

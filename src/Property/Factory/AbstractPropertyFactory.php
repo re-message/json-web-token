@@ -14,17 +14,17 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Factory;
+namespace RM\Standard\Jwt\Property\Factory;
 
 use RM\Standard\Jwt\Token\PropertyInterface;
 
 /**
  * @template T of PropertyInterface
- * @template-implements FactoryInterface<T>
+ * @template-implements PropertyFactoryInterface<T>
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-abstract class AbstractFactory implements FactoryInterface
+abstract class AbstractPropertyFactory implements PropertyFactoryInterface
 {
     /**
      * @var array<string, class-string<T>>
