@@ -14,35 +14,20 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Key\Storage;
+namespace RM\Standard\Jwt\Exception;
 
-use RM\Standard\Jwt\Exception\KeyNotFoundException;
-use RM\Standard\Jwt\Key\KeyInterface;
+use RuntimeException;
+use Throwable;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-interface KeyStorageInterface
+class KeyNotFoundException extends RuntimeException
 {
-    /**
-     * Get key from storage by id or throw exception.
-     *
-     * @throws KeyNotFoundException
-     */
-    public function get(string $id): KeyInterface;
+    public function __construct(string $id, ?Throwable $previous = null)
+    {
+        $message = sprintf('Key with id "%s" not found in the storage.', $id);
 
-    /**
-     * Find key from storage by id.
-     */
-    public function find(string $id): KeyInterface|null;
-
-    /**
-     * Add key to storage.
-     */
-    public function add(KeyInterface $key): void;
-
-    /**
-     * Checks if key exists in storage.
-     */
-    public function has(string $id): bool;
+        parent::__construct($message, 0, $previous);
+    }
 }
