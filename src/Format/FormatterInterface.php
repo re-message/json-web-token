@@ -14,29 +14,14 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Serializer\Format;
-
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
+namespace RM\Standard\Jwt\Format;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class JsonFormatter implements FormatterInterface
+interface FormatterInterface
 {
-    private JsonEncoder $encoder;
+    public function encode(array $data): string;
 
-    public function __construct()
-    {
-        $this->encoder = new JsonEncoder();
-    }
-
-    public function encode(array $data): string
-    {
-        return $this->encoder->encode($data, 'json');
-    }
-
-    public function decode(string $data): array
-    {
-        return $this->encoder->decode($data, 'json');
-    }
+    public function decode(string $data): array;
 }
