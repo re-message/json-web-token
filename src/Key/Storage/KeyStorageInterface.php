@@ -42,6 +42,13 @@ interface KeyStorageInterface
     public function add(KeyInterface $key): void;
 
     /**
+     * Add keys to storage.
+     *
+     * @param iterable<KeyInterface> $keys
+     */
+    public function addAll(iterable $keys): void;
+
+    /**
      * Checks if key exists in storage.
      */
     public function has(string|int $id): bool;

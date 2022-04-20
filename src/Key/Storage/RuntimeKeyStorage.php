@@ -74,6 +74,16 @@ class RuntimeKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
+    public function addAll(iterable $keys): void
+    {
+        foreach ($keys as $key) {
+            $this->add($key);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function has(string|int $id): bool
     {
         return $this->keys->containsKey($id);
