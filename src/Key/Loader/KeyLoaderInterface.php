@@ -23,6 +23,8 @@ use RM\Standard\Jwt\Key\KeyInterface;
  */
 interface KeyLoaderInterface
 {
+    public const PARAM_KEYS = 'keys';
+
     /**
      * @return array<int, KeyInterface>
      */
