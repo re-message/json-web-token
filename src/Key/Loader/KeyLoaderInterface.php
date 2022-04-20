@@ -23,5 +23,8 @@ use RM\Standard\Jwt\Key\KeyInterface;
  */
 interface KeyLoaderInterface
 {
-    public function load(): KeyInterface;
+    /**
+     * @return array<int, KeyInterface>
+     */
+    public function load(): array;
 }
