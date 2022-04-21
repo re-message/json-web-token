@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Loader;
 
+use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
 use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Http\HttpClientInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -42,8 +43,7 @@ class UrlKeyLoader implements KeyLoaderInterface
     public function load(ResourceInterface $resource): array
     {
         if (!$resource instanceof Url) {
-            $message = sprintf('%s does not support %s', self::class, $resource::class);
-            throw new \InvalidArgumentException($message);
+            throw new LoaderNotSupportResource($this, $resource, __METHOD__);
         }
 
         $content = $this->client->getContent($resource->address, $resource->headers);
