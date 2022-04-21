@@ -16,8 +16,10 @@
 
 namespace RM\Standard\Jwt\Key\Loader;
 
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use RM\Standard\Jwt\Exception\LoaderException;
 use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
-use RM\Standard\Jwt\Http\HttpClientInterface;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 use RM\Standard\Jwt\Key\Resource\Url;
 use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
@@ -31,7 +33,8 @@ class UrlKeyLoader implements KeyLoaderInterface
 {
     public function __construct(
         private readonly KeySetSerializerInterface $serializer,
-        private readonly HttpClientInterface $client,
+        private readonly ClientInterface $client,
+        private readonly RequestFactoryInterface $requestFactory,
     ) {
     }
 
@@ -44,7 +47,17 @@ class UrlKeyLoader implements KeyLoaderInterface
             throw new LoaderNotSupportResource($this, $resource, __METHOD__);
         }
 
-        $content = $this->client->getContent($resource->address, $resource->headers);
+        $request = $this->requestFactory->createRequest('GET', $resource->address);
+        foreach ($resource->headers as $key => $value) {
+            $request = $request->withHeader($key, $value);
+        }
+        $response = $this->client->sendRequest($request);
+
+        if ($response->getStatusCode() >= 400) {
+            throw new LoaderException('Unable to get the key set.');
+        }
+
+        $content = $response->getBody()->getContents();
 
         return $this->serializer->deserialize($content);
     }
