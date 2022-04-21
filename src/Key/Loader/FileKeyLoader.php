@@ -16,11 +16,12 @@
 
 namespace RM\Standard\Jwt\Key\Loader;
 
+use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Exception\LoaderException;
 use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
 use RM\Standard\Jwt\Format\FormatterInterface;
+use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Key\Resource\File;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 
@@ -33,6 +34,7 @@ class FileKeyLoader implements KeyLoaderInterface
 {
     public function __construct(
         private readonly FormatterInterface $formatter,
+        private readonly KeyFactoryInterface $factory,
     ) {
     }
 
@@ -77,27 +79,20 @@ class FileKeyLoader implements KeyLoaderInterface
         return $keys;
     }
 
+    protected function create(array $content): KeyInterface|null
+    {
+        try {
+            return $this->factory->create($content);
+        } catch (InvalidKeyException) {
+            return null;
+        }
+    }
+
     /**
      * @inheritDoc
      */
     public function supports(ResourceInterface $resource): bool
     {
         return $resource instanceof File;
-    }
-
-    /**
-     * @todo key factory
-     */
-    protected function create(array $key): KeyInterface|null
-    {
-        $type = $key[KeyInterface::PARAM_KEY_TYPE];
-        if ($type !== KeyInterface::KEY_TYPE_OCTET) {
-            return null;
-        }
-
-        $id = $key[KeyInterface::PARAM_KEY_IDENTIFIER] ?? null;
-        $value = $key[KeyInterface::PARAM_KEY_VALUE];
-
-        return new OctetKey($value, $id);
     }
 }
