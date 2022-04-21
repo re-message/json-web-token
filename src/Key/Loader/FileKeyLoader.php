@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Key\Loader;
 
 use RM\Standard\Jwt\Exception\LoaderException;
-use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
+use RM\Standard\Jwt\Exception\NotSupportedResourceException;
 use RM\Standard\Jwt\Key\Resource\File;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
@@ -40,7 +40,7 @@ class FileKeyLoader implements KeyLoaderInterface
     public function load(ResourceInterface $resource): array
     {
         if (!$resource instanceof File) {
-            throw new LoaderNotSupportResource($this, $resource, __METHOD__);
+            throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
         }
 
         if (!is_file($resource->path)) {

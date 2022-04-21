@@ -18,7 +18,7 @@ namespace RM\Standard\Jwt\Key\Loader;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
+use RM\Standard\Jwt\Exception\NotSupportedResourceException;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 
 /**
@@ -50,7 +50,7 @@ class DelegatingKeyLoader implements KeyLoaderInterface
     {
         $loader = $this->findLoader($resource);
         if (null === $loader) {
-            throw new LoaderNotSupportResource($this, $resource, __METHOD__);
+            throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
         }
 
         return $loader->load($resource);

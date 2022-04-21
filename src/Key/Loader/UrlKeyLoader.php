@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Key\Loader;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use RM\Standard\Jwt\Exception\LoaderException;
-use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
+use RM\Standard\Jwt\Exception\NotSupportedResourceException;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 use RM\Standard\Jwt\Key\Resource\Url;
 use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
@@ -44,7 +44,7 @@ class UrlKeyLoader implements KeyLoaderInterface
     public function load(ResourceInterface $resource): array
     {
         if (!$resource instanceof Url) {
-            throw new LoaderNotSupportResource($this, $resource, __METHOD__);
+            throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
         }
 
         $request = $this->requestFactory->createRequest('GET', $resource->address);
