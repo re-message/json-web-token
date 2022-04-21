@@ -16,30 +16,11 @@
 
 namespace RM\Standard\Jwt\Exception;
 
-use BadMethodCallException;
-use RM\Standard\Jwt\Key\Loader\KeyLoaderInterface;
-use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 use Throwable;
 
 /**
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-class LoaderNotSupportResource extends BadMethodCallException implements LoaderExceptionInterface
+interface LoaderExceptionInterface extends Throwable
 {
-    public function __construct(
-        KeyLoaderInterface $loader,
-        ResourceInterface $resource,
-        string $method,
-        ?Throwable $previous = null
-    ) {
-        $message = sprintf(
-            '%1$s does not support %2$s. Use %1$s::%3$s method before call %4$s.',
-            $loader::class,
-            $resource::class,
-            'supports',
-            $method,
-        );
-
-        parent::__construct($message, 0, $previous);
-    }
 }
