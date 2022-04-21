@@ -26,8 +26,6 @@ use RM\Standard\Jwt\Key\Resource\ResourceInterface;
  */
 interface KeyLoaderInterface
 {
-    public const PARAM_KEYS = 'keys';
-
     /**
      * @param T $resource
      *

@@ -16,14 +16,11 @@
 
 namespace RM\Standard\Jwt\Key\Loader;
 
-use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Exception\LoaderException;
 use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
-use RM\Standard\Jwt\Format\FormatterInterface;
-use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
-use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Resource\File;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
+use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
 
 /**
  * @template-implements KeyLoaderInterface<File>
@@ -33,8 +30,7 @@ use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 class FileKeyLoader implements KeyLoaderInterface
 {
     public function __construct(
-        private readonly FormatterInterface $formatter,
-        private readonly KeyFactoryInterface $factory,
+        private readonly KeySetSerializerInterface $serializer,
     ) {
     }
 
@@ -56,36 +52,11 @@ class FileKeyLoader implements KeyLoaderInterface
         }
 
         $content = file_get_contents($resource->path);
-        $array = $this->formatter->decode($content);
-
-        if (!array_key_exists(self::PARAM_KEYS, $array)) {
-            return [];
+        if (false === $content) {
+            throw new LoaderException(sprintf('Unable get content from file "%s".', $resource->path));
         }
 
-        $keys = [];
-        foreach ($array[self::PARAM_KEYS] as $content) {
-            if (!is_array($content)) {
-                continue;
-            }
-
-            $key = $this->create($content);
-            if (null === $key) {
-                continue;
-            }
-
-            $keys[] = $key;
-        }
-
-        return $keys;
-    }
-
-    protected function create(array $content): KeyInterface|null
-    {
-        try {
-            return $this->factory->create($content);
-        } catch (InvalidKeyException) {
-            return null;
-        }
+        return $this->serializer->deserialize($content);
     }
 
     /**

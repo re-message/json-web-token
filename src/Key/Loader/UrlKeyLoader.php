@@ -16,14 +16,11 @@
 
 namespace RM\Standard\Jwt\Key\Loader;
 
-use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Exception\LoaderNotSupportResource;
-use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Http\HttpClientInterface;
-use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
-use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 use RM\Standard\Jwt\Key\Resource\Url;
+use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
 
 /**
  * @template-implements KeyLoaderInterface<Url>
@@ -33,9 +30,8 @@ use RM\Standard\Jwt\Key\Resource\Url;
 class UrlKeyLoader implements KeyLoaderInterface
 {
     public function __construct(
+        private readonly KeySetSerializerInterface $serializer,
         private readonly HttpClientInterface $client,
-        private readonly FormatterInterface $formatter,
-        private readonly KeyFactoryInterface $factory,
     ) {
     }
 
@@ -49,36 +45,8 @@ class UrlKeyLoader implements KeyLoaderInterface
         }
 
         $content = $this->client->getContent($resource->address, $resource->headers);
-        $array = $this->formatter->decode($content);
 
-        if (!array_key_exists(self::PARAM_KEYS, $array)) {
-            return [];
-        }
-
-        $keys = [];
-        foreach ($array[self::PARAM_KEYS] as $content) {
-            if (!is_array($content)) {
-                continue;
-            }
-
-            $key = $this->create($content);
-            if (null === $key) {
-                continue;
-            }
-
-            $keys[] = $key;
-        }
-
-        return $keys;
-    }
-
-    protected function create(array $content): KeyInterface|null
-    {
-        try {
-            return $this->factory->create($content);
-        } catch (InvalidKeyException) {
-            return null;
-        }
+        return $this->serializer->deserialize($content);
     }
 
     public function supports(ResourceInterface $resource): bool
