@@ -14,29 +14,11 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Key\Loader;
-
-use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\Resource\ResourceInterface;
+namespace RM\Standard\Jwt\Key\Resource;
 
 /**
- * @template T of ResourceInterface
- *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
-interface KeyLoaderInterface
+interface ResourceInterface
 {
-    public const PARAM_KEYS = 'keys';
-
-    /**
-     * @param T $resource
-     *
-     * @return array<int, KeyInterface>
-     */
-    public function load(ResourceInterface $resource): array;
-
-    /**
-     * @psalm-assert-if-true T $resource
-     */
-    public function supports(ResourceInterface $resource): bool;
 }
