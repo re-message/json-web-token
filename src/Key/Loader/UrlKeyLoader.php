@@ -20,8 +20,12 @@ use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Http\HttpClientInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Key\Resource\ResourceInterface;
+use RM\Standard\Jwt\Key\Resource\Url;
 
 /**
+ * @template-implements KeyLoaderInterface<Url>
+ *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */
 class UrlKeyLoader implements KeyLoaderInterface
@@ -29,17 +33,20 @@ class UrlKeyLoader implements KeyLoaderInterface
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly FormatterInterface $formatter,
-        private readonly string $url,
-        private readonly array $headers = [],
     ) {
     }
 
     /**
      * @inheritDoc
      */
-    public function load(): array
+    public function load(ResourceInterface $resource): array
     {
-        $content = $this->client->getContent($this->url, $this->headers);
+        if (!$resource instanceof Url) {
+            $message = sprintf('%s does not support %s', self::class, $resource::class);
+            throw new \InvalidArgumentException($message);
+        }
+
+        $content = $this->client->getContent($resource->address, $resource->headers);
         $array = $this->formatter->decode($content);
 
         if (!array_key_exists(self::PARAM_KEYS, $array)) {
@@ -61,6 +68,11 @@ class UrlKeyLoader implements KeyLoaderInterface
         }
 
         return $keys;
+    }
+
+    public function supports(ResourceInterface $resource): bool
+    {
+        return $resource instanceof Url;
     }
 
     /**
