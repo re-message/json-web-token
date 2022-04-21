@@ -27,7 +27,7 @@ use RM\Standard\Jwt\Key\KeyInterface;
 class RuntimeKeyStorage implements KeyStorageInterface
 {
     /**
-     * @var Collection<string|int, KeyInterface>
+     * @var Collection<int|string, KeyInterface>
      */
     private readonly Collection $keys;
 
@@ -39,7 +39,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
-    public function get(string|int $id): KeyInterface
+    public function get(int|string $id): KeyInterface
     {
         $key = $this->find($id);
         if (null === $key) {
@@ -52,7 +52,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
-    public function find(string|int $id): KeyInterface|null
+    public function find(int|string $id): KeyInterface|null
     {
         $key = $this->keys->get($id);
         if (null === $key) {
@@ -84,7 +84,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
-    public function has(string|int $id): bool
+    public function has(int|string $id): bool
     {
         return $this->keys->containsKey($id);
     }

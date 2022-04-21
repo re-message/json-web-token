@@ -21,8 +21,8 @@ use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Token\AbstractProperty;
 
 /**
- * @template-extends AbstractProperty<string|int>
- * @template-implements HeaderParameterInterface<string|int>
+ * @template-extends AbstractProperty<int|string>
+ * @template-implements HeaderParameterInterface<int|string>
  *
  * @author Oleg Kozlov <h1karo@relmsg.ru>
  */

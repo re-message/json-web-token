@@ -29,12 +29,12 @@ interface KeyStorageInterface
      *
      * @throws KeyNotFoundException
      */
-    public function get(string|int $id): KeyInterface;
+    public function get(int|string $id): KeyInterface;
 
     /**
      * Find key from storage by id.
      */
-    public function find(string|int $id): KeyInterface|null;
+    public function find(int|string $id): KeyInterface|null;
 
     /**
      * Add key to storage.
@@ -51,5 +51,5 @@ interface KeyStorageInterface
     /**
      * Checks if key exists in storage.
      */
-    public function has(string|int $id): bool;
+    public function has(int|string $id): bool;
 }
