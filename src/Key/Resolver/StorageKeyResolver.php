@@ -36,13 +36,15 @@ class StorageKeyResolver implements KeyResolverInterface
 
     public function resolve(TokenInterface $token, KeyUse $use): KeyInterface
     {
-        $id = $token->getHeader()->find(KeyId::NAME);
-        if (null === $id) {
+        $idParameter = $token->getHeader()->find(KeyId::NAME);
+        if (null === $idParameter) {
             throw new KeyIdNotFound();
         }
 
+        $id = $idParameter->getValue();
         $key = $this->storage->get($id);
         $targetUse = KeyUse::from($key->get(KeyInterface::PARAM_USE));
+
         if ($use !== $targetUse) {
             throw new KeyUseNotMatch();
         }
