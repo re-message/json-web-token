@@ -1,12 +1,12 @@
 # Json Web Token Implementation
 
-This library implements a series of standards related with JSON Web Token and is used by others Relations Messenger libraries and services like `relmsg/client` and API server.
+This library implements a series of standards related with JSON Web Token and is used by others [Re: Message](https://remessage.ru) libraries and services like `remessage/client` and API server.
 
 ## Installation
 
 You will need Composer to install. Run this command:
 
-`composer require relmsg/json-web-token`
+`composer require remessage/json-web-token`
 
 ## Usage
 

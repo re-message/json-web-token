@@ -1,14 +1,14 @@
 <?php
 /*
- * This file is a part of Relations Messenger Json Web Token Implementation.
- * This package is a part of Relations Messenger.
+ * This file is a part of Re Message Json Web Token implementation.
+ * This package is a part of Re Message.
  *
- * @link      https://github.com/relmsg/json-web-token
- * @link      https://dev.relmsg.ru/packages/json-web-token
- * @copyright Copyright (c) 2018-2022 Relations Messenger
- * @author    Oleg Kozlov <h1karo@relmsg.ru>
+ * @link      https://github.com/re-message/json-web-token
+ * @link      https://dev.remessage.ru/packages/json-web-token
+ * @copyright Copyright (c) 2018-2022 Re Message
+ * @author    Oleg Kozlov <h1karo@remessage.ru>
  * @license   Apache License 2.0
- * @license   https://legal.relmsg.ru/licenses/json-web-token
+ * @license   https://legal.remessage.ru/licenses/json-web-token
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,8 +20,8 @@ $finder = PhpCsFixer\Finder::create()
     ->append([__FILE__])
 ;
 
-$namespace = 'Relations Messenger';
-$projectTitle = 'Relations Messenger Json Web Token Implementation';
+$namespace = 'Re Message';
+$projectTitle = 'Re Message Json Web Token implementation';
 $projectName = 'json-web-token';
 $currentYear = date('Y');
 
@@ -29,12 +29,12 @@ $header = <<<EOF
     This file is a part of {$projectTitle}.
     This package is a part of {$namespace}.
 
-    @link      https://github.com/relmsg/{$projectName}
-    @link      https://dev.relmsg.ru/packages/{$projectName}
+    @link      https://github.com/re-message/{$projectName}
+    @link      https://dev.remessage.ru/packages/{$projectName}
     @copyright Copyright (c) 2018-{$currentYear} {$namespace}
-    @author    Oleg Kozlov <h1karo@relmsg.ru>
+    @author    Oleg Kozlov <h1karo@remessage.ru>
     @license   Apache License 2.0
-    @license   https://legal.relmsg.ru/licenses/{$projectName}
+    @license   https://legal.remessage.ru/licenses/{$projectName}
 
     For the full copyright and license information, please view the LICENSE
     file that was distributed with this source code.
