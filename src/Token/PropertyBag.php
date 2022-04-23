@@ -57,21 +57,11 @@ abstract class PropertyBag implements PropertyBagInterface
 
     public function find(string $name): ?PropertyInterface
     {
-        if ($this->collection->containsKey($name)) {
-            return $this->collection->get($name);
+        if (!$this->collection->containsKey($name)) {
+            return null;
         }
 
-        /**
-         * @var PropertyInterface $property
-         * @psalm-var T $property
-         */
-        foreach ($this->collection as $property) {
-            if ($property->getName() === $name) {
-                return $property;
-            }
-        }
-
-        return null;
+        return $this->collection->get($name);
     }
 
     public function has(string $name): bool
