@@ -50,6 +50,7 @@ class HMACTest extends TestCase
     }
 
     /**
+     * @covers ::hash
      * @covers ::verify
      * @dataProvider provideAlgorithms
      */
