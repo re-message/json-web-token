@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
-use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * Subject is a unique identity of application who wants to get access to the audience {@see Audience}.

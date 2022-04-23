@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Header;
 
-use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * Type of token, by default is `JWT`.

@@ -19,10 +19,10 @@ namespace RM\Standard\Jwt\Generator;
 use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
 use RM\Standard\Jwt\Identifier\UniqIdGenerator;
 use RM\Standard\Jwt\Property\Payload\Identifier;
+use RM\Standard\Jwt\Property\PropertyInterface;
+use RM\Standard\Jwt\Property\PropertyTarget;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use RM\Standard\Jwt\Token\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>

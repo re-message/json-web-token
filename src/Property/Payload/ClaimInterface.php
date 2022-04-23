@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
-use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Property\PropertyInterface;
 
 /**
  * @template T of mixed

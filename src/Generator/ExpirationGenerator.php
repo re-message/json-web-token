@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Generator;
 
 use RM\Standard\Jwt\Property\Payload\Expiration;
-use RM\Standard\Jwt\Token\PropertyTarget;
+use RM\Standard\Jwt\Property\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>

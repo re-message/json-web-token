@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
-use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * Audience is a unique identity of object token provides access to.

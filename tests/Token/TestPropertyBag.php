@@ -16,8 +16,8 @@
 
 namespace RM\Standard\Jwt\Tests\Token;
 
-use RM\Standard\Jwt\Token\PropertyBag;
-use RM\Standard\Jwt\Token\PropertyInterface;
+use RM\Standard\Jwt\Property\PropertyBag;
+use RM\Standard\Jwt\Property\PropertyInterface;
 
 /**
  * @template-extends PropertyBag<PropertyInterface>

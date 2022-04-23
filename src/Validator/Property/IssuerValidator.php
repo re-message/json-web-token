@@ -18,8 +18,8 @@ namespace RM\Standard\Jwt\Validator\Property;
 
 use RM\Standard\Jwt\Exception\IssuerViolationException;
 use RM\Standard\Jwt\Property\Payload\Issuer;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use RM\Standard\Jwt\Token\PropertyTarget;
+use RM\Standard\Jwt\Property\PropertyInterface;
+use RM\Standard\Jwt\Property\PropertyTarget;
 use UnexpectedValueException;
 
 /**

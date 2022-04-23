@@ -18,7 +18,7 @@ namespace RM\Standard\Jwt\Property\Header;
 
 use InvalidArgumentException;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * @template-extends AbstractProperty<int|string>

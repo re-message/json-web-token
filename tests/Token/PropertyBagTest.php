@@ -22,7 +22,7 @@ use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\Type;
 
 /**
- * @covers \RM\Standard\Jwt\Token\PropertyBag
+ * @covers \RM\Standard\Jwt\Property\PropertyBag
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *

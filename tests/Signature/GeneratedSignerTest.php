@@ -25,11 +25,11 @@ use RM\Standard\Jwt\Generator\IssuerGenerator;
 use RM\Standard\Jwt\Generator\NotBeforeGenerator;
 use RM\Standard\Jwt\Generator\PropertyGeneratorInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Property\PropertyBag;
+use RM\Standard\Jwt\Property\PropertyTarget;
 use RM\Standard\Jwt\Signature\GeneratedSigner;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\SignerInterface;
-use RM\Standard\Jwt\Token\PropertyBag;
-use RM\Standard\Jwt\Token\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**

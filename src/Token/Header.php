@@ -20,6 +20,8 @@ use InvalidArgumentException;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
 use RM\Standard\Jwt\Property\Header\Type;
+use RM\Standard\Jwt\Property\PropertyBag;
+use RM\Standard\Jwt\Property\PropertyInterface;
 use UnexpectedValueException;
 
 /**

@@ -18,8 +18,8 @@ namespace RM\Standard\Jwt\Validator\Property;
 
 use RM\Standard\Jwt\Exception\InvalidPropertyException;
 use RM\Standard\Jwt\Exception\PropertyViolationException;
-use RM\Standard\Jwt\Token\PropertyInterface;
-use RM\Standard\Jwt\Token\PropertyTarget;
+use RM\Standard\Jwt\Property\PropertyInterface;
+use RM\Standard\Jwt\Property\PropertyTarget;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>

@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Property\Payload;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeZone;
-use RM\Standard\Jwt\Token\AbstractProperty;
+use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * @template-implements ClaimInterface<int>

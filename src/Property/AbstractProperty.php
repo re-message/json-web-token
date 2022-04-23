@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RM\Standard\Jwt\Token;
+namespace RM\Standard\Jwt\Property;
 
 /**
  * @template T of mixed
