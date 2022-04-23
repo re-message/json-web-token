@@ -33,13 +33,16 @@ abstract class HMAC implements SignatureAlgorithmInterface
     final public function hash(KeyInterface $key, string $input): string
     {
         $k = $this->getKey($key);
+        $algorithm = $this->getHashAlgorithm();
 
-        return hash_hmac($this->getHashAlgorithm(), $input, $k, true);
+        return hash_hmac($algorithm, $input, $k, true);
     }
 
     final public function verify(KeyInterface $key, string $input, string $hash): bool
     {
-        return hash_equals($this->hash($key, $input), $hash);
+        $expected = $this->hash($key, $input);
+
+        return hash_equals($expected, $hash);
     }
 
     protected function getKey(KeyInterface $key): string
@@ -49,7 +52,9 @@ abstract class HMAC implements SignatureAlgorithmInterface
         }
 
         if (!$key->has(KeyInterface::PARAM_KEY_VALUE)) {
-            throw new InvalidArgumentException(sprintf("The key parameter '%s' is missing.", KeyInterface::PARAM_KEY_VALUE));
+            $message = sprintf('The key parameter "%s" is missing.', KeyInterface::PARAM_KEY_VALUE);
+
+            throw new InvalidArgumentException($message);
         }
 
         $k = $key->get(KeyInterface::PARAM_KEY_VALUE);
