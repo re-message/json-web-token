@@ -27,7 +27,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
 {
     final public function allowedKeyTypes(): array
     {
-        return ['oct'];
+        return [KeyInterface::KEY_TYPE_OCTET];
     }
 
     final public function hash(KeyInterface $key, string $input): string
