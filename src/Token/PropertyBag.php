@@ -47,7 +47,12 @@ abstract class PropertyBag implements PropertyBagInterface
 
     public function __clone()
     {
-        $this->collection = clone $this->collection;
+        $properties = $this->getProperties();
+        $this->collection = new ArrayCollection();
+
+        foreach ($properties as $property) {
+            $this->set(clone $property);
+        }
     }
 
     public function get(string $name): PropertyInterface
