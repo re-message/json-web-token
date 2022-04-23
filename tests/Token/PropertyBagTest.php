@@ -101,4 +101,17 @@ class PropertyBagTest extends TestCase
             $propertyBag->toArray(),
         );
     }
+
+    public function testCloning(): void
+    {
+        $type = new Type('some-type');
+        $algorithm = new Algorithm('some-algo');
+        $properties = [$type, $algorithm];
+        $propertyBag = new TestPropertyBag($properties);
+
+        self::assertSame($properties, $propertyBag->getProperties());
+
+        $cloned = clone $propertyBag;
+        self::assertNotSame($properties, $cloned->getProperties());
+    }
 }
