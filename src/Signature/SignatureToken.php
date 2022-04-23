@@ -111,6 +111,15 @@ final class SignatureToken implements TokenInterface
         return null !== $this->signature;
     }
 
+    /**
+     * Checks if the token is protected by signing.
+     * An empty signature means that the token is not secure.
+     */
+    public function isSecured(): bool
+    {
+        return !empty($this->signature);
+    }
+
     public function toString(SerializerInterface $serializer): string
     {
         if (!$serializer->supports($this)) {

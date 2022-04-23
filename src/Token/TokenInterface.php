@@ -25,6 +25,11 @@ use RM\Standard\Jwt\Serializer\SerializerInterface;
 interface TokenInterface
 {
     /**
+     * Checks if the token is protected by signing, encryption, or something else.
+     */
+    public function isSecured(): bool;
+
+    /**
      * Returns array collection of header parameters.
      */
     public function getHeader(): Header;
