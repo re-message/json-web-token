@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Tests\Algorithm\Signature\HMAC;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
@@ -45,6 +46,16 @@ class HMACTest extends TestCase
         $this->key = new OctetKey(
             'zi8zioLYkOwX0i2n3iEi2a2oAFJpiqPxd-_qcCewX07lz6yRmLxMr2wUixlrqeiBhQdaU1ugHZv55T5PsEqeOg'
         );
+    }
+
+    /**
+     * @dataProvider provideAlgorithms
+     */
+    public function testAlgorithmName(HMAC $algorithm): void
+    {
+        $reflect = new ReflectionClass($algorithm);
+        $expected = strtoupper($reflect->getShortName());
+        self::assertSame($expected, $algorithm->name());
     }
 
     /**
