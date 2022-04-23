@@ -3,6 +3,7 @@
 composer.lock
 
 .phpunit.result.cache
+/coverage/
 .php-cs-fixer.cache
 
 /tests/log
