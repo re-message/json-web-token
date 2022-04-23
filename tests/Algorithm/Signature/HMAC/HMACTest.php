@@ -25,7 +25,11 @@ use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\OctetKey;
 
 /**
- * @coversDefaultClass \RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC
+ * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC
+ * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256
+ * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256
+ * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512
+ * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512
  *
  * @internal
  */
@@ -41,7 +45,6 @@ class HMACTest extends TestCase
     }
 
     /**
-     * @covers ::allowedKeyTypes
      * @dataProvider provideAlgorithms
      */
     public function testOctetKeyIsAllowed(SignatureAlgorithmInterface $algorithm): void
@@ -50,8 +53,6 @@ class HMACTest extends TestCase
     }
 
     /**
-     * @covers ::hash
-     * @covers ::verify
      * @dataProvider provideAlgorithms
      */
     public function testHash(SignatureAlgorithmInterface $algorithm, string $input, string $expects): void
