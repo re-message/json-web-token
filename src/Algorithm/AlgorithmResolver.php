@@ -40,9 +40,9 @@ class AlgorithmResolver implements AlgorithmResolverInterface
         }
 
         $message = sprintf(
-            'Algorithm must implement %1$s, given %2$s.',
-            $algorithm::class,
-            $type
+            'Algorithm must implement %s, given %s.',
+            $type,
+            $algorithm::class
         );
 
         throw new InvalidArgumentException($message);
