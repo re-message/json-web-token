@@ -33,6 +33,9 @@ abstract class PropertyBag implements PropertyBagInterface
      */
     private Collection $collection;
 
+    /**
+     * @param array<int, T> $properties
+     */
     public function __construct(array $properties = [])
     {
         $this->collection = new ArrayCollection();
