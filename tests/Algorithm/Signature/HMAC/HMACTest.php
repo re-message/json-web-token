@@ -16,13 +16,16 @@
 
 namespace RM\Standard\Jwt\Tests\Algorithm\Signature\HMAC;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
-use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
+use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Tests\Key\Key;
 
 /**
  * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC
@@ -47,15 +50,23 @@ class HMACTest extends TestCase
     /**
      * @dataProvider provideAlgorithms
      */
-    public function testOctetKeyIsAllowed(SignatureAlgorithmInterface $algorithm): void
+    public function testOctetKeyIsAllowed(HMAC $algorithm): void
     {
         self::assertContains($this->key->getType(), $algorithm->allowedKeyTypes());
     }
 
+    public function provideAlgorithms(): iterable
+    {
+        $algorithms = [new HS256(), new HS512(), new HS3256(), new HS3512()];
+        foreach ($algorithms as $algorithm) {
+            yield $algorithm->name() => [$algorithm];
+        }
+    }
+
     /**
-     * @dataProvider provideAlgorithms
+     * @dataProvider provideHashes
      */
-    public function testHash(SignatureAlgorithmInterface $algorithm, string $input, string $expects): void
+    public function testHash(HMAC $algorithm, string $input, string $expects): void
     {
         $hash = $algorithm->hash($this->key, $input);
         self::assertTrue(hash_equals($expects, $hash));
@@ -66,7 +77,7 @@ class HMACTest extends TestCase
         self::assertFalse($algorithm->verify($this->key, 'bad-input', 'bad-hash'));
     }
 
-    public function provideAlgorithms(): iterable
+    public function provideHashes(): iterable
     {
         yield [
             new HS256(),
@@ -94,6 +105,41 @@ class HMACTest extends TestCase
             hex2bin(
                 '0d86e47c72f02d947489a64a5ac9148483575caeae38acb935699ddd676e0c72d849ed9aef0cc02c3a8b8b1c854be7227921959d50be1a4c307b03f0db33034d'
             ),
+        ];
+    }
+
+    /**
+     * @dataProvider provideInvalidKeys
+     */
+    public function testInvalidKey(KeyInterface $key, string $message): void
+    {
+        $algorithm = new HS256();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($message);
+        $algorithm->hash($key, 'any');
+    }
+
+    public function provideInvalidKeys(): iterable
+    {
+        yield 'invalid type key' => [
+            new Key([KeyInterface::PARAM_KEY_TYPE => 'unknown key']),
+            'key type',
+        ];
+
+        yield 'no value key' => [
+            new Key([KeyInterface::PARAM_KEY_TYPE => KeyInterface::KEY_TYPE_OCTET]),
+            '"k" is missing',
+        ];
+
+        yield 'short value key' => [
+            new Key(
+                [
+                    KeyInterface::PARAM_KEY_TYPE => KeyInterface::KEY_TYPE_OCTET,
+                    KeyInterface::PARAM_KEY_VALUE => 'short-value',
+                ]
+            ),
+            'key length',
         ];
     }
 }
