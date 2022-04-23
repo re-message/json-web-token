@@ -41,7 +41,10 @@
         "symfony/stopwatch": "^6.0",
 
         "phpunit/phpunit": "^9.2.5",
+
         "friendsofphp/php-cs-fixer": "^3.8",
+        "remessage/ruleset": "^1.0",
+
         "vimeo/psalm": "^4.22",
         "psalm/plugin-phpunit": "^0.16.1",
 
