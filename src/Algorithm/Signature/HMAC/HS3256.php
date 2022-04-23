@@ -23,17 +23,11 @@ namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
  */
 class HS3256 extends HMAC
 {
-    /**
-     * @inheritDoc
-     */
     public function name(): string
     {
         return 'HS3256';
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function getHashAlgorithm(): string
     {
         return 'sha3-256';

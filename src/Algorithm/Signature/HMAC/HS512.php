@@ -23,17 +23,11 @@ namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
  */
 class HS512 extends HMAC
 {
-    /**
-     * @inheritDoc
-     */
     public function name(): string
     {
         return 'HS512';
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function getHashAlgorithm(): string
     {
         return 'sha512';
