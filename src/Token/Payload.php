@@ -58,7 +58,7 @@ class Payload extends PropertyBag
     public function set(PropertyInterface $property): void
     {
         if (!$property instanceof ClaimInterface) {
-            throw new UnexpectedValueException('Expects a header parameter.');
+            throw new UnexpectedValueException('Expects a claim.');
         }
 
         parent::set($property);
