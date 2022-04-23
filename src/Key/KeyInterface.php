@@ -32,6 +32,7 @@ interface KeyInterface extends JsonSerializable
     public const PARAM_USE = 'use';
     public const PARAM_KEY_VALUE = 'k';
 
+    public const KEY_TYPE_NONE = 'none';
     public const KEY_TYPE_OCTET = 'oct';
     public const KEY_TYPE_RSA = 'RSA';
 
