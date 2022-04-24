@@ -35,6 +35,12 @@ class NoneTest extends TestCase
         self::assertSame('none', $none->name());
     }
 
+    public function testAllowedKeys(): void
+    {
+        $none = new None();
+        self::assertContains(KeyInterface::KEY_TYPE_NONE, $none->allowedKeyTypes());
+    }
+
     public function testHash(): void
     {
         $none = new None();
