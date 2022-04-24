@@ -40,6 +40,8 @@ class AlgorithmResolverTest extends TestCase
 {
     /**
      * @dataProvider provideAlgorithm
+     *
+     * @param class-string<AlgorithmInterface> $by
      */
     public function testValidAlgorithm(AlgorithmInterface $expected, string $by): void
     {
