@@ -48,7 +48,7 @@ class SignatureCompactSerializerTest extends TestCase
     }
 
     /**
-     * @dataProvider getTokens
+     * @dataProvider provideTokens
      */
     public function testSerialize(bool $isValid, string $rawToken): void
     {
@@ -61,7 +61,7 @@ class SignatureCompactSerializerTest extends TestCase
         $token = $serializer->deserialize($rawToken);
         self::assertInstanceOf(SignatureToken::class, $token);
 
-        $serializedToken = $token->toString($serializer);
+        $serializedToken = $serializer->serialize($token);
         self::assertEquals($rawToken, $serializedToken);
     }
 
@@ -85,11 +85,21 @@ class SignatureCompactSerializerTest extends TestCase
         $serializer->serialize($token);
     }
 
-    public function getTokens(): Generator
+    public function provideTokens(): Generator
     {
         yield [
             true,
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        ];
+
+        yield [
+            true,
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.',
+        ];
+
+        yield [
+            true,
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ',
         ];
 
         yield [
