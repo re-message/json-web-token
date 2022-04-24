@@ -26,15 +26,12 @@ use RM\Standard\Jwt\Token\TokenInterface;
 use stdClass;
 
 /**
- * @coversDefaultClass \RM\Standard\Jwt\Serializer\SignatureCompactSerializer
+ * @covers \RM\Standard\Jwt\Serializer\SignatureCompactSerializer
  *
  * @internal
  */
 class SignatureCompactSerializerTest extends TestCase
 {
-    /**
-     * @covers ::supports
-     */
     public function testSupports(): SignatureCompactSerializer
     {
         $serializer = new SignatureCompactSerializer();
@@ -49,8 +46,6 @@ class SignatureCompactSerializerTest extends TestCase
     }
 
     /**
-     * @covers ::deserialize
-     * @covers ::serialize
      * @dataProvider getTokens
      */
     public function testSerialize(bool $isValid, string $rawToken): TokenInterface

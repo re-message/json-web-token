@@ -32,14 +32,13 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\Signer;
 
 /**
- * @coversDefaultClass \RM\Standard\Jwt\Signature\Signer
+ * @covers \RM\Standard\Jwt\Signature\Signer
  *
  * @internal
  */
 class SignerTest extends TestCase
 {
     /**
-     * @covers ::sign
      * @dataProvider provideKeyAndAlgorithm
      */
     public function testSign(SignatureAlgorithmInterface $algorithm, KeyInterface $key): void
@@ -54,9 +53,6 @@ class SignerTest extends TestCase
         self::assertTrue($signed->isSigned());
     }
 
-    /**
-     * @covers ::sign
-     */
     public function testSignAlreadySignedToken(): void
     {
         $algorithm = new HS3256();

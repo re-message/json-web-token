@@ -22,7 +22,7 @@ use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
 /**
- * @coversDefaultClass \RM\Standard\Jwt\Storage\RuntimeTokenStorage
+ * @covers \RM\Standard\Jwt\Storage\RuntimeTokenStorage
  *
  * @internal
  */
@@ -37,9 +37,6 @@ class RuntimeTokenStorageTest extends TestCase
         self::$someTokenId = Rand::getString(256);
     }
 
-    /**
-     * @covers ::put
-     */
     public function testPut(): void
     {
         self::$storage->put(self::$someTokenId, 60);
@@ -47,9 +44,6 @@ class RuntimeTokenStorageTest extends TestCase
         self::assertFalse(self::$storage->has(Rand::getString(256)));
     }
 
-    /**
-     * @covers ::revoke
-     */
     public function testRevoke(): void
     {
         self::$storage->revoke(self::$someTokenId);
