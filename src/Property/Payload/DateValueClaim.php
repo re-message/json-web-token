@@ -18,7 +18,6 @@ namespace RM\Standard\Jwt\Property\Payload;
 
 use DateTime;
 use DateTimeImmutable;
-use DateTimeZone;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -32,8 +31,9 @@ abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
     public function setValue(mixed $value): void
     {
         if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
-            $value = $value->setTimezone(new DateTimeZone('UTC'));
-            $value = $value->getTimestamp();
+            parent::setValue($value->getTimestamp());
+
+            return;
         }
 
         parent::setValue($value);
