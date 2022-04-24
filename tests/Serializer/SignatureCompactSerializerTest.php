@@ -19,12 +19,15 @@ namespace RM\Standard\Jwt\Tests\Serializer;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
 use stdClass;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 
 /**
  * @covers \RM\Standard\Jwt\Serializer\SignatureCompactSerializer
@@ -60,6 +63,17 @@ class SignatureCompactSerializerTest extends TestCase
 
         $serializedToken = $token->toString($serializer);
         self::assertEquals($rawToken, $serializedToken);
+    }
+
+    public function testInvalidTokenFormatOnSerialization(): void
+    {
+        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter->method('encode')->willThrowException(new UnexpectedValueException());
+        $serializer = new SignatureCompactSerializer($formatter);
+
+        $this->expectException(InvalidTokenException::class);
+        $token = SignatureToken::createWithAlgorithm(new HS256());
+        $serializer->serialize($token);
     }
 
     public function testUnsupportedTokenSerialization(): void
