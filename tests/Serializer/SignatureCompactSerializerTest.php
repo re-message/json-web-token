@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Tests\Serializer;
 
 use Generator;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
@@ -32,7 +33,7 @@ use stdClass;
  */
 class SignatureCompactSerializerTest extends TestCase
 {
-    public function testSupports(): SignatureCompactSerializer
+    public function testSupports(): void
     {
         $serializer = new SignatureCompactSerializer();
 
@@ -41,14 +42,12 @@ class SignatureCompactSerializerTest extends TestCase
 
         $token = SignatureToken::createWithAlgorithm(new HS3512());
         self::assertTrue($serializer->supports($token));
-
-        return $serializer;
     }
 
     /**
      * @dataProvider getTokens
      */
-    public function testSerialize(bool $isValid, string $rawToken): TokenInterface
+    public function testSerialize(bool $isValid, string $rawToken): void
     {
         $serializer = new SignatureCompactSerializer();
 
@@ -61,8 +60,15 @@ class SignatureCompactSerializerTest extends TestCase
 
         $serializedToken = $token->toString($serializer);
         self::assertEquals($rawToken, $serializedToken);
+    }
 
-        return $token;
+    public function testUnsupportedTokenSerialization(): void
+    {
+        $serializer = new SignatureCompactSerializer();
+
+        $this->expectException(InvalidArgumentException::class);
+        $token = $this->createMock(TokenInterface::class);
+        $serializer->serialize($token);
     }
 
     public function getTokens(): Generator
