@@ -63,6 +63,15 @@ class KeySetSerializerTest extends TestCase
                 ],
             ],
         ];
+
+        yield 'keys not as an array' => [
+            [
+                KeySetSerializerInterface::PARAM_KEYS => [
+                    'key',
+                    'another key',
+                ],
+            ],
+        ];
     }
 
     /**
