@@ -16,7 +16,9 @@
 
 namespace RM\Standard\Jwt\Tests\Key\Set;
 
+use Laminas\Math\Rand;
 use PHPUnit\Framework\TestCase;
+use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\Factory\OctetKeyFactory;
@@ -57,7 +59,7 @@ class KeySetSerializerTest extends TestCase
         yield 'no param keys' => [
             [
                 'not-keys-param' => [
-                    $this->getOctetKey()->all(),
+                    $this->generateOctetKey()->all(),
                 ],
             ],
         ];
@@ -87,11 +89,42 @@ class KeySetSerializerTest extends TestCase
     {
         yield 'empty' => [[]];
 
-        yield 'one octet key' => [[$this->getOctetKey()]];
+        yield 'one octet key' => [[$this->generateOctetKey()]];
     }
 
-    private function getOctetKey(): OctetKey
+    public function testSkipOnInvalidKey(): void
     {
-        return new OctetKey('GawgguFyGrWKav7AX4VKUg', 'fexa');
+        $firstKey = $this->generateOctetKey();
+        $secondKey = $this->generateOctetKey();
+        $keySet = [
+            KeySetSerializerInterface::PARAM_KEYS => [
+                $firstKey->all(),
+                $secondKey->all(),
+            ],
+        ];
+
+        $factory = $this->createMock(KeyFactoryInterface::class);
+        $factory
+            ->method('create')
+            ->willReturnCallback(
+                fn (array $key) => $key !== $firstKey->all()
+                    ? $secondKey
+                    : throw new UnsupportedKeyException('this'),
+            )
+        ;
+
+        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter->method('decode')->willReturn($keySet);
+
+        $serializer = new KeySetSerializer($factory, $formatter);
+
+        $keys = $serializer->deserialize('any');
+        self::assertCount(1, $keys);
+        self::assertEquals([$secondKey], $keys);
+    }
+
+    private function generateOctetKey(): OctetKey
+    {
+        return new OctetKey(Rand::getString(16), Rand::getString(12));
     }
 }
