@@ -23,6 +23,8 @@ use RM\Standard\Jwt\Format\JsonFormatter;
  * @covers \RM\Standard\Jwt\Format\JsonFormatter
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
+ *
+ * @internal
  */
 class JsonFormatterTest extends TestCase
 {
