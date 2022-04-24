@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Key\Set;
 use BadMethodCallException;
 use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Format\FormatterInterface;
+use RM\Standard\Jwt\Format\JsonFormatter;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
 
@@ -29,7 +30,7 @@ class KeySetSerializer implements KeySetSerializerInterface
 {
     public function __construct(
         private readonly KeyFactoryInterface $factory,
-        private readonly FormatterInterface $formatter,
+        private readonly FormatterInterface $formatter = new JsonFormatter(),
     ) {
     }
 
