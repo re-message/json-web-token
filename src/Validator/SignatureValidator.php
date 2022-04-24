@@ -43,7 +43,7 @@ class SignatureValidator implements ValidatorInterface
             return true;
         }
 
-        if (!$token->isSigned()) {
+        if (!$token->isSecured()) {
             return false;
         }
 
