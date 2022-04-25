@@ -53,7 +53,9 @@ class SignerTest extends TestCase
 
         self::assertNotSame($signed, $token);
         self::assertFalse($token->isSigned());
+        self::assertNull($token->getSignature());
         self::assertTrue($signed->isSigned());
+        self::assertNotNull($signed->getSignature());
     }
 
     public function testSignAlreadySignedToken(): void
