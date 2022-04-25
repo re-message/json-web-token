@@ -36,9 +36,9 @@ class GeneratedSigner extends DecoratedSigner
     private readonly Collection $generators;
 
     /**
-     * @param PropertyGeneratorInterface[] $generators
+     * @param iterable<PropertyGeneratorInterface> $generators
      */
-    public function __construct(SignerInterface $signer, array $generators = [])
+    public function __construct(SignerInterface $signer, iterable $generators = [])
     {
         parent::__construct($signer);
 
