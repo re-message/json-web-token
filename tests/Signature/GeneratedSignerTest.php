@@ -31,6 +31,8 @@ use RM\Standard\Jwt\Signature\GeneratedSigner;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\SignerInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
+use stdClass;
+use TypeError;
 
 /**
  * @covers \RM\Standard\Jwt\Signature\GeneratedSigner
@@ -39,6 +41,14 @@ use RM\Standard\Jwt\Token\TokenInterface;
  */
 class GeneratedSignerTest extends TestCase
 {
+    public function testInvalidConstructorUsage(): void
+    {
+        $signer = $this->createMock(SignerInterface::class);
+
+        $this->expectException(TypeError::class);
+        new GeneratedSigner($signer, [new stdClass()]);
+    }
+
     public function testTokenCloningOnSign(): GeneratedSigner
     {
         $algorithm = $this->createMock(SignatureAlgorithmInterface::class);
