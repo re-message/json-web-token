@@ -24,10 +24,13 @@ use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
+use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Property\Header\Algorithm;
+use RM\Standard\Jwt\Property\Header\KeyId;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\Signer;
 
@@ -67,7 +70,7 @@ class SignerTest extends TestCase
         $signer->sign($signed, $algorithm, $key);
     }
 
-    public function provideKeyAndAlgorithm(): Generator
+    public function provideKeyAndAlgorithm(): iterable
     {
         $cartesian = new CartesianProduct(
             [
@@ -99,8 +102,49 @@ class SignerTest extends TestCase
         yield $this->generateOctetKey();
     }
 
+    /**
+     * @dataProvider provideToken
+     */
+    public function testSignUpdatesAlgorithmAndKey(SignatureToken $token): void
+    {
+        $algorithm = new HS3256();
+        $key = $this->generateOctetKey();
+
+        $signer = new Signer();
+        $signed = $signer->sign($token, $algorithm, $key);
+
+        $algorithmParameter = $signed->getHeader()->get(Algorithm::NAME);
+        self::assertSame($algorithm->name(), $algorithmParameter->getValue());
+
+        $keyIdParameter = $signed->getHeader()->get(KeyId::NAME);
+        $expectedKeyId = $key->get(KeyInterface::PARAM_KEY_IDENTIFIER);
+        self::assertSame($expectedKeyId, $keyIdParameter->getValue());
+    }
+
+    public function provideToken(): iterable
+    {
+        $hs256 = new HS256();
+
+        yield [SignatureToken::createWithAlgorithm($hs256)];
+
+        $hs512 = new HS512();
+        $octetKey = $this->generateOctetKey();
+
+        yield [
+            new SignatureToken(
+                [
+                    Algorithm::fromAlgorithm($hs512),
+                    KeyId::fromKey($octetKey),
+                ]
+            ),
+        ];
+    }
+
     public function generateOctetKey(): KeyInterface
     {
-        return new OctetKey(Base64UrlSafe::encode(Rand::getBytes(64)));
+        $value = Base64UrlSafe::encode(Rand::getBytes(64));
+        $id = Rand::getString(16);
+
+        return new OctetKey($value, $id);
     }
 }
