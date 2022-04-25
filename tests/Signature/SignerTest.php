@@ -21,11 +21,11 @@ use Generator;
 use Laminas\Math\Rand;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use PHPUnit\Framework\TestCase;
-use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
-use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
+use RM\Standard\Jwt\Algorithm\Signature\None;
+use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
@@ -44,7 +44,7 @@ class SignerTest extends TestCase
     /**
      * @dataProvider provideKeyAndAlgorithm
      */
-    public function testSign(SignatureAlgorithmInterface $algorithm, KeyInterface $key): void
+    public function testSign(AlgorithmInterface $algorithm, KeyInterface $key): SignatureToken
     {
         $token = SignatureToken::createWithAlgorithm($algorithm);
 
@@ -56,6 +56,39 @@ class SignerTest extends TestCase
         self::assertNull($token->getSignature());
         self::assertTrue($signed->isSigned());
         self::assertNotNull($signed->getSignature());
+
+        return $signed;
+    }
+
+    /**
+     * @dataProvider provideKeyAndAlgorithm
+     */
+    public function testVerify(AlgorithmInterface $algorithm, KeyInterface $key): void
+    {
+        $token = SignatureToken::createWithAlgorithm($algorithm);
+        $signer = new Signer();
+        $signed = $signer->sign($token, $algorithm, $key);
+
+        $otherAlgorithm = new None();
+        $otherKey = $this->generateOctetKey();
+
+        self::assertTrue($signer->verify($signed, $algorithm, $key));
+        self::assertFalse($signer->verify($signed, $otherAlgorithm, $key));
+        self::assertFalse($signer->verify($signed, $algorithm, $otherKey));
+        self::assertFalse($signer->verify($signed, $otherAlgorithm, $otherKey));
+    }
+
+    public function testVerifyUnsignedToken(): void
+    {
+        $algorithm = new HS256();
+        $key = $this->generateOctetKey();
+
+        $token = SignatureToken::createWithAlgorithm($algorithm);
+        $signer = new Signer();
+
+        $this->expectException(InvalidTokenException::class);
+        $this->expectExceptionMessage('no signature');
+        $signer->verify($token, $algorithm, $key);
     }
 
     public function testSignAlreadySignedToken(): void
