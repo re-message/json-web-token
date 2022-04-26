@@ -28,11 +28,13 @@ class MemcacheTokenStorage implements TokenStorageInterface
 
     public function __construct(string $host, int $port = 11211)
     {
+        // @codeCoverageIgnoreStart
         if (!class_exists(Memcache::class, false)) {
             $message = 'Memcache class does not exist. You need the memcache php extension to use this storage.';
 
             throw new InvalidArgumentException($message);
         }
+        // @codeCoverageIgnoreEnd
 
         $this->memcache = new Memcache();
         $this->memcache->addServer($host, $port);
