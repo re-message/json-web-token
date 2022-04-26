@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Storage;
 
+use InvalidArgumentException;
 use Predis\Client;
 
 /**
@@ -27,6 +28,12 @@ class RedisTokenStorage implements TokenStorageInterface
 
     public function __construct(string $dsn)
     {
+        if (!class_exists(Client::class, false)) {
+            $message = 'Redis client class is not found. You need the predis/predis package to use this storage.';
+
+            throw new InvalidArgumentException($message);
+        }
+
         $this->redis = new Client($dsn);
     }
 
