@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Key\Set;
 
-use BadMethodCallException;
 use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Format\JsonFormatter;
@@ -37,17 +36,26 @@ class KeySetSerializer implements KeySetSerializerInterface
     /**
      * @inheritDoc
      */
-    public function serialize(array $set): string
+    public function serialize(array $keys): string
     {
-        throw new BadMethodCallException('Not implemented');
+        $array = [];
+        foreach ($keys as $key) {
+            if (!$key instanceof KeyInterface) {
+                continue;
+            }
+
+            $array[] = $key->all();
+        }
+
+        return $this->formatter->encode([self::PARAM_KEYS => $array]);
     }
 
     /**
      * @inheritDoc
      */
-    public function deserialize(string $serialized): array
+    public function deserialize(string $set): array
     {
-        $array = $this->formatter->decode($serialized);
+        $array = $this->formatter->decode($set);
 
         if (!array_key_exists(self::PARAM_KEYS, $array)) {
             return [];

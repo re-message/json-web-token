@@ -28,14 +28,14 @@ interface KeySetSerializerInterface
     /**
      * Serializes a key set to transfer and storage format.
      *
-     * @param KeyInterface[] $set
+     * @param KeyInterface[] $keys
      */
-    public function serialize(array $set): string;
+    public function serialize(array $keys): string;
 
     /**
      * Deserializes the key set from transfer and storage format.
      *
      * @return KeyInterface[]
      */
-    public function deserialize(string $serialized): array;
+    public function deserialize(string $set): array;
 }
