@@ -29,37 +29,41 @@ use RM\Standard\Jwt\Storage\TokenStorageInterface;
  */
 class MemcacheTokenStorageTest extends TestCase
 {
-    private static TokenStorageInterface $storage;
+    private static string $host;
+    private static int $port;
     private static string $someTokenId;
 
     public static function setUpBeforeClass(): void
     {
-        $host = $_ENV['MEMCACHED_HOST'];
-        $port = (int) $_ENV['MEMCACHED_PORT'];
+        self::$host = $_ENV['MEMCACHED_HOST'];
+        self::$port = (int) $_ENV['MEMCACHED_PORT'];
 
-        if (!self::isMemcacheAvailable($host, $port)) {
+        if (!self::isMemcacheAvailable(self::$host, self::$port)) {
             self::markTestIncomplete('Memcached server is not available');
         }
 
-        self::$storage = new MemcacheTokenStorage($host, $port);
         self::$someTokenId = Rand::getString(256);
     }
 
-    public function testPut(): void
+    public function testPut(): TokenStorageInterface
     {
-        self::$storage->put(self::$someTokenId, 60);
-        self::assertTrue(self::$storage->has(self::$someTokenId));
-        self::assertFalse(self::$storage->has(Rand::getString(256)));
+        $storage = new MemcacheTokenStorage(self::$host, self::$port);
+
+        $storage->put(self::$someTokenId, 60);
+        self::assertTrue($storage->has(self::$someTokenId));
+        self::assertFalse($storage->has(Rand::getString(256)));
+
+        return $storage;
     }
 
     /**
      * @depends testPut
      */
-    public function testRevoke(): void
+    public function testRevoke(TokenStorageInterface $storage): void
     {
-        self::assertTrue(self::$storage->has(self::$someTokenId));
-        self::$storage->revoke(self::$someTokenId);
-        self::assertFalse(self::$storage->has(self::$someTokenId));
+        self::assertTrue($storage->has(self::$someTokenId));
+        $storage->revoke(self::$someTokenId);
+        self::assertFalse($storage->has(self::$someTokenId));
     }
 
     private static function isMemcacheAvailable(string $host, int $port): bool

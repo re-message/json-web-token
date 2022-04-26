@@ -28,25 +28,30 @@ use RM\Standard\Jwt\Storage\TokenStorageInterface;
  */
 class RuntimeTokenStorageTest extends TestCase
 {
-    private static TokenStorageInterface $storage;
     private static string $someTokenId;
 
     public static function setUpBeforeClass(): void
     {
-        self::$storage = new RuntimeTokenStorage();
         self::$someTokenId = Rand::getString(256);
     }
 
-    public function testPut(): void
+    public function testPut(): TokenStorageInterface
     {
-        self::$storage->put(self::$someTokenId, 60);
-        self::assertTrue(self::$storage->has(self::$someTokenId));
-        self::assertFalse(self::$storage->has(Rand::getString(256)));
+        $storage = new RuntimeTokenStorage();
+
+        $storage->put(self::$someTokenId, 60);
+        self::assertTrue($storage->has(self::$someTokenId));
+        self::assertFalse($storage->has(Rand::getString(256)));
+
+        return $storage;
     }
 
-    public function testRevoke(): void
+    /**
+     * @depends testPut
+     */
+    public function testRevoke(TokenStorageInterface $storage): void
     {
-        self::$storage->revoke(self::$someTokenId);
-        self::assertFalse(self::$storage->has(self::$someTokenId));
+        $storage->revoke(self::$someTokenId);
+        self::assertFalse($storage->has(self::$someTokenId));
     }
 }
