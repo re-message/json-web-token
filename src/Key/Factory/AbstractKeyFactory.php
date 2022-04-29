@@ -1,0 +1,82 @@
+<?php
+/*
+ * This file is a part of Re Message Json Web Token implementation.
+ * This package is a part of Re Message.
+ *
+ * @link      https://github.com/re-message/json-web-token
+ * @link      https://dev.remessage.ru/packages/json-web-token
+ * @copyright Copyright (c) 2018-2022 Re Message
+ * @author    Oleg Kozlov <h1karo@remessage.ru>
+ * @license   Apache License 2.0
+ * @license   https://legal.remessage.ru/licenses/json-web-token
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace RM\Standard\Jwt\Key\Factory;
+
+use RM\Standard\Jwt\Exception\InvalidKeyException;
+use RM\Standard\Jwt\Exception\UnsupportedKeyException;
+use RM\Standard\Jwt\Key\Key;
+use RM\Standard\Jwt\Key\KeyInterface;
+
+/**
+ * @author Oleg Kozlov <h1karo@remessage.ru>
+ */
+abstract class AbstractKeyFactory implements KeyFactoryInterface
+{
+    protected function __construct(
+        private readonly array $supportedTypes,
+        private readonly array $requiredParameters = [KeyInterface::PARAM_TYPE],
+    ) {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(array $content): KeyInterface
+    {
+        $type = $content[KeyInterface::PARAM_TYPE] ?? null;
+        if (null === $type || !$this->supports($content)) {
+            throw new UnsupportedKeyException($type, static::class);
+        }
+
+        if (!$this->hasRequiredParameters($content)) {
+            throw new InvalidKeyException('The key does not have some required parameters.');
+        }
+
+        return $this->hydrate($content);
+    }
+
+    protected function hydrate(array $content): KeyInterface
+    {
+        return new Key($content);
+    }
+
+    protected function hasRequiredParameters(array $content): bool
+    {
+        $parameterNames = array_keys($content);
+        $intersection = array_intersect($this->requiredParameters, $parameterNames);
+
+        return count($intersection) === count($this->requiredParameters);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function supports(array $content): bool
+    {
+        $type = $content[KeyInterface::PARAM_TYPE] ?? null;
+        if (null === $type) {
+            return false;
+        }
+
+        return $this->supportsType($type);
+    }
+
+    protected function supportsType(string $type): bool
+    {
+        return in_array($type, $this->supportedTypes, true);
+    }
+}
