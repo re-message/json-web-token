@@ -41,23 +41,23 @@ class Key implements KeyInterface
         $this->parameters = $parameters;
     }
 
-    public function get(string $parameter): string
+    public function get(string $name): string
     {
-        if (!$this->has($parameter)) {
+        if (!$this->has($name)) {
             $message = sprintf(
                 'The parameter with name `%s` is not exists in this key.',
-                $parameter
+                $name
             );
 
             throw new InvalidArgumentException($message);
         }
 
-        return $this->parameters[$parameter];
+        return $this->parameters[$name];
     }
 
-    public function has(string $parameter): bool
+    public function has(string $name): bool
     {
-        return array_key_exists($parameter, $this->parameters);
+        return array_key_exists($name, $this->parameters);
     }
 
     public function getType(): string

@@ -30,12 +30,12 @@ interface KeyInterface extends JsonSerializable
     /**
      * Returns value of parameter if he exists.
      */
-    public function get(string $parameter): string;
+    public function get(string $name): string;
 
     /**
      * Checks if a parameter exists in a key.
      */
-    public function has(string $parameter): bool;
+    public function has(string $name): bool;
 
     /**
      * Returns the type of the key.
