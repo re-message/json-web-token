@@ -20,6 +20,7 @@ use Laminas\Math\Rand;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Format\FormatterInterface;
+use RM\Standard\Jwt\Format\JsonFormatter;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\Factory\OctetKeyFactory;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -36,6 +37,25 @@ use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
  */
 class KeySetSerializerTest extends TestCase
 {
+    /**
+     * @dataProvider provideKeys
+     */
+    public function testSerialize(array $keys): void
+    {
+        $factory = $this->createMock(KeyFactoryInterface::class);
+        $factory->expects(self::never())->method('create');
+        $formatter = new JsonFormatter();
+
+        $serializer = new KeySetSerializer($factory, $formatter);
+
+        $keyToArray = static fn (KeyInterface $key) => $key->all();
+        $keysArray = array_map($keyToArray, $keys);
+        $expected = $formatter->encode([KeySetSerializerInterface::PARAM_KEYS => $keysArray]);
+
+        $keySet = $serializer->serialize($keys);
+        self::assertEquals($expected, $keySet);
+    }
+
     /**
      * @dataProvider provideInvalidKeySet
      */
