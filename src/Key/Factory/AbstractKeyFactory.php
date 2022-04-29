@@ -20,6 +20,8 @@ use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Factory\ParameterFactory;
+use RM\Standard\Jwt\Key\Parameter\Factory\ParameterFactoryInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
@@ -30,6 +32,7 @@ abstract class AbstractKeyFactory implements KeyFactoryInterface
     protected function __construct(
         private readonly array $supportedTypes,
         private readonly array $requiredParameters = [Type::NAME],
+        private readonly ParameterFactoryInterface $parameterFactory = new ParameterFactory(),
     ) {
     }
 
@@ -52,7 +55,12 @@ abstract class AbstractKeyFactory implements KeyFactoryInterface
 
     protected function hydrate(array $content): KeyInterface
     {
-        return new Key($content);
+        $properties = [];
+        foreach ($content as $name => $value) {
+            $properties[] = $this->parameterFactory->create($name, $value);
+        }
+
+        return new Key($properties);
     }
 
     protected function hasRequiredParameters(array $content): bool
