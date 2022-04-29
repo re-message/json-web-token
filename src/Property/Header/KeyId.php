@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Property\Header;
 
 use InvalidArgumentException;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -37,11 +38,11 @@ class KeyId extends AbstractProperty implements HeaderParameterInterface
 
     public static function fromKey(KeyInterface $key): self
     {
-        if (!$key->has(KeyInterface::PARAM_IDENTIFIER)) {
+        if (!$key->has(Identifier::NAME)) {
             throw new InvalidArgumentException('The key have no identifier.');
         }
 
-        $id = $key->get(KeyInterface::PARAM_IDENTIFIER);
+        $id = $key->get(Identifier::NAME);
 
         return new self($id);
     }

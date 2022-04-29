@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Algorithm\Signature;
 
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -30,7 +31,7 @@ class None implements SignatureAlgorithmInterface
 
     public function allowedKeyTypes(): array
     {
-        return [KeyInterface::TYPE_NONE];
+        return [Type::NONE];
     }
 
     public function hash(KeyInterface $key, string $input): string

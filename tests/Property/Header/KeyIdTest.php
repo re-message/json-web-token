@@ -20,6 +20,7 @@ use InvalidArgumentException;
 use Laminas\Math\Rand;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Property\Header\KeyId;
 
 /**
@@ -45,13 +46,13 @@ class KeyIdTest extends TestCase
         $key
             ->expects(self::once())
             ->method('has')
-            ->with(KeyInterface::PARAM_IDENTIFIER)
+            ->with(Identifier::NAME)
             ->willReturn(true)
         ;
         $key
             ->expects(self::once())
             ->method('get')
-            ->with(KeyInterface::PARAM_IDENTIFIER)
+            ->with(Identifier::NAME)
             ->willReturn($id)
         ;
 
@@ -65,7 +66,7 @@ class KeyIdTest extends TestCase
         $key
             ->expects(self::once())
             ->method('has')
-            ->with(KeyInterface::PARAM_IDENTIFIER)
+            ->with(Identifier::NAME)
             ->willReturn(false)
         ;
         $key

@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Tests\Algorithm\Signature;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\None;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
  * @covers \RM\Standard\Jwt\Algorithm\Signature\None
@@ -38,7 +39,7 @@ class NoneTest extends TestCase
     public function testAllowedKeys(): void
     {
         $none = new None();
-        self::assertContains(KeyInterface::TYPE_NONE, $none->allowedKeyTypes());
+        self::assertContains(Type::NONE, $none->allowedKeyTypes());
     }
 
     public function testHash(): void

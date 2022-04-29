@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Key;
 
 use InvalidArgumentException;
+use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -27,7 +28,7 @@ class Key implements KeyInterface
 
     public function __construct(array $parameters)
     {
-        $typeParameter = self::PARAM_TYPE;
+        $typeParameter = Type::NAME;
         if (!array_key_exists($typeParameter, $parameters)) {
             $message = sprintf(
                 'Any JSON Web Key must have the key type parameter (`%s`).',
@@ -61,7 +62,7 @@ class Key implements KeyInterface
 
     public function getType(): string
     {
-        return $this->get(self::PARAM_TYPE);
+        return $this->get(Type::NAME);
     }
 
     public function all(): array

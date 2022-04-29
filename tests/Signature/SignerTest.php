@@ -29,6 +29,7 @@ use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as Algorithm
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\KeyId;
 use RM\Standard\Jwt\Signature\SignatureToken;
@@ -152,7 +153,7 @@ class SignerTest extends TestCase
         self::assertSame($algorithm->name(), $algorithmParameter->getValue());
 
         $keyIdParameter = $signed->getHeader()->get(KeyId::NAME);
-        $expectedKeyId = $key->get(KeyInterface::PARAM_IDENTIFIER);
+        $expectedKeyId = $key->get(Identifier::NAME);
         self::assertSame($expectedKeyId, $keyIdParameter->getValue());
     }
 

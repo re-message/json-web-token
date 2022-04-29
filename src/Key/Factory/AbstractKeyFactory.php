@@ -20,6 +20,7 @@ use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -28,7 +29,7 @@ abstract class AbstractKeyFactory implements KeyFactoryInterface
 {
     protected function __construct(
         private readonly array $supportedTypes,
-        private readonly array $requiredParameters = [KeyInterface::PARAM_TYPE],
+        private readonly array $requiredParameters = [Type::NAME],
     ) {
     }
 
@@ -37,7 +38,7 @@ abstract class AbstractKeyFactory implements KeyFactoryInterface
      */
     public function create(array $content): KeyInterface
     {
-        $type = $content[KeyInterface::PARAM_TYPE] ?? null;
+        $type = $content[Type::NAME] ?? null;
         if (null === $type || !$this->supports($content)) {
             throw new UnsupportedKeyException($type, static::class);
         }
@@ -67,7 +68,7 @@ abstract class AbstractKeyFactory implements KeyFactoryInterface
      */
     public function supports(array $content): bool
     {
-        $type = $content[KeyInterface::PARAM_TYPE] ?? null;
+        $type = $content[Type::NAME] ?? null;
         if (null === $type) {
             return false;
         }

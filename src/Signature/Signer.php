@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Signature;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Property\Header\KeyId;
 use RM\Standard\Jwt\Serializer\SignatureCompactSerializer;
 use RM\Standard\Jwt\Serializer\SignatureSerializerInterface;
@@ -43,7 +44,7 @@ class Signer implements SignerInterface
             $token = $token->setAlgorithm($algorithm);
         }
 
-        if ($key->has(KeyInterface::PARAM_IDENTIFIER)) {
+        if ($key->has(Identifier::NAME)) {
             $token->getHeader()->set(KeyId::fromKey($key));
         }
 

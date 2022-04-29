@@ -20,6 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Exception\KeyNotFoundException;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Identifier;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -67,7 +68,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
      */
     public function add(KeyInterface $key): void
     {
-        $id = $key->get(KeyInterface::PARAM_IDENTIFIER);
+        $id = $key->get(Identifier::NAME);
         $this->keys->set($id, $key);
     }
 

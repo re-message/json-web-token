@@ -19,6 +19,8 @@ namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -27,7 +29,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
 {
     final public function allowedKeyTypes(): array
     {
-        return [KeyInterface::TYPE_OCTET];
+        return [Type::OCTET];
     }
 
     final public function hash(KeyInterface $key, string $input): string
@@ -51,13 +53,13 @@ abstract class HMAC implements SignatureAlgorithmInterface
             throw new InvalidArgumentException('Wrong key type.');
         }
 
-        if (!$key->has(KeyInterface::PARAM_VALUE)) {
-            $message = sprintf('The key parameter "%s" is missing.', KeyInterface::PARAM_VALUE);
+        if (!$key->has(Value::NAME)) {
+            $message = sprintf('The key parameter "%s" is missing.', Value::NAME);
 
             throw new InvalidArgumentException($message);
         }
 
-        $k = $key->get(KeyInterface::PARAM_VALUE);
+        $k = $key->get(Value::NAME);
 
         if (mb_strlen($k, '8bit') < 32) {
             throw new InvalidArgumentException('Invalid key length.');

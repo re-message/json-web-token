@@ -16,7 +16,8 @@
 
 namespace RM\Standard\Jwt\Key\Factory;
 
-use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -26,8 +27,8 @@ class OctetKeyFactory extends AbstractKeyFactory
     public function __construct()
     {
         parent::__construct(
-            [KeyInterface::TYPE_OCTET],
-            [KeyInterface::PARAM_TYPE, KeyInterface::PARAM_VALUE],
+            [Type::OCTET],
+            [Type::NAME, Value::NAME],
         );
     }
 }

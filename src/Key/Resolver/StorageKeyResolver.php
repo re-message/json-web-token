@@ -20,6 +20,7 @@ use RM\Standard\Jwt\Exception\KeyIdNotFound;
 use RM\Standard\Jwt\Exception\KeyUseNotMatch;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\KeyUsage;
+use RM\Standard\Jwt\Key\Parameter\KeyUse;
 use RM\Standard\Jwt\Key\Storage\KeyStorageInterface;
 use RM\Standard\Jwt\Property\Header\KeyId;
 use RM\Standard\Jwt\Token\TokenInterface;
@@ -43,7 +44,7 @@ class StorageKeyResolver implements KeyResolverInterface
 
         $id = $idParameter->getValue();
         $key = $this->storage->get($id);
-        $targetUse = KeyUsage::from($key->get(KeyInterface::PARAM_USE));
+        $targetUse = KeyUsage::from($key->get(KeyUse::NAME));
 
         if ($use !== $targetUse) {
             throw new KeyUseNotMatch();

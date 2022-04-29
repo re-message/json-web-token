@@ -16,6 +16,10 @@
 
 namespace RM\Standard\Jwt\Key;
 
+use RM\Standard\Jwt\Key\Parameter\Identifier;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
+
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
@@ -24,12 +28,12 @@ final class OctetKey extends Key
     public function __construct(string $value, string $id = null)
     {
         $parameters = [
-            self::PARAM_TYPE => self::TYPE_OCTET,
-            self::PARAM_VALUE => $value,
+            Type::NAME => Type::OCTET,
+            Value::NAME => $value,
         ];
 
         if (null !== $id) {
-            $parameters[self::PARAM_IDENTIFIER] = $id;
+            $parameters[Identifier::NAME] = $id;
         }
 
         parent::__construct($parameters);
@@ -37,6 +41,6 @@ final class OctetKey extends Key
 
     public function getValue(): string
     {
-        return $this->get(self::PARAM_VALUE);
+        return $this->get(Value::NAME);
     }
 }

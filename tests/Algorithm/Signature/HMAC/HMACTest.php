@@ -27,6 +27,8 @@ use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
  * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC
@@ -134,20 +136,20 @@ class HMACTest extends TestCase
     public function provideInvalidKeys(): iterable
     {
         yield 'invalid type key' => [
-            new Key([KeyInterface::PARAM_TYPE => 'unknown key']),
+            new Key([Type::NAME => 'unknown key']),
             'key type',
         ];
 
         yield 'no value key' => [
-            new Key([KeyInterface::PARAM_TYPE => KeyInterface::TYPE_OCTET]),
+            new Key([Type::NAME => Type::OCTET]),
             '"k" is missing',
         ];
 
         yield 'short value key' => [
             new Key(
                 [
-                    KeyInterface::PARAM_TYPE => KeyInterface::TYPE_OCTET,
-                    KeyInterface::PARAM_VALUE => 'short-value',
+                    Type::NAME => Type::OCTET,
+                    Value::NAME => 'short-value',
                 ]
             ),
             'key length',
