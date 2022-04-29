@@ -113,8 +113,8 @@ $token = SignatureToken::createWithAlgorithm($algorithm);
 $value = Base64UrlSafe::encode(Rand::getBytes(64));
 $key = new Key(
     [
-        Type::NAME => TypeAlias::OCTET,
-        Value::NAME => $value,
+        new Type(Type::OCTET),
+        new Value($value),
     ]
 );
 
