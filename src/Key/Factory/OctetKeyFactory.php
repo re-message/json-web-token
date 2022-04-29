@@ -16,35 +16,18 @@
 
 namespace RM\Standard\Jwt\Key\Factory;
 
-use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\OctetKey;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class OctetKeyFactory implements KeyFactoryInterface
+class OctetKeyFactory extends AbstractKeyFactory
 {
-    /**
-     * @inheritDoc
-     */
-    public function create(array $content): KeyInterface
+    public function __construct()
     {
-        $type = $content[KeyInterface::PARAM_TYPE];
-        if (!$this->supports($content)) {
-            throw new UnsupportedKeyException($type, $this::class);
-        }
-
-        $id = $content[KeyInterface::PARAM_IDENTIFIER] ?? null;
-        $value = $content[KeyInterface::PARAM_VALUE];
-
-        return new OctetKey($value, $id);
-    }
-
-    public function supports(array $content): bool
-    {
-        $type = $content[KeyInterface::PARAM_TYPE];
-
-        return KeyInterface::TYPE_OCTET === $type;
+        parent::__construct(
+            [KeyInterface::TYPE_OCTET],
+            [KeyInterface::PARAM_TYPE, KeyInterface::PARAM_VALUE],
+        );
     }
 }
