@@ -26,7 +26,7 @@ use RM\Standard\Jwt\Key\Parameter\Type;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
- * @see https://tools.ietf.org/pdf/rfc7517
+ * @see https://datatracker.ietf.org/doc/html/rfc7517
  */
 interface KeyInterface extends JsonSerializable
 {

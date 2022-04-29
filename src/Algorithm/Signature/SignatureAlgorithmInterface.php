@@ -24,7 +24,7 @@ use RM\Standard\Jwt\Key\KeyInterface;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
- * @see https://tools.ietf.org/html/rfc7518
+ * @see https://datatracker.ietf.org/doc/html/rfc7518
  */
 interface SignatureAlgorithmInterface extends AlgorithmInterface
 {

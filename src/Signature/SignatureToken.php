@@ -31,7 +31,7 @@ use RM\Standard\Jwt\Token\TokenInterface;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
- * @see https://tools.ietf.org/pdf/rfc7515
+ * @see https://datatracker.ietf.org/doc/html/rfc7518
  */
 final class SignatureToken implements TokenInterface
 {
