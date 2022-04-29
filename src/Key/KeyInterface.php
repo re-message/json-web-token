@@ -20,6 +20,7 @@ use JsonSerializable;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Key\Parameter\KeyUse;
 use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
  * Interface KeyInterface implements JSON Web Key standard (RFC 7517).
@@ -33,7 +34,7 @@ interface KeyInterface extends JsonSerializable
     public const PARAM_TYPE = Type::NAME;
     public const PARAM_IDENTIFIER = Identifier::NAME;
     public const PARAM_USE = KeyUse::NAME;
-    public const PARAM_VALUE = 'k';
+    public const PARAM_VALUE = Value::NAME;
     public const PARAM_OPERATIONS = 'key_ops';
 
     public const TYPE_NONE = 'none';
