@@ -27,13 +27,18 @@ class KeyUse extends KeyParameter
 {
     public const NAME = 'use';
 
-    public function __construct(KeyUsage $use)
+    public function __construct(string $use)
     {
-        parent::__construct(self::NAME, $use->value);
+        parent::__construct(self::NAME, $use);
     }
 
     public function toEnum(): KeyUsage
     {
         return KeyUsage::from($this->getValue());
+    }
+
+    public static function fromEnum(KeyUsage $use): static
+    {
+        return new static($use->value);
     }
 }

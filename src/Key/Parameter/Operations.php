@@ -28,14 +28,11 @@ class Operations extends KeyParameter
     public const NAME = 'key_ops';
 
     /**
-     * @param array<int, KeyOperation> $operations
+     * @param array<int, string> $operations
      */
     public function __construct(array $operations)
     {
-        $toString = static fn (KeyOperation $operation) => $operation->value;
-        $array = array_map($toString, $operations);
-
-        parent::__construct(self::NAME, $array);
+        parent::__construct(self::NAME, $operations);
     }
 
     public function toEnum(): array
@@ -47,5 +44,13 @@ class Operations extends KeyParameter
         }
 
         return $operations;
+    }
+
+    public static function fromEnum(array $operations): static
+    {
+        $toString = static fn (KeyOperation $operation) => $operation->value;
+        $array = array_map($toString, $operations);
+
+        return new static($array);
     }
 }
