@@ -27,9 +27,10 @@ class UnsupportedKeyException extends InvalidKeyException
     /**
      * @param class-string<KeyFactoryInterface> $factory
      */
-    public function __construct(string $type, string $factory, ?Throwable $previous = null)
+    public function __construct(?string $type, string $factory, ?Throwable $previous = null)
     {
-        $message = sprintf('Key with type "%s" does not supported by %s', $type, $factory);
+        $type ??= 'unknown';
+        $message = sprintf('Key with type "%s" does not supported by %s.', $type, $factory);
 
         parent::__construct($message, $previous);
     }
