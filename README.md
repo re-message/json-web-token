@@ -99,7 +99,9 @@ Example:
 use Laminas\Math\Rand;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
-use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Key\Key;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\Signer;
 
@@ -107,9 +109,14 @@ use RM\Standard\Jwt\Signature\Signer;
 $algorithm = new HS3256();
 $token = SignatureToken::createWithAlgorithm($algorithm);
 
-// generate random key for example
+// generate random octet key for example
 $value = Base64UrlSafe::encode(Rand::getBytes(64));
-$key = new OctetKey($value);
+$key = new Key(
+    [
+        Type::NAME => TypeAlias::OCTET,
+        Value::NAME => $value,
+    ]
+);
 
 $signer = new Signer();
 // method returns new token object with signature
