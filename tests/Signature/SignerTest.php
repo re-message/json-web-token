@@ -185,9 +185,9 @@ class SignerTest extends TestCase
 
         return new Key(
             [
-                Type::NAME => Type::OCTET,
-                Value::NAME => $value,
-                Identifier::NAME => $id,
+                new Type(Type::OCTET),
+                new Value($value),
+                new Identifier($id),
             ]
         );
     }

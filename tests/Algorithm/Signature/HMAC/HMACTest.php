@@ -46,8 +46,8 @@ class HMACTest extends TestCase
     {
         $this->key = new Key(
             [
-                Type::NAME => Type::OCTET,
-                Value::NAME => 'zi8zioLYkOwX0i2n3iEi2a2oAFJpiqPxd-_qcCewX07lz6yRmLxMr2wUixlrqeiBhQdaU1ugHZv55T5PsEqeOg',
+                new Type(Type::OCTET),
+                new Value('zi8zioLYkOwX0i2n3iEi2a2oAFJpiqPxd-_qcCewX07lz6yRmLxMr2wUixlrqeiBhQdaU1ugHZv55T5PsEqeOg'),
             ],
         );
     }
@@ -138,20 +138,20 @@ class HMACTest extends TestCase
     public function provideInvalidKeys(): iterable
     {
         yield 'invalid type key' => [
-            new Key([Type::NAME => 'unknown key']),
+            new Key([new Type('unknown key')]),
             'key type',
         ];
 
         yield 'no value key' => [
-            new Key([Type::NAME => Type::OCTET]),
+            new Key([new Type(Type::OCTET)]),
             '"k" is missing',
         ];
 
         yield 'short value key' => [
             new Key(
                 [
-                    Type::NAME => Type::OCTET,
-                    Value::NAME => 'short-value',
+                    new Type(Type::OCTET),
+                    new Value('short-value'),
                 ]
             ),
             'key length',
