@@ -133,5 +133,5 @@ This library implements only **the necessary minimum** for the correct operation
 ### Will not implemented
 * Nested JSON Web Token
 * Multiple signatures for JWS and JWE
-* JWS JSON Serialization ([RFC 7515](https://tools.ietf.org/html/rfc7515), section 7.2)
-* JWE JSON Serialization ([RFC 7516](https://tools.ietf.org/html/rfc7516), section 7.2)
+* JWS JSON Serialization ([RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515), section 7.2)
+* JWE JSON Serialization ([RFC 7516](https://datatracker.ietf.org/doc/html/rfc7516), section 7.2)
