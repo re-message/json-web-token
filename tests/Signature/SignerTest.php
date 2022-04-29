@@ -154,9 +154,9 @@ class SignerTest extends TestCase
         $algorithmParameter = $signed->getHeader()->get(Algorithm::NAME);
         self::assertSame($algorithm->name(), $algorithmParameter->getValue());
 
-        $keyIdParameter = $signed->getHeader()->get(KeyId::NAME);
-        $expectedKeyId = $key->get(Identifier::NAME);
-        self::assertSame($expectedKeyId, $keyIdParameter->getValue());
+        $tokenKeyId = $signed->getHeader()->get(KeyId::NAME)->getValue();
+        $keyId = $key->get(Identifier::NAME)->getValue();
+        self::assertSame($keyId, $tokenKeyId);
     }
 
     public function provideToken(): iterable

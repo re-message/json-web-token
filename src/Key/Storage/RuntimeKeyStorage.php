@@ -68,7 +68,9 @@ class RuntimeKeyStorage implements KeyStorageInterface
      */
     public function add(KeyInterface $key): void
     {
-        $id = $key->get(Identifier::NAME);
+        $idParameter = $key->get(Identifier::NAME);
+        $id = $idParameter->getValue();
+
         $this->keys->set($id, $key);
     }
 

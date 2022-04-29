@@ -53,7 +53,7 @@ class KeyIdTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with(Identifier::NAME)
-            ->willReturn($id)
+            ->willReturn(new Identifier($id))
         ;
 
         $parameter = KeyId::fromKey($key);

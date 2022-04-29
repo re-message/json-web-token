@@ -59,7 +59,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
             throw new InvalidArgumentException($message);
         }
 
-        $k = $key->get(Value::NAME);
+        $k = $key->get(Value::NAME)->getValue();
 
         if (mb_strlen($k, '8bit') < 32) {
             throw new InvalidArgumentException('Invalid key length.');

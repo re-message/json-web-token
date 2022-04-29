@@ -16,7 +16,10 @@
 
 namespace RM\Standard\Jwt\Key;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
+use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
@@ -24,26 +27,29 @@ use RM\Standard\Jwt\Key\Parameter\Type;
  */
 class Key implements KeyInterface
 {
-    private array $parameters;
+    private readonly Collection $collection;
 
     public function __construct(array $parameters)
     {
-        $typeParameter = Type::NAME;
-        if (!array_key_exists($typeParameter, $parameters)) {
+        $this->collection = new ArrayCollection();
+
+        foreach ($parameters as $parameter) {
+            $this->set($parameter);
+        }
+
+        if (!$this->has(Type::NAME)) {
             $message = sprintf(
                 'Any JSON Web Key must have the key type parameter (`%s`).',
-                $typeParameter
+                Type::NAME
             );
 
             throw new InvalidArgumentException($message);
         }
-
-        $this->parameters = $parameters;
     }
 
-    public function get(string $name): string
+    public function get(string $name): KeyParameterInterface
     {
-        if (!$this->has($name)) {
+        if (!$this->collection->containsKey($name)) {
             $message = sprintf(
                 'The parameter with name `%s` is not exists in this key.',
                 $name
@@ -52,22 +58,35 @@ class Key implements KeyInterface
             throw new InvalidArgumentException($message);
         }
 
-        return $this->parameters[$name];
+        return $this->collection->get($name);
     }
 
     public function has(string $name): bool
     {
-        return array_key_exists($name, $this->parameters);
+        return $this->collection->containsKey($name);
+    }
+
+    protected function set(KeyParameterInterface $parameter): void
+    {
+        $this->collection->set($parameter->getName(), $parameter);
     }
 
     public function getType(): string
     {
-        return $this->get(Type::NAME);
+        return $this->get(Type::NAME)->getValue();
     }
 
     public function all(): array
     {
-        return $this->parameters;
+        /** @var Collection<string, mixed> $collection */
+        $collection = new ArrayCollection();
+
+        /** @var KeyParameterInterface $parameter */
+        foreach ($this->collection as $parameter) {
+            $collection->set($parameter->getName(), $parameter->getValue());
+        }
+
+        return $collection->toArray();
     }
 
     public function jsonSerialize(): array

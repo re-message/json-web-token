@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Key;
 
 use JsonSerializable;
+use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
 
 /**
  * Interface KeyInterface implements JSON Web Key standard (RFC 7517).
@@ -30,7 +31,7 @@ interface KeyInterface extends JsonSerializable
     /**
      * Returns value of parameter if he exists.
      */
-    public function get(string $name): string;
+    public function get(string $name): KeyParameterInterface;
 
     /**
      * Checks if a parameter exists in a key.

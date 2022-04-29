@@ -44,7 +44,10 @@ class StorageKeyResolver implements KeyResolverInterface
 
         $id = $idParameter->getValue();
         $key = $this->storage->get($id);
-        $targetUse = KeyUsage::from($key->get(KeyUse::NAME));
+
+        /** @var KeyUse $keyUse */
+        $keyUse = $key->get(KeyUse::NAME);
+        $targetUse = $keyUse->toEnum();
 
         if ($use !== $targetUse) {
             throw new KeyUseNotMatch();

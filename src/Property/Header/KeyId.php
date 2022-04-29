@@ -42,7 +42,7 @@ class KeyId extends AbstractProperty implements HeaderParameterInterface
             throw new InvalidArgumentException('The key have no identifier.');
         }
 
-        $id = $key->get(Identifier::NAME);
+        $id = $key->get(Identifier::NAME)->getValue();
 
         return new self($id);
     }
