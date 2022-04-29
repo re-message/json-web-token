@@ -16,13 +16,29 @@
 
 namespace RM\Standard\Jwt\Key\Parameter\Factory;
 
+use RM\Standard\Jwt\Key\Parameter\Identifier;
+use RM\Standard\Jwt\Key\Parameter\KeyParameter;
 use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
+use RM\Standard\Jwt\Key\Parameter\KeyUse;
+use RM\Standard\Jwt\Key\Parameter\Operations;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
 class ParameterFactory implements ParameterFactoryInterface
 {
+    public const DEFAULT_CLASS_MAP = [
+        Type::NAME => Type::class,
+        Value::NAME => Value::class,
+        Identifier::NAME => Identifier::class,
+        KeyUse::NAME => KeyUse::class,
+        Operations::NAME => Operations::class,
+    ];
+
+    public const DEFAULT_CLASS = KeyParameter::class;
+
     /**
      * @var array<string, class-string<KeyParameterInterface>>
      */
@@ -38,8 +54,8 @@ class ParameterFactory implements ParameterFactoryInterface
      * @param class-string<KeyParameterInterface>                $defaultClass
      */
     public function __construct(
-        array $classMap,
-        string $defaultClass
+        array $classMap = self::DEFAULT_CLASS_MAP,
+        string $defaultClass = self::DEFAULT_CLASS,
     ) {
         $this->classMap = $classMap;
         $this->defaultClass = $defaultClass;
