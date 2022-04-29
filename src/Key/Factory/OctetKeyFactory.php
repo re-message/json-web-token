@@ -32,7 +32,7 @@ class OctetKeyFactory implements KeyFactoryInterface
     {
         $type = $content[KeyInterface::PARAM_TYPE];
         if (!$this->supports($content)) {
-            throw new UnsupportedKeyException($type);
+            throw new UnsupportedKeyException($type, $this::class);
         }
 
         $id = $content[KeyInterface::PARAM_IDENTIFIER] ?? null;

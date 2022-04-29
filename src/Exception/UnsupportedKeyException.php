@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Exception;
 
+use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use Throwable;
 
 /**
@@ -23,9 +24,12 @@ use Throwable;
  */
 class UnsupportedKeyException extends InvalidKeyException
 {
-    public function __construct(string $type, ?Throwable $previous = null)
+    /**
+     * @param class-string<KeyFactoryInterface> $factory
+     */
+    public function __construct(string $type, string $factory, ?Throwable $previous = null)
     {
-        $message = sprintf('Key with type "%s" does not supported.', $type);
+        $message = sprintf('Key with type "%s" does not supported by %s', $type, $factory);
 
         parent::__construct($message, $previous);
     }

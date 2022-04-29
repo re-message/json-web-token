@@ -138,7 +138,7 @@ class KeySetSerializerTest extends TestCase
             ->willReturnCallback(
                 fn (array $key) => $key !== $firstKey->all()
                     ? $secondKey
-                    : throw new UnsupportedKeyException('this'),
+                    : throw new UnsupportedKeyException('this', KeyFactoryInterface::class),
             )
         ;
 
