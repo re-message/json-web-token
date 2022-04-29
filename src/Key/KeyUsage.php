@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key;
  *
  * @see https://datatracker.ietf.org/doc/html/rfc7517#section-4.2
  */
-enum KeyUse: string
+enum KeyUsage: string
 {
     case SIGN = 'sig';
 

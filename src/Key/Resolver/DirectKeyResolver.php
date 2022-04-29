@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Key\Resolver;
 
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\KeyUse;
+use RM\Standard\Jwt\Key\KeyUsage;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -30,7 +30,7 @@ class DirectKeyResolver implements KeyResolverInterface
     ) {
     }
 
-    public function resolve(TokenInterface $token, KeyUse $use): KeyInterface
+    public function resolve(TokenInterface $token, KeyUsage $use): KeyInterface
     {
         return $this->key;
     }

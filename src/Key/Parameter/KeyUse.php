@@ -16,7 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Parameter;
 
-use RM\Standard\Jwt\Key\KeyUse as KeyUseEnum;
+use RM\Standard\Jwt\Key\KeyUsage;
 
 /**
  * @template-extends KeyParameter<string>
@@ -27,13 +27,13 @@ class KeyUse extends KeyParameter
 {
     public const NAME = 'use';
 
-    public function __construct(KeyUseEnum $use)
+    public function __construct(KeyUsage $use)
     {
         parent::__construct(self::NAME, $use->value);
     }
 
-    public function toEnum(): KeyUseEnum
+    public function toEnum(): KeyUsage
     {
-        return KeyUseEnum::from($this->getValue());
+        return KeyUsage::from($this->getValue());
     }
 }
