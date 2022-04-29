@@ -25,6 +25,10 @@ class Type extends KeyParameter
 {
     public const NAME = 'kty';
 
+    public const NONE = 'none';
+    public const OCTET = 'oct';
+    public const RSA = 'RSA';
+
     public function __construct(string $value)
     {
         parent::__construct(self::NAME, $value);

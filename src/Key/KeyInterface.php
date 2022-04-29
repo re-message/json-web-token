@@ -38,9 +38,9 @@ interface KeyInterface extends JsonSerializable
     public const PARAM_VALUE = Value::NAME;
     public const PARAM_OPERATIONS = Operations::NAME;
 
-    public const TYPE_NONE = 'none';
-    public const TYPE_OCTET = 'oct';
-    public const TYPE_RSA = 'RSA';
+    public const TYPE_NONE = Type::NONE;
+    public const TYPE_OCTET = Type::OCTET;
+    public const TYPE_RSA = Type::RSA;
 
     /**
      * Returns value of parameter if he exists.
