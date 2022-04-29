@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Key;
 use JsonSerializable;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Key\Parameter\KeyUse;
+use RM\Standard\Jwt\Key\Parameter\Operations;
 use RM\Standard\Jwt\Key\Parameter\Type;
 use RM\Standard\Jwt\Key\Parameter\Value;
 
@@ -35,7 +36,7 @@ interface KeyInterface extends JsonSerializable
     public const PARAM_IDENTIFIER = Identifier::NAME;
     public const PARAM_USE = KeyUse::NAME;
     public const PARAM_VALUE = Value::NAME;
-    public const PARAM_OPERATIONS = 'key_ops';
+    public const PARAM_OPERATIONS = Operations::NAME;
 
     public const TYPE_NONE = 'none';
     public const TYPE_OCTET = 'oct';
