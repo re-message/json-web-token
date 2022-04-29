@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Key\Parameter;
 
+use RM\Standard\Jwt\Key\KeyOperation;
+
 /**
  * @template-extends KeyParameter<array<int, string>>
  *
@@ -26,10 +28,24 @@ class Operations extends KeyParameter
     public const NAME = 'key_ops';
 
     /**
-     * @param array<int, string> $value
+     * @param array<int, KeyOperation> $operations
      */
-    public function __construct(array $value)
+    public function __construct(array $operations)
     {
-        parent::__construct(self::NAME, $value);
+        $toString = static fn (KeyOperation $operation) => $operation->value;
+        $array = array_map($toString, $operations);
+
+        parent::__construct(self::NAME, $array);
+    }
+
+    public function toEnum(): array
+    {
+        $operations = [];
+        $array = $this->getValue();
+        foreach ($array as $value) {
+            $operations[] = KeyOperation::from($value);
+        }
+
+        return $operations;
     }
 }
