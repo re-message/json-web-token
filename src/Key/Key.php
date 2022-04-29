@@ -21,7 +21,7 @@ use InvalidArgumentException;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class AbstractKey implements KeyInterface
+class Key implements KeyInterface
 {
     private array $parameters;
 
@@ -54,14 +54,14 @@ abstract class AbstractKey implements KeyInterface
         return $this->parameters[$parameter];
     }
 
-    public function getType(): string
-    {
-        return $this->get(self::PARAM_KEY_TYPE);
-    }
-
     public function has(string $parameter): bool
     {
         return array_key_exists($parameter, $this->parameters);
+    }
+
+    public function getType(): string
+    {
+        return $this->get(self::PARAM_KEY_TYPE);
     }
 
     public function all(): array
@@ -71,6 +71,6 @@ abstract class AbstractKey implements KeyInterface
 
     public function jsonSerialize(): array
     {
-        return $this->parameters;
+        return $this->all();
     }
 }

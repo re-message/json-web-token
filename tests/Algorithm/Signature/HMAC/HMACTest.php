@@ -24,9 +24,9 @@ use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
+use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\OctetKey;
-use RM\Standard\Jwt\Tests\Key\Key;
 
 /**
  * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC

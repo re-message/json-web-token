@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Key;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-final class OctetKey extends AbstractKey
+final class OctetKey extends Key
 {
     public function __construct(string $value, string $id = null)
     {
