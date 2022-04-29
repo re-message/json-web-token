@@ -17,16 +17,16 @@
 namespace RM\Standard\Jwt\Key\Parameter;
 
 /**
- * @template-extends AbstractKeyParameter<string>
+ * @template-extends KeyParameter<string>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Type extends AbstractKeyParameter
+class Type extends KeyParameter
 {
     public const NAME = 'kty';
 
-    public function getName(): string
+    public function __construct(string $value)
     {
-        return self::NAME;
+        parent::__construct(self::NAME, $value);
     }
 }

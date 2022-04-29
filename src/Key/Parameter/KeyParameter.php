@@ -22,19 +22,23 @@ namespace RM\Standard\Jwt\Key\Parameter;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class AbstractKeyParameter implements KeyParameterInterface
+class KeyParameter implements KeyParameterInterface
 {
-    /**
-     * @var T
-     */
-    private mixed $value;
-
     /**
      * @param T $value
      */
-    public function __construct(mixed $value = null)
+    public function __construct(
+        private readonly string $name,
+        private readonly mixed $value = null
+    ) {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName(): string
     {
-        $this->value = $value;
+        return $this->name;
     }
 
     /**
