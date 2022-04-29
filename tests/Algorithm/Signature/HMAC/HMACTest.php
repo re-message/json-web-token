@@ -134,20 +134,20 @@ class HMACTest extends TestCase
     public function provideInvalidKeys(): iterable
     {
         yield 'invalid type key' => [
-            new Key([KeyInterface::PARAM_KEY_TYPE => 'unknown key']),
+            new Key([KeyInterface::PARAM_TYPE => 'unknown key']),
             'key type',
         ];
 
         yield 'no value key' => [
-            new Key([KeyInterface::PARAM_KEY_TYPE => KeyInterface::KEY_TYPE_OCTET]),
+            new Key([KeyInterface::PARAM_TYPE => KeyInterface::TYPE_OCTET]),
             '"k" is missing',
         ];
 
         yield 'short value key' => [
             new Key(
                 [
-                    KeyInterface::PARAM_KEY_TYPE => KeyInterface::KEY_TYPE_OCTET,
-                    KeyInterface::PARAM_KEY_VALUE => 'short-value',
+                    KeyInterface::PARAM_TYPE => KeyInterface::TYPE_OCTET,
+                    KeyInterface::PARAM_VALUE => 'short-value',
                 ]
             ),
             'key length',

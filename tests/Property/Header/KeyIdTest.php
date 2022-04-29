@@ -45,13 +45,13 @@ class KeyIdTest extends TestCase
         $key
             ->expects(self::once())
             ->method('has')
-            ->with(KeyInterface::PARAM_KEY_IDENTIFIER)
+            ->with(KeyInterface::PARAM_IDENTIFIER)
             ->willReturn(true)
         ;
         $key
             ->expects(self::once())
             ->method('get')
-            ->with(KeyInterface::PARAM_KEY_IDENTIFIER)
+            ->with(KeyInterface::PARAM_IDENTIFIER)
             ->willReturn($id)
         ;
 
@@ -65,7 +65,7 @@ class KeyIdTest extends TestCase
         $key
             ->expects(self::once())
             ->method('has')
-            ->with(KeyInterface::PARAM_KEY_IDENTIFIER)
+            ->with(KeyInterface::PARAM_IDENTIFIER)
             ->willReturn(false)
         ;
         $key

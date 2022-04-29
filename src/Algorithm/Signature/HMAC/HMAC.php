@@ -27,7 +27,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
 {
     final public function allowedKeyTypes(): array
     {
-        return [KeyInterface::KEY_TYPE_OCTET];
+        return [KeyInterface::TYPE_OCTET];
     }
 
     final public function hash(KeyInterface $key, string $input): string
@@ -51,13 +51,13 @@ abstract class HMAC implements SignatureAlgorithmInterface
             throw new InvalidArgumentException('Wrong key type.');
         }
 
-        if (!$key->has(KeyInterface::PARAM_KEY_VALUE)) {
-            $message = sprintf('The key parameter "%s" is missing.', KeyInterface::PARAM_KEY_VALUE);
+        if (!$key->has(KeyInterface::PARAM_VALUE)) {
+            $message = sprintf('The key parameter "%s" is missing.', KeyInterface::PARAM_VALUE);
 
             throw new InvalidArgumentException($message);
         }
 
-        $k = $key->get(KeyInterface::PARAM_KEY_VALUE);
+        $k = $key->get(KeyInterface::PARAM_VALUE);
 
         if (mb_strlen($k, '8bit') < 32) {
             throw new InvalidArgumentException('Invalid key length.');

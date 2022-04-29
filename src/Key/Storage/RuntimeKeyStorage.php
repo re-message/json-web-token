@@ -67,7 +67,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
      */
     public function add(KeyInterface $key): void
     {
-        $id = $key->get(KeyInterface::PARAM_KEY_IDENTIFIER);
+        $id = $key->get(KeyInterface::PARAM_IDENTIFIER);
         $this->keys->set($id, $key);
     }
 

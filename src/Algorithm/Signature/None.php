@@ -30,7 +30,7 @@ class None implements SignatureAlgorithmInterface
 
     public function allowedKeyTypes(): array
     {
-        return [KeyInterface::KEY_TYPE_NONE];
+        return [KeyInterface::TYPE_NONE];
     }
 
     public function hash(KeyInterface $key, string $input): string

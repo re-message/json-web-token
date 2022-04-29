@@ -27,7 +27,7 @@ class Key implements KeyInterface
 
     public function __construct(array $parameters)
     {
-        $typeParameter = self::PARAM_KEY_TYPE;
+        $typeParameter = self::PARAM_TYPE;
         if (!array_key_exists($typeParameter, $parameters)) {
             $message = sprintf(
                 'Any JSON Web Key must have the key type parameter (`%s`).',
@@ -61,7 +61,7 @@ class Key implements KeyInterface
 
     public function getType(): string
     {
-        return $this->get(self::PARAM_KEY_TYPE);
+        return $this->get(self::PARAM_TYPE);
     }
 
     public function all(): array

@@ -24,12 +24,12 @@ final class OctetKey extends Key
     public function __construct(string $value, string $id = null)
     {
         $parameters = [
-            self::PARAM_KEY_TYPE => self::KEY_TYPE_OCTET,
-            self::PARAM_KEY_VALUE => $value,
+            self::PARAM_TYPE => self::TYPE_OCTET,
+            self::PARAM_VALUE => $value,
         ];
 
         if (null !== $id) {
-            $parameters[self::PARAM_KEY_IDENTIFIER] = $id;
+            $parameters[self::PARAM_IDENTIFIER] = $id;
         }
 
         parent::__construct($parameters);
@@ -37,6 +37,6 @@ final class OctetKey extends Key
 
     public function getValue(): string
     {
-        return $this->get(self::PARAM_KEY_VALUE);
+        return $this->get(self::PARAM_VALUE);
     }
 }

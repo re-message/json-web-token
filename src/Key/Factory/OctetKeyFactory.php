@@ -30,13 +30,13 @@ class OctetKeyFactory implements KeyFactoryInterface
      */
     public function create(array $content): KeyInterface
     {
-        $type = $content[KeyInterface::PARAM_KEY_TYPE];
-        if (KeyInterface::KEY_TYPE_OCTET !== $type) {
+        $type = $content[KeyInterface::PARAM_TYPE];
+        if (KeyInterface::TYPE_OCTET !== $type) {
             throw new UnsupportedKeyException($type);
         }
 
-        $id = $content[KeyInterface::PARAM_KEY_IDENTIFIER] ?? null;
-        $value = $content[KeyInterface::PARAM_KEY_VALUE];
+        $id = $content[KeyInterface::PARAM_IDENTIFIER] ?? null;
+        $value = $content[KeyInterface::PARAM_VALUE];
 
         return new OctetKey($value, $id);
     }

@@ -43,7 +43,7 @@ class Signer implements SignerInterface
             $token = $token->setAlgorithm($algorithm);
         }
 
-        if ($key->has(KeyInterface::PARAM_KEY_IDENTIFIER)) {
+        if ($key->has(KeyInterface::PARAM_IDENTIFIER)) {
             $token->getHeader()->set(KeyId::fromKey($key));
         }
 

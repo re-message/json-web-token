@@ -152,7 +152,7 @@ class SignerTest extends TestCase
         self::assertSame($algorithm->name(), $algorithmParameter->getValue());
 
         $keyIdParameter = $signed->getHeader()->get(KeyId::NAME);
-        $expectedKeyId = $key->get(KeyInterface::PARAM_KEY_IDENTIFIER);
+        $expectedKeyId = $key->get(KeyInterface::PARAM_IDENTIFIER);
         self::assertSame($expectedKeyId, $keyIdParameter->getValue());
     }
 

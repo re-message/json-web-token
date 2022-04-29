@@ -38,7 +38,7 @@ class NoneTest extends TestCase
     public function testAllowedKeys(): void
     {
         $none = new None();
-        self::assertContains(KeyInterface::KEY_TYPE_NONE, $none->allowedKeyTypes());
+        self::assertContains(KeyInterface::TYPE_NONE, $none->allowedKeyTypes());
     }
 
     public function testHash(): void
