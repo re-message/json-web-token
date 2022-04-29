@@ -23,8 +23,11 @@ use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Format\JsonFormatter;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\Factory\OctetKeyFactory;
+use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\OctetKey;
+use RM\Standard\Jwt\Key\Parameter\Identifier;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 use RM\Standard\Jwt\Key\Set\KeySetSerializer;
 use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
 
@@ -152,8 +155,17 @@ class KeySetSerializerTest extends TestCase
         self::assertEquals([$secondKey], $keys);
     }
 
-    private function generateOctetKey(): OctetKey
+    private function generateOctetKey(): KeyInterface
     {
-        return new OctetKey(Rand::getString(16), Rand::getString(12));
+        $value = Rand::getString(16);
+        $id = Rand::getString(12);
+
+        return new Key(
+            [
+                Type::NAME => Type::OCTET,
+                Value::NAME => $value,
+                Identifier::NAME => $id,
+            ]
+        );
     }
 }

@@ -26,7 +26,6 @@ use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Key\Parameter\Type;
 use RM\Standard\Jwt\Key\Parameter\Value;
 
@@ -41,12 +40,15 @@ use RM\Standard\Jwt\Key\Parameter\Value;
  */
 class HMACTest extends TestCase
 {
-    private OctetKey $key;
+    private KeyInterface $key;
 
     protected function setUp(): void
     {
-        $this->key = new OctetKey(
-            'zi8zioLYkOwX0i2n3iEi2a2oAFJpiqPxd-_qcCewX07lz6yRmLxMr2wUixlrqeiBhQdaU1ugHZv55T5PsEqeOg'
+        $this->key = new Key(
+            [
+                Type::NAME => Type::OCTET,
+                Value::NAME => 'zi8zioLYkOwX0i2n3iEi2a2oAFJpiqPxd-_qcCewX07lz6yRmLxMr2wUixlrqeiBhQdaU1ugHZv55T5PsEqeOg',
+            ],
         );
     }
 

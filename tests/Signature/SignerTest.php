@@ -27,9 +27,11 @@ use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
 use RM\Standard\Jwt\Algorithm\Signature\None;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
+use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\OctetKey;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\KeyId;
 use RM\Standard\Jwt\Signature\SignatureToken;
@@ -181,6 +183,12 @@ class SignerTest extends TestCase
         $value = Base64UrlSafe::encode(Rand::getBytes(64));
         $id = Rand::getString(16);
 
-        return new OctetKey($value, $id);
+        return new Key(
+            [
+                Type::NAME => Type::OCTET,
+                Value::NAME => $value,
+                Identifier::NAME => $id,
+            ]
+        );
     }
 }
