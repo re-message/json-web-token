@@ -30,4 +30,9 @@ interface KeyFactoryInterface
      * @throws InvalidKeyException
      */
     public function create(array $content): KeyInterface;
+
+    /**
+     * Checks that factory can create a key from content.
+     */
+    public function supports(array $content): bool;
 }
