@@ -31,6 +31,7 @@ interface KeyInterface extends JsonSerializable
     public const PARAM_IDENTIFIER = 'kid';
     public const PARAM_USE = 'use';
     public const PARAM_VALUE = 'k';
+    public const PARAM_OPERATIONS = 'key_ops';
 
     public const TYPE_NONE = 'none';
     public const TYPE_OCTET = 'oct';
