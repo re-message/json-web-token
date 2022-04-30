@@ -83,4 +83,21 @@ class SignatureTokenTest extends TestCase
         self::assertNull($token->getSignature());
         self::assertNotSame($newToken, $token);
     }
+
+    /**
+     * @dataProvider provideSerialization
+     */
+    public function testDefaultSerialization(SignatureToken $token, string $expected): void
+    {
+        $actual = (string) $token;
+        self::assertSame($expected, $actual);
+    }
+
+    public function provideSerialization(): iterable
+    {
+        yield [
+            SignatureToken::createWithAlgorithm(new Some()),
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJzb21lIn0.e30',
+        ];
+    }
 }
