@@ -69,6 +69,11 @@
             "RM\\Standard\\Jwt\\Tests\\": "tests/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
