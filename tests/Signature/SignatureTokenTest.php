@@ -20,6 +20,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\None;
 use RM\Standard\Jwt\Property\Header\Algorithm;
+use RM\Standard\Jwt\Serializer\SerializerInterface;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Tests\Algorithm\Some;
 
@@ -99,5 +100,17 @@ class SignatureTokenTest extends TestCase
             SignatureToken::createWithAlgorithm(new Some()),
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJzb21lIn0.e30',
         ];
+    }
+
+    public function testUnsupportedSerializer(): void
+    {
+        $serializer = $this->createMock(SerializerInterface::class);
+        $serializer->expects(self::once())->method('supports')->willReturn(false);
+        $serializer->expects(self::never())->method('serialize');
+        $token = SignatureToken::createWithAlgorithm(new Some());
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('can not be serialized with');
+        $token->toString($serializer);
     }
 }
