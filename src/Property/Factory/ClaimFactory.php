@@ -33,19 +33,23 @@ use RM\Standard\Jwt\Property\Payload\Subject;
  */
 class ClaimFactory extends AbstractPropertyFactory
 {
-    public function __construct()
+    public const DEFAULT_CLASS_MAP = [
+        Audience::NAME => Audience::class,
+        Expiration::NAME => Expiration::class,
+        Identifier::NAME => Identifier::class,
+        IssuedAt::NAME => IssuedAt::class,
+        Issuer::NAME => Issuer::class,
+        NotBefore::NAME => NotBefore::class,
+        Subject::NAME => Subject::class,
+    ];
+
+    /**
+     * @param array<string, class-string<ClaimInterface>> $classMap
+     */
+    public function __construct(array $classMap = [])
     {
-        parent::__construct(
-            [
-                Audience::NAME => Audience::class,
-                Expiration::NAME => Expiration::class,
-                Identifier::NAME => Identifier::class,
-                IssuedAt::NAME => IssuedAt::class,
-                Issuer::NAME => Issuer::class,
-                NotBefore::NAME => NotBefore::class,
-                Subject::NAME => Subject::class,
-            ],
-            PrivateClaim::class
-        );
+        $classMap = array_merge(self::DEFAULT_CLASS_MAP, $classMap);
+
+        parent::__construct($classMap, PrivateClaim::class);
     }
 }

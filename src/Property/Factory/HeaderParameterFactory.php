@@ -28,14 +28,18 @@ use RM\Standard\Jwt\Property\Header\Type;
  */
 class HeaderParameterFactory extends AbstractPropertyFactory
 {
-    public function __construct()
+    public const DEFAULT_CLASS_MAP = [
+        Algorithm::NAME => Algorithm::class,
+        Type::NAME => Type::class,
+    ];
+
+    /**
+     * @param array<string, class-string<HeaderParameterInterface>> $classMap
+     */
+    public function __construct(array $classMap = [])
     {
-        parent::__construct(
-            [
-                Algorithm::NAME => Algorithm::class,
-                Type::NAME => Type::class,
-            ],
-            Custom::class,
-        );
+        $classMap = array_merge(self::DEFAULT_CLASS_MAP, $classMap);
+
+        parent::__construct($classMap, Custom::class);
     }
 }
