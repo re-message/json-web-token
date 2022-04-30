@@ -18,11 +18,12 @@ namespace RM\Standard\Jwt\Token;
 
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Serializer\SerializerInterface;
+use Stringable;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-interface TokenInterface
+interface TokenInterface extends Stringable
 {
     /**
      * Checks if the token is protected by signing, encryption, or something else.

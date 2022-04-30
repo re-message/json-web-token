@@ -146,7 +146,7 @@ final class SignatureToken implements TokenInterface
      *
      * @see SignatureCompactSerializer::serialize()
      */
-    public function __toString()
+    public function __toString(): string
     {
         $serializer = new SignatureCompactSerializer();
 
