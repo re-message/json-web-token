@@ -30,7 +30,7 @@ abstract class AbstractLeewayValidator implements PropertyValidatorInterface
 
     /**
      * Allowed leeway in seconds. By default, 0.
-     * For security reason, cannot be more than 2 minutes or negative.
+     * For security reason, can not be more than max leeway or negative.
      */
     private readonly int $leeway;
 
