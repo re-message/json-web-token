@@ -18,8 +18,10 @@ namespace RM\Standard\Jwt\Tests\Signature;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RM\Standard\Jwt\Algorithm\Signature\None;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Signature\SignatureToken;
+use RM\Standard\Jwt\Tests\Algorithm\Some;
 
 /**
  * @covers \RM\Standard\Jwt\Signature\SignatureToken
@@ -36,6 +38,20 @@ class SignatureTokenTest extends TestCase
         $this->expectExceptionMessage('must have the algorithm parameter');
 
         new SignatureToken([], []);
+    }
+
+    public function testCloningOnChangeAlgorithm(): void
+    {
+        $algorithm = new None();
+        $token = SignatureToken::createWithAlgorithm($algorithm);
+        self::assertSame($algorithm->name(), $token->getAlgorithm());
+
+        $newAlgorithm = new Some();
+        $newToken = $token->setAlgorithm($newAlgorithm);
+        self::assertSame($algorithm->name(), $token->getAlgorithm());
+        self::assertNotSame($token->getAlgorithm(), $newToken->getAlgorithm());
+        self::assertNotSame($newToken, $token);
+        self::assertSame($newAlgorithm->name(), $newToken->getAlgorithm());
     }
 
     public function testNoSignature(): void

@@ -16,7 +16,8 @@
 
 namespace RM\Standard\Jwt\Tests\Algorithm;
 
-use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
+use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
+use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
  * Class Some represents just stub for {@see AlgorithmManagerTest}.
@@ -25,7 +26,7 @@ use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Some implements AlgorithmInterface
+class Some implements SignatureAlgorithmInterface
 {
     public function name(): string
     {
@@ -35,5 +36,15 @@ class Some implements AlgorithmInterface
     public function allowedKeyTypes(): array
     {
         return [];
+    }
+
+    public function hash(KeyInterface $key, string $input): string
+    {
+        return 'some-signature';
+    }
+
+    public function verify(KeyInterface $key, string $input, string $hash): bool
+    {
+        return 'some-signature' === $hash;
     }
 }
