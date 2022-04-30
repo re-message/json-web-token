@@ -22,6 +22,8 @@ use RM\Standard\Jwt\Signature\SignatureToken as Token;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
+ *
+ * @codeCoverageIgnore
  */
 abstract class DecoratedSigner implements SignerInterface
 {
