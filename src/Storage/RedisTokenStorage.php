@@ -29,7 +29,7 @@ class RedisTokenStorage implements TokenStorageInterface
     public function __construct(string $dsn)
     {
         // @codeCoverageIgnoreStart
-        if (!class_exists(Client::class, false)) {
+        if (!class_exists(Client::class)) {
             $message = 'Redis client class is not found. You need the predis/predis package to use this storage.';
 
             throw new InvalidArgumentException($message);
