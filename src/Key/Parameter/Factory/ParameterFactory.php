@@ -47,18 +47,15 @@ class ParameterFactory implements ParameterFactoryInterface
     /**
      * @var class-string<KeyParameterInterface>
      */
-    private string $defaultClass;
+    private readonly string $defaultClass;
 
     /**
      * @param array<string, class-string<KeyParameterInterface>> $classMap
-     * @param class-string<KeyParameterInterface>                $defaultClass
      */
-    public function __construct(
-        array $classMap = [],
-        string $defaultClass = self::DEFAULT_CLASS,
-    ) {
+    public function __construct(array $classMap = [])
+    {
         $this->classMap = array_merge(self::DEFAULT_CLASS_MAP, $classMap);
-        $this->defaultClass = $defaultClass;
+        $this->defaultClass = self::DEFAULT_CLASS;
     }
 
     /**
