@@ -14,13 +14,25 @@ You will need Composer to install. Run this command:
 
 All tokens and services uses algorithms to sign, verify, encrypt and decrypt the token data. Each algorithm MUST implement `RM\Standard\Jwt\Algorithm\AlgorithmInterface`.
 
+At this moment, we provide only HMAC-based algorithms:
+1. `RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256` for HMAC with SHA-256
+1. `RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512` for HMAC with SHA-512
+1. `RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256` for HMAC with SHA3-256 (or Keccak256)
+1. `RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512` for HMAC with SHA3-512 (or Keccak512)
+
+Also, you can implement your own algorithm. You need implement the `RM\Standard\Jwt\Algorithm\AlgorithmInterface` interface.
+
 ### Keys
 
-At the moment, we provide only octet support. This is a just string which used as key in HMAC algorithms.
+Each key must implement the `RM\Standard\Jwt\Key\Factory\KeyInterface` interface.
+
+At the moment, we provide only octet support. This is a just string which used as secret key in HMAC algorithms.
+
+Also, you can implement your own key. You need implement the `RM\Standard\Jwt\Key\Factory\KeyFactoryInterface` interface to create your key from array. If your key contains a property that is not implemented in this library, then you also need to implement the `RM\Standard\Jwt\Key\Parameter\KeyParameterInterface` interface and use `RM\Standard\Jwt\Key\Parameter\Factory\ParameterFactory` with your key parameter class.
 
 ### Tokens
 
-To create new token you can use class `RM\Standard\Jwt\Signature\SignatureToken` class. Class constructor have 3 arguments: header claims, payload claims and signature. You should pass algorithm name with header claims. Other arguments and claims is optional.
+To create new token you can use the `RM\Standard\Jwt\Signature\SignatureToken` class. The class constructor have 3 arguments: header parameters, payload claims and signature. The header parameters must include the algorithm parameter. Other arguments is optional.
 
 Example:
 
@@ -45,14 +57,17 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 $token = SignatureToken::createWithAlgorithm(new HS3256());
 ```
 
-### Claims
+### Properties
 
-The token has parameters called claim, these are important sensitive data that are needed for authorization and verification. They are divided respectively in the header and in the payload of the token. Header claims are general token data: the signing or encryption algorithm and the type of token. Payload claims contain the data necessary for verification: this is the time of signing the token, the time of its action, who signed it and for whom.
+The token has parameters called properties, these are important sensitive data that are needed for authorization and verification. They are separated respectively in the header and in the payload of the token. Header parameters contains the common token data: the signing or encryption algorithm and the type of token. Payload claims contain the data necessary for verification: the token sign/encrypt time, the action time, who signed and for whom. The payload can also include business logic data like permissions or something else.
 
-Header claims defined in `RM\Standard\Jwt\Token\Header` class as constants. Payload claim defined in `RM\Standard\Jwt\Token\Payload` class.
+Header parameters defined in the `RM\Standard\Jwt\Property\Header\` namespace. Payload claims defined in the `RM\Standard\Jwt\Property\Payload\` namespace.
 
-You can use your custom claims. According to the standard, claim names must be concise enough. We use 3-character names, but there are no restrictions.
+You can use custom properties. To create your custom property you need implement one of these interfaces:
+1. `RM\Standard\Jwt\Property\Header\HeaderParameterInterface` to create custom header parameter
+2. `RM\Standard\Jwt\Property\Payload\ClaimInterface` to create custom claim
 
+According to the standard, property names must be concise enough. We use 3-character names, but there are no restrictions.
 
 ### Serialization
 
@@ -84,7 +99,7 @@ var_dump($rawToken === $token->toString($serializer));
 
 To sign the token you should use the `RM\Standard\Jwt\Signature\Signer`. Signer only depends on the serializer, but the default is `RM\Standard\Jwt\Serializer\SignatureCompactSerializer`.
 
-Serializer is necessary for the service to sign the token, since the signature is the header, and the payload signed by the key.
+Serializer is necessary for the service to sign the token, since the signature is the header and the payload signed by the key.
 
 Also, you can use decorators for Signer to provide some token handling:
 - `RM\Standard\Jwt\Signature\GeneratedSigner` provides ability to generate token property before signing
