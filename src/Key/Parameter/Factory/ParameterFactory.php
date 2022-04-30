@@ -54,10 +54,10 @@ class ParameterFactory implements ParameterFactoryInterface
      * @param class-string<KeyParameterInterface>                $defaultClass
      */
     public function __construct(
-        array $classMap = self::DEFAULT_CLASS_MAP,
+        array $classMap = [],
         string $defaultClass = self::DEFAULT_CLASS,
     ) {
-        $this->classMap = $classMap;
+        $this->classMap = array_merge(self::DEFAULT_CLASS_MAP, $classMap);
         $this->defaultClass = $defaultClass;
     }
 
