@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Property\Factory;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\Custom;
 use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
+use RM\Standard\Jwt\Property\Header\KeyId;
 use RM\Standard\Jwt\Property\Header\Type;
 
 /**
@@ -31,6 +32,7 @@ class HeaderParameterFactory extends AbstractPropertyFactory
     public const DEFAULT_CLASS_MAP = [
         Algorithm::NAME => Algorithm::class,
         Type::NAME => Type::class,
+        KeyId::NAME => KeyId::class,
     ];
 
     /**
