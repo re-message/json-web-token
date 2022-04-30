@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Format;
 
+use Symfony\Component\Serializer\Encoder\JsonDecode;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 /**
@@ -27,7 +29,10 @@ class JsonFormatter implements FormatterInterface
 
     public function __construct()
     {
-        $this->encoder = new JsonEncoder();
+        $encode = new JsonEncode();
+        $decode = new JsonDecode([JsonDecode::ASSOCIATIVE => true]);
+
+        $this->encoder = new JsonEncoder($encode, $decode);
     }
 
     public function encode(array $data): string
