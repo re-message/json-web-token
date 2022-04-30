@@ -29,7 +29,7 @@ class JsonFormatter implements FormatterInterface
 
     public function __construct()
     {
-        $encode = new JsonEncode();
+        $encode = new JsonEncode([JsonEncode::OPTIONS => JSON_FORCE_OBJECT]);
         $decode = new JsonDecode([JsonDecode::ASSOCIATIVE => true]);
 
         $this->encoder = new JsonEncoder($encode, $decode);
