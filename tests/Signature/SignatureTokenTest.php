@@ -56,4 +56,15 @@ class SignatureTokenTest extends TestCase
         self::assertTrue($token->isSigned());
         self::assertFalse($token->isSecured());
     }
+
+    public function testCloningOnChangeSignature(): void
+    {
+        $token = new SignatureToken([new Algorithm('algo')], [], null);
+        self::assertNull($token->getSignature());
+
+        $newToken = $token->setSignature('signature');
+        self::assertNotNull($newToken->getSignature());
+        self::assertNull($token->getSignature());
+        self::assertNotSame($newToken, $token);
+    }
 }
