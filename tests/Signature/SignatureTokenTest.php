@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Tests\Signature;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Signature\SignatureToken;
 
 /**
@@ -35,5 +36,24 @@ class SignatureTokenTest extends TestCase
         $this->expectExceptionMessage('must have the algorithm parameter');
 
         new SignatureToken([], []);
+    }
+
+    public function testNoSignature(): void
+    {
+        $token = new SignatureToken([new Algorithm('algo')], [], null);
+
+        self::assertNull($token->getSignature());
+        self::assertFalse($token->isSigned());
+        self::assertFalse($token->isSecured());
+    }
+
+    public function testEmptySignature(): void
+    {
+        $token = new SignatureToken([new Algorithm('algo')], [], '');
+
+        self::assertNotNull($token->getSignature());
+        self::assertEmpty($token->getSignature());
+        self::assertTrue($token->isSigned());
+        self::assertFalse($token->isSecured());
     }
 }
