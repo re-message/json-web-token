@@ -1,5 +1,10 @@
 # Json Web Token Implementation
 
+![Version](https://img.shields.io/packagist/v/remessage/json-web-token?style=for-the-badge)
+![PHP Version Support](https://img.shields.io/packagist/php-v/remessage/json-web-token?style=for-the-badge)
+![License](https://img.shields.io/github/license/re-message/json-web-token?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/re-message/json-web-token/testing/1.x?style=for-the-badge)
+
 This library implements a series of standards related with JSON Web Token and is used by others [Re: Message](https://remessage.ru) libraries and services like `remessage/client` and API server.
 
 ## Installation
