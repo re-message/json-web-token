@@ -50,13 +50,17 @@ class JsonFormatterTest extends TestCase
 
     public function provideData(): iterable
     {
-        yield [['bool' => true], '{"bool":true}'];
+        yield 'empty' => [[], '{}'];
 
-        yield [['number' => 25], '{"number":25}'];
+        yield 'list' => [[1, 2, 3], '{"0":1,"1":2,"2":3}'];
 
-        yield [['string' => 'string'], '{"string":"string"}'];
+        yield 'bool' => [['bool' => true], '{"bool":true}'];
 
-        yield [
+        yield 'number' => [['number' => 25], '{"number":25}'];
+
+        yield 'string' => [['string' => 'string'], '{"string":"string"}'];
+
+        yield 'all' => [
             [
                 'bool' => true,
                 'number' => 25,
