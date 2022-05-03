@@ -21,8 +21,6 @@ use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Generator\PropertyGeneratorInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Property\PropertyBag;
-use RM\Standard\Jwt\Property\PropertyTarget;
 use RM\Standard\Jwt\Signature\SignatureToken as Token;
 
 /**
@@ -71,12 +69,7 @@ class GeneratedSigner extends DecoratedSigner
         $name = $generator->getPropertyName();
         $target = $generator->getPropertyTarget();
 
-        /** @var PropertyBag $bag */
-        $bag = match ($target) {
-            PropertyTarget::HEADER => $token->getHeader(),
-            PropertyTarget::PAYLOAD => $token->getPayload(),
-        };
-
+        $bag = $target->resolve($token);
         if ($bag->has($name)) {
             return;
         }

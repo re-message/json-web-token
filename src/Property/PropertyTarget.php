@@ -16,6 +16,10 @@
 
 namespace RM\Standard\Jwt\Property;
 
+use BadMethodCallException;
+use RM\Standard\Jwt\Signature\SignatureToken;
+use RM\Standard\Jwt\Token\TokenInterface;
+
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
@@ -24,4 +28,16 @@ enum PropertyTarget
     case HEADER;
 
     case PAYLOAD;
+
+    public function resolve(TokenInterface $token): PropertyBagInterface
+    {
+        if (!$token instanceof SignatureToken) {
+            throw new BadMethodCallException('Not implemented yet.');
+        }
+
+        return match ($this) {
+            self::HEADER => $token->getHeader(),
+            self::PAYLOAD => $token->getPayload(),
+        };
+    }
 }

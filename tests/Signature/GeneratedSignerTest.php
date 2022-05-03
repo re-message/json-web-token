@@ -25,12 +25,9 @@ use RM\Standard\Jwt\Generator\IssuerGenerator;
 use RM\Standard\Jwt\Generator\NotBeforeGenerator;
 use RM\Standard\Jwt\Generator\PropertyGeneratorInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Property\PropertyBag;
-use RM\Standard\Jwt\Property\PropertyTarget;
 use RM\Standard\Jwt\Signature\GeneratedSigner;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\SignerInterface;
-use RM\Standard\Jwt\Token\TokenInterface;
 use stdClass;
 use TypeError;
 
@@ -90,17 +87,9 @@ class GeneratedSignerTest extends TestCase
             $target = $generator->getPropertyTarget();
             $property = $generator->getPropertyName();
 
-            $bag = $this->getPropertyBag($generatedToken, $target);
+            $bag = $target->resolve($generatedToken);
             self::assertTrue($bag->has($property));
         }
-    }
-
-    private function getPropertyBag(TokenInterface $token, PropertyTarget $target): PropertyBag
-    {
-        return match ($target) {
-            PropertyTarget::HEADER => $token->getHeader(),
-            PropertyTarget::PAYLOAD => $token->getPayload(),
-        };
     }
 
     public function providePropertyGenerators(): Generator
