@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Identifier;
 
 use InvalidArgumentException;
 use Laminas\Math\Rand;
+use ParagonIE\ConstantTime\Base64UrlSafe;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -46,7 +47,9 @@ final class LaminasRandGenerator implements IdentifierGeneratorInterface
      */
     public function generate(): string
     {
-        return Rand::getString($this->getLength());
+        $bytes = Rand::getBytes($this->getLength());
+
+        return Base64UrlSafe::encodeUnpadded($bytes);
     }
 
     /**
