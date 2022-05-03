@@ -16,15 +16,30 @@
 
 namespace RM\Standard\Jwt\Identifier;
 
+use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
 /**
- * Class RandomUuidGenerator provides UUID v4 via ramsey\uuid package.
+ * Class RandomUuidGenerator provides UUID v4 via ramsey/uuid package.
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
 final class RandomUuidGenerator implements IdentifierGeneratorInterface
 {
+    public function __construct()
+    {
+        // @codeCoverageIgnoreStart
+        if (!class_exists(Uuid::class)) {
+            $message = sprintf(
+                '%s class not found. You need the ramsey/uuid package to use this generator.',
+                Uuid::class
+            );
+
+            throw new InvalidArgumentException($message);
+        }
+        // @codeCoverageIgnoreEnd
+    }
+
     public function generate(): string
     {
         return Uuid::uuid4()->toString();
