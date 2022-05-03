@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Identifier;
 
+use InvalidArgumentException;
 use Laminas\Math\Rand;
 
 /**
@@ -28,6 +29,16 @@ final class LaminasRandGenerator implements IdentifierGeneratorInterface
     public function __construct(
         private readonly int $length = 64,
     ) {
+        // @codeCoverageIgnoreStart
+        if (!class_exists(Rand::class)) {
+            $message = sprintf(
+                '%s class not found. You need the laminas/laminas-math package to use this generator.',
+                Rand::class
+            );
+
+            throw new InvalidArgumentException($message);
+        }
+        // @codeCoverageIgnoreEnd
     }
 
     /**
