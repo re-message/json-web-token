@@ -16,6 +16,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
+    ->notPath('src/Property/PropertyTarget.php')
     ->exclude('vendor')
     ->append([__FILE__])
 ;
