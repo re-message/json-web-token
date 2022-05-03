@@ -53,7 +53,8 @@
     "suggest": {
         "ext-memcache": "Allows to use memcache token storage",
         "predis/predis": "Allows to use redis token storage",
-        "ramsey/uuid": "Allow to use UUID identifier generators"
+        "ramsey/uuid": "Allow to use UUID identifier generators",
+        "laminas/laminas-math": "To use Laminas Rand identifier generator"
     },
     "autoload": {
         "psr-4": {
