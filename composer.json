@@ -31,7 +31,6 @@
 
         "symfony/serializer": "^6.0",
         "paragonie/constant_time_encoding": "^2.3",
-        "laminas/laminas-math": "^3.2",
 
         "symfony/event-dispatcher": "^6.0"
     },
@@ -47,6 +46,7 @@
         "vimeo/psalm": "^4.22",
         "psalm/plugin-phpunit": "^0.16.1",
 
+        "laminas/laminas-math": "^3.2",
         "ramsey/uuid": "^4.0.0",
         "bentools/cartesian-product": "^1.3"
     },
