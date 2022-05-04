@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key;
 
 use JsonSerializable;
 use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
+use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
 
 /**
  * Interface KeyInterface implements JSON Web Key standard (RFC 7517).
@@ -47,4 +48,12 @@ interface KeyInterface extends JsonSerializable
      * Returns all parameters for this key or array key format.
      */
     public function all(): array;
+
+    /**
+     * Create a thumbprint from key.
+     *
+     * @see ThumbprintFactoryInterface
+     * @see https://datatracker.ietf.org/doc/html/rfc7638
+     */
+    public function toThumbprint(string $algorithm, ThumbprintFactoryInterface $factory = null): string;
 }

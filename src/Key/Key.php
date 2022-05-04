@@ -21,6 +21,8 @@ use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactory;
+use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -74,6 +76,13 @@ class Key implements KeyInterface
     public function getType(): string
     {
         return $this->get(Type::NAME)->getValue();
+    }
+
+    public function toThumbprint(string $algorithm, ThumbprintFactoryInterface $factory = null): string
+    {
+        $factory ??= new ThumbprintFactory();
+
+        return $factory->create($this, $algorithm);
     }
 
     public function all(): array
