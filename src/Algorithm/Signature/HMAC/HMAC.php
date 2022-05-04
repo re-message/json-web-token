@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
 use InvalidArgumentException;
+use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
@@ -70,7 +71,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
             throw new InvalidArgumentException('Invalid key length.');
         }
 
-        return $k;
+        return Base64UrlSafe::decode($k);
     }
 
     /**
