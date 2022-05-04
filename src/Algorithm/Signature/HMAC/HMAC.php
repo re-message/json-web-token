@@ -36,6 +36,11 @@ abstract class HMAC implements SignatureAlgorithmInterface
     {
         $k = $this->getKey($key);
         $algorithm = $this->getHashAlgorithm();
+        if (!in_array($algorithm, hash_hmac_algos(), true)) {
+            $message = sprintf('Your platform does not support the HMAC algorithm "%s".', $algorithm);
+
+            throw new InvalidArgumentException($message);
+        }
 
         return hash_hmac($algorithm, $input, $k, true);
     }
