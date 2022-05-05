@@ -85,6 +85,11 @@ class Key implements KeyInterface
         return $factory->create($this, $algorithm);
     }
 
+    public function getParameters(): array
+    {
+        return $this->collection->toArray();
+    }
+
     public function all(): array
     {
         /** @var Collection<string, mixed> $collection */

@@ -45,7 +45,14 @@ interface KeyInterface extends JsonSerializable
     public function getType(): string;
 
     /**
-     * Returns all parameters for this key or array key format.
+     * Returns all parameters.
+     *
+     * @return KeyParameterInterface[]
+     */
+    public function getParameters(): array;
+
+    /**
+     * Returns all parameters in array format.
      */
     public function all(): array;
 
