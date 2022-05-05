@@ -44,10 +44,12 @@ class HMACTest extends TestCase
 
     protected function setUp(): void
     {
+        $b64Key = '-2iJCM1Dgovi-djDb9Xb-_EQxxxRTVl_y6S6r7mlpPM';
+
         $this->key = new Key(
             [
                 new Type(Type::OCTET),
-                new Value('zi8zioLYkOwX0i2n3iEi2a2oAFJpiqPxd-_qcCewX07lz6yRmLxMr2wUixlrqeiBhQdaU1ugHZv55T5PsEqeOg'),
+                new Value($b64Key),
             ],
         );
     }
@@ -81,10 +83,10 @@ class HMACTest extends TestCase
     /**
      * @dataProvider provideHashes
      */
-    public function testHash(HMAC $algorithm, string $input, string $expects): void
+    public function testHash(HMAC $algorithm, string $input, string $expected): void
     {
         $hash = $algorithm->sign($this->key, $input);
-        self::assertTrue(hash_equals($expects, $hash));
+        self::assertTrue(hash_equals($expected, $hash));
 
         self::assertTrue($algorithm->verify($this->key, $input, $hash));
         self::assertFalse($algorithm->verify($this->key, 'bad-input', $hash));
@@ -97,28 +99,28 @@ class HMACTest extends TestCase
         yield [
             new HS256(),
             'input',
-            hex2bin('f54fd0731daba5ffb087794dae7605586806174716a0707e0870271db629856a'),
+            hex2bin('2062ae27ddaa4f3979800505af608d0a0160d92819d5b19cae9b61654a0909fd'),
         ];
 
         yield [
             new HS512(),
             'input',
             hex2bin(
-                '523fe3160ec40b07a19ce0171dd6bc0be0520785c5d190679606c49fbaa0aae58ebf57895b53f34aa0320863bfcebfa32733e13b4f66ebe99e40fd7cc88ae76f'
+                '58c5dadbf34c1bc6c072066b9cf13a90dcc127ffed89f56fcf99487e823d836779d037b762f635b6eb86471bd6728f0ff902e39a93da973099502770f6c8c846'
             ),
         ];
 
         yield [
             new HS3256(),
             'input',
-            hex2bin('ef7ddbdc8e63d45a8efa7fa88f3cd6be38611ef87d9cf2f36c8958949d95c3f7'),
+            hex2bin('6106021e36ac5850a5487d8202408e938adcbb6f1d8ff2309967e2697e95821a'),
         ];
 
         yield [
             new HS3512(),
             'input',
             hex2bin(
-                '0d86e47c72f02d947489a64a5ac9148483575caeae38acb935699ddd676e0c72d849ed9aef0cc02c3a8b8b1c854be7227921959d50be1a4c307b03f0db33034d'
+                'df601769b1a6de723df10a4554d78f90767d849a8e090ab262785d51de000bcf156ab7af5d0143fb467e4c275942fb8cef3d1dbb55b9c7351e052074e07895c2'
             ),
         ];
     }
