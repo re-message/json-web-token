@@ -35,7 +35,7 @@ class OctetKeyFactory extends AbstractKeyFactory
     ) {
         parent::__construct(
             [Type::OCTET],
-            [Type::NAME, Value::NAME],
+            [Value::NAME],
             $parameterFactory,
         );
     }
