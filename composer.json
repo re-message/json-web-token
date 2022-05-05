@@ -30,6 +30,7 @@
         "symfony/deprecation-contracts": "^3.0",
 
         "symfony/serializer": "^6.0",
+        "phpseclib/phpseclib": "^3.0",
         "paragonie/constant_time_encoding": "^2.3",
 
         "symfony/event-dispatcher": "^6.0"
