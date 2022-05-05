@@ -43,8 +43,8 @@ class Some implements SignatureAlgorithmInterface
         return 'some-signature';
     }
 
-    public function verify(KeyInterface $key, string $input, string $hash): bool
+    public function verify(KeyInterface $key, string $input, string $signature): bool
     {
-        return 'some-signature' === $hash;
+        return 'some-signature' === $signature;
     }
 }

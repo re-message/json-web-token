@@ -39,8 +39,8 @@ class None implements SignatureAlgorithmInterface
         return '';
     }
 
-    public function verify(KeyInterface $key, string $input, string $hash): bool
+    public function verify(KeyInterface $key, string $input, string $signature): bool
     {
-        return $this->sign($key, $input) === $hash;
+        return $this->sign($key, $input) === $signature;
     }
 }

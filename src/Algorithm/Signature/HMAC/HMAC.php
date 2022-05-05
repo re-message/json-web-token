@@ -46,11 +46,11 @@ abstract class HMAC implements SignatureAlgorithmInterface
         return hash_hmac($algorithm, $input, $k, true);
     }
 
-    final public function verify(KeyInterface $key, string $input, string $hash): bool
+    final public function verify(KeyInterface $key, string $input, string $signature): bool
     {
         $expected = $this->sign($key, $input);
 
-        return hash_equals($expected, $hash);
+        return hash_equals($expected, $signature);
     }
 
     protected function getKey(KeyInterface $key): string

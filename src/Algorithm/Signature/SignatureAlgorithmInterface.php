@@ -36,5 +36,5 @@ interface SignatureAlgorithmInterface extends AlgorithmInterface
     /**
      * Verify signature for this input and key pair.
      */
-    public function verify(KeyInterface $key, string $input, string $hash): bool;
+    public function verify(KeyInterface $key, string $input, string $signature): bool;
 }
