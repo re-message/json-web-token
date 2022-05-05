@@ -25,6 +25,10 @@ class OtherPrimesInfo extends KeyParameter
 {
     public const NAME = 'oth';
 
+    public const PARAM_PRIME_FACTOR = 'r';
+    public const PARAM_FACTOR_EXPONENT = 'd';
+    public const PARAM_FACTOR_COEFFICIENT = 't';
+
     public function __construct(array $value)
     {
         parent::__construct(self::NAME, $value);
