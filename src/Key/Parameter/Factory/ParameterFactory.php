@@ -22,7 +22,6 @@ use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
 use RM\Standard\Jwt\Key\Parameter\KeyUse;
 use RM\Standard\Jwt\Key\Parameter\Operations;
 use RM\Standard\Jwt\Key\Parameter\Type;
-use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -31,7 +30,6 @@ class ParameterFactory implements ParameterFactoryInterface
 {
     public const DEFAULT_CLASS_MAP = [
         Type::NAME => Type::class,
-        Value::NAME => Value::class,
         Identifier::NAME => Identifier::class,
         KeyUse::NAME => KeyUse::class,
         Operations::NAME => Operations::class,
