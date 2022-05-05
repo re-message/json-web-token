@@ -83,7 +83,7 @@ class HMACTest extends TestCase
      */
     public function testHash(HMAC $algorithm, string $input, string $expects): void
     {
-        $hash = $algorithm->hash($this->key, $input);
+        $hash = $algorithm->sign($this->key, $input);
         self::assertTrue(hash_equals($expects, $hash));
 
         self::assertTrue($algorithm->verify($this->key, $input, $hash));
@@ -132,7 +132,7 @@ class HMACTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($message);
-        $algorithm->hash($key, 'any');
+        $algorithm->sign($key, 'any');
     }
 
     public function provideInvalidKeys(): iterable

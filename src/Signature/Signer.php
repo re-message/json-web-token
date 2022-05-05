@@ -49,7 +49,7 @@ class Signer implements SignerInterface
         }
 
         $body = $this->serializer->serialize($token, true);
-        $signature = $algorithm->hash($key, $body);
+        $signature = $algorithm->sign($key, $body);
 
         return $token->setSignature($signature);
     }

@@ -38,7 +38,7 @@ class Some implements SignatureAlgorithmInterface
         return [];
     }
 
-    public function hash(KeyInterface $key, string $input): string
+    public function sign(KeyInterface $key, string $input): string
     {
         return 'some-signature';
     }

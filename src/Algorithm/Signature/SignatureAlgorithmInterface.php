@@ -31,7 +31,7 @@ interface SignatureAlgorithmInterface extends AlgorithmInterface
     /**
      * Sign input with key.
      */
-    public function hash(KeyInterface $key, string $input): string;
+    public function sign(KeyInterface $key, string $input): string;
 
     /**
      * Verify signature for this input and key pair.

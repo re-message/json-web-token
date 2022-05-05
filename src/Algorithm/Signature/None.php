@@ -34,13 +34,13 @@ class None implements SignatureAlgorithmInterface
         return [Type::NONE];
     }
 
-    public function hash(KeyInterface $key, string $input): string
+    public function sign(KeyInterface $key, string $input): string
     {
         return '';
     }
 
     public function verify(KeyInterface $key, string $input, string $hash): bool
     {
-        return $this->hash($key, $input) === $hash;
+        return $this->sign($key, $input) === $hash;
     }
 }

@@ -33,7 +33,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
         return [Type::OCTET];
     }
 
-    final public function hash(KeyInterface $key, string $input): string
+    final public function sign(KeyInterface $key, string $input): string
     {
         $k = $this->getKey($key);
         $algorithm = $this->getHashAlgorithm();
@@ -48,7 +48,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
 
     final public function verify(KeyInterface $key, string $input, string $hash): bool
     {
-        $expected = $this->hash($key, $input);
+        $expected = $this->sign($key, $input);
 
         return hash_equals($expected, $hash);
     }

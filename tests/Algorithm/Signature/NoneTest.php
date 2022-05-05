@@ -48,7 +48,7 @@ class NoneTest extends TestCase
         $key = $this->createMock(KeyInterface::class);
 
         $input = 'input';
-        $signature = $none->hash($key, $input);
+        $signature = $none->sign($key, $input);
 
         self::assertSame('', $signature);
         self::assertTrue($none->verify($key, $input, $signature));
