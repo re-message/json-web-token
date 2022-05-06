@@ -18,10 +18,12 @@ namespace RM\Standard\Jwt\Algorithm\Signature\RSA;
 
 use phpseclib3\Crypt\RSA as CryptRSA;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
+use RM\Standard\Jwt\Key\Factory\RsaKeyFactory;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
 use RM\Standard\Jwt\Key\Transformer\PublicKey\PublicKeyTransformerInterface;
 use RM\Standard\Jwt\Key\Transformer\PublicKey\RsaPublicKeyTransformer;
+use RM\Standard\Jwt\Key\Transformer\SecLib\RsaSecLibTransformer;
 use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
 
 /**
@@ -34,7 +36,7 @@ abstract class RSA implements SignatureAlgorithmInterface
     public const PADDING_PKCS1 = CryptRSA::SIGNATURE_PKCS1;
 
     public function __construct(
-        private readonly SecLibTransformerInterface $transformer,
+        private readonly SecLibTransformerInterface $transformer = new RsaSecLibTransformer(new RsaKeyFactory()),
         private readonly PublicKeyTransformerInterface $publicKeyTransformer = new RsaPublicKeyTransformer()
     ) {
     }

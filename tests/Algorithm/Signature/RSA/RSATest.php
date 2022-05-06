@@ -45,7 +45,7 @@ class RSATest extends TestCase
 
     protected function setUp(): void
     {
-        $this->transformer = $this->createRsaTransformer();
+        $this->transformer = new RsaSecLibTransformer(new RsaKeyFactory());
     }
 
     /**
@@ -73,19 +73,12 @@ class RSATest extends TestCase
 
     public function provideRsa(): iterable
     {
-        $transformer = $this->createRsaTransformer();
+        yield 'RS256' => [new RS256(), 'sha256', CryptRSA::SIGNATURE_PKCS1];
 
-        yield 'RS256' => [new RS256($transformer), 'sha256', CryptRSA::SIGNATURE_PKCS1];
+        yield 'RS512' => [new RS512(), 'sha512', CryptRSA::SIGNATURE_PKCS1];
 
-        yield 'RS512' => [new RS512($transformer), 'sha512', CryptRSA::SIGNATURE_PKCS1];
+        yield 'PS256' => [new PS256(), 'sha256', CryptRSA::SIGNATURE_PSS];
 
-        yield 'PS256' => [new PS256($transformer), 'sha256', CryptRSA::SIGNATURE_PSS];
-
-        yield 'PS512' => [new PS512($transformer), 'sha512', CryptRSA::SIGNATURE_PSS];
-    }
-
-    private function createRsaTransformer(): RsaSecLibTransformer
-    {
-        return new RsaSecLibTransformer(new RsaKeyFactory());
+        yield 'PS512' => [new PS512(), 'sha512', CryptRSA::SIGNATURE_PSS];
     }
 }
