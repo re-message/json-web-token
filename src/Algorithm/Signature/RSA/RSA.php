@@ -20,7 +20,7 @@ use phpseclib3\Crypt\RSA as CryptRSA;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
-use RM\Standard\Jwt\Key\Transformer\PhpSecLibTransformer;
+use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -32,7 +32,7 @@ abstract class RSA implements SignatureAlgorithmInterface
     public const PADDING_PKCS1 = CryptRSA::SIGNATURE_PKCS1;
 
     public function __construct(
-        private readonly PhpSecLibTransformer $transformer = new PhpSecLibTransformer(),
+        private readonly SecLibTransformerInterface $transformer,
     ) {
     }
 
