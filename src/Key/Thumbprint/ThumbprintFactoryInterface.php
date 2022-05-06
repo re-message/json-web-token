@@ -17,6 +17,10 @@
 namespace RM\Standard\Jwt\Key\Thumbprint;
 
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Modulus;
+use RM\Standard\Jwt\Key\Parameter\PublicExponent;
+use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -25,5 +29,16 @@ use RM\Standard\Jwt\Key\KeyInterface;
  */
 interface ThumbprintFactoryInterface
 {
+    // @todo make use parameter constants on implement
+    public const THUMBPRINT_PARAMETERS = [
+        Type::NAME,
+        Value::NAME,
+        PublicExponent::NAME,
+        Modulus::NAME,
+        'crv',
+        'x',
+        'y',
+    ];
+
     public function create(KeyInterface $key, string $hashAlgorithm): string;
 }
