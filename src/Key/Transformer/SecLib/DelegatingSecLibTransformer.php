@@ -31,12 +31,12 @@ use RM\Standard\Jwt\Key\KeyInterface;
 class DelegatingSecLibTransformer implements SecLibTransformerInterface
 {
     /**
-     * @var Collection<int, SecLibTransformerInterface>
+     * @var Collection<int, SecLibTransformerInterface<T>>
      */
     private readonly Collection $collection;
 
     /**
-     * @param iterable<SecLibTransformerInterface> $transformers
+     * @param iterable<SecLibTransformerInterface<T>> $transformers
      */
     public function __construct(iterable $transformers = [])
     {
@@ -47,6 +47,9 @@ class DelegatingSecLibTransformer implements SecLibTransformerInterface
         }
     }
 
+    /**
+     * @param SecLibTransformerInterface<T> $transformer
+     */
     public function pushTransformer(SecLibTransformerInterface $transformer): void
     {
         $this->collection->add($transformer);
@@ -90,6 +93,9 @@ class DelegatingSecLibTransformer implements SecLibTransformerInterface
         return null !== $this->findTransformer($type);
     }
 
+    /**
+     * @return null|SecLibTransformerInterface<T>
+     */
     protected function findTransformer(string $type): ?SecLibTransformerInterface
     {
         foreach ($this->collection as $transformer) {

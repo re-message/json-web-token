@@ -57,6 +57,7 @@ class RsaSecLibTransformer extends AbstractSecLibTransformer
     {
         $notNull = static fn (mixed $value) => null !== $value;
 
+        /** @var array $flattedComponents */
         $flattedComponents = array_filter(
             [
                 PublicExponent::NAME => $components['e'] ?? null,
