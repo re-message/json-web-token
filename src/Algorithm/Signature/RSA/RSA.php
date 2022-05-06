@@ -52,7 +52,7 @@ abstract class RSA implements SignatureAlgorithmInterface
     }
 
     /**
-     * @template T of AsymmetricKey
+     * @template T of CryptRSA
      *
      * @param class-string<T> $type
      *
