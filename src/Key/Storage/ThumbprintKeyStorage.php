@@ -16,12 +16,10 @@
 
 namespace RM\Standard\Jwt\Key\Storage;
 
-use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactory;
 use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
-use RM\Standard\Jwt\Property\Header\KeyId;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -39,8 +37,7 @@ class ThumbprintKeyStorage extends DecoratedKeyStorage
     {
         if (!$key->has(Identifier::NAME)) {
             $thumbprint = $this->thumbprintFactory->create($key);
-            $parameters = array_merge($key->getParameters(), [new KeyId($thumbprint)]);
-            $key = new Key($parameters);
+            $key->set(new Identifier($thumbprint));
         }
 
         parent::add($key);
