@@ -33,6 +33,9 @@ use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
  */
 class RsaKeyGenerator implements KeyGeneratorInterface
 {
+    /**
+     * @param SecLibTransformerInterface<CryptRSA> $transformer
+     */
     public function __construct(
         private readonly int $length = 4096,
         private readonly SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),

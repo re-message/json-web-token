@@ -34,6 +34,9 @@ abstract class RSA implements SignatureAlgorithmInterface
 
     public const PADDING_PKCS1 = CryptRSA::SIGNATURE_PKCS1;
 
+    /**
+     * @param SecLibTransformerInterface<CryptRSA> $transformer
+     */
     public function __construct(
         private readonly SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),
         private readonly PublicKeyTransformerInterface $publicKeyTransformer = new RsaPublicKeyTransformer()
