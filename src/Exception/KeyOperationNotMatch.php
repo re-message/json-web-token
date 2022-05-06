@@ -22,10 +22,10 @@ use Throwable;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class KeyUseNotMatch extends RuntimeException
+class KeyOperationNotMatch extends RuntimeException
 {
     public function __construct(?Throwable $previous = null)
     {
-        parent::__construct('The key usage does not match the requested usage.', 0, $previous);
+        parent::__construct('The key operation does not match the requested operation.', 0, $previous);
     }
 }

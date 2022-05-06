@@ -17,7 +17,7 @@
 namespace RM\Standard\Jwt\Key\Resolver;
 
 use RM\Standard\Jwt\Key\KeyInterface;
-use RM\Standard\Jwt\Key\KeyUsage;
+use RM\Standard\Jwt\Key\KeyOperation;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -25,5 +25,5 @@ use RM\Standard\Jwt\Token\TokenInterface;
  */
 interface KeyResolverInterface
 {
-    public function resolve(TokenInterface $token, KeyUsage $use): KeyInterface;
+    public function resolve(TokenInterface $token, KeyOperation $operation): KeyInterface;
 }
