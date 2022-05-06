@@ -24,7 +24,6 @@ use RM\Standard\Jwt\Algorithm\Signature\RSA\PS512;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\RS256;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\RS512;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\RSA;
-use RM\Standard\Jwt\Key\Factory\RsaKeyFactory;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\FirstCoefficient;
@@ -56,7 +55,7 @@ class RSATest extends TestCase
 
     protected function setUp(): void
     {
-        $this->transformer = new RsaSecLibTransformer(new RsaKeyFactory());
+        $this->transformer = new RsaSecLibTransformer();
     }
 
     /**

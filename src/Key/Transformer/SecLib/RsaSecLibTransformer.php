@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key\Transformer\SecLib;
 
 use phpseclib3\Crypt\RSA;
 use RM\Standard\Jwt\Exception\InvalidKeyException;
+use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\Factory\RsaKeyFactory;
 use RM\Standard\Jwt\Key\Parameter\FirstCoefficient;
 use RM\Standard\Jwt\Key\Parameter\FirstFactorExponent;
@@ -28,6 +29,8 @@ use RM\Standard\Jwt\Key\Parameter\PublicExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondFactorExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondPrimeFactor;
 use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Transformer\PublicKey\PublicKeyTransformerInterface;
+use RM\Standard\Jwt\Key\Transformer\PublicKey\RsaPublicKeyTransformer;
 
 /**
  * @template T of RSA
@@ -39,6 +42,13 @@ use RM\Standard\Jwt\Key\Parameter\Type;
  */
 class RsaSecLibTransformer extends AbstractSecLibTransformer
 {
+    public function __construct(
+        KeyFactoryInterface $factory = new RsaKeyFactory(),
+        PublicKeyTransformerInterface $publicKeyTransformer = new RsaPublicKeyTransformer(),
+    ) {
+        parent::__construct($factory, $publicKeyTransformer);
+    }
+
     protected function toComponents(array $parameters): array
     {
         $parameters = $this->filterRsaParameters($parameters);

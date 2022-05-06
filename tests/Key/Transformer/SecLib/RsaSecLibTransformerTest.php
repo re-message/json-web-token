@@ -19,7 +19,6 @@ namespace RM\Standard\Jwt\Tests\Key\Transformer\SecLib;
 use phpseclib3\Crypt\RSA;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
-use RM\Standard\Jwt\Key\Factory\RsaKeyFactory;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\FirstCoefficient;
@@ -64,8 +63,7 @@ class RsaSecLibTransformerTest extends TestCase
      */
     public function testReverseTransform(KeyInterface $jwk, RSA $key): void
     {
-        $factory = new RsaKeyFactory();
-        $transformer = new RsaSecLibTransformer($factory);
+        $transformer = new RsaSecLibTransformer();
 
         $actual = $transformer->reverseTransform($key);
         self::assertEquals(
