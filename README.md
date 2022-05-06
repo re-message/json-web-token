@@ -31,7 +31,9 @@ Also, you can implement your own algorithm. You need implement the `RM\Standard\
 
 Each key must implement the `RM\Standard\Jwt\Key\Factory\KeyInterface` interface.
 
-At the moment, we provide only octet support. This is a just string which used as secret key in HMAC algorithms.
+At the moment, we provide support for:
+1. Octet key
+2. RSA keys (PSS and PKCS1) _(only signing)_
 
 Also, you can implement your own key. You need implement the `RM\Standard\Jwt\Key\Factory\KeyFactoryInterface` interface to create your key from array. If your key contains a property that is not implemented in this library, then you also need to implement the `RM\Standard\Jwt\Key\Parameter\KeyParameterInterface` interface and use `RM\Standard\Jwt\Key\Parameter\Factory\ParameterFactory` with your key parameter class.
 
