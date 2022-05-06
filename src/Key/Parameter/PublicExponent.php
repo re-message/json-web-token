@@ -21,7 +21,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Exponent extends KeyParameter
+class PublicExponent extends KeyParameter
 {
     public const NAME = 'e';
 

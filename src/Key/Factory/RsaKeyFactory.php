@@ -16,7 +16,6 @@
 
 namespace RM\Standard\Jwt\Key\Factory;
 
-use RM\Standard\Jwt\Key\Parameter\Exponent;
 use RM\Standard\Jwt\Key\Parameter\Factory\ParameterFactory;
 use RM\Standard\Jwt\Key\Parameter\Factory\ParameterFactoryInterface;
 use RM\Standard\Jwt\Key\Parameter\FirstCoefficient;
@@ -25,6 +24,7 @@ use RM\Standard\Jwt\Key\Parameter\FirstPrimeFactor;
 use RM\Standard\Jwt\Key\Parameter\Modulus;
 use RM\Standard\Jwt\Key\Parameter\OtherPrimesInfo;
 use RM\Standard\Jwt\Key\Parameter\PrivateExponent;
+use RM\Standard\Jwt\Key\Parameter\PublicExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondFactorExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondPrimeFactor;
 use RM\Standard\Jwt\Key\Parameter\Type;
@@ -36,7 +36,7 @@ class RsaKeyFactory extends AbstractKeyFactory
 {
     public const DEFAULT_CLASS_MAP = [
         Modulus::NAME => Modulus::class,
-        Exponent::NAME => Exponent::class,
+        PublicExponent::NAME => PublicExponent::class,
         PrivateExponent::NAME => PrivateExponent::class,
         FirstPrimeFactor::NAME => FirstPrimeFactor::class,
         SecondPrimeFactor::NAME => SecondPrimeFactor::class,
@@ -51,7 +51,7 @@ class RsaKeyFactory extends AbstractKeyFactory
     ) {
         parent::__construct(
             [Type::RSA],
-            [Modulus::NAME, Exponent::NAME],
+            [Modulus::NAME, PublicExponent::NAME],
             $parameterFactory,
         );
     }
