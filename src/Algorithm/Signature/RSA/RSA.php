@@ -60,11 +60,10 @@ abstract class RSA implements SignatureAlgorithmInterface
      */
     private function getKey(KeyInterface $key, string $type): CryptRSA
     {
-        $rsa = $this->transformer->transform($key, $type);
-        $rsa = $rsa->withHash($this->getAlgorithm());
-        $rsa = $rsa->withPadding($this->getPadding());
-
-        return $rsa;
+        return $this->transformer->transform($key, $type)
+            ->withHash($this->getAlgorithm())
+            ->withPadding($this->getPadding())
+        ;
     }
 
     /**
