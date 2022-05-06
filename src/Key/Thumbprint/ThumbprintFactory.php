@@ -21,6 +21,8 @@ use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Format\JsonFormatter;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Parameter\Modulus;
+use RM\Standard\Jwt\Key\Parameter\PublicExponent;
 use RM\Standard\Jwt\Key\Parameter\Type;
 use RM\Standard\Jwt\Key\Parameter\Value;
 
@@ -33,8 +35,8 @@ class ThumbprintFactory implements ThumbprintFactoryInterface
     public const THUMBPRINT_PARAMETERS = [
         Type::NAME,
         Value::NAME,
-        'e',
-        'n',
+        PublicExponent::NAME,
+        Modulus::NAME,
         'crv',
         'x',
         'y',
