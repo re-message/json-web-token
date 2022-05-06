@@ -63,10 +63,10 @@ interface KeyInterface extends JsonSerializable
     public function all(): array;
 
     /**
-     * Create a thumbprint from key.
+     * Create a thumbprint from the key.
      *
      * @see ThumbprintFactoryInterface
      * @see https://datatracker.ietf.org/doc/html/rfc7638
      */
-    public function toThumbprint(string $algorithm, ThumbprintFactoryInterface $factory = null): string;
+    public function toThumbprint(ThumbprintFactoryInterface $factory = null): string;
 }

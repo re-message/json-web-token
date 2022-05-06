@@ -28,12 +28,9 @@ use RM\Standard\Jwt\Property\Header\KeyId;
  */
 class ThumbprintKeyStorage extends DecoratedKeyStorage
 {
-    public const DEFAULT_ALGORITHM = 'sha256';
-
     public function __construct(
         KeyStorageInterface $storage,
         private readonly ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
-        private readonly string $algorithm = self::DEFAULT_ALGORITHM,
     ) {
         parent::__construct($storage);
     }
@@ -41,7 +38,7 @@ class ThumbprintKeyStorage extends DecoratedKeyStorage
     public function add(KeyInterface $key): void
     {
         if (!$key->has(Identifier::NAME)) {
-            $thumbprint = $this->thumbprintFactory->create($key, $this->algorithm);
+            $thumbprint = $this->thumbprintFactory->create($key);
             $parameters = array_merge($key->getParameters(), [new KeyId($thumbprint)]);
             $key = new Key($parameters);
         }

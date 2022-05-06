@@ -78,11 +78,11 @@ class Key implements KeyInterface
         return $this->get(Type::NAME)->getValue();
     }
 
-    public function toThumbprint(string $algorithm, ThumbprintFactoryInterface $factory = null): string
+    public function toThumbprint(ThumbprintFactoryInterface $factory = null): string
     {
         $factory ??= new ThumbprintFactory();
 
-        return $factory->create($this, $algorithm);
+        return $factory->create($this);
     }
 
     public function getParameters(): array

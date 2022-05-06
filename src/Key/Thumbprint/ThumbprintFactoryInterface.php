@@ -29,6 +29,8 @@ use RM\Standard\Jwt\Key\Parameter\Value;
  */
 interface ThumbprintFactoryInterface
 {
+    public const DEFAULT_ALGORITHM = 'sha256';
+
     // @todo make use parameter constants on implement
     public const THUMBPRINT_PARAMETERS = [
         Type::NAME,
@@ -40,5 +42,5 @@ interface ThumbprintFactoryInterface
         'y',
     ];
 
-    public function create(KeyInterface $key, string $hashAlgorithm): string;
+    public function create(KeyInterface $key): string;
 }

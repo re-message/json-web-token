@@ -28,23 +28,23 @@ use RM\Standard\Jwt\Key\KeyInterface;
 class ThumbprintFactory implements ThumbprintFactoryInterface
 {
     public function __construct(
+        private readonly string $algorithm = self::DEFAULT_ALGORITHM,
         private readonly FormatterInterface $formatter = new JsonFormatter(),
     ) {
-    }
-
-    public function create(KeyInterface $key, string $hashAlgorithm): string
-    {
-        if (!in_array($hashAlgorithm, hash_algos(), true)) {
-            $message = sprintf('The hash algorithm "%s" is not supported.', $hashAlgorithm);
+        if (!in_array($algorithm, hash_algos(), true)) {
+            $message = sprintf('The hash algorithm "%s" is not supported.', $algorithm);
 
             throw new InvalidArgumentException($message);
         }
+    }
 
+    public function create(KeyInterface $key): string
+    {
         $values = array_intersect_key($key->all(), array_flip(self::THUMBPRINT_PARAMETERS));
         ksort($values);
 
         $input = $this->formatter->encode($values);
-        $rawHash = hash($hashAlgorithm, $input, true);
+        $rawHash = hash($this->algorithm, $input, true);
 
         return Base64UrlSafe::encodeUnpadded($rawHash);
     }
