@@ -68,7 +68,7 @@ class Key implements KeyInterface
         return $this->collection->containsKey($name);
     }
 
-    protected function set(KeyParameterInterface $parameter): void
+    public function set(KeyParameterInterface $parameter): void
     {
         $this->collection->set($parameter->getName(), $parameter);
     }

@@ -40,6 +40,12 @@ interface KeyInterface extends JsonSerializable
     public function has(string $name): bool;
 
     /**
+     * Set the parameter to the key.
+     * The existing parameter will be overwritten.
+     */
+    public function set(KeyParameterInterface $parameter): void;
+
+    /**
      * Returns the type of the key.
      */
     public function getType(): string;
