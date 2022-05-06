@@ -19,10 +19,12 @@ namespace RM\Standard\Jwt\Key\Transformer\PublicKey;
 use InvalidArgumentException;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\KeyOperation;
 use RM\Standard\Jwt\Key\Parameter\FirstCoefficient;
 use RM\Standard\Jwt\Key\Parameter\FirstFactorExponent;
 use RM\Standard\Jwt\Key\Parameter\FirstPrimeFactor;
 use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
+use RM\Standard\Jwt\Key\Parameter\Operations;
 use RM\Standard\Jwt\Key\Parameter\PrivateExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondFactorExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondPrimeFactor;
@@ -56,8 +58,14 @@ class RsaPublicKeyTransformer implements PublicKeyTransformerInterface
         }
 
         $parameters = array_filter($privateKey->getParameters(), [$this, 'isPublic']);
+        $key = new Key($parameters);
 
-        return new Key($parameters);
+        if ($key->has(Operations::NAME)) {
+            $operations = Operations::fromEnum([KeyOperation::VERIFY, KeyOperation::ENCRYPT]);
+            $key->set($operations);
+        }
+
+        return $key;
     }
 
     protected function isPublic(KeyParameterInterface $parameter): bool
