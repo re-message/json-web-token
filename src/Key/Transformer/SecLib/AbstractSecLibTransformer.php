@@ -19,11 +19,13 @@ namespace RM\Standard\Jwt\Key\Transformer\SecLib;
 use InvalidArgumentException;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use phpseclib3\Crypt\Common\AsymmetricKey;
+use phpseclib3\Crypt\Common\PublicKey;
 use phpseclib3\Crypt\PublicKeyLoader;
 use phpseclib3\Math\BigInteger;
 use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
+use RM\Standard\Jwt\Key\Transformer\PublicKey\PublicKeyTransformerInterface;
 
 /**
  * @template T of AsymmetricKey
@@ -35,6 +37,7 @@ abstract class AbstractSecLibTransformer implements SecLibTransformerInterface
 {
     public function __construct(
         private readonly KeyFactoryInterface $factory,
+        private readonly PublicKeyTransformerInterface $publicKeyTransformer,
     ) {
     }
 
@@ -51,6 +54,12 @@ abstract class AbstractSecLibTransformer implements SecLibTransformerInterface
             );
 
             throw new InvalidArgumentException($message);
+        }
+
+        $expectPublic = is_a($type, PublicKey::class, true);
+        $canTransform = $this->publicKeyTransformer->supports($key->getType());
+        if ($expectPublic && $canTransform) {
+            $key = $this->publicKeyTransformer->transform($key);
         }
 
         $components = $this->toComponents($key->all());
