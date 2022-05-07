@@ -42,12 +42,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
      */
     public function get(int|string $id): KeyInterface
     {
-        $key = $this->find($id);
-        if (null === $key) {
-            throw new KeyNotFoundException($id);
-        }
-
-        return $key;
+        return $this->find($id) ?? throw new KeyNotFoundException($id);
     }
 
     /**
@@ -55,12 +50,15 @@ class RuntimeKeyStorage implements KeyStorageInterface
      */
     public function find(int|string $id): KeyInterface|null
     {
-        $key = $this->keys->get($id);
-        if (null === $key) {
-            return null;
-        }
+        return $this->keys->get($id);
+    }
 
-        return $key;
+    /**
+     * @inheritDoc
+     */
+    public function has(int|string $id): bool
+    {
+        return $this->keys->containsKey($id);
     }
 
     /**
@@ -82,13 +80,5 @@ class RuntimeKeyStorage implements KeyStorageInterface
         foreach ($keys as $key) {
             $this->add($key);
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function has(int|string $id): bool
-    {
-        return $this->keys->containsKey($id);
     }
 }
