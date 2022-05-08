@@ -81,4 +81,12 @@ class RuntimeKeyStorage implements KeyStorageInterface
             $this->add($key);
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return $this->keys->toArray();
+    }
 }

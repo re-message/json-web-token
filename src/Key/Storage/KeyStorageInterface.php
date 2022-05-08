@@ -52,4 +52,9 @@ interface KeyStorageInterface
      * @param iterable<KeyInterface> $keys
      */
     public function addAll(iterable $keys): void;
+
+    /**
+     * Get all keys from the storage.
+     */
+    public function toArray(): array;
 }

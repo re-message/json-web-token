@@ -47,6 +47,14 @@ abstract class DecoratedKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
+    public function has(int|string $id): bool
+    {
+        return $this->storage->has($id);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function add(KeyInterface $key): void
     {
         $this->storage->add($key);
@@ -63,8 +71,8 @@ abstract class DecoratedKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
-    public function has(int|string $id): bool
+    public function toArray(): array
     {
-        return $this->storage->has($id);
+        return $this->storage->toArray();
     }
 }
