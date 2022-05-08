@@ -34,7 +34,7 @@ class KeyIdTest extends TestCase
 {
     public function testName(): void
     {
-        $keyId = new KeyId();
+        $keyId = new KeyId('123');
         self::assertSame('kid', $keyId->getName());
     }
 

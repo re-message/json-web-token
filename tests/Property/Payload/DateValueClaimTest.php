@@ -40,7 +40,7 @@ class DateValueClaimTest extends TestCase
      */
     public function testSetValue(string $claimClass): void
     {
-        $claim = new $claimClass();
+        $claim = new $claimClass(new DateTime());
 
         $date = $this->getRandomDate();
         $timestamp = $date->getTimestamp();
@@ -56,7 +56,7 @@ class DateValueClaimTest extends TestCase
      */
     public function testDateTimeUsage(string $claimClass): void
     {
-        $claim = new $claimClass();
+        $claim = new $claimClass(new DateTime());
 
         $date = $this->getRandomDate();
         $claim->setValue($date);

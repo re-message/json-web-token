@@ -35,7 +35,7 @@ class AlgorithmTest extends TestCase
 {
     public function testName(): void
     {
-        $algorithm = new Algorithm();
+        $algorithm = new Algorithm('alg');
         self::assertSame('alg', $algorithm->getName());
     }
 

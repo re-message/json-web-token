@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Tests\Property;
 
+use DateTime;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Property\Header\Type;
 use RM\Standard\Jwt\Property\Payload\Audience;
@@ -48,30 +49,28 @@ class PropertyNameTest extends TestCase
      *
      * @param class-string<PropertyInterface> $propertyClass
      */
-    public function testName(string $propertyClass, string $expected): void
+    public function testName(string $propertyClass, mixed $value, string $expected): void
     {
-        $property = new $propertyClass();
+        $property = new $propertyClass($value);
         self::assertSame($property->getName(), $expected);
     }
 
     public function provideClaims(): iterable
     {
-        yield [Type::class, 'typ'];
+        yield [Type::class, 'some-type', 'typ'];
 
-        yield [Audience::class, 'aud'];
+        yield [Audience::class, ['some-audience'], 'aud'];
 
-        yield [Audience::class, 'aud'];
+        yield [Expiration::class, new DateTime(), 'exp'];
 
-        yield [Expiration::class, 'exp'];
+        yield [Identifier::class, 'some-id', 'jti'];
 
-        yield [Identifier::class, 'jti'];
+        yield [IssuedAt::class, new DateTime(), 'iat'];
 
-        yield [IssuedAt::class, 'iat'];
+        yield [Issuer::class, 'asrfw', 'iss'];
 
-        yield [Issuer::class, 'iss'];
+        yield [NotBefore::class, new DateTime(), 'nbf'];
 
-        yield [NotBefore::class, 'nbf'];
-
-        yield [Subject::class, 'sub'];
+        yield [Subject::class, 'some-subject', 'sub'];
     }
 }
