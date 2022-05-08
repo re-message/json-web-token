@@ -49,9 +49,13 @@ class Key implements KeyInterface
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function get(string $name): KeyParameterInterface
     {
-        if (!$this->collection->containsKey($name)) {
+        $parameter = $this->collection->get($name);
+        if (null === $parameter) {
             $message = sprintf(
                 'The parameter with name `%s` is not exists in this key.',
                 $name
@@ -60,24 +64,44 @@ class Key implements KeyInterface
             throw new InvalidArgumentException($message);
         }
 
+        return $parameter;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function find(string $name): ?KeyParameterInterface
+    {
         return $this->collection->get($name);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function has(string $name): bool
     {
         return $this->collection->containsKey($name);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function set(KeyParameterInterface $parameter): void
     {
         $this->collection->set($parameter->getName(), $parameter);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getType(): string
     {
         return $this->get(Type::NAME)->getValue();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function toThumbprint(ThumbprintFactoryInterface $factory = null): string
     {
         $factory ??= new ThumbprintFactory();
@@ -85,11 +109,17 @@ class Key implements KeyInterface
         return $factory->create($this);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getParameters(): array
     {
         return $this->collection->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function all(): array
     {
         /** @var Collection<string, mixed> $collection */
@@ -103,6 +133,9 @@ class Key implements KeyInterface
         return $collection->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function jsonSerialize(): array
     {
         return $this->all();

@@ -30,9 +30,14 @@ use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
 interface KeyInterface extends JsonSerializable
 {
     /**
-     * Returns value of parameter if he exists.
+     * Returns the parameter if exists.
      */
     public function get(string $name): KeyParameterInterface;
+
+    /**
+     * Returns the parameter or null.
+     */
+    public function find(string $name): ?KeyParameterInterface;
 
     /**
      * Checks if a parameter exists in a key.
