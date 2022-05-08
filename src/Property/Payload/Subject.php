@@ -19,8 +19,8 @@ namespace RM\Standard\Jwt\Property\Payload;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
- * Subject is a unique identity of application who wants to get access to the audience {@see Audience}.
- * It is required claim.
+ * Subject is a unique identity of object token provides access to.
+ * It is optional claim.
  *
  * @template-extends AbstractProperty<string>
  * @template-implements ClaimInterface<string>

@@ -19,8 +19,8 @@ namespace RM\Standard\Jwt\Property\Payload;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
- * Audience is a unique identity of object token provides access to.
- * It is required claim. May have same value as {@see Subject} claim.
+ * Audience is an array of unique identifiers for access recipients of a subject.
+ * It is optional claim. May contain the same value as the {@see Subject} claim.
  * This property has no generator or validator.
  *
  * @template-extends AbstractProperty<array<int, string>>
