@@ -37,6 +37,20 @@ interface KeyStorageInterface
     public function find(int|string $id): KeyInterface|null;
 
     /**
+     * Find key from storage by some parameter.
+     *
+     * @return iterable<KeyInterface>
+     */
+    public function findBy(string $name, mixed $value): iterable;
+
+    /**
+     * Find keys from storage by key types.
+     *
+     * @return iterable<KeyInterface>
+     */
+    public function findByType(string $type): iterable;
+
+    /**
      * Checks if key exists in storage.
      */
     public function has(int|string $id): bool;

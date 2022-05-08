@@ -21,6 +21,7 @@ use Doctrine\Common\Collections\Collection;
 use RM\Standard\Jwt\Exception\KeyNotFoundException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
+use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -51,6 +52,24 @@ class RuntimeKeyStorage implements KeyStorageInterface
     public function find(int|string $id): KeyInterface|null
     {
         return $this->keys->get($id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findBy(string $name, mixed $value): iterable
+    {
+        $filter = fn (KeyInterface $key): bool => $value === $key->find($name)?->getValue();
+
+        return $this->keys->filter($filter);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findByType(string $type): iterable
+    {
+        return $this->findBy(Type::NAME, $type);
     }
 
     /**

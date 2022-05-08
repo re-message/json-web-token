@@ -47,6 +47,22 @@ abstract class DecoratedKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
+    public function findBy(string $name, mixed $value): iterable
+    {
+        return $this->storage->findBy($name, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findByType(string $type): iterable
+    {
+        return $this->storage->findByType($type);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function has(int|string $id): bool
     {
         return $this->storage->has($id);
