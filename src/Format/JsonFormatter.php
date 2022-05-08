@@ -25,20 +25,21 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
  */
 class JsonFormatter implements FormatterInterface
 {
+    public const DEFAULT_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+
     private JsonEncoder $encoder;
 
     public function __construct()
     {
-        $options = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
         $encode = new JsonEncode(
             [
-                JsonEncode::OPTIONS => JSON_FORCE_OBJECT | $options,
+                JsonEncode::OPTIONS => self::DEFAULT_OPTIONS,
             ]
         );
         $decode = new JsonDecode(
             [
                 JsonDecode::ASSOCIATIVE => true,
-                JsonDecode::OPTIONS => $options,
+                JsonDecode::OPTIONS => self::DEFAULT_OPTIONS,
             ]
         );
 
@@ -47,7 +48,12 @@ class JsonFormatter implements FormatterInterface
 
     public function encode(array $data): string
     {
-        return $this->encoder->encode($data, 'json');
+        $context = [];
+        if (empty($data)) {
+            $context[JsonEncode::OPTIONS] = JSON_FORCE_OBJECT | self::DEFAULT_OPTIONS;
+        }
+
+        return $this->encoder->encode($data, 'json', $context);
     }
 
     public function decode(string $data): array

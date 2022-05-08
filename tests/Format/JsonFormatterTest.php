@@ -52,7 +52,7 @@ class JsonFormatterTest extends TestCase
     {
         yield 'empty' => [[], '{}'];
 
-        yield 'list' => [[1, 2, 3], '{"0":1,"1":2,"2":3}'];
+        yield 'list' => [[1, 2, 3], '[1,2,3]'];
 
         yield 'bool' => [['bool' => true], '{"bool":true}'];
 
