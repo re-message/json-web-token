@@ -31,6 +31,11 @@ class Subject extends AbstractProperty implements ClaimInterface
 {
     public const NAME = 'sub';
 
+    public function __construct(string $value)
+    {
+        parent::__construct($value);
+    }
+
     public function getName(): string
     {
         return self::NAME;

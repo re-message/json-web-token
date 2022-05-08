@@ -36,6 +36,11 @@ class Identifier extends AbstractProperty implements ClaimInterface
 {
     public const NAME = 'jti';
 
+    public function __construct(string $value)
+    {
+        parent::__construct($value);
+    }
+
     public function getName(): string
     {
         return self::NAME;

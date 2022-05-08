@@ -16,8 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
-use DateTime;
-use DateTimeImmutable;
+use DateTimeInterface;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -28,9 +27,18 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  */
 abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
 {
+    public function __construct(int|DateTimeInterface $value)
+    {
+        if ($value instanceof DateTimeInterface) {
+            $value = $value->getTimestamp();
+        }
+
+        parent::__construct($value);
+    }
+
     public function setValue(mixed $value): void
     {
-        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
+        if ($value instanceof DateTimeInterface) {
             parent::setValue($value->getTimestamp());
 
             return;

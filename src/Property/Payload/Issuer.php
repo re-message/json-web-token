@@ -39,6 +39,11 @@ class Issuer extends AbstractProperty implements ClaimInterface
 {
     public const NAME = 'iss';
 
+    public function __construct(string $value)
+    {
+        parent::__construct($value);
+    }
+
     public function getName(): string
     {
         return self::NAME;
