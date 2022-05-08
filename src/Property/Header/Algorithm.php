@@ -29,6 +29,11 @@ final class Algorithm extends AbstractProperty implements HeaderParameterInterfa
 {
     public const NAME = 'alg';
 
+    public function __construct(string $value)
+    {
+        parent::__construct($value);
+    }
+
     public function getName(): string
     {
         return self::NAME;

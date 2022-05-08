@@ -31,6 +31,11 @@ class Type extends AbstractProperty implements HeaderParameterInterface
 {
     public const NAME = 'typ';
 
+    public function __construct(string $value)
+    {
+        parent::__construct($value);
+    }
+
     public function getName(): string
     {
         return self::NAME;

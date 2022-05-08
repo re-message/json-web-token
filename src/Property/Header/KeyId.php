@@ -31,6 +31,11 @@ class KeyId extends AbstractProperty implements HeaderParameterInterface
 {
     public const NAME = 'kid';
 
+    public function __construct(int|string $value)
+    {
+        parent::__construct($value);
+    }
+
     public function getName(): string
     {
         return self::NAME;
