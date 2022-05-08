@@ -23,14 +23,19 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  * It is required claim. May have same value as {@see Subject} claim.
  * This property has no generator or validator.
  *
- * @template-extends AbstractProperty<string>
- * @template-implements ClaimInterface<string>
+ * @template-extends AbstractProperty<array<int, string>>
+ * @template-implements ClaimInterface<array<int, string>>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
 class Audience extends AbstractProperty implements ClaimInterface
 {
     public const NAME = 'aud';
+
+    public function __construct(array $value = [])
+    {
+        parent::__construct($value);
+    }
 
     public function getName(): string
     {
