@@ -42,7 +42,7 @@ class OctetKeyGenerator implements KeyGeneratorInterface
     ) {
     }
 
-    public function generate(string $type): KeyInterface
+    public function generate(string $type, array $options = []): KeyInterface
     {
         if (!$this->supports($type)) {
             $message = sprintf(

@@ -48,7 +48,7 @@ class DelegatingKeyGenerator implements KeyGeneratorInterface
         $this->collection->add($generator);
     }
 
-    public function generate(string $type): KeyInterface
+    public function generate(string $type, array $options = []): KeyInterface
     {
         $generator = $this->findGenerator($type);
         if (null === $generator) {
@@ -57,7 +57,7 @@ class DelegatingKeyGenerator implements KeyGeneratorInterface
             throw new InvalidArgumentException($message);
         }
 
-        return $generator->generate($type);
+        return $generator->generate($type, $options);
     }
 
     public function supports(string $type): bool

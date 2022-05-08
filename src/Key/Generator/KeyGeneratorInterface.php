@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Key\KeyInterface;
  */
 interface KeyGeneratorInterface
 {
-    public function generate(string $type): KeyInterface;
+    public function generate(string $type, array $options = []): KeyInterface;
 
     public function supports(string $type): bool;
 }
