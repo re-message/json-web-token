@@ -34,12 +34,15 @@ use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class OctetKeyGenerator implements KeyGeneratorInterface
+class OctetKeyGenerator extends LengthAwareGenerator
 {
+    public const DEFAULT_LENGTH = 64;
+    public const MIN_LENGTH = 64;
+
     public function __construct(
-        private readonly int $length = 64,
         private readonly ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
     ) {
+        parent::__construct(self::DEFAULT_LENGTH, self::MIN_LENGTH);
     }
 
     public function generate(string $type, array $options = []): KeyInterface
@@ -54,7 +57,8 @@ class OctetKeyGenerator implements KeyGeneratorInterface
             throw new InvalidArgumentException($message);
         }
 
-        $bytes = Rand::getBytes($this->length);
+        $length = $this->resolveLength($options);
+        $bytes = Rand::getBytes($length);
         $value = Base64UrlSafe::encodeUnpadded($bytes);
 
         $key = new Key(

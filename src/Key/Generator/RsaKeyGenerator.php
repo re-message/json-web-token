@@ -31,16 +31,19 @@ use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class RsaKeyGenerator implements KeyGeneratorInterface
+class RsaKeyGenerator extends LengthAwareGenerator
 {
+    public const DEFAULT_LENGTH = 4096;
+    public const MIN_LENGTH = 512;
+
     /**
      * @param SecLibTransformerInterface<CryptRSA> $transformer
      */
     public function __construct(
-        private readonly int $length = 4096,
         private readonly SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),
         private readonly ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
     ) {
+        parent::__construct(self::DEFAULT_LENGTH, self::MIN_LENGTH);
     }
 
     public function generate(string $type, array $options = []): KeyInterface
@@ -55,7 +58,8 @@ class RsaKeyGenerator implements KeyGeneratorInterface
             throw new InvalidArgumentException($message);
         }
 
-        $cryptKey = CryptRSA::createKey($this->length);
+        $length = $this->resolveLength($options);
+        $cryptKey = CryptRSA::createKey($length);
         $key = $this->transformer->reverseTransform($cryptKey);
 
         $thumbprint = $this->thumbprintFactory->create($key);
