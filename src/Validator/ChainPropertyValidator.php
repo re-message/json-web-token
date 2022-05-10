@@ -18,13 +18,10 @@ namespace RM\Standard\Jwt\Validator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
-use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use RM\Standard\Jwt\Property\PropertyInterface;
 use RM\Standard\Jwt\Property\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
 use RM\Standard\Jwt\Validator\Property\PropertyValidatorInterface;
-use UnexpectedValueException;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -83,7 +80,7 @@ class ChainPropertyValidator implements ValidatorInterface
     private function findValidator(PropertyInterface $property): ?PropertyValidatorInterface
     {
         foreach ($this->validators as $validator) {
-            $target = $this->getPropertyTarget($property);
+            $target = PropertyTarget::getByProperty($property);
             $isSameTarget = $validator->getPropertyTarget() === $target;
             $isSameName = $validator->getPropertyName() === $property->getName();
 
@@ -93,14 +90,5 @@ class ChainPropertyValidator implements ValidatorInterface
         }
 
         return null;
-    }
-
-    private function getPropertyTarget(PropertyInterface $property): PropertyTarget
-    {
-        return match ($property::class) {
-            HeaderParameterInterface::class => PropertyTarget::HEADER,
-            ClaimInterface::class => PropertyTarget::PAYLOAD,
-            default => throw new UnexpectedValueException(),
-        };
     }
 }

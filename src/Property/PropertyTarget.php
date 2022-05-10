@@ -17,8 +17,11 @@
 namespace RM\Standard\Jwt\Property;
 
 use BadMethodCallException;
+use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
+use RM\Standard\Jwt\Property\Payload\ClaimInterface;
 use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Token\TokenInterface;
+use UnexpectedValueException;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -28,6 +31,19 @@ enum PropertyTarget
     case HEADER;
 
     case PAYLOAD;
+
+    public static function getByProperty(PropertyInterface $property): self
+    {
+        if ($property instanceof HeaderParameterInterface) {
+            return self::HEADER;
+        }
+
+        if ($property instanceof ClaimInterface) {
+            return self::PAYLOAD;
+        }
+
+        throw new UnexpectedValueException('Unable to find target by this property');
+    }
 
     public function getBag(TokenInterface $token): PropertyBagInterface
     {
