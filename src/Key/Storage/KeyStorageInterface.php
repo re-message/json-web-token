@@ -39,16 +39,16 @@ interface KeyStorageInterface
     /**
      * Find key from storage by some parameter.
      *
-     * @return iterable<KeyInterface>
+     * @return array<int, KeyInterface>
      */
-    public function findBy(string $name, mixed $value): iterable;
+    public function findBy(string $name, mixed $value): array;
 
     /**
      * Find keys from storage by key types.
      *
-     * @return iterable<KeyInterface>
+     * @return array<int, KeyInterface>
      */
-    public function findByType(string $type): iterable;
+    public function findByType(string $type): array;
 
     /**
      * Checks if key exists in storage.

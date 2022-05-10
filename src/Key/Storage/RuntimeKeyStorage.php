@@ -57,17 +57,17 @@ class RuntimeKeyStorage implements KeyStorageInterface
     /**
      * @inheritDoc
      */
-    public function findBy(string $name, mixed $value): iterable
+    public function findBy(string $name, mixed $value): array
     {
         $filter = fn (KeyInterface $key): bool => $value === $key->find($name)?->getValue();
 
-        return $this->keys->filter($filter);
+        return $this->keys->filter($filter)->getValues();
     }
 
     /**
      * @inheritDoc
      */
-    public function findByType(string $type): iterable
+    public function findByType(string $type): array
     {
         return $this->findBy(Type::NAME, $type);
     }
