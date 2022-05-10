@@ -69,7 +69,7 @@ class GeneratedSigner extends DecoratedSigner
         $name = $generator->getPropertyName();
         $target = $generator->getPropertyTarget();
 
-        $bag = $target->resolve($token);
+        $bag = $target->getBag($token);
         if ($bag->has($name)) {
             return;
         }

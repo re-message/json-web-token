@@ -87,7 +87,7 @@ class GeneratedSignerTest extends TestCase
             $target = $generator->getPropertyTarget();
             $property = $generator->getPropertyName();
 
-            $bag = $target->resolve($generatedToken);
+            $bag = $target->getBag($generatedToken);
             self::assertTrue($bag->has($property));
         }
     }

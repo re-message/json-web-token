@@ -29,7 +29,7 @@ enum PropertyTarget
 
     case PAYLOAD;
 
-    public function resolve(TokenInterface $token): PropertyBagInterface
+    public function getBag(TokenInterface $token): PropertyBagInterface
     {
         if (!$token instanceof SignatureToken) {
             throw new BadMethodCallException('Not implemented yet.');
