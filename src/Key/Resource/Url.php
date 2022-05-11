@@ -19,11 +19,13 @@ namespace RM\Standard\Jwt\Key\Resource;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Url implements ResourceInterface
+class Url extends AbstractResource
 {
     public function __construct(
         public readonly string $address,
         public readonly array $headers = [],
+        bool $required = false,
     ) {
+        parent::__construct($required);
     }
 }

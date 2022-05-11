@@ -19,12 +19,15 @@ namespace RM\Standard\Jwt\Key\Resource;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class File extends AbstractResource
+abstract class AbstractResource implements ResourceInterface
 {
     public function __construct(
-        public readonly string $path,
-        bool $required = false,
+        private readonly bool $required = false,
     ) {
-        parent::__construct($required);
+    }
+
+    public function isRequired(): bool
+    {
+        return $this->required;
     }
 }

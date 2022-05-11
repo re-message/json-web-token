@@ -21,4 +21,5 @@ namespace RM\Standard\Jwt\Key\Resource;
  */
 interface ResourceInterface
 {
+    public function isRequired(): bool;
 }

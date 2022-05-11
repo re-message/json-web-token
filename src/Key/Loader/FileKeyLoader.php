@@ -43,11 +43,15 @@ class FileKeyLoader implements KeyLoaderInterface
             throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
         }
 
-        if (!is_file($resource->path)) {
+        if (!file_exists($resource->path)) {
+            if (!$resource->isRequired()) {
+                return [];
+            }
+
             throw new LoaderException(sprintf('File "%s" does not exist.', $resource->path));
         }
 
-        if (!is_readable($resource->path)) {
+        if (!is_file($resource->path) || !is_readable($resource->path)) {
             throw new LoaderException(sprintf('File "%s" cannot be read.', $resource->path));
         }
 

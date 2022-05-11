@@ -51,9 +51,13 @@ class UrlKeyLoader implements KeyLoaderInterface
         foreach ($resource->headers as $key => $value) {
             $request = $request->withHeader($key, $value);
         }
-        $response = $this->client->sendRequest($request);
 
+        $response = $this->client->sendRequest($request);
         if ($response->getStatusCode() >= 400) {
+            if (!$resource->isRequired()) {
+                return [];
+            }
+
             throw new LoaderException('Unable to get the key set.');
         }
 
