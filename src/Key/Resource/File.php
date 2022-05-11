@@ -22,9 +22,14 @@ namespace RM\Standard\Jwt\Key\Resource;
 class File extends AbstractResource
 {
     public function __construct(
-        public readonly string $path,
+        private readonly string $path,
         bool $required = false,
     ) {
         parent::__construct($required);
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
     }
 }

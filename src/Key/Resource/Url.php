@@ -22,10 +22,20 @@ namespace RM\Standard\Jwt\Key\Resource;
 class Url extends AbstractResource
 {
     public function __construct(
-        public readonly string $address,
-        public readonly array $headers = [],
+        private readonly string $address,
+        private readonly array $headers = [],
         bool $required = false,
     ) {
         parent::__construct($required);
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
     }
 }

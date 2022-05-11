@@ -43,21 +43,22 @@ class FileKeyLoader implements KeyLoaderInterface
             throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
         }
 
-        if (!file_exists($resource->path)) {
+        $path = $resource->getPath();
+        if (!file_exists($path)) {
             if (!$resource->isRequired()) {
                 return [];
             }
 
-            throw new LoaderException(sprintf('File "%s" does not exist.', $resource->path));
+            throw new LoaderException(sprintf('File "%s" does not exist.', $path));
         }
 
-        if (!is_file($resource->path) || !is_readable($resource->path)) {
-            throw new LoaderException(sprintf('File "%s" cannot be read.', $resource->path));
+        if (!is_file($path) || !is_readable($path)) {
+            throw new LoaderException(sprintf('File "%s" cannot be read.', $path));
         }
 
-        $content = file_get_contents($resource->path);
+        $content = file_get_contents($path);
         if (false === $content) {
-            throw new LoaderException(sprintf('Unable get content from file "%s".', $resource->path));
+            throw new LoaderException(sprintf('Unable get content from file "%s".', $path));
         }
 
         return $this->serializer->deserialize($content);

@@ -47,8 +47,8 @@ class UrlKeyLoader implements KeyLoaderInterface
             throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
         }
 
-        $request = $this->requestFactory->createRequest('GET', $resource->address);
-        foreach ($resource->headers as $key => $value) {
+        $request = $this->requestFactory->createRequest('GET', $resource->getAddress());
+        foreach ($resource->getHeaders() as $key => $value) {
             $request = $request->withHeader($key, $value);
         }
 
