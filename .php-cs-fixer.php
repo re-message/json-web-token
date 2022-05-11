@@ -16,6 +16,8 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
+    ->notPath('src/Key/KeyOperation.php')
+    ->notPath('src/Key/KeyUsage.php')
     ->notPath('src/Property/PropertyTarget.php')
     ->exclude('vendor')
     ->append([__FILE__])
