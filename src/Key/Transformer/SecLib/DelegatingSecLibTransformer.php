@@ -94,7 +94,7 @@ class DelegatingSecLibTransformer implements SecLibTransformerInterface
     }
 
     /**
-     * @return null|SecLibTransformerInterface<T>
+     * @return SecLibTransformerInterface<T>|null
      */
     protected function findTransformer(string $type): ?SecLibTransformerInterface
     {

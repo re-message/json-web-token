@@ -37,7 +37,7 @@ interface PropertyBagInterface
     /**
      * Returns the property from the bag by name or nul.
      *
-     * @return null|T
+     * @return T|null
      */
     public function find(string $name): ?PropertyInterface;
 
