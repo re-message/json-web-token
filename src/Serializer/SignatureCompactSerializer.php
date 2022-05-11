@@ -59,14 +59,14 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
     public function serialize(TokenInterface $token, bool $withoutSignature = false): string
     {
         if (!$token instanceof SignatureToken) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '%s can serialize only %s, given %s',
-                    self::class,
-                    SignatureToken::class,
-                    $token::class
-                )
+            $message = sprintf(
+                '%s can serialize only %s, given %s',
+                self::class,
+                SignatureToken::class,
+                $token::class,
             );
+
+            throw new InvalidArgumentException($message);
         }
 
         try {
