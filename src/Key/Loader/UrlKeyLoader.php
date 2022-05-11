@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key\Loader;
 
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use RM\Standard\Jwt\Exception\LoaderException;
 use RM\Standard\Jwt\Exception\NotSupportedResourceException;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
@@ -53,7 +54,7 @@ class UrlKeyLoader implements KeyLoaderInterface
         }
 
         $response = $this->client->sendRequest($request);
-        if ($response->getStatusCode() >= 400) {
+        if (!$this->validateResponse($response)) {
             if (!$resource->isRequired()) {
                 return [];
             }
@@ -64,6 +65,11 @@ class UrlKeyLoader implements KeyLoaderInterface
         $content = $response->getBody()->getContents();
 
         return $this->serializer->deserialize($content);
+    }
+
+    protected function validateResponse(ResponseInterface $response): bool
+    {
+        return $response->getStatusCode() < 400;
     }
 
     public function supports(ResourceInterface $resource): bool
