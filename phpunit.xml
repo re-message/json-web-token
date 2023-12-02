@@ -10,8 +10,15 @@
          bootstrap="vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="No service-related tests">
             <directory>tests</directory>
+            <exclude>tests/Storage/MemcacheTokenStorageTest.php</exclude>
+            <exclude>tests/Storage/RedisTokenStorageTest.php</exclude>
+        </testsuite>
+
+        <testsuite name="Service-related tests">
+            <file>tests/Storage/MemcacheTokenStorageTest.php</file>
+            <file>tests/Storage/RedisTokenStorageTest.php</file>
         </testsuite>
     </testsuites>
 
