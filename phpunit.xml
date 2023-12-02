@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
          colors="true"
          testdox="true"
          beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         forceCoversAnnotation="true"
          failOnRisky="true"
          failOnWarning="true"
          bootstrap="vendor/autoload.php"
@@ -27,12 +25,12 @@
         <env name="MEMCACHED_PORT" value="11211"/>
     </php>
 
-    <coverage>
+    <source>
         <include>
             <directory>src</directory>
         </include>
         <exclude>
             <directory>src/Exception</directory>
         </exclude>
-    </coverage>
+    </source>
 </phpunit>
