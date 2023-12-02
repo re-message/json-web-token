@@ -3,9 +3,11 @@ name: testing
 on:
   push:
     branches:
+      - 'release'
       - '*.x'
   pull_request:
     branches:
+      - 'release'
       - '*.x'
 
 jobs:
