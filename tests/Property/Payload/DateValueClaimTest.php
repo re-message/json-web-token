@@ -18,6 +18,8 @@ namespace RM\Standard\Jwt\Tests\Property\Payload;
 
 use DateTime;
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Property\Payload\DateValueClaim;
 use RM\Standard\Jwt\Property\Payload\Expiration;
@@ -25,19 +27,17 @@ use RM\Standard\Jwt\Property\Payload\IssuedAt;
 use RM\Standard\Jwt\Property\Payload\NotBefore;
 
 /**
- * @covers \RM\Standard\Jwt\Property\Payload\DateValueClaim
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(DateValueClaim::class)]
 class DateValueClaimTest extends TestCase
 {
     /**
-     * @dataProvider provideClaimClass
-     *
      * @param class-string<DateValueClaim> $claimClass
      */
+    #[DataProvider('provideClaimClass')]
     public function testSetValue(string $claimClass): void
     {
         $claim = new $claimClass(new DateTime());
@@ -50,10 +50,9 @@ class DateValueClaimTest extends TestCase
     }
 
     /**
-     * @dataProvider provideClaimClass
-     *
      * @param class-string<DateValueClaim> $claimClass
      */
+    #[DataProvider('provideClaimClass')]
     public function testDateTimeUsage(string $claimClass): void
     {
         $claim = new $claimClass(new DateTime());

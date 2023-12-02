@@ -16,7 +16,10 @@
 
 namespace RM\Standard\Jwt\Tests\Property\Factory;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use RM\Standard\Jwt\Property\Factory\AbstractPropertyFactory;
 use RM\Standard\Jwt\Property\Factory\ClaimFactory;
 use RM\Standard\Jwt\Property\Factory\HeaderParameterFactory;
 use RM\Standard\Jwt\Property\Header\Custom;
@@ -24,22 +27,20 @@ use RM\Standard\Jwt\Property\Payload\PrivateClaim;
 use RM\Standard\Jwt\Tests\Property\SomeProperty;
 
 /**
- * @covers \RM\Standard\Jwt\Property\Factory\AbstractPropertyFactory
- * @covers \RM\Standard\Jwt\Property\Factory\ClaimFactory
- * @covers \RM\Standard\Jwt\Property\Factory\HeaderParameterFactory
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(AbstractPropertyFactory::class)]
+#[CoversClass(ClaimFactory::class)]
+#[CoversClass(HeaderParameterFactory::class)]
 class PropertyFactoryTest extends TestCase
 {
     /**
-     * @dataProvider provideFactory
-     *
      * @param class-string $factoryClass
      * @param class-string $expectedClass
      */
+    #[DataProvider('provideFactory')]
     public function testCreate(string $factoryClass, string $expectedClass): void
     {
         $factory = new $factoryClass();

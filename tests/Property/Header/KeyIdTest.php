@@ -18,18 +18,18 @@ namespace RM\Standard\Jwt\Tests\Property\Header;
 
 use InvalidArgumentException;
 use Laminas\Math\Rand;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Property\Header\KeyId;
 
 /**
- * @covers \RM\Standard\Jwt\Property\Header\KeyId
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(KeyId::class)]
 class KeyIdTest extends TestCase
 {
     public function testName(): void

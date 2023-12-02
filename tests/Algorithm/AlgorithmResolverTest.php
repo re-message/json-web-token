@@ -17,6 +17,8 @@
 namespace RM\Standard\Jwt\Tests\Algorithm;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
@@ -30,19 +32,17 @@ use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Algorithm\AlgorithmResolver
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(AlgorithmResolver::class)]
 class AlgorithmResolverTest extends TestCase
 {
     /**
-     * @dataProvider provideAlgorithm
-     *
      * @param class-string<AlgorithmInterface> $by
      */
+    #[DataProvider('provideAlgorithm')]
     public function testValidAlgorithm(AlgorithmInterface $expected, string $by): void
     {
         $manager = $this->createMock(AlgorithmManager::class);

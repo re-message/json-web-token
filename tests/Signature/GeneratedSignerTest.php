@@ -17,6 +17,9 @@
 namespace RM\Standard\Jwt\Tests\Signature;
 
 use Generator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Generator\ExpirationGenerator;
@@ -32,10 +35,9 @@ use stdClass;
 use TypeError;
 
 /**
- * @covers \RM\Standard\Jwt\Signature\GeneratedSigner
- *
  * @internal
  */
+#[CoversClass(GeneratedSigner::class)]
 class GeneratedSignerTest extends TestCase
 {
     public function testInvalidConstructorUsage(): void
@@ -65,12 +67,10 @@ class GeneratedSignerTest extends TestCase
     }
 
     /**
-     * @depends      testTokenCloningOnSign
-     *
-     * @dataProvider providePropertyGenerators
-     *
      * @param PropertyGeneratorInterface[] $generators
      */
+    #[Depends('testTokenCloningOnSign')]
+    #[DataProvider('providePropertyGenerators')]
     public function testPropertyGeneration(array $generators, GeneratedSigner $signer): void
     {
         foreach ($generators as $generator) {

@@ -18,6 +18,8 @@ namespace RM\Standard\Jwt\Tests\Serializer;
 
 use Generator;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512;
@@ -30,10 +32,9 @@ use stdClass;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 
 /**
- * @covers \RM\Standard\Jwt\Serializer\SignatureCompactSerializer
- *
  * @internal
  */
+#[CoversClass(SignatureCompactSerializer::class)]
 class SignatureCompactSerializerTest extends TestCase
 {
     public function testSupports(): void
@@ -47,9 +48,7 @@ class SignatureCompactSerializerTest extends TestCase
         self::assertTrue($serializer->supports($token));
     }
 
-    /**
-     * @dataProvider provideTokens
-     */
+    #[DataProvider('provideTokens')]
     public function testSerialize(bool $isValid, string $rawToken): void
     {
         $serializer = new SignatureCompactSerializer();

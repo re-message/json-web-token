@@ -17,6 +17,8 @@
 namespace RM\Standard\Jwt\Tests\Property;
 
 use DateTime;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Property\Header\Type;
 use RM\Standard\Jwt\Property\Payload\Audience;
@@ -29,26 +31,24 @@ use RM\Standard\Jwt\Property\Payload\Subject;
 use RM\Standard\Jwt\Property\PropertyInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Property\Header\Type
- * @covers \RM\Standard\Jwt\Property\Payload\Audience
- * @covers \RM\Standard\Jwt\Property\Payload\Expiration
- * @covers \RM\Standard\Jwt\Property\Payload\Identifier
- * @covers \RM\Standard\Jwt\Property\Payload\IssuedAt
- * @covers \RM\Standard\Jwt\Property\Payload\Issuer
- * @covers \RM\Standard\Jwt\Property\Payload\NotBefore
- * @covers \RM\Standard\Jwt\Property\Payload\Subject
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(Type::class)]
+#[CoversClass(Audience::class)]
+#[CoversClass(Expiration::class)]
+#[CoversClass(Identifier::class)]
+#[CoversClass(IssuedAt::class)]
+#[CoversClass(Issuer::class)]
+#[CoversClass(NotBefore::class)]
+#[CoversClass(Subject::class)]
 class PropertyNameTest extends TestCase
 {
     /**
-     * @dataProvider provideClaims
-     *
      * @param class-string<PropertyInterface> $propertyClass
      */
+    #[DataProvider('provideClaims')]
     public function testName(string $propertyClass, mixed $value, string $expected): void
     {
         $property = new $propertyClass($value);

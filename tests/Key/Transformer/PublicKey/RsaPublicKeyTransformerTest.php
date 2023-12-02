@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Tests\Key\Transformer\PublicKey;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -31,17 +33,14 @@ use RM\Standard\Jwt\Key\Parameter\Type;
 use RM\Standard\Jwt\Key\Transformer\PublicKey\RsaPublicKeyTransformer;
 
 /**
- * @covers \RM\Standard\Jwt\Key\Transformer\PublicKey\RsaPublicKeyTransformer
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(RsaPublicKeyTransformer::class)]
 class RsaPublicKeyTransformerTest extends TestCase
 {
-    /**
-     * @dataProvider provideKey
-     */
+    #[DataProvider('provideKey')]
     public function testTransform(KeyInterface $private, KeyInterface $public): void
     {
         $transformer = new RsaPublicKeyTransformer();

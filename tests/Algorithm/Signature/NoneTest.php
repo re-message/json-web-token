@@ -16,18 +16,18 @@
 
 namespace RM\Standard\Jwt\Tests\Algorithm\Signature;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\None;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
 
 /**
- * @covers \RM\Standard\Jwt\Algorithm\Signature\None
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(None::class)]
 class NoneTest extends TestCase
 {
     public function testName(): void

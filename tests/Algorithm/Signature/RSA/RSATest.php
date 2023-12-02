@@ -19,12 +19,16 @@ namespace RM\Standard\Jwt\Tests\Algorithm\Signature\RSA;
 use Laminas\Math\Rand;
 use Override;
 use phpseclib3\Crypt\RSA as CryptRSA;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\PS256;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\PS512;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\RS256;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\RS512;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\RSA;
+use RM\Standard\Jwt\Algorithm\Signature\RSA\RSAPKCS1;
+use RM\Standard\Jwt\Algorithm\Signature\RSA\RSAPSS;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\FirstCoefficient;
@@ -40,16 +44,15 @@ use RM\Standard\Jwt\Key\Transformer\SecLib\RsaSecLibTransformer;
 use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Algorithm\Signature\RSA\PS256
- * @covers \RM\Standard\Jwt\Algorithm\Signature\RSA\PS512
- * @covers \RM\Standard\Jwt\Algorithm\Signature\RSA\RS256
- * @covers \RM\Standard\Jwt\Algorithm\Signature\RSA\RS512
- * @covers \RM\Standard\Jwt\Algorithm\Signature\RSA\RSA
- * @covers \RM\Standard\Jwt\Algorithm\Signature\RSA\RSAPKCS1
- * @covers \RM\Standard\Jwt\Algorithm\Signature\RSA\RSAPSS
- *
  * @internal
  */
+#[CoversClass(PS256::class)]
+#[CoversClass(PS512::class)]
+#[CoversClass(RS256::class)]
+#[CoversClass(RS512::class)]
+#[CoversClass(RSA::class)]
+#[CoversClass(RSAPKCS1::class)]
+#[CoversClass(RSAPSS::class)]
 class RSATest extends TestCase
 {
     private SecLibTransformerInterface $transformer;
@@ -60,9 +63,7 @@ class RSATest extends TestCase
         $this->transformer = new RsaSecLibTransformer();
     }
 
-    /**
-     * @dataProvider provideRsa
-     */
+    #[DataProvider('provideRsa')]
     public function testSigning(RSA $rsa, string $hash, int $padding): void
     {
         /** @var CryptRSA\PrivateKey $privateKey */
@@ -94,9 +95,7 @@ class RSATest extends TestCase
         yield 'PS512' => [new PS512(), 'sha512', CryptRSA::SIGNATURE_PSS];
     }
 
-    /**
-     * @dataProvider provideStaticRsa
-     */
+    #[DataProvider('provideStaticRsa')]
     public function testStaticSigning(
         RSA $rsa,
         KeyInterface $key,

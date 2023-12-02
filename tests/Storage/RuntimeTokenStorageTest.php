@@ -18,15 +18,16 @@ namespace RM\Standard\Jwt\Tests\Storage;
 
 use Laminas\Math\Rand;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Storage\RuntimeTokenStorage
- *
  * @internal
  */
+#[CoversClass(RuntimeTokenStorage::class)]
 class RuntimeTokenStorageTest extends TestCase
 {
     private static string $someTokenId;
@@ -48,9 +49,7 @@ class RuntimeTokenStorageTest extends TestCase
         return $storage;
     }
 
-    /**
-     * @depends testPut
-     */
+    #[Depends('testPut')]
     public function testRevoke(TokenStorageInterface $storage): void
     {
         $storage->revoke(self::$someTokenId);

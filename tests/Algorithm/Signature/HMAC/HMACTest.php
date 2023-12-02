@@ -18,6 +18,8 @@ namespace RM\Standard\Jwt\Tests\Algorithm\Signature\HMAC;
 
 use InvalidArgumentException;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC;
@@ -31,14 +33,13 @@ use RM\Standard\Jwt\Key\Parameter\Type;
 use RM\Standard\Jwt\Key\Parameter\Value;
 
 /**
- * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC
- * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256
- * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256
- * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3512
- * @covers \RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512
- *
  * @internal
  */
+#[CoversClass(HMAC::class)]
+#[CoversClass(HS256::class)]
+#[CoversClass(HS3256::class)]
+#[CoversClass(HS3512::class)]
+#[CoversClass(HS512::class)]
 class HMACTest extends TestCase
 {
     private KeyInterface $key;
@@ -56,9 +57,7 @@ class HMACTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider provideAlgorithms
-     */
+    #[DataProvider('provideAlgorithms')]
     public function testAlgorithmName(HMAC $algorithm): void
     {
         $reflect = new ReflectionClass($algorithm);
@@ -66,15 +65,13 @@ class HMACTest extends TestCase
         self::assertSame($expected, $algorithm->name());
     }
 
-    /**
-     * @dataProvider provideAlgorithms
-     */
+    #[DataProvider('provideAlgorithms')]
     public function testOctetKeyIsAllowed(HMAC $algorithm): void
     {
         self::assertContains($this->key->getType(), $algorithm->allowedKeyTypes());
     }
 
-    public function provideAlgorithms(): iterable
+    public static function provideAlgorithms(): iterable
     {
         $algorithms = [new HS256(), new HS512(), new HS3256(), new HS3512()];
         foreach ($algorithms as $algorithm) {
@@ -82,9 +79,7 @@ class HMACTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider provideHashes
-     */
+    #[DataProvider('provideHashes')]
     public function testHash(HMAC $algorithm, string $input, string $expected): void
     {
         $hash = $algorithm->sign($this->key, $input);
@@ -127,9 +122,7 @@ class HMACTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideInvalidKeys
-     */
+    #[DataProvider('provideInvalidKeys')]
     public function testInvalidKey(KeyInterface $key, string $message): void
     {
         $algorithm = new HS256();

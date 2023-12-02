@@ -17,6 +17,8 @@
 namespace RM\Standard\Jwt\Tests\Key\Set;
 
 use Laminas\Math\Rand;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Format\FormatterInterface;
@@ -32,17 +34,14 @@ use RM\Standard\Jwt\Key\Set\KeySetSerializer;
 use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Key\Set\KeySetSerializer
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(KeySetSerializer::class)]
 class KeySetSerializerTest extends TestCase
 {
-    /**
-     * @dataProvider provideKeys
-     */
+    #[DataProvider('provideKeys')]
     public function testSerialize(array $keys): void
     {
         $factory = $this->createMock(KeyFactoryInterface::class);
@@ -59,9 +58,7 @@ class KeySetSerializerTest extends TestCase
         self::assertEquals($expected, $keySet);
     }
 
-    /**
-     * @dataProvider provideInvalidKeySet
-     */
+    #[DataProvider('provideInvalidKeySet')]
     public function testInvalidKeySet(array $array): void
     {
         $factory = $this->createMock(KeyFactoryInterface::class);
@@ -97,9 +94,7 @@ class KeySetSerializerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideKeys
-     */
+    #[DataProvider('provideKeys')]
     public function testDeserialize(array $expected): void
     {
         $factory = new OctetKeyFactory();

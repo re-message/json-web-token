@@ -17,6 +17,8 @@
 namespace RM\Standard\Jwt\Tests\Signature;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\None;
 use RM\Standard\Jwt\Property\Header\Algorithm;
@@ -25,12 +27,11 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Tests\Algorithm\Some;
 
 /**
- * @covers \RM\Standard\Jwt\Signature\SignatureToken
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(SignatureToken::class)]
 class SignatureTokenTest extends TestCase
 {
     public function testAlgorithmRequired(): void
@@ -85,9 +86,7 @@ class SignatureTokenTest extends TestCase
         self::assertNotSame($newToken, $token);
     }
 
-    /**
-     * @dataProvider provideSerialization
-     */
+    #[DataProvider('provideSerialization')]
     public function testDefaultSerialization(SignatureToken $token, string $expected): void
     {
         $actual = (string) $token;

@@ -17,29 +17,30 @@
 namespace RM\Standard\Jwt\Tests\Property;
 
 use Laminas\Math\Rand;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use RM\Standard\Jwt\Property\AbstractProperty;
 use RM\Standard\Jwt\Property\Header\Custom;
 use RM\Standard\Jwt\Property\Payload\PrivateClaim;
 use RM\Standard\Jwt\Property\Payload\PublicClaim;
 use RM\Standard\Jwt\Property\PropertyInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Property\AbstractProperty
- * @covers \RM\Standard\Jwt\Property\Header\Custom
- * @covers \RM\Standard\Jwt\Property\Payload\PrivateClaim
- * @covers \RM\Standard\Jwt\Property\Payload\PublicClaim
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(AbstractProperty::class)]
+#[CoversClass(Custom::class)]
+#[CoversClass(PrivateClaim::class)]
+#[CoversClass(PublicClaim::class)]
 class PropertyTest extends TestCase
 {
     /**
-     * @dataProvider provideClaimClass
-     *
      * @param class-string<PropertyInterface> $claimClass
      */
+    #[DataProvider('provideClaimClass')]
     public function testPassValueInConstructor(string $claimClass): void
     {
         $name = Rand::getString(8);
@@ -51,10 +52,9 @@ class PropertyTest extends TestCase
     }
 
     /**
-     * @dataProvider provideClaimClass
-     *
      * @param class-string<PropertyInterface> $claimClass
      */
+    #[DataProvider('provideClaimClass')]
     public function testPassValueInSetter(string $claimClass): void
     {
         $name = Rand::getString(8);

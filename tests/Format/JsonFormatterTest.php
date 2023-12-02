@@ -16,21 +16,20 @@
 
 namespace RM\Standard\Jwt\Tests\Format;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Format\JsonFormatter;
 
 /**
- * @covers \RM\Standard\Jwt\Format\JsonFormatter
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(JsonFormatter::class)]
 class JsonFormatterTest extends TestCase
 {
-    /**
-     * @dataProvider provideData
-     */
+    #[DataProvider('provideData')]
     public function testEncode(array $data, string $expected): void
     {
         $formatter = new JsonFormatter();
@@ -38,9 +37,7 @@ class JsonFormatterTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider provideData
-     */
+    #[DataProvider('provideData')]
     public function testDecode(array $expected, string $data): void
     {
         $formatter = new JsonFormatter();

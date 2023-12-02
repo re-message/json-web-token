@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Tests\Signature;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
@@ -25,12 +26,11 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\SignerInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Signature\LoggableSigner
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(LoggableSigner::class)]
 class LoggableSignerTest extends TestCase
 {
     public function testLogging(): void

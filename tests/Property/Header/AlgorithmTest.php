@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Tests\Property\Header;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
@@ -25,12 +27,11 @@ use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS512;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 
 /**
- * @covers \RM\Standard\Jwt\Property\Header\Algorithm
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(Algorithm::class)]
 class AlgorithmTest extends TestCase
 {
     public function testName(): void
@@ -39,9 +40,7 @@ class AlgorithmTest extends TestCase
         self::assertSame('alg', $algorithm->getName());
     }
 
-    /**
-     * @dataProvider provideAlgorithm
-     */
+    #[DataProvider('provideAlgorithm')]
     public function testSecondaryConstructor(AlgorithmInterface $algorithm): void
     {
         $parameter = Algorithm::fromAlgorithm($algorithm);

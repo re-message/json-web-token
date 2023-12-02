@@ -17,6 +17,8 @@
 namespace RM\Standard\Jwt\Tests\Key\Transformer\SecLib;
 
 use phpseclib3\Crypt\RSA;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
 use RM\Standard\Jwt\Key\Key;
@@ -30,21 +32,19 @@ use RM\Standard\Jwt\Key\Parameter\PublicExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondFactorExponent;
 use RM\Standard\Jwt\Key\Parameter\SecondPrimeFactor;
 use RM\Standard\Jwt\Key\Parameter\Type;
+use RM\Standard\Jwt\Key\Transformer\SecLib\AbstractSecLibTransformer;
 use RM\Standard\Jwt\Key\Transformer\SecLib\RsaSecLibTransformer;
 
 /**
- * @covers \RM\Standard\Jwt\Key\Transformer\SecLib\AbstractSecLibTransformer
- * @covers \RM\Standard\Jwt\Key\Transformer\SecLib\RsaSecLibTransformer
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(AbstractSecLibTransformer::class)]
+#[CoversClass(RsaSecLibTransformer::class)]
 class RsaSecLibTransformerTest extends TestCase
 {
-    /**
-     * @dataProvider provideKey
-     */
+    #[DataProvider('provideKey')]
     public function testTransform(KeyInterface $jwk, RSA $key): void
     {
         $factory = $this->createMock(KeyFactoryInterface::class);
@@ -58,9 +58,7 @@ class RsaSecLibTransformerTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider provideKey
-     */
+    #[DataProvider('provideKey')]
     public function testReverseTransform(KeyInterface $jwk, RSA $key): void
     {
         $transformer = new RsaSecLibTransformer();

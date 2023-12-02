@@ -19,15 +19,16 @@ namespace RM\Standard\Jwt\Tests\Storage;
 use Laminas\Math\Rand;
 use Memcache;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Storage\MemcacheTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Storage\MemcacheTokenStorage
- *
  * @internal
  */
+#[CoversClass(MemcacheTokenStorage::class)]
 class MemcacheTokenStorageTest extends TestCase
 {
     private static string $host;
@@ -58,9 +59,7 @@ class MemcacheTokenStorageTest extends TestCase
         return $storage;
     }
 
-    /**
-     * @depends testPut
-     */
+    #[Depends('testPut')]
     public function testRevoke(TokenStorageInterface $storage): void
     {
         self::assertTrue($storage->has(self::$someTokenId));

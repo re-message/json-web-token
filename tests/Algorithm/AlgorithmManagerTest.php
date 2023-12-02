@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Tests\Algorithm;
 
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\None;
@@ -25,10 +26,9 @@ use stdClass;
 use TypeError;
 
 /**
- * @covers \RM\Standard\Jwt\Algorithm\AlgorithmManager
- *
  * @internal
  */
+#[CoversClass(AlgorithmManager::class)]
 class AlgorithmManagerTest extends TestCase
 {
     private AlgorithmManager $manager;

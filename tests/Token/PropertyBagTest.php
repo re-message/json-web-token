@@ -16,18 +16,19 @@
 
 namespace RM\Standard\Jwt\Tests\Token;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\Type;
+use RM\Standard\Jwt\Property\PropertyBag;
 
 /**
- * @covers \RM\Standard\Jwt\Property\PropertyBag
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(PropertyBag::class)]
 class PropertyBagTest extends TestCase
 {
     public function testFind(): void

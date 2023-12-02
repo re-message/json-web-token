@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Tests\Signature;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
@@ -29,12 +30,11 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\SignerInterface;
 
 /**
- * @covers \RM\Standard\Jwt\Signature\EventfulSigner
- *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @internal
  */
+#[CoversClass(EventfulSigner::class)]
 class EventfulSignerTest extends TestCase
 {
     public function testLogging(): void

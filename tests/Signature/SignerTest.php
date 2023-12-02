@@ -20,6 +20,8 @@ use BenTools\CartesianProduct\CartesianProduct;
 use Generator;
 use Laminas\Math\Rand;
 use ParagonIE\ConstantTime\Base64UrlSafe;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS256;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HS3256;
@@ -38,15 +40,12 @@ use RM\Standard\Jwt\Signature\SignatureToken;
 use RM\Standard\Jwt\Signature\Signer;
 
 /**
- * @covers \RM\Standard\Jwt\Signature\Signer
- *
  * @internal
  */
+#[CoversClass(Signer::class)]
 class SignerTest extends TestCase
 {
-    /**
-     * @dataProvider provideKeyAndAlgorithm
-     */
+    #[DataProvider('provideKeyAndAlgorithm')]
     public function testSign(AlgorithmInterface $algorithm, KeyInterface $key): SignatureToken
     {
         $token = SignatureToken::createWithAlgorithm($algorithm);
@@ -63,9 +62,7 @@ class SignerTest extends TestCase
         return $signed;
     }
 
-    /**
-     * @dataProvider provideKeyAndAlgorithm
-     */
+    #[DataProvider('provideKeyAndAlgorithm')]
     public function testVerify(AlgorithmInterface $algorithm, KeyInterface $key): void
     {
         $token = SignatureToken::createWithAlgorithm($algorithm);
@@ -140,9 +137,7 @@ class SignerTest extends TestCase
         yield $this->generateOctetKey();
     }
 
-    /**
-     * @dataProvider provideToken
-     */
+    #[DataProvider('provideToken')]
     public function testSignUpdatesAlgorithmAndKey(SignatureToken $token): void
     {
         $algorithm = new HS3256();
