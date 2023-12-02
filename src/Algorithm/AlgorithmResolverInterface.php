@@ -29,9 +29,9 @@ interface AlgorithmResolverInterface
      *
      * @param class-string<T> $type
      *
-     * @throws AlgorithmNotFoundException
-     *
      * @return T
+     *
+     * @throws AlgorithmNotFoundException
      */
     public function resolve(TokenInterface $token, string $type): AlgorithmInterface;
 }

@@ -24,7 +24,7 @@ use Throwable;
  */
 class KeyOperationNotMatch extends RuntimeException
 {
-    public function __construct(?Throwable $previous = null)
+    public function __construct(Throwable $previous = null)
     {
         parent::__construct('The key operation does not match the requested operation.', 0, $previous);
     }

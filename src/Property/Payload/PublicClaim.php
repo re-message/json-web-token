@@ -22,6 +22,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  * @author Oleg Kozlov <h1karo@remessage.ru>
  *
  * @template-extends AbstractProperty<mixed>
+ *
  * @template-implements ClaimInterface<mixed>
  */
 class PublicClaim extends AbstractProperty implements ClaimInterface

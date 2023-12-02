@@ -21,6 +21,4 @@ use Throwable;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-interface InvalidTokenExceptionInterface extends Throwable
-{
-}
+interface InvalidTokenExceptionInterface extends Throwable {}

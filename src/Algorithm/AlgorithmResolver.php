@@ -26,8 +26,7 @@ class AlgorithmResolver implements AlgorithmResolverInterface
 {
     public function __construct(
         private readonly AlgorithmManager $algorithmManager
-    ) {
-    }
+    ) {}
 
     /**
      * @template T of AlgorithmInterface

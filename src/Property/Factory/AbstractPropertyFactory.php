@@ -20,6 +20,7 @@ use RM\Standard\Jwt\Property\PropertyInterface;
 
 /**
  * @template T of PropertyInterface
+ *
  * @template-implements PropertyFactoryInterface<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

@@ -30,7 +30,7 @@ class NotSupportedResourceException extends BadMethodCallException implements Lo
         string $loader,
         string $resource,
         string $method,
-        ?Throwable $previous = null
+        Throwable $previous = null
     ) {
         $message = sprintf(
             '%1$s does not support %2$s. Use %1$s::%3$s method before call %4$s.',

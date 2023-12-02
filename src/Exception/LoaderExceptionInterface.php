@@ -21,6 +21,4 @@ use Throwable;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-interface LoaderExceptionInterface extends Throwable
-{
-}
+interface LoaderExceptionInterface extends Throwable {}

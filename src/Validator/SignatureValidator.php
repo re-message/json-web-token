@@ -34,8 +34,7 @@ class SignatureValidator implements ValidatorInterface
         private readonly AlgorithmResolverInterface $algorithmResolver,
         private readonly KeyResolverInterface $keyResolver,
         private readonly SignerInterface $signer = new Signer(),
-    ) {
-    }
+    ) {}
 
     public function validate(TokenInterface $token): bool
     {

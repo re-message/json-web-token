@@ -25,8 +25,7 @@ final class UniqIdGenerator implements IdentifierGeneratorInterface
 {
     public function __construct(
         private readonly string $prefix = '',
-    ) {
-    }
+    ) {}
 
     public function generate(): string
     {

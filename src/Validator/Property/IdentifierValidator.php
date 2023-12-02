@@ -33,8 +33,7 @@ class IdentifierValidator implements PropertyValidatorInterface
 {
     public function __construct(
         protected readonly TokenStorageInterface $storage = new RuntimeTokenStorage(),
-    ) {
-    }
+    ) {}
 
     public function getPropertyTarget(): PropertyTarget
     {

@@ -23,8 +23,7 @@ abstract class AbstractResource implements ResourceInterface
 {
     public function __construct(
         private readonly bool $required = false,
-    ) {
-    }
+    ) {}
 
     public function isRequired(): bool
     {

@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Property;
 
 /**
  * @template T of mixed
+ *
  * @template-implements PropertyInterface<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

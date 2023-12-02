@@ -20,6 +20,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * @template-extends AbstractProperty<mixed>
+ *
  * @template-implements HeaderParameterInterface<mixed>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

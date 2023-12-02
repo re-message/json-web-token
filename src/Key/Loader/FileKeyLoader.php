@@ -31,8 +31,7 @@ class FileKeyLoader implements KeyLoaderInterface
 {
     public function __construct(
         private readonly KeySetSerializerInterface $serializer,
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc

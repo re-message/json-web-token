@@ -30,8 +30,7 @@ class KeySetSerializer implements KeySetSerializerInterface
     public function __construct(
         private readonly KeyFactoryInterface $factory,
         private readonly FormatterInterface $formatter = new JsonFormatter(),
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc

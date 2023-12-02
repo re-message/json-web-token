@@ -26,8 +26,7 @@ abstract class LengthAwareGenerator implements KeyGeneratorInterface
     public function __construct(
         private readonly int $defaultLength,
         private readonly int $minimalLength = 0,
-    ) {
-    }
+    ) {}
 
     final protected function resolveLength(array $options): int
     {

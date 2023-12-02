@@ -21,13 +21,14 @@ use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * @template-implements ClaimInterface<int>
+ *
  * @template-extends AbstractProperty<int>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
 abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
 {
-    public function __construct(int|DateTimeInterface $value)
+    public function __construct(DateTimeInterface|int $value)
     {
         if ($value instanceof DateTimeInterface) {
             $value = $value->getTimestamp();

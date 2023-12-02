@@ -24,7 +24,7 @@ use Throwable;
  */
 class KeyIdNotFound extends RuntimeException
 {
-    public function __construct(?Throwable $previous = null)
+    public function __construct(Throwable $previous = null)
     {
         parent::__construct('The key id parameter not found in the token.', 0, $previous);
     }

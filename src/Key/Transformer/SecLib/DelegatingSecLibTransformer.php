@@ -24,6 +24,7 @@ use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
  * @template T of AsymmetricKey
+ *
  * @template-implements SecLibTransformerInterface<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

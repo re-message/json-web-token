@@ -25,6 +25,7 @@ use RM\Standard\Jwt\Validator\Property\IdentifierValidator;
  * We recommend to set this claim.
  *
  * @template-extends AbstractProperty<string>
+ *
  * @template-implements ClaimInterface<string>
  *
  * @see IdentifierGenerator can generate value for this claim.

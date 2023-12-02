@@ -34,6 +34,7 @@ use RM\Standard\Jwt\Key\Transformer\PublicKey\RsaPublicKeyTransformer;
 
 /**
  * @template T of RSA
+ *
  * @template-extends AbstractSecLibTransformer<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

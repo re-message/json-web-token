@@ -21,6 +21,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * @template-extends AbstractProperty<string>
+ *
  * @template-implements HeaderParameterInterface<string>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

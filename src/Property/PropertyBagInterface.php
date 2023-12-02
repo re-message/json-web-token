@@ -28,9 +28,9 @@ interface PropertyBagInterface
     /**
      * Returns the property from the bag by name or throw exception.
      *
-     * @throws PropertyNotFoundException
-     *
      * @return T
+     *
+     * @throws PropertyNotFoundException
      */
     public function get(string $name): PropertyInterface;
 

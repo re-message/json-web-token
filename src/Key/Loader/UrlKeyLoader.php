@@ -36,8 +36,7 @@ class UrlKeyLoader implements KeyLoaderInterface
         private readonly KeySetSerializerInterface $serializer,
         private readonly ClientInterface $client,
         private readonly RequestFactoryInterface $requestFactory,
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc

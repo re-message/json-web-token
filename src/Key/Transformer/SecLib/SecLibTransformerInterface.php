@@ -32,9 +32,9 @@ interface SecLibTransformerInterface
     /**
      * @param class-string<T> $type
      *
-     * @throws InvalidKeyException
-     *
      * @return T
+     *
+     * @throws InvalidKeyException
      */
     public function transform(KeyInterface $key, string $type): AsymmetricKey;
 

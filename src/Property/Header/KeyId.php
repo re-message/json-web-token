@@ -23,6 +23,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
  * @template-extends AbstractProperty<int|string>
+ *
  * @template-implements HeaderParameterInterface<int|string>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

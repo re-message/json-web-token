@@ -24,7 +24,7 @@ use Throwable;
  */
 class KeyNotFoundException extends RuntimeException
 {
-    public function __construct(int|string $id, ?Throwable $previous = null)
+    public function __construct(int|string $id, Throwable $previous = null)
     {
         $message = sprintf('Key with id "%s" not found in the storage.', $id);
 

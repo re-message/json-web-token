@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
 
 /**
  * @template T of mixed
+ *
  * @template-implements KeyParameterInterface<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -30,8 +31,7 @@ class KeyParameter implements KeyParameterInterface
     public function __construct(
         private readonly string $name,
         private readonly mixed $value = null
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc

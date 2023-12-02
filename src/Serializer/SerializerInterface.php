@@ -38,9 +38,9 @@ interface SerializerInterface
     /**
      * Deserializes the token from short transfer format.
      *
-     * @throws InvalidTokenException
-     *
      * @return T
+     *
+     * @throws InvalidTokenException
      */
     public function deserialize(string $serialized): TokenInterface;
 
@@ -49,5 +49,5 @@ interface SerializerInterface
      *
      * @psalm-assert-if-true T|string $token
      */
-    public function supports(TokenInterface|string $token): bool;
+    public function supports(string|TokenInterface $token): bool;
 }

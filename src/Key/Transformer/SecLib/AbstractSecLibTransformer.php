@@ -29,6 +29,7 @@ use RM\Standard\Jwt\Key\Transformer\PublicKey\PublicKeyTransformerInterface;
 
 /**
  * @template T of AsymmetricKey
+ *
  * @template-implements SecLibTransformerInterface<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -38,8 +39,7 @@ abstract class AbstractSecLibTransformer implements SecLibTransformerInterface
     public function __construct(
         private readonly KeyFactoryInterface $factory,
         private readonly PublicKeyTransformerInterface $publicKeyTransformer,
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc

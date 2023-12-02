@@ -40,8 +40,7 @@ abstract class RSA implements SignatureAlgorithmInterface
     public function __construct(
         private readonly SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),
         private readonly PublicKeyTransformerInterface $publicKeyTransformer = new RsaPublicKeyTransformer()
-    ) {
-    }
+    ) {}
 
     final public function allowedKeyTypes(): array
     {

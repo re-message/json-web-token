@@ -24,6 +24,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  * This property has no generator or validator.
  *
  * @template-extends AbstractProperty<array<int, string>>
+ *
  * @template-implements ClaimInterface<array<int, string>>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

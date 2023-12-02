@@ -34,8 +34,7 @@ class StorageKeyResolver implements KeyResolverInterface
     public function __construct(
         private readonly KeyStorageInterface $storage,
         private readonly PublicKeyTransformerInterface $transformer,
-    ) {
-    }
+    ) {}
 
     public function resolve(TokenInterface $token, KeyOperation $operation): KeyInterface
     {

@@ -22,6 +22,7 @@ use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 
 /**
  * @template T of PropertyInterface
+ *
  * @template-implements PropertyBagInterface<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

@@ -19,6 +19,4 @@ namespace RM\Standard\Jwt\Event;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class TokenPreSignEvent extends AbstractSignEvent
-{
-}
+class TokenPreSignEvent extends AbstractSignEvent {}

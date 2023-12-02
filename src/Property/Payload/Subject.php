@@ -23,6 +23,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  * It is optional claim.
  *
  * @template-extends AbstractProperty<string>
+ *
  * @template-implements ClaimInterface<string>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

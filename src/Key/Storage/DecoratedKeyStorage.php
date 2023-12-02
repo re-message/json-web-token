@@ -25,8 +25,7 @@ abstract class DecoratedKeyStorage implements KeyStorageInterface
 {
     public function __construct(
         private readonly KeyStorageInterface $storage
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc

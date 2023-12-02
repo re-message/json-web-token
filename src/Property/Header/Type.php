@@ -23,6 +23,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  * If you use some token types, you can override this claim.
  *
  * @template-extends AbstractProperty<string>
+ *
  * @template-implements HeaderParameterInterface<string>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>

@@ -66,6 +66,7 @@ class GeneratedSignerTest extends TestCase
 
     /**
      * @depends      testTokenCloningOnSign
+     *
      * @dataProvider providePropertyGenerators
      *
      * @param PropertyGeneratorInterface[] $generators

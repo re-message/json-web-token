@@ -20,10 +20,9 @@ use RM\Standard\Jwt\Property\PropertyInterface;
 
 /**
  * @template T of mixed
+ *
  * @template-extends PropertyInterface<T>
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-interface ClaimInterface extends PropertyInterface
-{
-}
+interface ClaimInterface extends PropertyInterface {}

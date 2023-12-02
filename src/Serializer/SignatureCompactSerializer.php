@@ -48,8 +48,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         private readonly FormatterInterface $formatter = new JsonFormatter(),
         private readonly PropertyFactoryInterface $claimFactory = new ClaimFactory(),
         private readonly PropertyFactoryInterface $headerParameterFactory = new HeaderParameterFactory(),
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc
@@ -129,7 +128,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         return $bag;
     }
 
-    public function supports(TokenInterface|string $token): bool
+    public function supports(string|TokenInterface $token): bool
     {
         return is_a($token, SignatureToken::class, !is_object($token));
     }
