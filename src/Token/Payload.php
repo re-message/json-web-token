@@ -27,7 +27,7 @@ use UnexpectedValueException;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Payload extends PropertyBag
+readonly class Payload extends PropertyBag
 {
     #[Override]
     public function get(string $name): ClaimInterface

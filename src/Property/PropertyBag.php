@@ -28,7 +28,7 @@ use RM\Standard\Jwt\Exception\PropertyNotFoundException;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class PropertyBag implements PropertyBagInterface
+abstract readonly class PropertyBag implements PropertyBagInterface
 {
     /**
      * @var Collection<string, T>

@@ -30,7 +30,7 @@ use UnexpectedValueException;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Header extends PropertyBag
+readonly class Header extends PropertyBag
 {
     /**
      * @param HeaderParameterInterface[] $parameters
