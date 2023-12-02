@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Token;
 
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Property\Header\Algorithm;
 use RM\Standard\Jwt\Property\Header\HeaderParameterInterface;
 use RM\Standard\Jwt\Property\Header\Type;
@@ -49,9 +50,7 @@ class Header extends PropertyBag
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function get(string $name): HeaderParameterInterface
     {
         $property = parent::get($name);
@@ -62,9 +61,7 @@ class Header extends PropertyBag
         return $property;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function find(string $name): ?HeaderParameterInterface
     {
         $property = parent::find($name);
@@ -75,9 +72,7 @@ class Header extends PropertyBag
         return $property;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function set(PropertyInterface $property): void
     {
         if (!$property instanceof HeaderParameterInterface) {

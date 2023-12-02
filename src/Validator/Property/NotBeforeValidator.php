@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
+use Override;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\NotBeforeViolationException;
 use RM\Standard\Jwt\Property\Payload\NotBefore;
@@ -30,16 +31,19 @@ use UnexpectedValueException;
  */
 class NotBeforeValidator extends AbstractLeewayValidator
 {
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function getPropertyName(): string
     {
         return NotBefore::NAME;
     }
 
+    #[Override]
     public function validate(PropertyInterface $property): bool
     {
         if (!$property instanceof NotBefore) {

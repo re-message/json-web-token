@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use Override;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -36,6 +37,7 @@ class PublicClaim extends AbstractProperty implements ClaimInterface
         $this->setName($name);
     }
 
+    #[Override]
     public function getName(): string
     {
         return $this->name;

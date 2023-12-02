@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Tests\Storage;
 
 use Laminas\Math\Rand;
+use Override;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Storage\RuntimeTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
@@ -30,6 +31,7 @@ class RuntimeTokenStorageTest extends TestCase
 {
     private static string $someTokenId;
 
+    #[Override]
     public static function setUpBeforeClass(): void
     {
         self::$someTokenId = Rand::getString(256);

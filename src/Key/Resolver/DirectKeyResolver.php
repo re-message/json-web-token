@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Resolver;
 
+use Override;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\KeyOperation;
 use RM\Standard\Jwt\Token\TokenInterface;
@@ -29,6 +30,7 @@ class DirectKeyResolver implements KeyResolverInterface
         private readonly KeyInterface $key
     ) {}
 
+    #[Override]
     public function resolve(TokenInterface $token, KeyOperation $operation): KeyInterface
     {
         return $this->key;

@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Signature;
 
+use Override;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -34,6 +35,7 @@ class Signer implements SignerInterface
         $this->serializer = $serializer ?? new SignatureCompactSerializer();
     }
 
+    #[Override]
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
         if ($token->isSigned()) {
@@ -57,6 +59,7 @@ class Signer implements SignerInterface
     /**
      * @throws InvalidTokenException
      */
+    #[Override]
     public function verify(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): bool
     {
         if (!$token->isSigned()) {

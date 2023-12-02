@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Storage;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Override;
 
 /**
  * Class RuntimeTokenStorage implement runtime (in-memory) storage.
@@ -32,6 +33,7 @@ class RuntimeTokenStorage implements TokenStorageInterface
         $this->runtime = new ArrayCollection();
     }
 
+    #[Override]
     public function has(string $tokenId): bool
     {
         if ($this->runtime->containsKey($tokenId)) {
@@ -41,11 +43,13 @@ class RuntimeTokenStorage implements TokenStorageInterface
         return false;
     }
 
+    #[Override]
     public function put(string $tokenId, int $duration): void
     {
         $this->runtime->set($tokenId, time() + $duration);
     }
 
+    #[Override]
     public function revoke(string $tokenId): void
     {
         if ($this->runtime->containsKey($tokenId)) {

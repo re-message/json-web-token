@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Identifier;
 
 use InvalidArgumentException;
+use Override;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -40,6 +41,7 @@ final class RandomUuidGenerator implements IdentifierGeneratorInterface
         // @codeCoverageIgnoreEnd
     }
 
+    #[Override]
     public function generate(): string
     {
         return Uuid::uuid4()->toString();

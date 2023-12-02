@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Storage;
 
+use Override;
 use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
@@ -27,65 +28,49 @@ abstract class DecoratedKeyStorage implements KeyStorageInterface
         private readonly KeyStorageInterface $storage
     ) {}
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function get(int|string $id): KeyInterface
     {
         return $this->storage->get($id);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function find(int|string $id): KeyInterface|null
     {
         return $this->storage->find($id);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function findBy(string $name, mixed $value): array
     {
         return $this->storage->findBy($name, $value);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function findByType(string $type): array
     {
         return $this->storage->findByType($type);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function has(int|string $id): bool
     {
         return $this->storage->has($id);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function add(KeyInterface $key): void
     {
         $this->storage->add($key);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function addAll(iterable $keys): void
     {
         $this->storage->addAll($keys);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function toArray(): array
     {
         return $this->storage->toArray();

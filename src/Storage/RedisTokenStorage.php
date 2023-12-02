@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Storage;
 
 use InvalidArgumentException;
+use Override;
 use Predis\Client;
 
 /**
@@ -39,17 +40,20 @@ class RedisTokenStorage implements TokenStorageInterface
         $this->redis = new Client($dsn);
     }
 
+    #[Override]
     public function has(string $tokenId): bool
     {
         return $this->redis->get($tokenId) === $tokenId;
     }
 
+    #[Override]
     public function put(string $tokenId, int $duration): void
     {
         $this->redis->set($tokenId, $tokenId);
         $this->redis->expire($tokenId, $duration);
     }
 
+    #[Override]
     public function revoke(string $tokenId): void
     {
         $this->redis->del([$tokenId]);

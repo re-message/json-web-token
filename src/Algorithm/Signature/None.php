@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Algorithm\Signature;
 
+use Override;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
 
@@ -24,21 +25,25 @@ use RM\Standard\Jwt\Key\Parameter\Type;
  */
 class None implements SignatureAlgorithmInterface
 {
+    #[Override]
     public function name(): string
     {
         return 'none';
     }
 
+    #[Override]
     public function allowedKeyTypes(): array
     {
         return [Type::NONE];
     }
 
+    #[Override]
     public function sign(KeyInterface $key, string $input): string
     {
         return '';
     }
 
+    #[Override]
     public function verify(KeyInterface $key, string $input, string $signature): bool
     {
         return $this->sign($key, $input) === $signature;

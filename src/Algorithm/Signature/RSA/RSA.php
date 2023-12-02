@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Algorithm\Signature\RSA;
 
+use Override;
 use phpseclib3\Crypt\RSA as CryptRSA;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -42,16 +43,19 @@ abstract class RSA implements SignatureAlgorithmInterface
         private readonly PublicKeyTransformerInterface $publicKeyTransformer = new RsaPublicKeyTransformer()
     ) {}
 
+    #[Override]
     final public function allowedKeyTypes(): array
     {
         return [Type::RSA];
     }
 
+    #[Override]
     final public function sign(KeyInterface $key, string $input): string
     {
         return $this->getKey($key, CryptRSA\PrivateKey::class)->sign($input);
     }
 
+    #[Override]
     final public function verify(KeyInterface $key, string $input, string $signature): bool
     {
         $publicKey = $this->publicKeyTransformer->transform($key);

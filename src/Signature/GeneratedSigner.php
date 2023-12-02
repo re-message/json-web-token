@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Signature;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Override;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Generator\PropertyGeneratorInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -47,6 +48,7 @@ class GeneratedSigner extends DecoratedSigner
         }
     }
 
+    #[Override]
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
         // detach token to avoid the value changes in original token

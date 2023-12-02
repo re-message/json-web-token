@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Key\Transformer\SecLib;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
+use Override;
 use phpseclib3\Crypt\Common\AsymmetricKey;
 use RM\Standard\Jwt\Key\KeyInterface;
 
@@ -56,9 +57,7 @@ class DelegatingSecLibTransformer implements SecLibTransformerInterface
         $this->collection->add($transformer);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function transform(KeyInterface $key, string $type): AsymmetricKey
     {
         $transformer = $this->findTransformer($type);
@@ -71,9 +70,7 @@ class DelegatingSecLibTransformer implements SecLibTransformerInterface
         return $transformer->transform($key, $type);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function reverseTransform(AsymmetricKey $key): KeyInterface
     {
         $transformer = $this->findTransformer($key::class);
@@ -86,9 +83,7 @@ class DelegatingSecLibTransformer implements SecLibTransformerInterface
         return $transformer->reverseTransform($key);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function supports(string $type): bool
     {
         return null !== $this->findTransformer($type);

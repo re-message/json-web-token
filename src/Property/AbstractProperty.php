@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Property;
 
+use Override;
+
 /**
  * @template T of mixed
  *
@@ -38,17 +40,13 @@ abstract class AbstractProperty implements PropertyInterface
         $this->value = $value;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getValue(): mixed
     {
         return $this->value;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function setValue(mixed $value): void
     {
         $this->value = $value;

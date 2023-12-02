@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Parameter\Factory;
 
+use Override;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Key\Parameter\KeyParameter;
 use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
@@ -56,14 +57,13 @@ class ParameterFactory implements ParameterFactoryInterface
         $this->defaultClass = self::DEFAULT_CLASS;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function register(string $name, string $class): void
     {
         $this->classMap[$name] = $class;
     }
 
+    #[Override]
     public function create(string $name, mixed $value): KeyParameterInterface
     {
         $class = $this->classMap[$name] ?? null;

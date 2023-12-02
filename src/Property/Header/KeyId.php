@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Property\Header;
 
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Property\AbstractProperty;
@@ -37,6 +38,7 @@ class KeyId extends AbstractProperty implements HeaderParameterInterface
         parent::__construct($value);
     }
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

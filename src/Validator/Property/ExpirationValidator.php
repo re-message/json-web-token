@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
+use Override;
 use RM\Standard\Jwt\Exception\ExpirationViolationException;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Property\Payload\Expiration;
@@ -30,16 +31,19 @@ use UnexpectedValueException;
  */
 class ExpirationValidator extends AbstractLeewayValidator
 {
+    #[Override]
     public function getPropertyName(): string
     {
         return Expiration::NAME;
     }
 
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function validate(PropertyInterface $property): bool
     {
         if (!$property instanceof Expiration) {

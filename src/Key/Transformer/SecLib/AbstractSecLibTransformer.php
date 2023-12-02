@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Key\Transformer\SecLib;
 
 use InvalidArgumentException;
+use Override;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use phpseclib3\Crypt\Common\AsymmetricKey;
 use phpseclib3\Crypt\Common\PublicKey;
@@ -41,9 +42,7 @@ abstract class AbstractSecLibTransformer implements SecLibTransformerInterface
         private readonly PublicKeyTransformerInterface $publicKeyTransformer,
     ) {}
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function transform(KeyInterface $key, string $type): AsymmetricKey
     {
         if (!$this->supports($type)) {
@@ -86,9 +85,7 @@ abstract class AbstractSecLibTransformer implements SecLibTransformerInterface
         return new BigInteger($bytes, 256);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function reverseTransform(AsymmetricKey $key): KeyInterface
     {
         if (!$this->supports($key::class)) {

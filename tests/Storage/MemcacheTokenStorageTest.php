@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Tests\Storage;
 
 use Laminas\Math\Rand;
 use Memcache;
+use Override;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Storage\MemcacheTokenStorage;
 use RM\Standard\Jwt\Storage\TokenStorageInterface;
@@ -33,6 +34,7 @@ class MemcacheTokenStorageTest extends TestCase
     private static int $port;
     private static string $someTokenId;
 
+    #[Override]
     public static function setUpBeforeClass(): void
     {
         self::$host = $_ENV['MEMCACHED_HOST'];

@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Signature;
 
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Property\Header\Algorithm;
@@ -53,11 +54,13 @@ final class SignatureToken implements TokenInterface
         $this->signature = $signature;
     }
 
+    #[Override]
     public function getHeader(): Header
     {
         return $this->header;
     }
 
+    #[Override]
     public function getAlgorithm(): string
     {
         return $this->header->get(Algorithm::NAME)->getValue();
@@ -76,6 +79,7 @@ final class SignatureToken implements TokenInterface
         return $token;
     }
 
+    #[Override]
     public function getPayload(): Payload
     {
         return $this->payload;
@@ -115,11 +119,13 @@ final class SignatureToken implements TokenInterface
      * Checks if the token is protected by signing.
      * An empty signature means that the token is not secure.
      */
+    #[Override]
     public function isSecured(): bool
     {
         return !empty($this->signature);
     }
 
+    #[Override]
     public function toString(SerializerInterface $serializer): string
     {
         if (!$serializer->supports($this)) {
@@ -146,6 +152,7 @@ final class SignatureToken implements TokenInterface
      *
      * @see SignatureCompactSerializer::serialize()
      */
+    #[Override]
     public function __toString(): string
     {
         $serializer = new SignatureCompactSerializer();
@@ -153,6 +160,7 @@ final class SignatureToken implements TokenInterface
         return $this->toString($serializer);
     }
 
+    #[Override]
     public static function createWithAlgorithm(AlgorithmInterface $algorithm): static
     {
         $algorithmParameter = Algorithm::fromAlgorithm($algorithm);

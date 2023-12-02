@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Key\Thumbprint;
 
 use InvalidArgumentException;
+use Override;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Format\JsonFormatter;
@@ -38,6 +39,7 @@ class ThumbprintFactory implements ThumbprintFactoryInterface
         }
     }
 
+    #[Override]
     public function create(KeyInterface $key): string
     {
         $values = array_intersect_key($key->all(), array_flip(self::THUMBPRINT_PARAMETERS));

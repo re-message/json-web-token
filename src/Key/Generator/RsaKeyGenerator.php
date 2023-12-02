@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Key\Generator;
 
 use InvalidArgumentException;
+use Override;
 use phpseclib3\Crypt\RSA as CryptRSA;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\KeyOperation;
@@ -46,6 +47,7 @@ class RsaKeyGenerator extends LengthAwareGenerator
         parent::__construct(self::DEFAULT_LENGTH, self::MIN_LENGTH);
     }
 
+    #[Override]
     public function generate(string $type, array $options = []): KeyInterface
     {
         if (!$this->supports($type)) {
@@ -71,6 +73,7 @@ class RsaKeyGenerator extends LengthAwareGenerator
         return $key;
     }
 
+    #[Override]
     public function supports(string $type): bool
     {
         return Type::RSA === $type;

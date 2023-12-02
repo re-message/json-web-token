@@ -16,16 +16,20 @@
 
 namespace RM\Standard\Jwt\Algorithm\Signature\RSA;
 
+use Override;
+
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
 class PS256 extends RSAPSS
 {
+    #[Override]
     public function name(): string
     {
         return 'PS256';
     }
 
+    #[Override]
     protected function getAlgorithm(): string
     {
         return 'sha256';

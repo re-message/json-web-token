@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use Override;
 use RM\Standard\Jwt\Generator\IdentifierGenerator;
 use RM\Standard\Jwt\Property\AbstractProperty;
 use RM\Standard\Jwt\Validator\Property\IdentifierValidator;
@@ -42,6 +43,7 @@ class Identifier extends AbstractProperty implements ClaimInterface
         parent::__construct($value);
     }
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

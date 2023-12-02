@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Tests\Algorithm\Signature\RSA;
 
 use Laminas\Math\Rand;
+use Override;
 use phpseclib3\Crypt\RSA as CryptRSA;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\Signature\RSA\PS256;
@@ -53,6 +54,7 @@ class RSATest extends TestCase
 {
     private SecLibTransformerInterface $transformer;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->transformer = new RsaSecLibTransformer();

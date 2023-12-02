@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Factory;
 
+use Override;
 use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Key\Key;
@@ -39,9 +40,7 @@ abstract class AbstractKeyFactory implements KeyFactoryInterface
         $this->requiredParameters = array_merge([Type::NAME], $requiredParameters);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function create(array $content): KeyInterface
     {
         $type = $content[Type::NAME] ?? null;
@@ -74,9 +73,7 @@ abstract class AbstractKeyFactory implements KeyFactoryInterface
         return count($intersection) === count($this->requiredParameters);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function supports(array $content): bool
     {
         $type = $content[Type::NAME] ?? null;

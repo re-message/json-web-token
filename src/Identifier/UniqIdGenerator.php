@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Identifier;
 
+use Override;
+
 /**
  * Class UniqIdGenerator provides generation via function { @see uniqid() }.
  *
@@ -27,6 +29,7 @@ final class UniqIdGenerator implements IdentifierGeneratorInterface
         private readonly string $prefix = '',
     ) {}
 
+    #[Override]
     public function generate(): string
     {
         return uniqid($this->prefix, true);

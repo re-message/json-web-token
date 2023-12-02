@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Identifier;
 
 use InvalidArgumentException;
 use Laminas\Math\Rand;
+use Override;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 
 /**
@@ -45,6 +46,7 @@ final class LaminasRandGenerator implements IdentifierGeneratorInterface
     /**
      * @see getLength()
      */
+    #[Override]
     public function generate(): string
     {
         $bytes = Rand::getBytes($this->getLength());

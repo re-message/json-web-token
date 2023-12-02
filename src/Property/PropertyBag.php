@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Property;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Override;
 use RM\Standard\Jwt\Exception\PropertyNotFoundException;
 
 /**
@@ -56,11 +57,13 @@ abstract class PropertyBag implements PropertyBagInterface
         }
     }
 
+    #[Override]
     public function get(string $name): PropertyInterface
     {
         return $this->find($name) ?: throw new PropertyNotFoundException($name);
     }
 
+    #[Override]
     public function find(string $name): ?PropertyInterface
     {
         if (!$this->collection->containsKey($name)) {
@@ -70,21 +73,25 @@ abstract class PropertyBag implements PropertyBagInterface
         return $this->collection->get($name);
     }
 
+    #[Override]
     public function has(string $name): bool
     {
         return null !== $this->find($name);
     }
 
+    #[Override]
     public function set(PropertyInterface $property): void
     {
         $this->collection->set($property->getName(), $property);
     }
 
+    #[Override]
     public function getProperties(): array
     {
         return $this->collection->getValues();
     }
 
+    #[Override]
     public function toArray(): array
     {
         /** @var Collection<string, mixed> $collection */

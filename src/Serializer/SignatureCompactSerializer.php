@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Serializer;
 
 use InvalidArgumentException;
+use Override;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Exception\InvalidTokenException;
 use RM\Standard\Jwt\Format\FormatterInterface;
@@ -51,10 +52,9 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
     ) {}
 
     /**
-     * @inheritDoc
-     *
      * @throws InvalidTokenException
      */
+    #[Override]
     public function serialize(TokenInterface $token, bool $withoutSignature = false): string
     {
         if (!$token instanceof SignatureToken) {
@@ -88,6 +88,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         }
     }
 
+    #[Override]
     public function deserialize(string $serialized): TokenInterface
     {
         $parts = explode(self::TOKEN_DELIMITER, $serialized);
@@ -128,6 +129,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
         return $bag;
     }
 
+    #[Override]
     public function supports(string|TokenInterface $token): bool
     {
         return is_a($token, SignatureToken::class, !is_object($token));

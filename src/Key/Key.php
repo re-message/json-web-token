@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Key;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Key\Parameter\KeyParameterInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
 use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactory;
@@ -49,9 +50,7 @@ class Key implements KeyInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function get(string $name): KeyParameterInterface
     {
         $parameter = $this->collection->get($name);
@@ -67,41 +66,31 @@ class Key implements KeyInterface
         return $parameter;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function find(string $name): ?KeyParameterInterface
     {
         return $this->collection->get($name);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function has(string $name): bool
     {
         return $this->collection->containsKey($name);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function set(KeyParameterInterface $parameter): void
     {
         $this->collection->set($parameter->getName(), $parameter);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getType(): string
     {
         return $this->get(Type::NAME)->getValue();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function toThumbprint(ThumbprintFactoryInterface $factory = null): string
     {
         $factory ??= new ThumbprintFactory();
@@ -109,17 +98,13 @@ class Key implements KeyInterface
         return $factory->create($this);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getParameters(): array
     {
         return $this->collection->toArray();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function all(): array
     {
         /** @var Collection<string, mixed> $collection */
@@ -133,9 +118,7 @@ class Key implements KeyInterface
         return $collection->toArray();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function jsonSerialize(): array
     {
         return $this->all();

@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
+use Override;
+
 /**
  * Class HS512 is HMAC implementation with SHA512 algorithm.
  *
@@ -23,11 +25,13 @@ namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
  */
 class HS512 extends HMAC
 {
+    #[Override]
     public function name(): string
     {
         return 'HS512';
     }
 
+    #[Override]
     protected function getHashAlgorithm(): string
     {
         return 'sha512';

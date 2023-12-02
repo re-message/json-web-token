@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Header;
 
+use Override;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -37,6 +38,7 @@ class Type extends AbstractProperty implements HeaderParameterInterface
         parent::__construct($value);
     }
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

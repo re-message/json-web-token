@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Key\Transformer\PublicKey;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
@@ -48,6 +49,7 @@ class DelegatingPublicKeyTransformer implements PublicKeyTransformerInterface
         $this->collection->add($transformer);
     }
 
+    #[Override]
     public function transform(KeyInterface $privateKey): KeyInterface
     {
         $type = $privateKey->getType();
@@ -61,6 +63,7 @@ class DelegatingPublicKeyTransformer implements PublicKeyTransformerInterface
         return $transformer->transform($privateKey);
     }
 
+    #[Override]
     public function supports(string $type): bool
     {
         return null !== $this->findTransformer($type);

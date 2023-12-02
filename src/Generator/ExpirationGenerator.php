@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Generator;
 
+use Override;
 use RM\Standard\Jwt\Property\Payload\Expiration;
 use RM\Standard\Jwt\Property\PropertyTarget;
 
@@ -26,16 +27,19 @@ use RM\Standard\Jwt\Property\PropertyTarget;
  */
 class ExpirationGenerator extends AbstractDurationGenerator
 {
+    #[Override]
     public function getPropertyName(): string
     {
         return Expiration::NAME;
     }
 
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function generate(): Expiration
     {
         $value = time() + $this->getDuration();

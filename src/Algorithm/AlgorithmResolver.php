@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Algorithm;
 
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -31,6 +32,7 @@ class AlgorithmResolver implements AlgorithmResolverInterface
     /**
      * @template T of AlgorithmInterface
      */
+    #[Override]
     public function resolve(TokenInterface $token, string $type): AlgorithmInterface
     {
         $algorithm = $this->algorithmManager->get($token->getAlgorithm());

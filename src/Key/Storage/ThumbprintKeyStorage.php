@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Storage;
 
+use Override;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
 use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactory;
@@ -33,6 +34,7 @@ class ThumbprintKeyStorage extends DecoratedKeyStorage
         parent::__construct($storage);
     }
 
+    #[Override]
     public function add(KeyInterface $key): void
     {
         if (!$key->has(Identifier::NAME)) {
@@ -43,6 +45,7 @@ class ThumbprintKeyStorage extends DecoratedKeyStorage
         parent::add($key);
     }
 
+    #[Override]
     public function addAll(iterable $keys): void
     {
         foreach ($keys as $key) {

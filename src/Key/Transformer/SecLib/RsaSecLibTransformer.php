@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Transformer\SecLib;
 
+use Override;
 use phpseclib3\Crypt\RSA;
 use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Key\Factory\KeyFactoryInterface;
@@ -50,6 +51,7 @@ class RsaSecLibTransformer extends AbstractSecLibTransformer
         parent::__construct($factory, $publicKeyTransformer);
     }
 
+    #[Override]
     protected function toComponents(array $parameters): array
     {
         $parameters = $this->filterRsaParameters($parameters);
@@ -64,6 +66,7 @@ class RsaSecLibTransformer extends AbstractSecLibTransformer
         return array_map([$this, 'toComponent'], $parameters);
     }
 
+    #[Override]
     protected function fromComponents(array $components): array
     {
         $notNull = static fn (mixed $value) => null !== $value;
@@ -102,9 +105,7 @@ class RsaSecLibTransformer extends AbstractSecLibTransformer
         return array_filter($parameters, $isRsaParameter, ARRAY_FILTER_USE_KEY);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function supports(string $type): bool
     {
         return is_a($type, RSA::class, true);

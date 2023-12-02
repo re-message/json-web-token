@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
+use Override;
+
 /**
  * Class HS3512 is HMAC implementation with SHA3-512 algorithm.
  *
@@ -23,11 +25,13 @@ namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
  */
 class HS3512 extends HMAC
 {
+    #[Override]
     public function name(): string
     {
         return 'HS3512';
     }
 
+    #[Override]
     protected function getHashAlgorithm(): string
     {
         return 'sha3-512';

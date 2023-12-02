@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
+use Override;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Property\Payload\Identifier;
 use RM\Standard\Jwt\Property\PropertyInterface;
@@ -35,11 +36,13 @@ class IdentifierValidator implements PropertyValidatorInterface
         protected readonly TokenStorageInterface $storage = new RuntimeTokenStorage(),
     ) {}
 
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function validate(PropertyInterface $property): bool
     {
         if (!$property instanceof Identifier) {
@@ -59,6 +62,7 @@ class IdentifierValidator implements PropertyValidatorInterface
         return $this->storage->has($value);
     }
 
+    #[Override]
     public function getPropertyName(): string
     {
         return Identifier::NAME;

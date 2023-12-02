@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Tests\Algorithm\Signature\HMAC;
 
 use InvalidArgumentException;
+use Override;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use RM\Standard\Jwt\Algorithm\Signature\HMAC\HMAC;
@@ -42,6 +43,7 @@ class HMACTest extends TestCase
 {
     private KeyInterface $key;
 
+    #[Override]
     protected function setUp(): void
     {
         $b64Key = '-2iJCM1Dgovi-djDb9Xb-_EQxxxRTVl_y6S6r7mlpPM';

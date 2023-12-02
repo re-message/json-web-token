@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Loader;
 
+use Override;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -38,13 +39,11 @@ class UrlKeyLoader implements KeyLoaderInterface
         private readonly RequestFactoryInterface $requestFactory,
     ) {}
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function load(ResourceInterface $resource): array
     {
         if (!$resource instanceof Url) {
-            throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
+            throw new NotSupportedResourceException(static::class, $resource::class, __METHOD__);
         }
 
         $request = $this->requestFactory->createRequest('GET', $resource->getAddress());
@@ -71,6 +70,7 @@ class UrlKeyLoader implements KeyLoaderInterface
         return $response->getStatusCode() < 400;
     }
 
+    #[Override]
     public function supports(ResourceInterface $resource): bool
     {
         return $resource instanceof Url;

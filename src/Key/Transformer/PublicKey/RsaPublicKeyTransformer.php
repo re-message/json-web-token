@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Key\Transformer\PublicKey;
 
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\KeyOperation;
@@ -44,6 +45,7 @@ class RsaPublicKeyTransformer implements PublicKeyTransformerInterface
         FirstCoefficient::NAME,
     ];
 
+    #[Override]
     public function transform(KeyInterface $privateKey): KeyInterface
     {
         $type = $privateKey->getType();
@@ -75,6 +77,7 @@ class RsaPublicKeyTransformer implements PublicKeyTransformerInterface
         return !in_array($name, self::PRIVATE_PARAMETERS, true);
     }
 
+    #[Override]
     public function supports(string $type): bool
     {
         return Type::RSA === $type;

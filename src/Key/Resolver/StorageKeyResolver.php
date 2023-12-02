@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Resolver;
 
+use Override;
 use RM\Standard\Jwt\Exception\KeyIdNotFound;
 use RM\Standard\Jwt\Exception\KeyOperationNotMatch;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -36,6 +37,7 @@ class StorageKeyResolver implements KeyResolverInterface
         private readonly PublicKeyTransformerInterface $transformer,
     ) {}
 
+    #[Override]
     public function resolve(TokenInterface $token, KeyOperation $operation): KeyInterface
     {
         $idParameter = $token->getHeader()->find(KeyId::NAME);

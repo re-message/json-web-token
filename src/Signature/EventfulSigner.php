@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Signature;
 
+use Override;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
 use RM\Standard\Jwt\Event\TokenPreSignEvent;
@@ -38,6 +39,7 @@ class EventfulSigner extends DecoratedSigner
         $this->eventDispatcher = $eventDispatcher ?? new EventDispatcher();
     }
 
+    #[Override]
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
         $this->eventDispatcher->dispatch(new TokenPreSignEvent($token));

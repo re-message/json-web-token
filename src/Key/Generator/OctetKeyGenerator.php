@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key\Generator;
 
 use InvalidArgumentException;
 use Laminas\Math\Rand;
+use Override;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Key\Key;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -45,6 +46,7 @@ class OctetKeyGenerator extends LengthAwareGenerator
         parent::__construct(self::DEFAULT_LENGTH, self::MIN_LENGTH);
     }
 
+    #[Override]
     public function generate(string $type, array $options = []): KeyInterface
     {
         if (!$this->supports($type)) {
@@ -76,6 +78,7 @@ class OctetKeyGenerator extends LengthAwareGenerator
         return $key;
     }
 
+    #[Override]
     public function supports(string $type): bool
     {
         return Type::OCTET === $type;

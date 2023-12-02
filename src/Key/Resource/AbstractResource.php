@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Key\Resource;
 
+use Override;
+
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
@@ -25,6 +27,7 @@ abstract class AbstractResource implements ResourceInterface
         private readonly bool $required = false,
     ) {}
 
+    #[Override]
     public function isRequired(): bool
     {
         return $this->required;

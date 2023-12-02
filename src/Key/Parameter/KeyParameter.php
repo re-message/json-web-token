@@ -16,6 +16,8 @@
 
 namespace RM\Standard\Jwt\Key\Parameter;
 
+use Override;
+
 /**
  * @template T of mixed
  *
@@ -33,17 +35,13 @@ class KeyParameter implements KeyParameterInterface
         private readonly mixed $value = null
     ) {}
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function getValue(): mixed
     {
         return $this->value;

@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use Override;
 use RM\Standard\Jwt\Generator\IssuedAtGenerator;
 use RM\Standard\Jwt\Validator\Property\IssuedAtValidator;
 
@@ -32,6 +33,7 @@ class IssuedAt extends DateValueClaim
 {
     public const NAME = 'iat';
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

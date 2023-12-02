@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Format;
 
+use Override;
 use Symfony\Component\Serializer\Encoder\JsonDecode;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -46,6 +47,7 @@ class JsonFormatter implements FormatterInterface
         $this->encoder = new JsonEncoder($encode, $decode);
     }
 
+    #[Override]
     public function encode(array $data): string
     {
         $context = [];
@@ -56,6 +58,7 @@ class JsonFormatter implements FormatterInterface
         return $this->encoder->encode($data, 'json', $context);
     }
 
+    #[Override]
     public function decode(string $data): array
     {
         return $this->encoder->decode($data, 'json');

@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Signature;
 
+use Override;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface as AlgorithmInterface;
@@ -36,6 +37,7 @@ class LoggableSigner extends DecoratedSigner
         $this->logger = $logger ?? new NullLogger();
     }
 
+    #[Override]
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {
         $signedToken = parent::sign($token, $algorithm, $key);

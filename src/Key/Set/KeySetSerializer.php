@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Set;
 
+use Override;
 use RM\Standard\Jwt\Exception\InvalidKeyException;
 use RM\Standard\Jwt\Format\FormatterInterface;
 use RM\Standard\Jwt\Format\JsonFormatter;
@@ -32,9 +33,7 @@ class KeySetSerializer implements KeySetSerializerInterface
         private readonly FormatterInterface $formatter = new JsonFormatter(),
     ) {}
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function serialize(array $keys): string
     {
         $array = [];
@@ -49,9 +48,7 @@ class KeySetSerializer implements KeySetSerializerInterface
         return $this->formatter->encode([self::PARAM_KEYS => $array]);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function deserialize(string $set): array
     {
         $array = $this->formatter->decode($set);

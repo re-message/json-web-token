@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
+use Override;
 use RM\Standard\Jwt\Exception\IssuerViolationException;
 use RM\Standard\Jwt\Property\Payload\Issuer;
 use RM\Standard\Jwt\Property\PropertyInterface;
@@ -36,16 +37,19 @@ class IssuerValidator implements PropertyValidatorInterface
         $this->issuers = $issuers;
     }
 
+    #[Override]
     public function getPropertyName(): string
     {
         return Issuer::NAME;
     }
 
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function validate(PropertyInterface $property): bool
     {
         if (!$property instanceof Issuer) {

@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Tests\Algorithm;
 
+use Override;
 use PHPUnit\Framework\TestCase;
 use RM\Standard\Jwt\Algorithm\AlgorithmManager;
 use RM\Standard\Jwt\Algorithm\Signature\None;
@@ -32,6 +33,7 @@ class AlgorithmManagerTest extends TestCase
 {
     private AlgorithmManager $manager;
 
+    #[Override]
     protected function setUp(): void
     {
         $none = new None();

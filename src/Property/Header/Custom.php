@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Header;
 
+use Override;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -36,6 +37,7 @@ class Custom extends AbstractProperty implements HeaderParameterInterface
         $this->setName($name);
     }
 
+    #[Override]
     public function getName(): string
     {
         return $this->name;

@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use Override;
 use RM\Standard\Jwt\Generator\NotBeforeGenerator;
 use RM\Standard\Jwt\Validator\Property\NotBeforeValidator;
 
@@ -31,6 +32,7 @@ class NotBefore extends DateValueClaim
 {
     public const NAME = 'nbf';
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

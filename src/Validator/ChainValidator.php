@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Validator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Override;
 use RM\Standard\Jwt\Token\TokenInterface;
 
 /**
@@ -42,9 +43,7 @@ class ChainValidator implements ValidatorInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function validate(TokenInterface $token): bool
     {
         foreach ($this->validators as $validator) {

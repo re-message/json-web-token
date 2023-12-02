@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Storage;
 
 use InvalidArgumentException;
 use Memcache;
+use Override;
 
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
@@ -40,16 +41,19 @@ class MemcacheTokenStorage implements TokenStorageInterface
         $this->memcache->addServer($host, $port);
     }
 
+    #[Override]
     public function has(string $tokenId): bool
     {
         return $this->memcache->get($tokenId) === $tokenId;
     }
 
+    #[Override]
     public function put(string $tokenId, int $duration): void
     {
         $this->memcache->set($tokenId, $tokenId, 0, $duration);
     }
 
+    #[Override]
     public function revoke(string $tokenId): void
     {
         $this->memcache->delete($tokenId);

@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Validator\Property;
 
+use Override;
 use RM\Standard\Jwt\Exception\IncorrectPropertyTypeException;
 use RM\Standard\Jwt\Exception\IssuedAtViolationException;
 use RM\Standard\Jwt\Property\Payload\IssuedAt;
@@ -30,16 +31,19 @@ use UnexpectedValueException;
  */
 class IssuedAtValidator extends AbstractLeewayValidator
 {
+    #[Override]
     public function getPropertyName(): string
     {
         return IssuedAt::NAME;
     }
 
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function validate(PropertyInterface $property): bool
     {
         if (!$property instanceof IssuedAt) {

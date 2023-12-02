@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Generator;
 
+use Override;
 use RM\Standard\Jwt\Property\Payload\Issuer;
 use RM\Standard\Jwt\Property\PropertyInterface;
 use RM\Standard\Jwt\Property\PropertyTarget;
@@ -31,16 +32,19 @@ class IssuerGenerator implements PropertyGeneratorInterface
         protected readonly string $issuer
     ) {}
 
+    #[Override]
     public function getPropertyName(): string
     {
         return Issuer::NAME;
     }
 
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function generate(): PropertyInterface
     {
         return new Issuer($this->issuer);

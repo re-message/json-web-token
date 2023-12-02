@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Payload;
 
+use Override;
 use RM\Standard\Jwt\Generator\ExpirationGenerator;
 use RM\Standard\Jwt\Validator\Property\ExpirationValidator;
 
@@ -32,6 +33,7 @@ class Expiration extends DateValueClaim
 {
     public const NAME = 'exp';
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

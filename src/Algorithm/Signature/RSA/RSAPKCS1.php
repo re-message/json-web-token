@@ -16,11 +16,14 @@
 
 namespace RM\Standard\Jwt\Algorithm\Signature\RSA;
 
+use Override;
+
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
 abstract class RSAPKCS1 extends RSA
 {
+    #[Override]
     protected function getPadding(): int
     {
         return self::PADDING_PKCS1;

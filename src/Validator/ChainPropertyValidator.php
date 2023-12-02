@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Validator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Override;
 use RM\Standard\Jwt\Property\PropertyInterface;
 use RM\Standard\Jwt\Property\PropertyTarget;
 use RM\Standard\Jwt\Token\TokenInterface;
@@ -45,6 +46,7 @@ class ChainPropertyValidator implements ValidatorInterface
         }
     }
 
+    #[Override]
     public function validate(TokenInterface $token): bool
     {
         $headerProperties = $token->getHeader()->getProperties();

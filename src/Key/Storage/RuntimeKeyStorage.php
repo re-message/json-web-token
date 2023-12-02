@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key\Storage;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Override;
 use RM\Standard\Jwt\Exception\KeyNotFoundException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Identifier;
@@ -38,25 +39,19 @@ class RuntimeKeyStorage implements KeyStorageInterface
         $this->keys = new ArrayCollection();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function get(int|string $id): KeyInterface
     {
         return $this->find($id) ?? throw new KeyNotFoundException($id);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function find(int|string $id): KeyInterface|null
     {
         return $this->keys->get($id);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function findBy(string $name, mixed $value): array
     {
         $filter = fn (KeyInterface $key): bool => $value === $key->find($name)?->getValue();
@@ -64,25 +59,19 @@ class RuntimeKeyStorage implements KeyStorageInterface
         return $this->keys->filter($filter)->getValues();
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function findByType(string $type): array
     {
         return $this->findBy(Type::NAME, $type);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function has(int|string $id): bool
     {
         return $this->keys->containsKey($id);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function add(KeyInterface $key): void
     {
         $idParameter = $key->get(Identifier::NAME);
@@ -91,9 +80,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
         $this->keys->set($id, $key);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function addAll(iterable $keys): void
     {
         foreach ($keys as $key) {
@@ -101,9 +88,7 @@ class RuntimeKeyStorage implements KeyStorageInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function toArray(): array
     {
         return $this->keys->toArray();

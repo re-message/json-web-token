@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Tests\Property;
 
+use Override;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -29,6 +30,7 @@ class SomeProperty extends AbstractProperty
 {
     public const NAME = 'some';
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

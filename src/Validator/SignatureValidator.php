@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Validator;
 
+use Override;
 use RM\Standard\Jwt\Algorithm\AlgorithmResolverInterface;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyOperation;
@@ -36,6 +37,7 @@ class SignatureValidator implements ValidatorInterface
         private readonly SignerInterface $signer = new Signer(),
     ) {}
 
+    #[Override]
     public function validate(TokenInterface $token): bool
     {
         if (!$token instanceof SignatureToken) {

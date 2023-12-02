@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Override;
 use RM\Standard\Jwt\Exception\UnsupportedKeyException;
 use RM\Standard\Jwt\Key\KeyInterface;
 use RM\Standard\Jwt\Key\Parameter\Type;
@@ -49,9 +50,7 @@ class DelegatingKeyFactory implements KeyFactoryInterface
         $this->collection->add($loader);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function create(array $content): KeyInterface
     {
         $factory = $this->findFactory($content);
@@ -64,9 +63,7 @@ class DelegatingKeyFactory implements KeyFactoryInterface
         return $factory->create($content);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function supports(array $content): bool
     {
         return null !== $this->findFactory($content);

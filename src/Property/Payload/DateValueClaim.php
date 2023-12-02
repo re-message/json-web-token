@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Property\Payload;
 
 use DateTimeInterface;
+use Override;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
 /**
@@ -37,6 +38,7 @@ abstract class DateValueClaim extends AbstractProperty implements ClaimInterface
         parent::__construct($value);
     }
 
+    #[Override]
     public function setValue(mixed $value): void
     {
         if ($value instanceof DateTimeInterface) {

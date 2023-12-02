@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Header;
 
+use Override;
 use RM\Standard\Jwt\Algorithm\AlgorithmInterface;
 use RM\Standard\Jwt\Property\AbstractProperty;
 
@@ -35,6 +36,7 @@ final class Algorithm extends AbstractProperty implements HeaderParameterInterfa
         parent::__construct($value);
     }
 
+    #[Override]
     public function getName(): string
     {
         return self::NAME;

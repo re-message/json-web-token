@@ -18,6 +18,7 @@ namespace RM\Standard\Jwt\Key\Loader;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Override;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 
 /**
@@ -44,9 +45,7 @@ class ResourceLoader implements ResourceLoaderInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function load(): iterable
     {
         foreach ($this->resources as $resource) {
@@ -56,9 +55,7 @@ class ResourceLoader implements ResourceLoaderInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function pushResource(ResourceInterface $resource): void
     {
         $this->resources->add($resource);

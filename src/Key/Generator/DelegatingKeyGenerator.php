@@ -19,6 +19,7 @@ namespace RM\Standard\Jwt\Key\Generator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
+use Override;
 use RM\Standard\Jwt\Key\KeyInterface;
 
 /**
@@ -48,6 +49,7 @@ class DelegatingKeyGenerator implements KeyGeneratorInterface
         $this->collection->add($generator);
     }
 
+    #[Override]
     public function generate(string $type, array $options = []): KeyInterface
     {
         $generator = $this->findGenerator($type);
@@ -60,6 +62,7 @@ class DelegatingKeyGenerator implements KeyGeneratorInterface
         return $generator->generate($type, $options);
     }
 
+    #[Override]
     public function supports(string $type): bool
     {
         return null !== $this->findGenerator($type);

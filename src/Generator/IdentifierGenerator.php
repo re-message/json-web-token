@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Generator;
 
+use Override;
 use RM\Standard\Jwt\Identifier\IdentifierGeneratorInterface;
 use RM\Standard\Jwt\Identifier\UniqIdGenerator;
 use RM\Standard\Jwt\Property\Payload\Identifier;
@@ -39,16 +40,19 @@ class IdentifierGenerator extends AbstractDurationGenerator
         parent::__construct($duration);
     }
 
+    #[Override]
     public function getPropertyName(): string
     {
         return Identifier::NAME;
     }
 
+    #[Override]
     public function getPropertyTarget(): PropertyTarget
     {
         return PropertyTarget::PAYLOAD;
     }
 
+    #[Override]
     public function generate(): PropertyInterface
     {
         $identifier = $this->generator->generate();

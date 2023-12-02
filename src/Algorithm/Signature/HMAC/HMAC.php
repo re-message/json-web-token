@@ -17,6 +17,7 @@
 namespace RM\Standard\Jwt\Algorithm\Signature\HMAC;
 
 use InvalidArgumentException;
+use Override;
 use ParagonIE\ConstantTime\Base64UrlSafe;
 use RM\Standard\Jwt\Algorithm\Signature\SignatureAlgorithmInterface;
 use RM\Standard\Jwt\Key\KeyInterface;
@@ -28,11 +29,13 @@ use RM\Standard\Jwt\Key\Parameter\Value;
  */
 abstract class HMAC implements SignatureAlgorithmInterface
 {
+    #[Override]
     final public function allowedKeyTypes(): array
     {
         return [Type::OCTET];
     }
 
+    #[Override]
     final public function sign(KeyInterface $key, string $input): string
     {
         $k = $this->getKey($key);
@@ -46,6 +49,7 @@ abstract class HMAC implements SignatureAlgorithmInterface
         return hash_hmac($algorithm, $input, $k, true);
     }
 
+    #[Override]
     final public function verify(KeyInterface $key, string $input, string $signature): bool
     {
         $expected = $this->sign($key, $input);

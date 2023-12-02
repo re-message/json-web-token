@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Property\Factory;
 
+use Override;
 use RM\Standard\Jwt\Property\PropertyInterface;
 
 /**
@@ -50,11 +51,13 @@ abstract class AbstractPropertyFactory implements PropertyFactoryInterface
     /**
      * @param class-string<T> $class
      */
+    #[Override]
     public function register(string $name, string $class): void
     {
         $this->classMap[$name] = $class;
     }
 
+    #[Override]
     public function create(string $name, mixed $value): PropertyInterface
     {
         $class = $this->classMap[$name] ?? null;

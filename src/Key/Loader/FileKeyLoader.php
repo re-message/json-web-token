@@ -16,6 +16,7 @@
 
 namespace RM\Standard\Jwt\Key\Loader;
 
+use Override;
 use RM\Standard\Jwt\Exception\LoaderException;
 use RM\Standard\Jwt\Exception\NotSupportedResourceException;
 use RM\Standard\Jwt\Key\Resource\File;
@@ -33,9 +34,7 @@ class FileKeyLoader implements KeyLoaderInterface
         private readonly KeySetSerializerInterface $serializer,
     ) {}
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function load(ResourceInterface $resource): array
     {
         if (!$resource instanceof File) {
@@ -63,9 +62,7 @@ class FileKeyLoader implements KeyLoaderInterface
         return $this->serializer->deserialize($content);
     }
 
-    /**
-     * @inheritDoc
-     */
+    #[Override]
     public function supports(ResourceInterface $resource): bool
     {
         return $resource instanceof File;
