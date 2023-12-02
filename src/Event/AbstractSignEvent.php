@@ -24,12 +24,9 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class AbstractSignEvent extends Event
 {
-    protected SignatureToken $token;
-
-    public function __construct(SignatureToken $token)
-    {
-        $this->token = $token;
-    }
+    public function __construct(
+        protected SignatureToken $token,
+    ) {}
 
     public function getToken(): SignatureToken
     {

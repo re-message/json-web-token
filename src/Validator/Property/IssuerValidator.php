@@ -30,12 +30,9 @@ use UnexpectedValueException;
  */
 class IssuerValidator implements PropertyValidatorInterface
 {
-    protected readonly array $issuers;
-
-    public function __construct(array $issuers)
-    {
-        $this->issuers = $issuers;
-    }
+    public function __construct(
+        protected readonly array $issuers,
+    ) {}
 
     #[Override]
     public function getPropertyName(): string

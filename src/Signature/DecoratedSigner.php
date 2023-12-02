@@ -27,12 +27,9 @@ use RM\Standard\Jwt\Signature\SignatureToken as Token;
  */
 abstract class DecoratedSigner implements SignerInterface
 {
-    private SignerInterface $signer;
-
-    public function __construct(SignerInterface $signer)
-    {
-        $this->signer = $signer;
-    }
+    public function __construct(
+        private readonly SignerInterface $signer,
+    ) {}
 
     public function sign(Token $token, AlgorithmInterface $algorithm, KeyInterface $key): Token
     {

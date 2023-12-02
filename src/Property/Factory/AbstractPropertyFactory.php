@@ -29,24 +29,13 @@ use RM\Standard\Jwt\Property\PropertyInterface;
 abstract class AbstractPropertyFactory implements PropertyFactoryInterface
 {
     /**
-     * @var array<string, class-string<T>>
-     */
-    private array $classMap;
-
-    /**
-     * @var class-string<T>
-     */
-    private string $defaultPropertyClass;
-
-    /**
      * @param array<string, class-string<T>> $classMap
      * @param class-string<T>                $defaultPropertyClass
      */
-    public function __construct(array $classMap, string $defaultPropertyClass)
-    {
-        $this->classMap = $classMap;
-        $this->defaultPropertyClass = $defaultPropertyClass;
-    }
+    public function __construct(
+        private array $classMap,
+        private readonly string $defaultPropertyClass,
+    ) {}
 
     /**
      * @param class-string<T> $class
