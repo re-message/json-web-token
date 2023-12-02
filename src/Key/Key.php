@@ -28,9 +28,9 @@ use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Key implements KeyInterface
+readonly class Key implements KeyInterface
 {
-    private readonly Collection $collection;
+    private Collection $collection;
 
     public function __construct(array $parameters)
     {
