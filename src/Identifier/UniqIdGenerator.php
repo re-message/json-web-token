@@ -23,10 +23,10 @@ use Override;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-final class UniqIdGenerator implements IdentifierGeneratorInterface
+final readonly class UniqIdGenerator implements IdentifierGeneratorInterface
 {
     public function __construct(
-        private readonly string $prefix = '',
+        private string $prefix = '',
     ) {}
 
     #[Override]

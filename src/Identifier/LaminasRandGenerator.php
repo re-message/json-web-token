@@ -24,12 +24,12 @@ use ParagonIE\ConstantTime\Base64UrlSafe;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-final class LaminasRandGenerator implements IdentifierGeneratorInterface
+final readonly class LaminasRandGenerator implements IdentifierGeneratorInterface
 {
     private const int MIN_LENGTH = 32;
 
     public function __construct(
-        private readonly int $length = 64,
+        private int $length = 64,
     ) {
         // @codeCoverageIgnoreStart
         if (!class_exists(Rand::class)) {
