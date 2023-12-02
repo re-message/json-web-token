@@ -26,4 +26,4 @@ use RM\Standard\Jwt\Property\PropertyInterface;
  *
  * @internal
  */
-class TestPropertyBag extends PropertyBag {}
+readonly class TestPropertyBag extends PropertyBag {}
