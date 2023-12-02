@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class SecondFactorExponent extends KeyParameter
 {
-    public const NAME = 'dq';
+    final public const string NAME = 'dq';
 
     public function __construct(string $value)
     {

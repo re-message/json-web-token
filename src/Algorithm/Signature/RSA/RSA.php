@@ -31,9 +31,9 @@ use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
  */
 abstract class RSA implements SignatureAlgorithmInterface
 {
-    public const PADDING_PSS = CryptRSA::SIGNATURE_PSS;
+    final public const int PADDING_PSS = CryptRSA::SIGNATURE_PSS;
 
-    public const PADDING_PKCS1 = CryptRSA::SIGNATURE_PKCS1;
+    final public const int PADDING_PKCS1 = CryptRSA::SIGNATURE_PKCS1;
 
     /**
      * @param SecLibTransformerInterface<CryptRSA> $transformer

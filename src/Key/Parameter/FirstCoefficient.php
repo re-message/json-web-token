@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class FirstCoefficient extends KeyParameter
 {
-    public const NAME = 'qi';
+    final public const string NAME = 'qi';
 
     public function __construct(string $value)
     {

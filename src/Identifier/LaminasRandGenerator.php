@@ -26,7 +26,7 @@ use ParagonIE\ConstantTime\Base64UrlSafe;
  */
 final class LaminasRandGenerator implements IdentifierGeneratorInterface
 {
-    private const MIN_LENGTH = 32;
+    private const int MIN_LENGTH = 32;
 
     public function __construct(
         private readonly int $length = 64,

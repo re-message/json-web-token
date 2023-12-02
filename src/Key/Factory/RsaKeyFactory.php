@@ -34,7 +34,7 @@ use RM\Standard\Jwt\Key\Parameter\Type;
  */
 class RsaKeyFactory extends AbstractKeyFactory
 {
-    public const DEFAULT_CLASS_MAP = [
+    final public const array DEFAULT_CLASS_MAP = [
         Modulus::NAME => Modulus::class,
         PublicExponent::NAME => PublicExponent::class,
         PrivateExponent::NAME => PrivateExponent::class,

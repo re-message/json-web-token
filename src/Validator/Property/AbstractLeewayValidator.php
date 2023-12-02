@@ -18,9 +18,9 @@ namespace RM\Standard\Jwt\Validator\Property;
 
 abstract class AbstractLeewayValidator implements PropertyValidatorInterface
 {
-    public const DEFAULT_LEEWAY = 0;
-    public const DEFAULT_MAX_LEEWAY = 2 * 60;
-    public const MINIMAL_LEEWAY = 0;
+    final public const int DEFAULT_LEEWAY = 0;
+    final public const float DEFAULT_MAX_LEEWAY = 2 * 60;
+    final public const int MINIMAL_LEEWAY = 0;
 
     /**
      * Max leeway value.

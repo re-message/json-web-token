@@ -36,7 +36,7 @@ use RM\Standard\Jwt\Validator\Property\IdentifierValidator;
  */
 class Identifier extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'jti';
+    final public const string NAME = 'jti';
 
     public function __construct(string $value)
     {

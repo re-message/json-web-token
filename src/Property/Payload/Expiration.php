@@ -31,7 +31,7 @@ use RM\Standard\Jwt\Validator\Property\ExpirationValidator;
  */
 class Expiration extends DateValueClaim
 {
-    public const NAME = 'exp';
+    final public const string NAME = 'exp';
 
     #[Override]
     public function getName(): string

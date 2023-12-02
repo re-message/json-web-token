@@ -39,7 +39,7 @@ use RM\Standard\Jwt\Validator\Property\IssuerValidator;
  */
 class Issuer extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'iss';
+    final public const string NAME = 'iss';
 
     public function __construct(string $value)
     {

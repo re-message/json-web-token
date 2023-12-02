@@ -33,7 +33,7 @@ use RM\Standard\Jwt\Property\Payload\Subject;
  */
 class ClaimFactory extends AbstractPropertyFactory
 {
-    public const DEFAULT_CLASS_MAP = [
+    final public const array DEFAULT_CLASS_MAP = [
         Audience::NAME => Audience::class,
         Expiration::NAME => Expiration::class,
         Identifier::NAME => Identifier::class,

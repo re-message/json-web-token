@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
  */
 class JsonFormatter implements FormatterInterface
 {
-    public const DEFAULT_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+    final public const int DEFAULT_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
     private readonly JsonEncoder $encoder;
 

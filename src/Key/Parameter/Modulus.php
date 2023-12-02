@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class Modulus extends KeyParameter
 {
-    public const NAME = 'n';
+    final public const string NAME = 'n';
 
     public function __construct(string $value)
     {

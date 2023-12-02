@@ -43,7 +43,7 @@ class SignatureCompactSerializer implements SignatureSerializerInterface
      * @see SignatureCompactSerializer::serialize()
      * @see SignatureCompactSerializer::deserialize()
      */
-    public const TOKEN_DELIMITER = '.';
+    final public const string TOKEN_DELIMITER = '.';
 
     public function __construct(
         private readonly FormatterInterface $formatter = new JsonFormatter(),

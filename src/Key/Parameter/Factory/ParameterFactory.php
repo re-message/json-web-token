@@ -29,14 +29,14 @@ use RM\Standard\Jwt\Key\Parameter\Type;
  */
 class ParameterFactory implements ParameterFactoryInterface
 {
-    public const DEFAULT_CLASS_MAP = [
+    final public const array DEFAULT_CLASS_MAP = [
         Type::NAME => Type::class,
         Identifier::NAME => Identifier::class,
         KeyUse::NAME => KeyUse::class,
         Operations::NAME => Operations::class,
     ];
 
-    public const DEFAULT_CLASS = KeyParameter::class;
+    final public const string DEFAULT_CLASS = KeyParameter::class;
 
     /**
      * @var array<string, class-string<KeyParameterInterface>>

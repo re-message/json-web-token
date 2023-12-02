@@ -36,7 +36,7 @@ use RM\Standard\Jwt\Key\Parameter\Type;
  */
 class RsaPublicKeyTransformer implements PublicKeyTransformerInterface
 {
-    public const PRIVATE_PARAMETERS = [
+    final public const array PRIVATE_PARAMETERS = [
         PrivateExponent::NAME,
         FirstPrimeFactor::NAME,
         SecondPrimeFactor::NAME,

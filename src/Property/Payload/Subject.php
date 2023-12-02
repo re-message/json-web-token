@@ -31,7 +31,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  */
 class Subject extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'sub';
+    final public const string NAME = 'sub';
 
     public function __construct(string $value)
     {

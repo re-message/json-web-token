@@ -34,8 +34,8 @@ use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
  */
 class RsaKeyGenerator extends LengthAwareGenerator
 {
-    public const DEFAULT_LENGTH = 4096;
-    public const MIN_LENGTH = 512;
+    final public const int DEFAULT_LENGTH = 4096;
+    final public const int MIN_LENGTH = 512;
 
     /**
      * @param SecLibTransformerInterface<CryptRSA> $transformer

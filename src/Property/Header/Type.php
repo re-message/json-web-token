@@ -31,7 +31,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  */
 class Type extends AbstractProperty implements HeaderParameterInterface
 {
-    public const NAME = 'typ';
+    final public const string NAME = 'typ';
 
     public function __construct(string $value)
     {

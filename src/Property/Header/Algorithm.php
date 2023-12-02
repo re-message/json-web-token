@@ -29,7 +29,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  */
 final class Algorithm extends AbstractProperty implements HeaderParameterInterface
 {
-    public const NAME = 'alg';
+    final public const string NAME = 'alg';
 
     public function __construct(string $value)
     {

@@ -29,7 +29,7 @@ use RM\Standard\Jwt\Property\Header\Type;
  */
 class HeaderParameterFactory extends AbstractPropertyFactory
 {
-    public const DEFAULT_CLASS_MAP = [
+    final public const array DEFAULT_CLASS_MAP = [
         Algorithm::NAME => Algorithm::class,
         Type::NAME => Type::class,
         KeyId::NAME => KeyId::class,

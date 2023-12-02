@@ -21,8 +21,8 @@ namespace RM\Standard\Jwt\Generator;
  */
 abstract class AbstractDurationGenerator implements PropertyGeneratorInterface
 {
-    public const DEFAULT_DURATION = 60 * 60;
-    public const MINIMAL_DURATION = 0;
+    final public const float DEFAULT_DURATION = 60 * 60;
+    final public const int MINIMAL_DURATION = 0;
 
     /**
      * Duration of token in seconds. By default, 1 hour.

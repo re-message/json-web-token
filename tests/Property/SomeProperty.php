@@ -28,7 +28,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  */
 class SomeProperty extends AbstractProperty
 {
-    public const NAME = 'some';
+    final public const string NAME = 'some';
 
     #[Override]
     public function getName(): string

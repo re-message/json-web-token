@@ -23,11 +23,11 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class Type extends KeyParameter
 {
-    public const NAME = 'kty';
+    final public const string NAME = 'kty';
 
-    public const NONE = 'none';
-    public const OCTET = 'oct';
-    public const RSA = 'RSA';
+    final public const string NONE = 'none';
+    final public const string OCTET = 'oct';
+    final public const string RSA = 'RSA';
 
     public function __construct(string $value)
     {

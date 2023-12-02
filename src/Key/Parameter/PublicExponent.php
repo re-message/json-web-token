@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class PublicExponent extends KeyParameter
 {
-    public const NAME = 'e';
+    final public const string NAME = 'e';
 
     public function __construct(string $value)
     {

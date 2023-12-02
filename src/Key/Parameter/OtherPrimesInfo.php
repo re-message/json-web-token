@@ -23,11 +23,11 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class OtherPrimesInfo extends KeyParameter
 {
-    public const NAME = 'oth';
+    final public const string NAME = 'oth';
 
-    public const PARAM_PRIME_FACTOR = 'r';
-    public const PARAM_FACTOR_EXPONENT = 'd';
-    public const PARAM_FACTOR_COEFFICIENT = 't';
+    final public const string PARAM_PRIME_FACTOR = 'r';
+    final public const string PARAM_FACTOR_EXPONENT = 'd';
+    final public const string PARAM_FACTOR_COEFFICIENT = 't';
 
     public function __construct(array $value)
     {

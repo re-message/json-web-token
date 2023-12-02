@@ -25,7 +25,7 @@ use RM\Standard\Jwt\Key\KeyOperation;
  */
 class Operations extends KeyParameter
 {
-    public const NAME = 'key_ops';
+    final public const string NAME = 'key_ops';
 
     /**
      * @param array<int, string> $operations

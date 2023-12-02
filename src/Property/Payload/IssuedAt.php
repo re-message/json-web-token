@@ -31,7 +31,7 @@ use RM\Standard\Jwt\Validator\Property\IssuedAtValidator;
  */
 class IssuedAt extends DateValueClaim
 {
-    public const NAME = 'iat';
+    final public const string NAME = 'iat';
 
     #[Override]
     public function getName(): string

@@ -21,7 +21,7 @@ namespace RM\Standard\Jwt\Key\Generator;
  */
 abstract class LengthAwareGenerator implements KeyGeneratorInterface
 {
-    public const LENGTH_OPTION = 'length';
+    final public const string LENGTH_OPTION = 'length';
 
     public function __construct(
         private readonly int $defaultLength,

@@ -37,8 +37,8 @@ use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
  */
 class OctetKeyGenerator extends LengthAwareGenerator
 {
-    public const DEFAULT_LENGTH = 64;
-    public const MIN_LENGTH = 64;
+    final public const int DEFAULT_LENGTH = 64;
+    final public const int MIN_LENGTH = 64;
 
     public function __construct(
         private readonly ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),

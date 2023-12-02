@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class Identifier extends KeyParameter
 {
-    public const NAME = 'kid';
+    final public const string NAME = 'kid';
 
     public function __construct(string $value)
     {

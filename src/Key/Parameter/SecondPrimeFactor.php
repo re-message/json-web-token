@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class SecondPrimeFactor extends KeyParameter
 {
-    public const NAME = 'q';
+    final public const string NAME = 'q';
 
     public function __construct(string $value)
     {

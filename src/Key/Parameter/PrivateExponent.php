@@ -23,7 +23,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  */
 class PrivateExponent extends KeyParameter
 {
-    public const NAME = 'd';
+    final public const string NAME = 'd';
 
     public function __construct(string $value)
     {

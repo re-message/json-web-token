@@ -25,7 +25,7 @@ use RM\Standard\Jwt\Key\KeyUsage;
  */
 class KeyUse extends KeyParameter
 {
-    public const NAME = 'use';
+    final public const string NAME = 'use';
 
     public function __construct(string $use)
     {

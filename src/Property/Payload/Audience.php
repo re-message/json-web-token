@@ -32,7 +32,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  */
 class Audience extends AbstractProperty implements ClaimInterface
 {
-    public const NAME = 'aud';
+    final public const string NAME = 'aud';
 
     public function __construct(array $value = [])
     {

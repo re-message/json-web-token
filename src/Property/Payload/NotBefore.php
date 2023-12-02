@@ -30,7 +30,7 @@ use RM\Standard\Jwt\Validator\Property\NotBeforeValidator;
  */
 class NotBefore extends DateValueClaim
 {
-    public const NAME = 'nbf';
+    final public const string NAME = 'nbf';
 
     #[Override]
     public function getName(): string

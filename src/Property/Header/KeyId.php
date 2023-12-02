@@ -31,7 +31,7 @@ use RM\Standard\Jwt\Property\AbstractProperty;
  */
 class KeyId extends AbstractProperty implements HeaderParameterInterface
 {
-    public const NAME = 'kid';
+    final public const string NAME = 'kid';
 
     public function __construct(int|string $value)
     {
