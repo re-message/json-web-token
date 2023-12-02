@@ -50,7 +50,7 @@
         "ramsey/uuid": "^4.7.5",
         "predis/predis": "^2.2",
 
-        "phpunit/phpunit": "^10.1",
+        "phpunit/phpunit": "^10.5",
         "symfony/stopwatch": "^6.0 || ^7.0",
         "bentools/cartesian-product": "^1.3",
 
