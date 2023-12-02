@@ -59,7 +59,7 @@ class RsaPublicKeyTransformer implements PublicKeyTransformerInterface
             throw new InvalidArgumentException($message);
         }
 
-        $parameters = array_filter($privateKey->getParameters(), [$this, 'isPublic']);
+        $parameters = array_filter($privateKey->getParameters(), $this->isPublic(...));
         $key = new Key($parameters);
 
         if ($key->has(Operations::NAME)) {

@@ -63,7 +63,7 @@ class RsaSecLibTransformer extends AbstractSecLibTransformer
             throw new InvalidKeyException('Exponent and/or modulus not found.');
         }
 
-        return array_map([$this, 'toComponent'], $parameters);
+        return array_map($this->toComponent(...), $parameters);
     }
 
     #[Override]
@@ -86,7 +86,7 @@ class RsaSecLibTransformer extends AbstractSecLibTransformer
             $notNull,
         );
 
-        $parameters = array_map([$this, 'fromComponent'], $flattedComponents);
+        $parameters = array_map($this->fromComponent(...), $flattedComponents);
 
         $exponentExists = array_key_exists(PublicExponent::NAME, $parameters);
         $modulusExists = array_key_exists(Modulus::NAME, $parameters);
