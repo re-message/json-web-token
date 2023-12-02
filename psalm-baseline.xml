@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
+  <file src="src/Algorithm/AlgorithmResolver.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/HMAC/HMAC.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/HMAC/HS256.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/HMAC/HS3256.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/HMAC/HS3512.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/HMAC/HS512.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/None.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/RSA/PS256.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/RSA/PS512.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/RSA/RS256.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/RSA/RS512.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/RSA/RSA.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/RSA/RSAPKCS1.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Algorithm/Signature/RSA/RSAPSS.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Format/JsonFormatter.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Generator/ExpirationGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Generator/IdentifierGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Generator/IssuedAtGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Generator/IssuerGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Generator/NotBeforeGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Identifier/LaminasRandGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Identifier/RandomUuidGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Identifier/UniqIdGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Factory/AbstractKeyFactory.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Factory/DelegatingKeyFactory.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Generator/DelegatingKeyGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Generator/OctetKeyGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Generator/RsaKeyGenerator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Key.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Loader/DelegatingKeyLoader.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Loader/FileKeyLoader.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Loader/ResourceLoader.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Loader/UrlKeyLoader.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Parameter/Factory/ParameterFactory.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Parameter/KeyParameter.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Resolver/DirectKeyResolver.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Resolver/StorageKeyResolver.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Resource/AbstractResource.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Set/KeySetSerializer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Storage/DecoratedKeyStorage.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Storage/RuntimeKeyStorage.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Storage/ThumbprintKeyStorage.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Thumbprint/ThumbprintFactory.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Transformer/PublicKey/DelegatingPublicKeyTransformer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Transformer/PublicKey/RsaPublicKeyTransformer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Transformer/SecLib/AbstractSecLibTransformer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Transformer/SecLib/DelegatingSecLibTransformer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Key/Transformer/SecLib/RsaSecLibTransformer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/AbstractProperty.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Factory/AbstractPropertyFactory.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Header/Algorithm.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Header/Custom.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Header/KeyId.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Header/Type.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/Audience.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/DateValueClaim.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/Expiration.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/Identifier.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/IssuedAt.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/Issuer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/NotBefore.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/PrivateClaim.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/PublicClaim.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/Payload/Subject.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Property/PropertyBag.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Serializer/SignatureCompactSerializer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Serializer/SignatureSerializerInterface.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Signature/EventfulSigner.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Signature/GeneratedSigner.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Signature/LoggableSigner.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Signature/SignatureToken.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Signature/Signer.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Storage/MemcacheTokenStorage.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Storage/RedisTokenStorage.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Storage/RuntimeTokenStorage.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Token/Header.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Token/Payload.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/ChainPropertyValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/ChainValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/Property/ExpirationValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/Property/IdentifierValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/Property/IssuedAtValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/Property/IssuerValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/Property/NotBeforeValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+      <code>Override</code>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+  <file src="src/Validator/SignatureValidator.php">
+    <InvalidAttribute>
+      <code>Override</code>
+    </InvalidAttribute>
+  </file>
+</files>
