@@ -27,7 +27,7 @@ use RM\Standard\Jwt\Key\Parameter\Value;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class HMAC implements SignatureAlgorithmInterface
+abstract readonly class HMAC implements SignatureAlgorithmInterface
 {
     #[Override]
     final public function allowedKeyTypes(): array

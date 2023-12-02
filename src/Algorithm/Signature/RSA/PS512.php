@@ -21,7 +21,7 @@ use Override;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class PS512 extends RSAPSS
+readonly class PS512 extends RSAPSS
 {
     #[Override]
     public function name(): string

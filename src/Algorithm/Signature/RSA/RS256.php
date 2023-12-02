@@ -21,7 +21,7 @@ use Override;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class RS256 extends RSAPKCS1
+readonly class RS256 extends RSAPKCS1
 {
     #[Override]
     public function name(): string

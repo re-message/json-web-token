@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Key\Parameter\Type;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class None implements SignatureAlgorithmInterface
+readonly class None implements SignatureAlgorithmInterface
 {
     #[Override]
     public function name(): string

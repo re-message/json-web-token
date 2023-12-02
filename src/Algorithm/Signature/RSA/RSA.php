@@ -29,7 +29,7 @@ use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class RSA implements SignatureAlgorithmInterface
+abstract readonly class RSA implements SignatureAlgorithmInterface
 {
     final public const int PADDING_PSS = CryptRSA::SIGNATURE_PSS;
 
@@ -39,8 +39,8 @@ abstract class RSA implements SignatureAlgorithmInterface
      * @param SecLibTransformerInterface<CryptRSA> $transformer
      */
     public function __construct(
-        private readonly SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),
-        private readonly PublicKeyTransformerInterface $publicKeyTransformer = new RsaPublicKeyTransformer()
+        private SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),
+        private PublicKeyTransformerInterface $publicKeyTransformer = new RsaPublicKeyTransformer()
     ) {}
 
     #[Override]

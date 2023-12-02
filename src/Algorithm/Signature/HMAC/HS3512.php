@@ -23,7 +23,7 @@ use Override;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class HS3512 extends HMAC
+readonly class HS3512 extends HMAC
 {
     #[Override]
     public function name(): string

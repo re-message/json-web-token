@@ -21,7 +21,7 @@ use Override;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class RSAPKCS1 extends RSA
+abstract readonly class RSAPKCS1 extends RSA
 {
     #[Override]
     protected function getPadding(): int
