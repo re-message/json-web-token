@@ -67,6 +67,7 @@
         "laminas/laminas-math": "To use Laminas Rand identifier generator"
     },
     "config": {
+        "sort-packages": false,
         "allow-plugins": {
             "composer/package-versions-deprecated": true
         }
