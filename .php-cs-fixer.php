@@ -5,7 +5,7 @@
  *
  * @link      https://github.com/re-message/json-web-token
  * @link      https://dev.remessage.ru/packages/json-web-token
- * @copyright Copyright (c) 2018-2022 Re Message
+ * @copyright Copyright (c) 2018-2023 Re Message
  * @author    Oleg Kozlov <h1karo@remessage.ru>
  * @license   Apache License 2.0
  * @license   https://legal.remessage.ru/licenses/json-web-token
@@ -16,9 +16,6 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
-    ->notPath('src/Key/KeyOperation.php')
-    ->notPath('src/Key/KeyUsage.php')
-    ->notPath('src/Property/PropertyTarget.php')
     ->exclude('vendor')
     ->append([__FILE__])
 ;
