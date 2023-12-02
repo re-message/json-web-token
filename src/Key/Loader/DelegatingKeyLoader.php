@@ -49,7 +49,7 @@ class DelegatingKeyLoader implements KeyLoaderInterface
     {
         $loader = $this->findLoader($resource);
         if (null === $loader) {
-            throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
+            throw new NotSupportedResourceException(static::class, $resource::class, __METHOD__);
         }
 
         return $loader->load($resource);

@@ -38,7 +38,7 @@ class FileKeyLoader implements KeyLoaderInterface
     public function load(ResourceInterface $resource): array
     {
         if (!$resource instanceof File) {
-            throw new NotSupportedResourceException($this::class, $resource::class, __METHOD__);
+            throw new NotSupportedResourceException(static::class, $resource::class, __METHOD__);
         }
 
         $path = $resource->getPath();
