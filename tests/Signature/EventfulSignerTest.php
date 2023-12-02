@@ -53,13 +53,11 @@ class EventfulSignerTest extends TestCase
             ->willReturnArgument(0)
         ;
 
+        $eventTypeCheck = fn (object $event) => $event instanceof TokenPreSignEvent || $event instanceof TokenSignEvent;
         $eventDispatcher
             ->expects(self::exactly(2))
             ->method('dispatch')
-            ->with(
-                [self::isInstanceOf(TokenPreSignEvent::class)],
-                [self::isInstanceOf(TokenSignEvent::class)],
-            )
+            ->with(self::callback($eventTypeCheck))
         ;
 
         $signer->sign($token, $algorithm, $key);
@@ -81,13 +79,11 @@ class EventfulSignerTest extends TestCase
             ->willReturnArgument(0)
         ;
 
+        $eventTypeCheck = fn (object $event) => $event instanceof TokenPreSignEvent || $event instanceof TokenSignEvent;
         $eventDispatcher
             ->expects(self::exactly(2))
             ->method('dispatch')
-            ->with(
-                [self::isInstanceOf(TokenPreSignEvent::class)],
-                [self::isInstanceOf(TokenSignEvent::class)],
-            )
+            ->with(self::callback($eventTypeCheck))
             ->willReturnCallback(static function (AbstractSignEvent $event): void {
                 if (!$event instanceof TokenSignEvent) {
                     return;
