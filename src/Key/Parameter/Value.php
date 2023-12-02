@@ -21,7 +21,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Value extends KeyParameter
+readonly class Value extends KeyParameter
 {
     final public const string NAME = 'k';
 

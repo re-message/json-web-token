@@ -21,7 +21,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class FirstCoefficient extends KeyParameter
+readonly class FirstCoefficient extends KeyParameter
 {
     final public const string NAME = 'qi';
 

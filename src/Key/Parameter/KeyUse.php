@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Key\KeyUsage;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class KeyUse extends KeyParameter
+readonly class KeyUse extends KeyParameter
 {
     final public const string NAME = 'use';
 

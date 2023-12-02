@@ -21,7 +21,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Identifier extends KeyParameter
+readonly class Identifier extends KeyParameter
 {
     final public const string NAME = 'kid';
 

@@ -21,7 +21,7 @@ namespace RM\Standard\Jwt\Key\Parameter;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class FirstFactorExponent extends KeyParameter
+readonly class FirstFactorExponent extends KeyParameter
 {
     final public const string NAME = 'dp';
 

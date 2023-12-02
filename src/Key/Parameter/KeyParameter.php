@@ -25,14 +25,14 @@ use Override;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class KeyParameter implements KeyParameterInterface
+readonly class KeyParameter implements KeyParameterInterface
 {
     /**
      * @param T $value
      */
     public function __construct(
-        private readonly string $name,
-        private readonly mixed $value = null
+        private string $name,
+        private mixed $value = null
     ) {}
 
     #[Override]

@@ -23,7 +23,7 @@ use RM\Standard\Jwt\Key\KeyOperation;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Operations extends KeyParameter
+readonly class Operations extends KeyParameter
 {
     final public const string NAME = 'key_ops';
 
