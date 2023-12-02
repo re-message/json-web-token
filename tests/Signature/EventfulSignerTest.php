@@ -56,7 +56,7 @@ class EventfulSignerTest extends TestCase
         $eventDispatcher
             ->expects(self::exactly(2))
             ->method('dispatch')
-            ->withConsecutive(
+            ->with(
                 [self::isInstanceOf(TokenPreSignEvent::class)],
                 [self::isInstanceOf(TokenSignEvent::class)],
             )
@@ -84,7 +84,7 @@ class EventfulSignerTest extends TestCase
         $eventDispatcher
             ->expects(self::exactly(2))
             ->method('dispatch')
-            ->withConsecutive(
+            ->with(
                 [self::isInstanceOf(TokenPreSignEvent::class)],
                 [self::isInstanceOf(TokenSignEvent::class)],
             )
