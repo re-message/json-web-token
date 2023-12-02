@@ -70,7 +70,7 @@ class RsaSecLibTransformerTest extends TestCase
         );
     }
 
-    public function provideKey(): iterable
+    public static function provideKey(): iterable
     {
         $cert = '-----BEGIN RSA PRIVATE KEY-----
 MIICWwIBAAKBgQDRhGF7X4A0ZVlEg594WmODVVUIiiPQs04aLmvfg8SborHss5gQ

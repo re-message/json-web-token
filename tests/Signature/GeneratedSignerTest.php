@@ -93,7 +93,7 @@ class GeneratedSignerTest extends TestCase
         }
     }
 
-    public function providePropertyGenerators(): Generator
+    public static function providePropertyGenerators(): Generator
     {
         yield 'issuer only' => [[new IssuerGenerator('issuer')]];
 

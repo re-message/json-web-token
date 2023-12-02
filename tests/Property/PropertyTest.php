@@ -68,7 +68,7 @@ class PropertyTest extends TestCase
         self::assertSame($value, $claim->getValue());
     }
 
-    public function provideClaimClass(): iterable
+    public static function provideClaimClass(): iterable
     {
         yield 'custom parameter' => [Custom::class];
 

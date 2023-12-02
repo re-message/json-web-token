@@ -84,7 +84,7 @@ class RSATest extends TestCase
         self::assertTrue($rsa->verify($jwk, $message, $signature));
     }
 
-    public function provideRsa(): iterable
+    public static function provideRsa(): iterable
     {
         yield 'RS256' => [new RS256(), 'sha256', CryptRSA::SIGNATURE_PKCS1];
 
@@ -108,7 +108,7 @@ class RSATest extends TestCase
         self::assertSame($signature, $actual);
     }
 
-    public function provideStaticRsa(): iterable
+    public static function provideStaticRsa(): iterable
     {
         $key = new Key(
             [

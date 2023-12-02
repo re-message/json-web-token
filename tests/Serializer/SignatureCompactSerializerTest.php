@@ -84,7 +84,7 @@ class SignatureCompactSerializerTest extends TestCase
         $serializer->serialize($token);
     }
 
-    public function provideTokens(): Generator
+    public static function provideTokens(): Generator
     {
         yield [
             true,

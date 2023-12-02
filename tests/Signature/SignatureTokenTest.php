@@ -93,7 +93,7 @@ class SignatureTokenTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function provideSerialization(): iterable
+    public static function provideSerialization(): iterable
     {
         yield [
             SignatureToken::createWithAlgorithm(new Some()),

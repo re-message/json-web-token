@@ -75,7 +75,7 @@ class DateValueClaimTest extends TestCase
         return DateTime::createFromFormat('U', $timestamp);
     }
 
-    public function provideClaimClass(): iterable
+    public static function provideClaimClass(): iterable
     {
         yield 'expiration' => [Expiration::class];
 

@@ -105,12 +105,12 @@ class SignerTest extends TestCase
         $signer->sign($signed, $algorithm, $key);
     }
 
-    public function provideKeyAndAlgorithm(): iterable
+    public static function provideKeyAndAlgorithm(): iterable
     {
         $cartesian = new CartesianProduct(
             [
-                iterator_to_array($this->getAlgorithms()),
-                iterator_to_array($this->getKeys()),
+                iterator_to_array(static::getAlgorithms()),
+                iterator_to_array(static::getKeys()),
             ]
         );
 
@@ -125,16 +125,16 @@ class SignerTest extends TestCase
         }
     }
 
-    public function getAlgorithms(): Generator
+    public static function getAlgorithms(): Generator
     {
         yield new HS256();
 
         yield new HS3256();
     }
 
-    public function getKeys(): Generator
+    public static function getKeys(): Generator
     {
-        yield $this->generateOctetKey();
+        yield static::generateOctetKey();
     }
 
     #[DataProvider('provideToken')]
@@ -154,14 +154,14 @@ class SignerTest extends TestCase
         self::assertSame($keyId, $tokenKeyId);
     }
 
-    public function provideToken(): iterable
+    public static function provideToken(): iterable
     {
         $hs256 = new HS256();
 
         yield [SignatureToken::createWithAlgorithm($hs256)];
 
         $hs512 = new HS512();
-        $octetKey = $this->generateOctetKey();
+        $octetKey = static::generateOctetKey();
 
         yield [
             new SignatureToken(
@@ -173,7 +173,7 @@ class SignerTest extends TestCase
         ];
     }
 
-    public function generateOctetKey(): KeyInterface
+    public static function generateOctetKey(): KeyInterface
     {
         $value = Base64UrlSafe::encode(Rand::getBytes(64));
         $id = Rand::getString(16);

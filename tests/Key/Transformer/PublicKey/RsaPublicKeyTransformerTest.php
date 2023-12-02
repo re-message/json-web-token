@@ -49,7 +49,7 @@ class RsaPublicKeyTransformerTest extends TestCase
         self::assertEquals($public, $actual);
     }
 
-    public function provideKey(): iterable
+    public static function provideKey(): iterable
     {
         $private = new Key(
             [

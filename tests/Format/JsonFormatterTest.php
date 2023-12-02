@@ -45,7 +45,7 @@ class JsonFormatterTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function provideData(): iterable
+    public static function provideData(): iterable
     {
         yield 'empty' => [[], '{}'];
 

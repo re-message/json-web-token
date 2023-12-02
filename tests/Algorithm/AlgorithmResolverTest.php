@@ -56,7 +56,7 @@ class AlgorithmResolverTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function provideAlgorithm(): iterable
+    public static function provideAlgorithm(): iterable
     {
         $algorithms = [
             new HS256(),

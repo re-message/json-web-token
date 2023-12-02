@@ -91,7 +91,7 @@ class HMACTest extends TestCase
         self::assertFalse($algorithm->verify($this->key, 'bad-input', 'bad-hash'));
     }
 
-    public function provideHashes(): iterable
+    public static function provideHashes(): iterable
     {
         yield [
             new HS256(),
@@ -132,7 +132,7 @@ class HMACTest extends TestCase
         $algorithm->sign($key, 'any');
     }
 
-    public function provideInvalidKeys(): iterable
+    public static function provideInvalidKeys(): iterable
     {
         yield 'invalid type key' => [
             new Key([new Type('unknown key')]),

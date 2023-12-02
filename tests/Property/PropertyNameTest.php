@@ -55,7 +55,7 @@ class PropertyNameTest extends TestCase
         self::assertSame($property->getName(), $expected);
     }
 
-    public function provideClaims(): iterable
+    public static function provideClaims(): iterable
     {
         yield [Type::class, 'some-type', 'typ'];
 

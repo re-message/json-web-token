@@ -53,7 +53,7 @@ class PropertyFactoryTest extends TestCase
         self::assertInstanceOf(SomeProperty::class, $property);
     }
 
-    public function provideFactory(): iterable
+    public static function provideFactory(): iterable
     {
         yield 'header parameter factory & some' => [
             HeaderParameterFactory::class,

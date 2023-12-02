@@ -70,7 +70,7 @@ class KeySetSerializerTest extends TestCase
         self::assertEmpty($keySet);
     }
 
-    public function provideInvalidKeySet(): iterable
+    public static function provideInvalidKeySet(): iterable
     {
         yield 'empty' => [
             [],
@@ -79,7 +79,7 @@ class KeySetSerializerTest extends TestCase
         yield 'no param keys' => [
             [
                 'not-keys-param' => [
-                    $this->generateOctetKey()->all(),
+                    static::generateOctetKey()->all(),
                 ],
             ],
         ];
@@ -112,17 +112,17 @@ class KeySetSerializerTest extends TestCase
         self::assertEquals($expected, $keys);
     }
 
-    public function provideKeys(): iterable
+    public static function provideKeys(): iterable
     {
         yield 'empty' => [[]];
 
-        yield 'one octet key' => [[$this->generateOctetKey()]];
+        yield 'one octet key' => [[static::generateOctetKey()]];
     }
 
     public function testSkipOnInvalidKey(): void
     {
-        $firstKey = $this->generateOctetKey();
-        $secondKey = $this->generateOctetKey();
+        $firstKey = static::generateOctetKey();
+        $secondKey = static::generateOctetKey();
         $keySet = [
             KeySetSerializerInterface::PARAM_KEYS => [
                 $firstKey->all(),
@@ -150,7 +150,7 @@ class KeySetSerializerTest extends TestCase
         self::assertEquals([$secondKey], $keys);
     }
 
-    private function generateOctetKey(): KeyInterface
+    private static function generateOctetKey(): KeyInterface
     {
         $value = Rand::getString(16);
         $id = Rand::getString(12);
