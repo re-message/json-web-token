@@ -26,7 +26,7 @@ use Override;
  */
 class RuntimeTokenStorage implements TokenStorageInterface
 {
-    private ArrayCollection $runtime;
+    private readonly ArrayCollection $runtime;
 
     public function __construct()
     {

@@ -25,7 +25,7 @@ use Predis\Client;
  */
 class RedisTokenStorage implements TokenStorageInterface
 {
-    private Client $redis;
+    private readonly Client $redis;
 
     public function __construct(string $dsn)
     {

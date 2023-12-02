@@ -28,7 +28,7 @@ use RM\Standard\Jwt\Signature\SignatureToken as Token;
 
 class Signer implements SignerInterface
 {
-    private SignatureSerializerInterface $serializer;
+    private readonly SignatureSerializerInterface $serializer;
 
     public function __construct(SignatureSerializerInterface $serializer = null)
     {

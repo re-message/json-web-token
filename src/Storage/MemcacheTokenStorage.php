@@ -25,7 +25,7 @@ use Override;
  */
 class MemcacheTokenStorage implements TokenStorageInterface
 {
-    private Memcache $memcache;
+    private readonly Memcache $memcache;
 
     public function __construct(string $host, int $port = 11211)
     {

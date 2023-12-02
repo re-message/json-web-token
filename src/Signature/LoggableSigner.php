@@ -28,7 +28,7 @@ use RM\Standard\Jwt\Signature\SignatureToken as Token;
  */
 class LoggableSigner extends DecoratedSigner
 {
-    private LoggerInterface $logger;
+    private readonly LoggerInterface $logger;
 
     public function __construct(SignerInterface $signer, LoggerInterface $logger = null)
     {

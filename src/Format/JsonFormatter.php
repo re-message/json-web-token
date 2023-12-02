@@ -28,7 +28,7 @@ class JsonFormatter implements FormatterInterface
 {
     public const DEFAULT_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
-    private JsonEncoder $encoder;
+    private readonly JsonEncoder $encoder;
 
     public function __construct()
     {

@@ -30,7 +30,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  */
 class EventfulSigner extends DecoratedSigner
 {
-    private EventDispatcherInterface $eventDispatcher;
+    private readonly EventDispatcherInterface $eventDispatcher;
 
     public function __construct(SignerInterface $signer, EventDispatcherInterface $eventDispatcher = null)
     {
