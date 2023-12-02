@@ -23,6 +23,8 @@ use RM\Standard\Jwt\Exception\NotSupportedResourceException;
 use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 
 /**
+ * @template-implements KeyLoaderInterface<ResourceInterface>
+ *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
 class DelegatingKeyLoader implements KeyLoaderInterface
