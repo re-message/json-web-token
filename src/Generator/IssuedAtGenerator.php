@@ -26,7 +26,7 @@ use RM\Standard\Jwt\Property\PropertyTarget;
  *
  * @see IssuedAt
  */
-class IssuedAtGenerator implements PropertyGeneratorInterface
+readonly class IssuedAtGenerator implements PropertyGeneratorInterface
 {
     #[Override]
     public function getPropertyName(): string

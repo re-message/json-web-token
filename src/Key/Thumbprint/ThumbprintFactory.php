@@ -26,11 +26,11 @@ use RM\Standard\Jwt\Key\KeyInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class ThumbprintFactory implements ThumbprintFactoryInterface
+readonly class ThumbprintFactory implements ThumbprintFactoryInterface
 {
     public function __construct(
-        private readonly string $algorithm = self::DEFAULT_ALGORITHM,
-        private readonly FormatterInterface $formatter = new JsonFormatter(),
+        private string $algorithm = self::DEFAULT_ALGORITHM,
+        private FormatterInterface $formatter = new JsonFormatter(),
     ) {
         if (!in_array($algorithm, hash_algos(), true)) {
             $message = sprintf('The hash algorithm "%s" is not supported.', $algorithm);

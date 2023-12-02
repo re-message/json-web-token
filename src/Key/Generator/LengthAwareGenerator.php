@@ -19,13 +19,13 @@ namespace RM\Standard\Jwt\Key\Generator;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class LengthAwareGenerator implements KeyGeneratorInterface
+abstract readonly class LengthAwareGenerator implements KeyGeneratorInterface
 {
     final public const string LENGTH_OPTION = 'length';
 
     public function __construct(
-        private readonly int $defaultLength,
-        private readonly int $minimalLength = 0,
+        private int $defaultLength,
+        private int $minimalLength = 0,
     ) {}
 
     final protected function resolveLength(array $options): int

@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Generator;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class AbstractDurationGenerator implements PropertyGeneratorInterface
+abstract readonly class AbstractDurationGenerator implements PropertyGeneratorInterface
 {
     final public const float DEFAULT_DURATION = 60 * 60;
     final public const int MINIMAL_DURATION = 0;
@@ -28,7 +28,7 @@ abstract class AbstractDurationGenerator implements PropertyGeneratorInterface
      * Duration of token in seconds. By default, 1 hour.
      * For security reason, cannot be infinite or negative.
      */
-    private readonly int $duration;
+    private int $duration;
 
     public function __construct(int $duration = self::DEFAULT_DURATION)
     {

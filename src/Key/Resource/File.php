@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Key\Resource;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class File extends AbstractResource
+readonly class File extends AbstractResource
 {
     public function __construct(
         private readonly string $path,

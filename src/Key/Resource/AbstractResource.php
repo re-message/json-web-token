@@ -21,10 +21,10 @@ use Override;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class AbstractResource implements ResourceInterface
+abstract readonly class AbstractResource implements ResourceInterface
 {
     public function __construct(
-        private readonly bool $required = false,
+        private bool $required = false,
     ) {}
 
     #[Override]

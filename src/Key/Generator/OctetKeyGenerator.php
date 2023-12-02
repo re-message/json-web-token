@@ -35,13 +35,13 @@ use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class OctetKeyGenerator extends LengthAwareGenerator
+readonly class OctetKeyGenerator extends LengthAwareGenerator
 {
     final public const int DEFAULT_LENGTH = 64;
     final public const int MIN_LENGTH = 64;
 
     public function __construct(
-        private readonly ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
+        private ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
     ) {
         parent::__construct(self::DEFAULT_LENGTH, self::MIN_LENGTH);
     }

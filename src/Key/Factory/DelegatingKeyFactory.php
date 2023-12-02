@@ -26,12 +26,12 @@ use RM\Standard\Jwt\Key\Parameter\Type;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class DelegatingKeyFactory implements KeyFactoryInterface
+readonly class DelegatingKeyFactory implements KeyFactoryInterface
 {
     /**
      * @var Collection<int, KeyFactoryInterface>
      */
-    private readonly Collection $collection;
+    private Collection $collection;
 
     /**
      * @param iterable<KeyFactoryInterface> $loaders

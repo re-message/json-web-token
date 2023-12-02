@@ -19,7 +19,7 @@ namespace RM\Standard\Jwt\Key\Resource;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class Url extends AbstractResource
+readonly class Url extends AbstractResource
 {
     public function __construct(
         private readonly string $address,

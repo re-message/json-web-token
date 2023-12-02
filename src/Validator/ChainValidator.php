@@ -24,12 +24,12 @@ use RM\Standard\Jwt\Token\TokenInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class ChainValidator implements ValidatorInterface
+readonly class ChainValidator implements ValidatorInterface
 {
     /**
      * @var Collection<int, ValidatorInterface>
      */
-    private readonly Collection $validators;
+    private Collection $validators;
 
     /**
      * @param ValidatorInterface[] $validators

@@ -28,10 +28,10 @@ use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class FileKeyLoader implements KeyLoaderInterface
+readonly class FileKeyLoader implements KeyLoaderInterface
 {
     public function __construct(
-        private readonly KeySetSerializerInterface $serializer,
+        private KeySetSerializerInterface $serializer,
     ) {}
 
     #[Override]

@@ -32,7 +32,7 @@ use RM\Standard\Jwt\Key\Transformer\SecLib\SecLibTransformerInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class RsaKeyGenerator extends LengthAwareGenerator
+readonly class RsaKeyGenerator extends LengthAwareGenerator
 {
     final public const int DEFAULT_LENGTH = 4096;
     final public const int MIN_LENGTH = 512;
@@ -41,8 +41,8 @@ class RsaKeyGenerator extends LengthAwareGenerator
      * @param SecLibTransformerInterface<CryptRSA> $transformer
      */
     public function __construct(
-        private readonly SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),
-        private readonly ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
+        private SecLibTransformerInterface $transformer = new RsaSecLibTransformer(),
+        private ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
     ) {
         parent::__construct(self::DEFAULT_LENGTH, self::MIN_LENGTH);
     }

@@ -26,7 +26,7 @@ use RM\Standard\Jwt\Property\PropertyTarget;
  *
  * @see Issuer
  */
-class IssuerGenerator implements PropertyGeneratorInterface
+readonly class IssuerGenerator implements PropertyGeneratorInterface
 {
     public function __construct(
         protected readonly string $issuer

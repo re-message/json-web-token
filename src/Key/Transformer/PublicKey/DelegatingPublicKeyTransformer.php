@@ -25,12 +25,12 @@ use RM\Standard\Jwt\Key\KeyInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class DelegatingPublicKeyTransformer implements PublicKeyTransformerInterface
+readonly class DelegatingPublicKeyTransformer implements PublicKeyTransformerInterface
 {
     /**
      * @var Collection<int, PublicKeyTransformerInterface>
      */
-    private readonly Collection $collection;
+    private Collection $collection;
 
     /**
      * @param iterable<PublicKeyTransformerInterface> $transformers

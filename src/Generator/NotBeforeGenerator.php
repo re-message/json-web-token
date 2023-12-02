@@ -26,7 +26,7 @@ use RM\Standard\Jwt\Property\PropertyTarget;
  *
  * @see NotBefore
  */
-class NotBeforeGenerator implements PropertyGeneratorInterface
+readonly class NotBeforeGenerator implements PropertyGeneratorInterface
 {
     #[Override]
     public function getPropertyTarget(): PropertyTarget

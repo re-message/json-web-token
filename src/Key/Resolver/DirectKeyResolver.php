@@ -24,10 +24,10 @@ use RM\Standard\Jwt\Token\TokenInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class DirectKeyResolver implements KeyResolverInterface
+readonly class DirectKeyResolver implements KeyResolverInterface
 {
     public function __construct(
-        private readonly KeyInterface $key
+        private KeyInterface $key
     ) {}
 
     #[Override]

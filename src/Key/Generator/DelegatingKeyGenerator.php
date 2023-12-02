@@ -25,12 +25,12 @@ use RM\Standard\Jwt\Key\KeyInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class DelegatingKeyGenerator implements KeyGeneratorInterface
+readonly class DelegatingKeyGenerator implements KeyGeneratorInterface
 {
     /**
      * @var Collection<int, KeyGeneratorInterface>
      */
-    private readonly Collection $collection;
+    private Collection $collection;
 
     /**
      * @param iterable<KeyGeneratorInterface> $generators

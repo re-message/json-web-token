@@ -30,7 +30,7 @@ use RM\Standard\Jwt\Storage\TokenStorageInterface;
  *
  * @see Identifier
  */
-class IdentifierGenerator extends AbstractDurationGenerator
+readonly class IdentifierGenerator extends AbstractDurationGenerator
 {
     public function __construct(
         protected readonly IdentifierGeneratorInterface $generator = new UniqIdGenerator(),

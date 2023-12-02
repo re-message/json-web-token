@@ -29,12 +29,12 @@ use RM\Standard\Jwt\Token\TokenInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class SignatureValidator implements ValidatorInterface
+readonly class SignatureValidator implements ValidatorInterface
 {
     public function __construct(
-        private readonly AlgorithmResolverInterface $algorithmResolver,
-        private readonly KeyResolverInterface $keyResolver,
-        private readonly SignerInterface $signer = new Signer(),
+        private AlgorithmResolverInterface $algorithmResolver,
+        private KeyResolverInterface $keyResolver,
+        private SignerInterface $signer = new Signer(),
     ) {}
 
     #[Override]

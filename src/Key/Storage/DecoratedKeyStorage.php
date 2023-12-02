@@ -22,10 +22,10 @@ use RM\Standard\Jwt\Key\KeyInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class DecoratedKeyStorage implements KeyStorageInterface
+abstract readonly class DecoratedKeyStorage implements KeyStorageInterface
 {
     public function __construct(
-        private readonly KeyStorageInterface $storage
+        private KeyStorageInterface $storage
     ) {}
 
     #[Override]

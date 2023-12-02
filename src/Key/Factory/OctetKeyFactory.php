@@ -24,7 +24,7 @@ use RM\Standard\Jwt\Key\Parameter\Value;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class OctetKeyFactory extends AbstractKeyFactory
+readonly class OctetKeyFactory extends AbstractKeyFactory
 {
     final public const array DEFAULT_CLASS_MAP = [
         Value::NAME => Value::class,

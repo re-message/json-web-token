@@ -24,11 +24,11 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class JsonFormatter implements FormatterInterface
+readonly class JsonFormatter implements FormatterInterface
 {
     final public const int DEFAULT_OPTIONS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
-    private readonly JsonEncoder $encoder;
+    private JsonEncoder $encoder;
 
     public function __construct()
     {

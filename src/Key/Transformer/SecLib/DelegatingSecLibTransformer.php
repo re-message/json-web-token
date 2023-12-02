@@ -30,12 +30,12 @@ use RM\Standard\Jwt\Key\KeyInterface;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class DelegatingSecLibTransformer implements SecLibTransformerInterface
+readonly class DelegatingSecLibTransformer implements SecLibTransformerInterface
 {
     /**
      * @var Collection<int, SecLibTransformerInterface<T>>
      */
-    private readonly Collection $collection;
+    private Collection $collection;
 
     /**
      * @param iterable<SecLibTransformerInterface<T>> $transformers

@@ -27,12 +27,12 @@ use RM\Standard\Jwt\Validator\Property\PropertyValidatorInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class ChainPropertyValidator implements ValidatorInterface
+readonly class ChainPropertyValidator implements ValidatorInterface
 {
     /**
      * @var Collection<int, PropertyValidatorInterface>
      */
-    private readonly Collection $validators;
+    private Collection $validators;
 
     /**
      * @param PropertyValidatorInterface[] $validators

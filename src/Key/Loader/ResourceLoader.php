@@ -24,18 +24,18 @@ use RM\Standard\Jwt\Key\Resource\ResourceInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class ResourceLoader implements ResourceLoaderInterface
+readonly class ResourceLoader implements ResourceLoaderInterface
 {
     /**
      * @var Collection<int, ResourceInterface>
      */
-    private readonly Collection $resources;
+    private Collection $resources;
 
     /**
      * @param iterable<ResourceInterface> $resources
      */
     public function __construct(
-        private readonly KeyLoaderInterface $loader,
+        private KeyLoaderInterface $loader,
         iterable $resources = [],
     ) {
         $this->resources = new ArrayCollection();

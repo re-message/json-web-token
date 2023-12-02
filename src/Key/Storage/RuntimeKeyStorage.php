@@ -27,12 +27,12 @@ use RM\Standard\Jwt\Key\Parameter\Type;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class RuntimeKeyStorage implements KeyStorageInterface
+readonly class RuntimeKeyStorage implements KeyStorageInterface
 {
     /**
      * @var Collection<int|string, KeyInterface>
      */
-    private readonly Collection $keys;
+    private Collection $keys;
 
     public function __construct()
     {

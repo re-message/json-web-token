@@ -42,7 +42,7 @@ use RM\Standard\Jwt\Key\Transformer\PublicKey\RsaPublicKeyTransformer;
  *
  * @see RSA\Formats\Keys\Raw::load
  */
-class RsaSecLibTransformer extends AbstractSecLibTransformer
+readonly class RsaSecLibTransformer extends AbstractSecLibTransformer
 {
     public function __construct(
         KeyFactoryInterface $factory = new RsaKeyFactory(),

@@ -25,7 +25,7 @@ use Ramsey\Uuid\Uuid;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-final class RandomUuidGenerator implements IdentifierGeneratorInterface
+final readonly class RandomUuidGenerator implements IdentifierGeneratorInterface
 {
     public function __construct()
     {

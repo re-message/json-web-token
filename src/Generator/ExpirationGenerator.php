@@ -25,7 +25,7 @@ use RM\Standard\Jwt\Property\PropertyTarget;
  *
  * @see Expiration
  */
-class ExpirationGenerator extends AbstractDurationGenerator
+readonly class ExpirationGenerator extends AbstractDurationGenerator
 {
     #[Override]
     public function getPropertyName(): string

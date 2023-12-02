@@ -25,11 +25,11 @@ use RM\Standard\Jwt\Key\Thumbprint\ThumbprintFactoryInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class ThumbprintKeyStorage extends DecoratedKeyStorage
+readonly class ThumbprintKeyStorage extends DecoratedKeyStorage
 {
     public function __construct(
         KeyStorageInterface $storage,
-        private readonly ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
+        private ThumbprintFactoryInterface $thumbprintFactory = new ThumbprintFactory(),
     ) {
         parent::__construct($storage);
     }

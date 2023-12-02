@@ -27,12 +27,12 @@ use RM\Standard\Jwt\Key\Resource\ResourceInterface;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class DelegatingKeyLoader implements KeyLoaderInterface
+readonly class DelegatingKeyLoader implements KeyLoaderInterface
 {
     /**
      * @var Collection<int, KeyLoaderInterface>
      */
-    private readonly Collection $loaders;
+    private Collection $loaders;
 
     /**
      * @param iterable<KeyLoaderInterface> $loaders

@@ -31,12 +31,12 @@ use RM\Standard\Jwt\Key\Set\KeySetSerializerInterface;
  *
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class UrlKeyLoader implements KeyLoaderInterface
+readonly class UrlKeyLoader implements KeyLoaderInterface
 {
     public function __construct(
-        private readonly KeySetSerializerInterface $serializer,
-        private readonly ClientInterface $client,
-        private readonly RequestFactoryInterface $requestFactory,
+        private KeySetSerializerInterface $serializer,
+        private ClientInterface $client,
+        private RequestFactoryInterface $requestFactory,
     ) {}
 
     #[Override]

@@ -32,7 +32,7 @@ use RM\Standard\Jwt\Key\Parameter\Type;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class RsaKeyFactory extends AbstractKeyFactory
+readonly class RsaKeyFactory extends AbstractKeyFactory
 {
     final public const array DEFAULT_CLASS_MAP = [
         Modulus::NAME => Modulus::class,

@@ -28,14 +28,14 @@ use RM\Standard\Jwt\Key\Parameter\Type;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-abstract class AbstractKeyFactory implements KeyFactoryInterface
+abstract readonly class AbstractKeyFactory implements KeyFactoryInterface
 {
-    private readonly array $requiredParameters;
+    private array $requiredParameters;
 
     protected function __construct(
-        private readonly array $supportedTypes,
+        private array $supportedTypes,
         array $requiredParameters = [],
-        private readonly ParameterFactoryInterface $parameterFactory = new ParameterFactory(),
+        private ParameterFactoryInterface $parameterFactory = new ParameterFactory(),
     ) {
         $this->requiredParameters = array_merge([Type::NAME], $requiredParameters);
     }

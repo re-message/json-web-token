@@ -30,11 +30,11 @@ use RM\Standard\Jwt\Token\TokenInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class StorageKeyResolver implements KeyResolverInterface
+readonly class StorageKeyResolver implements KeyResolverInterface
 {
     public function __construct(
-        private readonly KeyStorageInterface $storage,
-        private readonly PublicKeyTransformerInterface $transformer,
+        private KeyStorageInterface $storage,
+        private PublicKeyTransformerInterface $transformer,
     ) {}
 
     #[Override]

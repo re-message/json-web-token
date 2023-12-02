@@ -26,11 +26,11 @@ use RM\Standard\Jwt\Key\KeyInterface;
 /**
  * @author Oleg Kozlov <h1karo@remessage.ru>
  */
-class KeySetSerializer implements KeySetSerializerInterface
+readonly class KeySetSerializer implements KeySetSerializerInterface
 {
     public function __construct(
-        private readonly KeyFactoryInterface $factory,
-        private readonly FormatterInterface $formatter = new JsonFormatter(),
+        private KeyFactoryInterface $factory,
+        private FormatterInterface $formatter = new JsonFormatter(),
     ) {}
 
     #[Override]
